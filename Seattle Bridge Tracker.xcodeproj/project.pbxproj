@@ -12,6 +12,14 @@
 		A33F930728AC90A900391EBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33F930628AC90A900391EBB /* Assets.xcassets */; };
 		A33F930A28AC90A900391EBB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33F930928AC90A900391EBB /* Preview Assets.xcassets */; };
 		A33F931328AC912500391EBB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A33F931228AC912500391EBB /* .gitignore */; };
+		A33F931528AC926100391EBB /* Fetch Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F931428AC926100391EBB /* Fetch Data.swift */; };
+		A33F931728AC96AE00391EBB /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F931628AC96AE00391EBB /* Secrets.swift */; };
+		A33F931928AC97A300391EBB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A33F931828AC97A300391EBB /* .swiftlint.yml */; };
+		A33F932228AC980500391EBB /* ReturnedTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F931C28AC980500391EBB /* ReturnedTweet.swift */; };
+		A33F932328AC980500391EBB /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F931D28AC980500391EBB /* Tweet.swift */; };
+		A33F932528AC980500391EBB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F931F28AC980500391EBB /* User.swift */; };
+		A33F932628AC980500391EBB /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F932028AC980500391EBB /* Response.swift */; };
+		A33F932728AC980500391EBB /* Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F932128AC980500391EBB /* Metadata.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +29,14 @@
 		A33F930628AC90A900391EBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A33F930928AC90A900391EBB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A33F931228AC912500391EBB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A33F931428AC926100391EBB /* Fetch Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch Data.swift"; sourceTree = "<group>"; };
+		A33F931628AC96AE00391EBB /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		A33F931828AC97A300391EBB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A33F931C28AC980500391EBB /* ReturnedTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnedTweet.swift; sourceTree = "<group>"; };
+		A33F931D28AC980500391EBB /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
+		A33F931F28AC980500391EBB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A33F932028AC980500391EBB /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		A33F932128AC980500391EBB /* Metadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metadata.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +53,7 @@
 		A33F92F628AC90A800391EBB = {
 			isa = PBXGroup;
 			children = (
+				A33F931828AC97A300391EBB /* .swiftlint.yml */,
 				A33F931228AC912500391EBB /* .gitignore */,
 				A33F930128AC90A800391EBB /* Seattle Bridge Tracker */,
 				A33F930028AC90A800391EBB /* Products */,
@@ -56,6 +73,9 @@
 			children = (
 				A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */,
 				A33F930428AC90A800391EBB /* ContentView.swift */,
+				A33F931428AC926100391EBB /* Fetch Data.swift */,
+				A33F931628AC96AE00391EBB /* Secrets.swift */,
+				A33F931B28AC980500391EBB /* Models */,
 				A33F930628AC90A900391EBB /* Assets.xcassets */,
 				A33F930828AC90A900391EBB /* Preview Content */,
 			);
@@ -70,6 +90,18 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		A33F931B28AC980500391EBB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A33F931C28AC980500391EBB /* ReturnedTweet.swift */,
+				A33F931D28AC980500391EBB /* Tweet.swift */,
+				A33F931F28AC980500391EBB /* User.swift */,
+				A33F932028AC980500391EBB /* Response.swift */,
+				A33F932128AC980500391EBB /* Metadata.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -80,6 +112,7 @@
 				A33F92FB28AC90A800391EBB /* Sources */,
 				A33F92FC28AC90A800391EBB /* Frameworks */,
 				A33F92FD28AC90A800391EBB /* Resources */,
+				A33F931A28AC97BA00391EBB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -128,6 +161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A33F931928AC97A300391EBB /* .swiftlint.yml in Resources */,
 				A33F930A28AC90A900391EBB /* Preview Assets.xcassets in Resources */,
 				A33F931328AC912500391EBB /* .gitignore in Resources */,
 				A33F930728AC90A900391EBB /* Assets.xcassets in Resources */,
@@ -136,13 +170,41 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A33F931A28AC97BA00391EBB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github#.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A33F92FB28AC90A800391EBB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				A33F930528AC90A800391EBB /* ContentView.swift in Sources */,
+				A33F931728AC96AE00391EBB /* Secrets.swift in Sources */,
+				A33F932728AC980500391EBB /* Metadata.swift in Sources */,
+				A33F932228AC980500391EBB /* ReturnedTweet.swift in Sources */,
+				A33F932628AC980500391EBB /* Response.swift in Sources */,
+				A33F932528AC980500391EBB /* User.swift in Sources */,
+				A33F932328AC980500391EBB /* Tweet.swift in Sources */,
 				A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */,
+				A33F931528AC926100391EBB /* Fetch Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
