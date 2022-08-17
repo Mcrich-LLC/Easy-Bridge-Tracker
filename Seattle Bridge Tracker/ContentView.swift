@@ -8,9 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    let fetchData = TwitterFetch()
+    @State var tweets: [Tweet] = []
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            List {
+                ForEach(tweets, id: \.self) { tweet in
+                    Text(tweet.text)
+                }
+            }
+        }
+        .onAppear {
+            fetchData.fetchTweet { response in
+                switch response {
+                case .success(let response):
+                    self.tweets = response.data
+                case .failure(let error):
+                    print("error = \(error)")
+                }
+            }
+        }
     }
 }
 
