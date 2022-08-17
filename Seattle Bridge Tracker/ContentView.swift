@@ -8,25 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
-    let fetchData = TwitterFetch()
-    @State var tweets: [Tweet] = []
+    @StateObject var viewModel = ContentViewModel()
     var body: some View {
         VStack {
             List {
-                ForEach(tweets, id: \.self) { tweet in
-                    Text(tweet.text)
+                ForEach(viewModel.bridges, id: \.self) { bridge in
+                    HStack() {
+                        Text(bridge.name)
+                        if bridge.status == .up {
+                            Text("Up")
+                                .foregroundColor(.red)
+                        } else if bridge.status == .maintenance {
+                            Text("Under Maintenance")
+                                .foregroundColor(.yellow)
+                        } else {
+                            Text("Down")
+                                .foregroundColor(.green)
+                        }
+                    }
                 }
             }
         }
         .onAppear {
-            fetchData.fetchTweet { response in
-                switch response {
-                case .success(let response):
-                    self.tweets = response.data
-                case .failure(let error):
-                    print("error = \(error)")
-                }
-            }
+            viewModel.fetchData()
         }
     }
 }

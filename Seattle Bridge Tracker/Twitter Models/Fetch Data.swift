@@ -15,7 +15,7 @@ enum HttpError: Error {
 class TwitterFetch {
     func fetchTweet(completion: @escaping (Result<Response, Error>) -> Void) {
         do {
-            var request = URLRequest(url: URL(string: "https://api.twitter.com/2/users/2768116808/tweets")!,
+            var request = URLRequest(url: URL(string: "https://api.twitter.com/2/users/2768116808/tweets?max_results=100")!,
                                      timeoutInterval: Double.infinity)
             
             request.addValue("Bearer \(Secrets.bearerToken)", forHTTPHeaderField: "Authorization")
@@ -44,7 +44,6 @@ class TwitterFetch {
                     do {
                         let jsonDecoder = JSONDecoder()
                         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                        print("json keyDecodingStrategy = \(jsonDecoder.keyDecodingStrategy)")
                         let result = try jsonDecoder.decode(Response.self, from: data)
                         
                         completion(.success(result))
@@ -55,22 +54,5 @@ class TwitterFetch {
             }
             task.resume()
         }
-    }
-    
-    private func createURL() throws -> URL {
-//        let apiURL = "https://api.twitter.com/2/tweets"
-//        let expansions = "author_id&user.fields=profile_image_url,verified"
-//        let tweetFields = "created_at"
-//        
-//        guard url.contains("twitter.com") else {
-//            throw HttpError.badURL
-//        }
-//        
-//         let id = url.components(separatedBy: "/").last!.components(separatedBy: "?")[0]
-        
-        guard let completeURL = URL(string: /*"\(apiURL)?ids=\(id)&expansions=\(expansions)&tweet.fields=\(tweetFields)"*/"https://api.twitter.com/2/users/:id/tweets?id=2768116808") else {
-            throw HttpError.badURL
-        }
-        return completeURL
     }
 }
