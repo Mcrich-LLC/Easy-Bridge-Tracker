@@ -8,7 +8,7 @@
 import Foundation
 
 struct Metadata: Codable {
-    let previousToken: String
+    let previousToken: String?
     let nextToken: String
     let resultCount: Int
     let newestId: String
