@@ -17,7 +17,7 @@ class ContentViewModel: ObservableObject {
                 }
                 for bridge in response {
                     DispatchQueue.main.async {
-                    self.bridges.append(Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, mapsUrl: bridge.mapsUrl, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude))
+                    self.bridges.append(Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude))
                 }
             }
         }
@@ -26,11 +26,15 @@ class ContentViewModel: ObservableObject {
         }
     }
 }
-struct Bridge: Identifiable, Hashable {
+struct Bridge: Identifiable, Hashable, Comparable {
+    static func < (lhs: Bridge, rhs: Bridge) -> Bool {
+        return lhs.name < rhs.name
+    }
+    
     let id = UUID()
     let name: String
     let status: BridgeStatus
-    let mapsUrl: String
+    let mapsUrl: URL
     let address: String
     let latitude: Double
     let longitude: Double
