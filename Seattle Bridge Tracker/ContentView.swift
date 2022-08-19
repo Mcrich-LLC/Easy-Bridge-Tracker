@@ -13,7 +13,7 @@ struct ContentView: View {
         VStack {
             List {
                 ForEach(viewModel.bridges, id: \.self) { bridge in
-                    HStack() {
+                    HStack {
                         Text(bridge.name)
                         if bridge.status == .up {
                             Text("Up")
