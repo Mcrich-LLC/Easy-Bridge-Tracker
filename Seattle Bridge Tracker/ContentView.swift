@@ -21,6 +21,9 @@ struct ContentView: View {
                         } else if bridge.status == .maintenance {
                             Text("Under Maintenance")
                                 .foregroundColor(.yellow)
+                        } else if bridge.status == .unknown {
+                            Text("Unknown")
+                                .foregroundColor(.yellow)
                         } else {
                             Text("Down")
                                 .foregroundColor(.green)

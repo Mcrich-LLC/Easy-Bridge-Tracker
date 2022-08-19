@@ -8,22 +8,21 @@
 import Foundation
 
 class ContentViewModel: ObservableObject {
-    @Published var bridges: [Bridge] = [] {
-        didSet {
-            print("added bridge item")
-        }
-    }
+    @Published var bridges: [Bridge] = []
     let dataFetch = TwitterFetch()
     func fetchData() {
-        DispatchQueue.main.async {
             self.dataFetch.fetchTweet { response in
+                DispatchQueue.main.async {
+                    self.bridges.removeAll()
+                }
                 for bridge in response {
+                    DispatchQueue.main.async {
                     self.bridges.append(Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, mapsUrl: bridge.mapsUrl, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude))
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
-                    self.fetchData()
-                }
             }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
+            self.fetchData()
         }
     }
 }

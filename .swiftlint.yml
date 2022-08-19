@@ -22,10 +22,11 @@ included: # paths to include during linting. `--path` is ignored if present.
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Pods
-  - Pickt/Pickt.swift
   - Source/ExcludedFolder
   - Source/ExcludedFile.swift
   - Source/*/ExcludedFile.swift # Exclude files with a wildcard
+  - /Users/mcrich/Xcode/Seattle Bridge Tracker/Bridge-Backend/.build
+  - Bridge-Backend
 analyzer_rules: # Rules run by `swiftlint analyze` (experimental)
   - explicit_self
 
