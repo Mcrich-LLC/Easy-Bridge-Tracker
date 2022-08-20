@@ -13,12 +13,10 @@ enum HttpError: Error {
 }
 
 class TwitterFetch {
-    func fetchTweet(completion: @escaping ([Response]) -> Void) {
+    func fetchTweet(errorHandler: @escaping (HTTPURLResponse) -> Void, completion: @escaping ([Response]) -> Void) {
         do {
             var request = URLRequest(url: URL(string: "http://mc.mcrich23.com:8080/bridges")!,
                                      timeoutInterval: Double.infinity)
-            
-            request.addValue("Bearer \(Secrets.bearerToken)", forHTTPHeaderField: "Authorization")
             
             request.httpMethod = "GET"
             
@@ -31,10 +29,13 @@ class TwitterFetch {
                 if let response = response as? HTTPURLResponse {
                     guard (200 ... 299) ~= response.statusCode else {
                         print("❌ Status code is \(response.statusCode)")
+                        errorHandler(response)
+                        completion([])
                         return
                     }
                     
                     guard let data = data else {
+                        completion([])
                         return
                     }
                     

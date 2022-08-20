@@ -11,6 +11,7 @@ struct Response: Codable {
     let id: String
     let name: String
     let status: String
+    let imageUrl: String
     let mapsUrl: String
     let address: String
     let latitude: Double

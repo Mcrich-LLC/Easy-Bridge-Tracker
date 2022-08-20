@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import Mcrich23_Toolkit
 
 @main
 struct Seattle_Bridge_TrackerApp: App {
+    
+    init() {
+        NetworkMonitor.shared.startMonitoring()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ContentView()
+            }
         }
     }
 }
