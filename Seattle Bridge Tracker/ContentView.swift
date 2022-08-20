@@ -79,6 +79,7 @@ struct ContentView: View {
                     .backport.refreshable(action: {
                         await viewModel.fetchData()
                     })
+                    .tag(0)
                 }
             }
         }

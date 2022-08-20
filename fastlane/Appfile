@@ -1,0 +1,8 @@
+app_identifier("com.Mcrich23.Emoji-Widgets") # The bundle identifier of your app
+apple_id("Evan.richman@skykick.com") # Your Apple email address
+
+itc_team_id("122679006") # App Store Connect Team ID
+team_id("L7JQRVXU2V") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
