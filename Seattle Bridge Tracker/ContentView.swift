@@ -23,70 +23,75 @@ struct ContentView: View {
             case .failed(let error):
                 errors(error: error)
             case .success:
-                    List {
-                            ForEach(viewModel.bridges.sorted(), id: \.self) { bridge in
-                                Link(destination: bridge.mapsUrl) {
-                                    HStack {
-                                        if #available(iOS 15, *) {
-                                            AsyncImage(url: bridge.imageUrl) { image in
-                                                image
-                                                    .resizable()
-                                                    .frame(width: 60, height: 60)
-                                                    .aspectRatio(contentMode: .fit)
-                                            } placeholder: {
-                                                Image(systemName: "photo")
-                                                    .resizable()
-                                                    .frame(width: 60, height: 60)
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .foregroundColor(.gray)
-                                            }
-                                        } else {
-                                            URLImage(bridge.imageUrl) { image in
-                                                image
-                                                    .resizable()
-                                                    .frame(width: 60, height: 60)
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .clipped()
-                                            }
+                List {
+                    Section {
+                        ForEach(viewModel.bridges.sorted(), id: \.self) { bridge in
+                            Link(destination: bridge.mapsUrl) {
+                                HStack {
+                                    if #available(iOS 15, *) {
+                                        AsyncImage(url: bridge.imageUrl) { image in
+                                            image
+                                                .resizable()
+                                                .frame(width: 60, height: 60)
+                                                .aspectRatio(contentMode: .fit)
+                                        } placeholder: {
+                                            Image(systemName: "photo")
+                                                .resizable()
+                                                .frame(width: 60, height: 60)
+                                                .aspectRatio(contentMode: .fit)
+                                                .foregroundColor(.gray)
                                         }
-                                        HStack(alignment: .center) {
-                                            VStack(alignment: .leading) {
-                                                Text(bridge.name)
-                                                    .foregroundColor(Color(.label))
-                                                Text(bridge.address)
-                                                    .font(SwiftUI.Font.caption)
-                                                    .foregroundColor(.gray)
-                                            }
-                                            Spacer()
-                                            if bridge.status == .up {
-                                                Text("Up")
-                                                    .foregroundColor(.red)
-                                            } else if bridge.status == .maintenance {
-                                                Text("Under Maintenance")
-                                                    .foregroundColor(.yellow)
-                                            } else if bridge.status == .unknown {
-                                                Text("Unknown")
-                                                    .foregroundColor(.yellow)
-                                            } else {
-                                                Text("Down")
-                                                    .foregroundColor(.green)
-                                            }
+                                    } else {
+                                        URLImage(bridge.imageUrl) { image in
+                                            image
+                                                .resizable()
+                                                .frame(width: 60, height: 60)
+                                                .aspectRatio(contentMode: .fit)
+                                                .clipped()
+                                        }
+                                    }
+                                    HStack(alignment: .center) {
+                                        VStack(alignment: .leading) {
+                                            Text(bridge.name)
+                                                .foregroundColor(Color(.label))
+                                            Text(bridge.address)
+                                                .font(SwiftUI.Font.caption)
+                                                .foregroundColor(.gray)
+                                        }
+                                        Spacer()
+                                        if bridge.status == .up {
+                                            Text("Up")
+                                                .foregroundColor(.red)
+                                        } else if bridge.status == .maintenance {
+                                            Text("Under Maintenance")
+                                                .foregroundColor(.yellow)
+                                        } else if bridge.status == .unknown {
+                                            Text("Unknown")
+                                                .foregroundColor(.yellow)
+                                        } else {
+                                            Text("Down")
+                                                .foregroundColor(.green)
                                         }
                                     }
                                 }
                             }
+                        }
+                    } header: {
+                        Text("Seattle")
                     }
+                }
                     .backport.refreshable(action: {
                         await viewModel.fetchData()
                     })
                     .tag(0)
+                    .listStyle(GroupedListStyle())
                 }
             }
         }
         .onAppear {
             viewModel.fetchData()
         }
-        .navigationBarTitle("Seattle Bridges", displayMode: .large)
+        .navigationBarTitle("Bridges", displayMode: .large)
     }
     
     func errors(error: String) -> some View {
