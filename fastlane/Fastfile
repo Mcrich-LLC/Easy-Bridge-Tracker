@@ -20,10 +20,10 @@ platform :ios do
   lane :beta do
     #sh("rm -r ~/Library/Developer/Xcode/DerivedData/*")
     precheck
-    getVersion = get_version_number(xcodeproj: "Seattle Bridge Tracker.xcodeproj", target: "Seattle Bridge Tracker")
-    increment_build_number(build_number: latest_testflight_build_number(version: getVersion) + 1, xcodeproj: "Seattle Bridge Tracker.xcodeproj")
-    getBuild = get_build_number(xcodeproj: "Seattle Bridge Tracker.xcodeproj")
-    build_app(scheme: "Seattle Bridge Tracker", output_directory: "./Builds/#{getVersion}/#{getBuild}")
+    getVersion = get_version_number(xcodeproj: "Easy Bridge Tracker.xcodeproj", target: "Easy Bridge Tracker")
+    increment_build_number(build_number: latest_testflight_build_number(version: getVersion) + 1, xcodeproj: "Easy Bridge Tracker.xcodeproj")
+    getBuild = get_build_number(xcodeproj: "Easy Bridge Tracker.xcodeproj")
+    build_app(scheme: "Easy Bridge Tracker", output_directory: "./Builds/#{getVersion}/#{getBuild}")
     upload_to_testflight
     notification(subtitle: "Finished Uploading", message: "Ready to test...", open: "https://appstoreconnect.apple.com/apps/1584491007/appstore/ios/version/inflight")
   end
@@ -35,7 +35,7 @@ platform :ios do
     capture_screenshots(headless: false, clear_previous_screenshots: false, output_directory: "./Promo Images/Light Mode", dark_mode: false)
     capture_screenshots(headless: false, clear_previous_screenshots: false, output_directory: "./Promo Images/Dark Mode", dark_mode: true)
     Dir.chdir("..") do
-      notification(subtitle: "Finished Taking Screenshots", message: "Ready to mockup...", open: "file:///~/Xcode/Pickt/Promo%20Images/AppMockUp%20Studio.webarchive")
+      notification(subtitle: "Finished Taking Screenshots", message: "Ready to mockup...", open: "file:///~/Xcode/Easy-Bridge-Tracker/Promo%20Images/AppMockUp%20Studio.webarchive")
       sh("sh './Promo Images/Convert Screenshots.sh'")
       #sh("sh './Promo Images/Remove png Screenshots.sh'")
     end
