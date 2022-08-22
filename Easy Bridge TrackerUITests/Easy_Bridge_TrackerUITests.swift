@@ -30,13 +30,15 @@ class Seattle_Bridge_TrackerUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testApp() throws {
+    func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
-        let tableButton = app.tables.buttons["1 Ave S Bridge, Down, Seattle, WA, United States"]
+        app.launch()
+        let seattleStaticText = app.tables.staticTexts["Seattle"]
         
-        XCTAssert(tableButton.waitForExistence(timeout: 15))
+        XCTAssert(seattleStaticText.waitForExistence(timeout: 15))
         snapshot("Bridges01")
+        seattleStaticText.tap()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
