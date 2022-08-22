@@ -25,7 +25,7 @@ struct Seattle_Bridge_TrackerApp: App {
             .navigationViewStyle(.stack)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    BannerAds(adUnitID: "ca-app-pub-8092077340719182/1348152099", areAdsDisabled: false)
+                    BannerAds()
                 }
             }
         }

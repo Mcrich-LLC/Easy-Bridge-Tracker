@@ -26,7 +26,11 @@ struct ContentView: View {
                 List {
                     Section {
                         ForEach(viewModel.bridges.sorted(), id: \.self) { bridge in
-                            Link(destination: bridge.mapsUrl) {
+                            Button {
+                                SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                                    UIApplication.shared.open(bridge.mapsUrl)
+                                }), UIAlertAction(title: "Cancel", style: .cancel)])
+                            } label: {
                                 HStack {
                                     if #available(iOS 15, *) {
                                         AsyncImage(url: bridge.imageUrl) { image in
