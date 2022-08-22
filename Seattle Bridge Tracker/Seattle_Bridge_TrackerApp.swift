@@ -19,7 +19,15 @@ struct Seattle_Bridge_TrackerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                ContentView()
+            }
+            .navigationViewStyle(.stack)
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    BannerAds()
+                }
+            }
         }
     }
 }
