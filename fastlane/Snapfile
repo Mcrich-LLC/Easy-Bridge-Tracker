@@ -32,7 +32,7 @@ clear_previous_screenshots(true)
 override_status_bar(true)
 
 # Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
-launch_arguments(["-deviceName Morris", "-welcomePopup false"])
+launch_arguments(["-FASTLANE_SNAPSHOT true"])
 
 # For more information about all available options run
 # fastlane action snapshot

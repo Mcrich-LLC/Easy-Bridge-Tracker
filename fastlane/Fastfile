@@ -25,7 +25,7 @@ platform :ios do
     getBuild = get_build_number(xcodeproj: "Easy Bridge Tracker.xcodeproj")
     build_app(scheme: "Easy Bridge Tracker", output_directory: "./Builds/#{getVersion}/#{getBuild}")
     upload_to_testflight
-    notification(subtitle: "Finished Uploading", message: "Ready to test...", open: "https://appstoreconnect.apple.com/apps/1584491007/appstore/ios/version/inflight")
+    notification(subtitle: "Finished Uploading", message: "Ready to test...", open: "https://appstoreconnect.apple.com/apps/1640954057/testflight/ios")
   end
     lane :getScreenshots do
     Dir.chdir("..") do
@@ -37,7 +37,7 @@ platform :ios do
     Dir.chdir("..") do
       notification(subtitle: "Finished Taking Screenshots", message: "Ready to mockup...", open: "file:///~/Xcode/Easy-Bridge-Tracker/Promo%20Images/AppMockUp%20Studio.webarchive")
       sh("sh './Promo Images/Convert Screenshots.sh'")
-      #sh("sh './Promo Images/Remove png Screenshots.sh'")
+      sh("sh './Promo Images/Remove png Screenshots.sh'")
     end
     #frame_screenshots(path: "./Promo Images")
   end
