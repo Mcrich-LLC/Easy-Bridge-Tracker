@@ -28,7 +28,7 @@ struct ContentView: View {
                         Section {
                             ForEach(viewModel.bridges.sorted(), id: \.self) { bridge in
                                 Button {
-                                    SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                                    SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Open", style: .default, handler: { _ in
                                         UIApplication.shared.open(bridge.mapsUrl)
                                     }), UIAlertAction(title: "Cancel", style: .cancel)])
                                 } label: {
