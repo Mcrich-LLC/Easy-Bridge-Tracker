@@ -1,4 +1,4 @@
-app_identifier("com.Mcrich23.Emoji-Widgets") # The bundle identifier of your app
+app_identifier("com.Mcrich23.Easy-Bridge-Tracker") # The bundle identifier of your app
 apple_id("Evan.richman@skykick.com") # Your Apple email address
 
 itc_team_id("122679006") # App Store Connect Team ID
