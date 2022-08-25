@@ -14,8 +14,16 @@ final class BannerViewController: UIViewControllerRepresentable {
     
     let adUnitID: String = "ca-app-pub-8092077340719182/1348152099"
     
+    var finishedLoading: () -> Void = {}
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(bannerViewController: self)
+    }
+    
+    init() {}
+    
+    init(finishedLoading: @escaping () -> Void) {
+        self.finishedLoading = finishedLoading
     }
     
     func makeUIViewController(context: Context) -> UIViewController {
@@ -47,20 +55,25 @@ final class BannerViewController: UIViewControllerRepresentable {
             print("banner failed to show! Error: \(String(describing: error))")
         }
         func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-            
+            bannerViewController.finishedLoading()
         }
     }
 }
 
 struct BannerAds: View {
+    @State var shimmering = true
     var body: some View {
         if !Utilities.isFastlaneRunning && !Utilities.areAdsDisabled {
             ZStack {
-                Rectangle()
-                    .background(.white)
-                    .shimmering(active: true, duration: 0.75, bounce: false)
-                    .frame(width: 320, height: 50)
-                BannerViewController()
+                if shimmering {
+                    Rectangle()
+                        .background(.white)
+                        .shimmering(active: true, duration: 0.75, bounce: false)
+                        .frame(width: 320, height: 50)
+                }
+                BannerViewController(finishedLoading: {
+                    shimmering = false
+                })
                     .frame(width: 320, height: 50)
             }
         }
