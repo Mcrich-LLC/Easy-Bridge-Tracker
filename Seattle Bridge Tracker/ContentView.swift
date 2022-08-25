@@ -9,6 +9,8 @@ import SwiftUI
 import URLImage
 import Mcrich23_Toolkit
 import SwiftUIBackports
+import Introspect
+import Foundation
 
 struct ContentView: View {
     @StateObject var viewModel = ContentViewModel()
@@ -96,7 +98,22 @@ struct ContentView: View {
             .onAppear {
                 viewModel.fetchData()
             }
-        .navigationBarTitle("Bridges", displayMode: .large)
+            .introspectNavigationController { navController in
+                let bar = navController.navigationBar
+                let hosting = UIHostingController(rootView: HelpMenu())
+                
+                guard let hostingView = hosting.view else { return }
+                // bar.addSubview(hostingView)                                          // <--- OPTION 1
+                 bar.subviews.first(where: \.clipsToBounds)?.addSubview(hostingView)  // <--- OPTION 2
+                hostingView.backgroundColor = .clear
+                
+                hostingView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    hostingView.trailingAnchor.constraint(equalTo: bar.trailingAnchor),
+                    hostingView.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -8)
+                ])
+            }
+            .navigationBarTitle("Bridges", displayMode: .large)
         }
         .navigationViewStyle(.stack)
         .toolbar {
@@ -118,5 +135,24 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+struct HelpMenu: View {
+    
+    var body: some View {
+        Menu {
+            Link(destination: URL(string: "mailto:feedback@mcrich23@icloud.com")!) {
+                Text("Give Feedback")
+            }
+            Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
+                Text("Get Support")
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .padding(.horizontal)
+        }
     }
 }
