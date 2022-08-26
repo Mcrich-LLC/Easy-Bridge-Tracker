@@ -73,20 +73,20 @@ struct BannerAds: View {
     var body: some View {
         if !Utilities.isFastlaneRunning && !Utilities.areAdsDisabled {
             ZStack {
+                if shimmering {
+                Rectangle()
+                    .shimmering(active: true, duration: 0.75, bounce: false)
+                    .frame(width: 320, height: 50)
+                    .onDisappear {
+                        print("stopped shimmering")
+                    }
+            }
                 BannerViewController(startLoading: {
                     shimmering = true
                 }, finishedLoading: {
                     shimmering = false
                 })
                     .frame(width: 320, height: 50)
-                if !shimmering {
-                    Rectangle()
-                        .shimmering(active: true, duration: 0.75, bounce: false)
-                        .frame(width: 320, height: 50)
-                        .onDisappear {
-                            print("stopped shimmering")
-                        }
-                }
             }
         }
     }
