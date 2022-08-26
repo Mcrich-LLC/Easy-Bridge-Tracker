@@ -15,6 +15,7 @@ final class BannerViewController: UIViewControllerRepresentable {
     let adUnitID: String = "ca-app-pub-8092077340719182/1348152099"
     
     var finishedLoading: () -> Void = {}
+    var startLoading: () -> Void = {}
     
     func makeCoordinator() -> Coordinator {
         Coordinator(bannerViewController: self)
@@ -22,11 +23,13 @@ final class BannerViewController: UIViewControllerRepresentable {
     
     init() {}
     
-    init(finishedLoading: @escaping () -> Void) {
+    init(startLoading: @escaping () -> Void, finishedLoading: @escaping () -> Void) {
+        self.startLoading = startLoading
         self.finishedLoading = finishedLoading
     }
     
     func makeUIViewController(context: Context) -> UIViewController {
+        self.startLoading()
         let banner = GADBannerView(adSize: GADAdSizeBanner)
         let viewController = UIViewController()
         banner.delegate = context.coordinator
@@ -53,10 +56,15 @@ final class BannerViewController: UIViewControllerRepresentable {
         }
         func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
             print("banner failed to show! Error: \(String(describing: error))")
+            bannerViewController.startLoading()
         }
         func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+            
+        }
+        func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
             bannerViewController.finishedLoading()
         }
+        
     }
 }
 
@@ -65,16 +73,20 @@ struct BannerAds: View {
     var body: some View {
         if !Utilities.isFastlaneRunning && !Utilities.areAdsDisabled {
             ZStack {
-                if shimmering {
-                    Rectangle()
-                        .background(.white)
-                        .shimmering(active: true, duration: 0.75, bounce: false)
-                        .frame(width: 320, height: 50)
-                }
-                BannerViewController(finishedLoading: {
+                BannerViewController(startLoading: {
+                    shimmering = true
+                }, finishedLoading: {
                     shimmering = false
                 })
                     .frame(width: 320, height: 50)
+                if !shimmering {
+                    Rectangle()
+                        .shimmering(active: true, duration: 0.75, bounce: false)
+                        .frame(width: 320, height: 50)
+                        .onDisappear {
+                            print("stopped shimmering")
+                        }
+                }
             }
         }
     }
