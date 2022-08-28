@@ -142,9 +142,11 @@ struct HelpMenu: View {
     var body: some View {
         Menu {
             Link(destination: URL(string: "mailto:feedback@mcrich23@icloud.com")!) {
+                Image(systemName: "tray")
                 Text("Give Feedback")
             }
             Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
+                Image(systemName: "questionmark.circle")
                 Text("Get Support")
             }
         } label: {

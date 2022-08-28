@@ -64,7 +64,6 @@ final class BannerViewController: UIViewControllerRepresentable {
         func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
             bannerViewController.finishedLoading()
         }
-        
     }
 }
 
