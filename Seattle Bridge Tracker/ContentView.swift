@@ -118,7 +118,7 @@ struct ContentView: View {
         .navigationViewStyle(.stack)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
-                BannerAds()
+//                BannerAds()
             }
         }
     }
@@ -142,13 +142,19 @@ struct HelpMenu: View {
     var body: some View {
         Menu {
             Link(destination: URL(string: "mailto:feedback@mcrich23@icloud.com")!) {
-                Image(systemName: "tray")
-                Text("Give Feedback")
+                Label("Give Feedback", systemImage: "tray")
             }
             Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
-                Image(systemName: "questionmark.circle")
-                Text("Get Support")
+                Label("Get Support", systemImage: "questionmark.circle")
             }
+            Button {
+                Mcrich23_Toolkit.topVC().present {
+                    Info()
+                }
+            } label: {
+                Label("Info", systemImage: "info.circle")
+            }
+
         } label: {
             Image(systemName: "ellipsis.circle")
                 .resizable()

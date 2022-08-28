@@ -16,12 +16,11 @@ class TwitterFetch {
     func fetchTweet(errorHandler: @escaping (HTTPURLResponse) -> Void, completion: @escaping ([Response]) -> Void) {
         do {
             var request = URLRequest(url: URL(string: "http://mc.mcrich23.com:8080/bridges")!,
-                                     timeoutInterval: Double.infinity)
+                                     timeoutInterval: .infinity)
             
             request.httpMethod = "GET"
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                
                 guard error == nil else {
                     return
                 }
