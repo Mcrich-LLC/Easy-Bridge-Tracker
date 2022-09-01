@@ -25,6 +25,7 @@ struct BridgeView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .fill(alignment: Alignment.center)
+                        .clipped()
                         .ignoresSafeArea()
                 } placeholder: {
                     Color.white
@@ -34,6 +35,7 @@ struct BridgeView: View {
 //                        .aspectRatio(contentMode: .fill)
 //                        .fill(alignment: Alignment.center)
 //                        .foregroundColor(.gray)
+//                        .clipped()
 //                        .ignoresSafeArea()
                 }
             } else {
@@ -43,6 +45,7 @@ struct BridgeView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .fill(alignment: Alignment.center)
+                        .clipped()
                         .ignoresSafeArea()
                 }
             }
