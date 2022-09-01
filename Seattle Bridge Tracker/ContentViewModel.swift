@@ -28,6 +28,7 @@ class ContentViewModel: ObservableObject {
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
     func fetchData(repeatFetch: Bool) {
+        self.bridges.removeAll()
         self.dataFetch.fetchTweet { error in
                 print("❌ Status code is \(error.statusCode)")
                 self.status = .failed(error.description)
