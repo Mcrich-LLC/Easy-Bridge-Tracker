@@ -28,9 +28,6 @@ class ContentViewModel: ObservableObject {
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
     func fetchData(repeatFetch: Bool) {
-        DispatchQueue.main.async {
-            self.bridges.removeAll()
-        }
         self.dataFetch.fetchTweet { error in
                 print("❌ Status code is \(error.statusCode)")
                 self.status = .failed(error.description)
@@ -43,7 +40,7 @@ class ContentViewModel: ObservableObject {
                             br.name == addBridge.name
                         }) {
                             let index = self.bridges[bridge.bridgeLocation]!.firstIndex { br in
-                                br.name == br.name
+                                br.name == addBridge.name
                             }!
                             self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
                             print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
