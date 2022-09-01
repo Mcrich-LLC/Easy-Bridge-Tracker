@@ -39,7 +39,7 @@ class TwitterFetch {
                 if let response = response as? HTTPURLResponse {
                     guard (200 ... 299) ~= response.statusCode else {
                         print("❌ Status code is \(response.statusCode)")
-                        errorHandler(HTTPStatusCode(rawValue: response.statusCode) ?? .ok)
+                        errorHandler(HTTPStatusCode(rawValue: response.statusCode) ?? .notFound)
                         completion([])
                         return
                     }
