@@ -35,6 +35,7 @@ struct ContentView: View {
                                             return bridge
                                         }, set: { _ in
                                         }), viewModel: viewModel)
+                                        .tag(bridge.name)
                                     }
                                 } header: {
                                     HStack {
@@ -62,9 +63,7 @@ struct ContentView: View {
                                                 return bridge
                                             }, set: { _ in
                                             }), viewModel: viewModel)
-                                                .onChange(of: viewModel.bridges) { _ in
-                                                    print("bridges = \(viewModel.bridges)")
-                                                }
+                                            .tag(bridge.name)
                                         }
                                     } header: {
                                         HStack {
@@ -88,7 +87,7 @@ struct ContentView: View {
                         .backport.refreshable(action: {
                             await viewModel.fetchData(repeatFetch: false)
                         })
-                        .tag(0)
+                        .tag("bridges")
                         .listStyle(GroupedListStyle())
                     }
                 }

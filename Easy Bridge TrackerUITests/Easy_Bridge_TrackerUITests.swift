@@ -34,12 +34,13 @@ class Seattle_Bridge_TrackerUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-        let seattleStaticText = app.tables.staticTexts["Seattle"]
+        let seattleStaticText = app.tables.staticTexts["Seattle, Wa"]
         
         XCTAssert(seattleStaticText.waitForExistence(timeout: 15))
-        snapshot("Bridges01")
-        seattleStaticText.tap()
-
+        snapshot("01Bridges")
+        app.tables.cells["Ballard Bridge, Seattle, WA 98199, United States, Down"].children(matching: .other).element(boundBy: 2).children(matching: .other).element.tap()
+        snapshot("02BridgeDetails")
+        
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 

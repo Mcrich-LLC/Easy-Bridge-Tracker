@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Spokane St Swing Bridge",
+        "latitude": 47.57237,
+        "address": "Seattle, WA, United States",
+        "maps_url": "https://maps.apple.com/?address=W%20Marginal%20Way%20SW,%20Seattle,%20WA%20%2098106,%20United%20States&auid=1398119420499563697&ll=47.572371,-122.359972&lsp=9902&q=Spokane%20St%20Swing%20Bridge&_ext=CjMKBQgEEOIBCgQIBRADCgUIBhCyAgoECAoQAAoECFIQBAoECFUQAAoECFkQBgoFCKQBEAESJilOd4r/q8hHQDHK8r5Ed5dewDnMTLBb0slHQEEG70AdnZZewFAE",
+        "bridge_location": "Seattle, Wa",
+        "status": "down",
+        "id": "52CA4452-2BBD-4C48-B456-C6FCB33FC0B1",
+        "longitude": -122.35997,
+        "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/65OT7DMVBuYaKCypaLl7Bw/o.jpg"
+    },
+    {
+        "name": "Fremont Bridge",
+        "latitude": 47.64957,
+        "address": "Seattle, Wa, United States",
+        "maps_url": "https://maps.apple.com/?address=N%2034th%20St%20%26%20Fremont%20Ave%20N,%20Seattle,%20WA%20%2098103,%20United%20States&auid=4071119378163287291&ll=47.649574,-122.349736&lsp=9902&q=Fremont%20Bridge&_ext=CjMKBQgEEOIBCgQIBRADCgUIBhCyAgoECAoQAAoECFIQAwoECFUQDwoECFkQAgoFCKQBEAESJikQPu8SktJHQDGYyOlOz5ZewDmOExVvuNNHQEGYFsfU9JVewFAE",
+        "bridge_location": "Seattle, Wa",
+        "status": "down",
+        "id": "D6E22016-407F-494B-B11B-63458AD1210F",
+        "longitude": -122.34974,
+        "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/D6GWjywwsRtcnUrmAKUbjg/o.jpg"
+    },
+    {
+        "name": "Ballard Bridge",
+        "latitude": 47.65704,
+        "address": "Seattle, WA 98199, United States",
+        "maps_url": "https://maps.apple.com/?address=Ballard%20Bridge,%20Seattle,%20WA%20%2098199,%20United%20States&ll=47.657044,-122.376245&q=Ballard%20Bridge&_ext=EiYpoLms1YbTR0AxFkGkn4GYXsA5Ho/SMa3UR0BBNmKBHaeXXsBQBA%3D%3D",
+        "bridge_location": "Seattle, Wa",
+        "status": "up",
+        "id": "85C3D66A-B103-49AB-AA8B-26D153600D19",
+        "longitude": -122.37624,
+        "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/rq2iSswXqRp5Nmp7MIEVJg/o.jpg"
+    },
+    {
+        "name": "Montlake Bridge",
+        "latitude": 47.64722,
+        "address": "Seattle, Wa, United States",
+        "maps_url": "https://maps.apple.com/?address=2908%20Montlake%20Blvd%20E,%20Seattle,%20WA%20%2098112,%20United%20States&auid=13921575388625385978&ll=47.647222,-122.304473&lsp=9902&q=Montlake%20Bridge&_ext=CjMKBQgEEOIBCgQIBRADCgUIBhCyAgoECAoQAAoECFIQAwoECFUQDwoECFkQAgoFCKQBEAESJCldUZhNUsdHQDECxyjtB5xewDl3hmP2WN5HQEHq+nsL8YpewA%3D%3D",
+        "bridge_location": "Seattle, Wa",
+        "status": "down",
+        "id": "8E12EA9B-7F86-4940-BECF-2AD8C09787F6",
+        "longitude": -122.30447,
+        "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/x23fdXYi_FhJ2FselX7f-w/o.jpg"
+    },
+    {
+        "name": "University Bridge",
+        "latitude": 47.65172,
+        "address": "Seattle, WA  98102, United States",
+        "maps_url": "https://maps.apple.com/?address=University%20Bridge,%20Seattle,%20WA%20%2098102,%20United%20States&ll=47.651722,-122.321160&q=University%20Bridge&_ext=EiYp/Jxoc9jSR0AxKwWjJfuUXsA5enKOz/7TR0BBwX0zqSCUXsBQBA%3D%3D",
+        "bridge_location": "Seattle, Wa",
+        "status": "down",
+        "id": "E4D0E7F3-DB3E-42C7-9009-D42AF978C4E3",
+        "longitude": -122.32116,
+        "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/s9o-RJkNPkAGoYbFL9Nh_w/o.jpg"
+    },
+    {
+        "name": "South Park Bridge",
+        "latitude": 47.5293,
+        "address": "Seattle, WA, United States",
+        "maps_url": "https://maps.apple.com/?address=14th%20Ave%20S,%20Tukwila,%20WA%20%2098108,%20United%20States&auid=13112458643910587530&ll=47.529300,-122.314000&lsp=9902&q=South%20Park%20Bridge&_ext=CjMKBQgEEOIBCgQIBRADCgUIBhCyAgoECAoQAAoECFIQBAoECFUQAAoECFkQAgoFCKQBEAESJCnFgJmqosNHQDGIm6FfLpRewDkRRdSJ3cNHQEFM3UfHApRewA%3D%3D",
+        "bridge_location": "Seattle, Wa",
+        "status": "up",
+        "id": "65C163B6-8B32-477A-B292-69AB0BCEFC15",
+        "longitude": -122.314,
+        "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/tqKgN-n8lthpfOr1Dwer6A/o.jpg"
+    },
+    {
+        "name": "1st Ave S Bridge",
+        "latitude": 47.54222,
+        "address": "Seattle, WA, United States",
+        "maps_url": "https://maps.apple.com/?address=1st%20Avenue%20S%20Bridge,%20Seattle,%20WA%20%2098108,%20United%20States&auid=4426036263298196194&ll=47.542222,-122.334234&lsp=9902&q=1st%20Avenue%20Bridge&_ext=CjMKBQgEEOIBCgQIBRADCgUIBhCyAgoECAoQAAoECFIQBAoECFUQAAoECFkQAwoFCKQBEAESJilHiR1b1MRHQDG4ji4Z0ZVewDnFXkO3+sVHQEGqAa0R95RewFAE",
+        "bridge_location": "Seattle, Wa",
+        "status": "down",
+        "id": "CC1A77E6-2B93-4781-849A-A9C794A2C1EC",
+        "longitude": -122.33423,
+        "image_url": "https://cdn.westseattleblog.com/blog/wp-content/uploads/2020/07/P1110807-scaled-e1594843642213.jpg"
+    }
+]

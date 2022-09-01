@@ -52,9 +52,21 @@ class TwitterFetch {
                     do {
                         let jsonDecoder = JSONDecoder()
                         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                        let result = try jsonDecoder.decode([Response].self, from: data)
-                        
-                        completion(result)
+                        if Utilities.isFastlaneRunning {
+                            if let bundlePath = Bundle.main.url(forResource: "DummyPromo", withExtension: "json") {
+                                let result = try jsonDecoder.decode([Response].self, from: Data(contentsOf: bundlePath))
+                                
+                                completion(result)
+                            } else {
+                                let result = try jsonDecoder.decode([Response].self, from: data)
+                                
+                                completion(result)
+                            }
+                        } else {
+                            let result = try jsonDecoder.decode([Response].self, from: data)
+                            
+                            completion(result)
+                        }
                     } catch {
                         print("error = \(error)")
                     }
