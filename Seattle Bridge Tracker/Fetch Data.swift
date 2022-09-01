@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HTTPStatusCodes
 
 enum HttpError: Error {
     case badResponse
@@ -13,22 +14,33 @@ enum HttpError: Error {
 }
 
 class TwitterFetch {
-    func fetchTweet(errorHandler: @escaping (HTTPURLResponse) -> Void, completion: @escaping ([Response]) -> Void) {
+    func fetchTweet(errorHandler: @escaping (HTTPStatusCode) -> Void, completion: @escaping ([Response]) -> Void) {
         do {
             var request = URLRequest(url: URL(string: "http://mc.mcrich23.com:8080/bridges")!,
-                                     timeoutInterval: .infinity)
+                                     timeoutInterval: 5.0)
             
             request.httpMethod = "GET"
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
+                    print("ERROR! \(error)")
+                    if error?.localizedDescription.range(of: "Could not connect to the server.") != nil {
+                        print("Could not connect to the server!")
+                        errorHandler(.networkConnectTimeoutError)
+                        completion([])
+                    } else /*if error?.localizedDescription.range(of: "A server with the specified hostname could not be found.") != nil*/ {
+                        print("A server with the specified hostname could not be found.")
+                        errorHandler(.notFound)
+                        completion([])
+                    }
+                    
                     return
                 }
                 
                 if let response = response as? HTTPURLResponse {
                     guard (200 ... 299) ~= response.statusCode else {
                         print("❌ Status code is \(response.statusCode)")
-                        errorHandler(response)
+                        errorHandler(HTTPStatusCode(rawValue: response.statusCode) ?? .ok)
                         completion([])
                         return
                     }

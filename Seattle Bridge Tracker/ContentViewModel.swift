@@ -29,31 +29,33 @@ class ContentViewModel: ObservableObject {
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
     func fetchData(repeatFetch: Bool) {
         self.dataFetch.fetchTweet { error in
-                print("❌ Status code is \(error.statusCode)")
-                self.status = .failed(error.description)
-            } completion: { response in
-                self.response = response
-                for bridge in response {
-                    DispatchQueue.main.async {
-                        let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation)
-                        if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
+            print("❌ Status code is \(error.rawValue)")
+            DispatchQueue.main.async {
+                self.status = .failed("\(error.rawValue) - \(error.localizedReasonPhrase.capitalized)")
+            }
+        } completion: { response in
+            self.response = response
+            for bridge in response {
+                DispatchQueue.main.async {
+                    let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation)
+                    if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
+                        br.name == addBridge.name
+                    }) {
+                        let index = self.bridges[bridge.bridgeLocation]!.firstIndex { br in
                             br.name == addBridge.name
-                        }) {
-                            let index = self.bridges[bridge.bridgeLocation]!.firstIndex { br in
-                                br.name == addBridge.name
-                            }!
-                            self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
-                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
+                        }!
+                        self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
+                        print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
+                    } else {
+                        if self.bridges[bridge.bridgeLocation] != nil {
+                            self.bridges[bridge.bridgeLocation]!.append(addBridge)
                         } else {
-                            if self.bridges[bridge.bridgeLocation] != nil {
-                                self.bridges[bridge.bridgeLocation]!.append(addBridge)
-                            } else {
-                                self.bridges[bridge.bridgeLocation] = [addBridge]
-                            }
+                            self.bridges[bridge.bridgeLocation] = [addBridge]
                         }
+                    }
                 }
             }
-            }
+        }
         if repeatFetch {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 self.fetchData(repeatFetch: true)
