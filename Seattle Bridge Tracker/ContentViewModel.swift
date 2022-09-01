@@ -8,8 +8,23 @@
 import Foundation
 
 class ContentViewModel: ObservableObject {
-    @Published var bridges: [Bridge] = []
+    @Published var bridges: [String: [Bridge]] = [:] {
+        didSet {
+            var count = 0 {
+                didSet {
+                    if count >= self.response.count {
+                        self.status = .success
+                    }
+                }
+            }
+            for bridgeArray in self.bridges {
+                count += bridgeArray.value.count
+            }
+        }
+    }
+    @Published var bridgeFavorites: [String : [Bridge]] = [:]
     @Published var status: LoadingStatus = .loading
+    private var response: [Response] = []
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
     func fetchData() {
@@ -17,22 +32,23 @@ class ContentViewModel: ObservableObject {
                 print("❌ Status code is \(error.statusCode)")
                 self.status = .failed(error.description)
             } completion: { response in
+                self.response = response
                 for bridge in response {
                     DispatchQueue.main.async {
-                        let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude)
-                        if self.bridges.contains(where: { br in
+                        let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation)
+                        if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
                             br.name == addBridge.name
                         }) {
-                            let index = self.bridges.firstIndex { br in
+                            let index = self.bridges[bridge.bridgeLocation]!.firstIndex { br in
                                 br.name == br.name
                             }!
-                            self.bridges[index].status = addBridge.status
+                            self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
                         } else {
-                            self.bridges.append(addBridge)
-                            if self.bridges.count >= response.count {
-                                self.status = .success
+                            if self.bridges[bridge.bridgeLocation] != nil {
+                                self.bridges[bridge.bridgeLocation]!.append(addBridge)
+                            } else {
+                                self.bridges[bridge.bridgeLocation] = [addBridge]
                             }
-                            
                         }
                 }
             }
@@ -55,6 +71,7 @@ struct Bridge: Identifiable, Hashable, Comparable {
     let address: String
     let latitude: Double
     let longitude: Double
+    let bridgeLocation: String
 }
 enum BridgeStatus: String {
     case up

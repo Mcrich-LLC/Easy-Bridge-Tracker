@@ -16,4 +16,5 @@ struct Response: Codable {
     let address: String
     let latitude: Double
     let longitude: Double
+    let bridgeLocation: String
 }
