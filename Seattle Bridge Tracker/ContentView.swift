@@ -30,7 +30,11 @@ struct ContentView: View {
                             ForEach(viewModel.bridgeFavorites, id: \.self) { key in
                                 Section {
                                     ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                        BridgeRow(bridge: bridge, viewModel: viewModel)
+                                        BridgeRow(bridge: Binding(get: {
+                                            print("get \(bridge)")
+                                            return bridge
+                                        }, set: { _ in
+                                        }), viewModel: viewModel)
                                     }
                                 } header: {
                                     HStack {
@@ -51,7 +55,11 @@ struct ContentView: View {
                                 if !Array(viewModel.bridgeFavorites).contains(key) {
                                     Section {
                                         ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                            BridgeRow(bridge: bridge, viewModel: viewModel)
+                                            BridgeRow(bridge: Binding(get: {
+                                                print("get \(bridge)")
+                                                return bridge
+                                            }, set: { _ in
+                                            }), viewModel: viewModel)
                                                 .onChange(of: viewModel.bridges) { _ in
                                                     print("bridges = \(viewModel.bridges)")
                                                 }

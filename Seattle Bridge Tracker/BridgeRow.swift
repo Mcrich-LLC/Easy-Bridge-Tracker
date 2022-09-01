@@ -13,11 +13,11 @@ import Introspect
 import Foundation
 
 struct BridgeRow: View {
-    @State var bridge: Bridge
+    @Binding var bridge: Bridge
     @ObservedObject var viewModel: ContentViewModel
     var body: some View {
         NavigationLink {
-            BridgeView(bridge: bridge, viewModel: viewModel)
+            BridgeView(bridge: $bridge, viewModel: viewModel)
         } label: {
             HStack {
                 if #available(iOS 15, *) {
@@ -73,6 +73,6 @@ struct BridgeRow: View {
 
 struct BridgeRow_Previews: PreviewProvider {
     static var previews: some View {
-        BridgeRow(bridge: Bridge(name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa"), viewModel: ContentViewModel())
+        BridgeRow(bridge: .constant(Bridge(name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa")), viewModel: ContentViewModel())
     }
 }

@@ -13,7 +13,7 @@ import SwiftUIX
 import Mcrich23_Toolkit
 
 struct BridgeView: View {
-    @State var bridge: Bridge
+    @Binding var bridge: Bridge
     @ObservedObject var viewModel: ContentViewModel
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
@@ -141,14 +141,14 @@ struct BridgeView: View {
 struct BridgeView_Previews: PreviewProvider {
     static var previews: some View {
         BridgeView(
-            bridge: Bridge(name: "Ballard Bridge",
+            bridge: .constant(Bridge(name: "Ballard Bridge",
                            status: .down,
                            imageUrl: URL(string: "https://s3-media0.fl.yelpcdn.com/bphoto/rq2iSswXqRp5Nmp7MIEVJg/o.jpg")!,
                            mapsUrl: URL(string: "https://maps.apple.com/?address=Ballard%20Bridge,%20Seattle,%20WA%20%2098199,%20United%20States&ll=47.657044,-122.376245&q=Ballard%20Bridge&_ext=EiYpoLms1YbTR0AxFkGkn4GYXsA5Ho/SMa3UR0BBNmKBHaeXXsBQBA%3D%3D")!,
                            address: "Ballard Bridge, Seattle, WA 98199, United States",
                            latitude: 47.65704,
                            longitude: -122.37624,
-                           bridgeLocation: "Seattle, Wa"), viewModel: ContentViewModel()
+                           bridgeLocation: "Seattle, Wa")), viewModel: ContentViewModel()
         )
     }
 }
