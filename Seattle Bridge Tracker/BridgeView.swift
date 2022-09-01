@@ -88,28 +88,20 @@ struct BridgeView: View {
                         .foregroundColor(Color.white)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .clipped()
-                    switch bridge.status {
-                    case .up:
-                        status
-                            .background(Color.red)
-                            .cornerRadius(12)
-                            .padding(.top, 8)
-                    case .down:
-                        status
-                            .background(Color.green)
-                            .cornerRadius(12)
-                            .padding(.top, 8)
-                    case .maintenance:
-                        status
-                            .background(Color.yellow)
-                            .cornerRadius(12)
-                            .padding(.top, 8)
-                    case .unknown:
-                        status
-                            .background(Color.yellow)
-                            .cornerRadius(12)
-                            .padding(.top, 8)
+                    HStack {
+                        Tag(backgroundColor: .blue, text: bridge.bridgeLocation)
+                        switch bridge.status {
+                        case .up:
+                            Tag(backgroundColor: .red, text: bridge.status.rawValue.capitalized)
+                        case .down:
+                            Tag(backgroundColor: .green, text: bridge.status.rawValue.capitalized)
+                        case .maintenance:
+                            Tag(backgroundColor: .yellow, text: bridge.status.rawValue.capitalized)
+                        case .unknown:
+                            Tag(backgroundColor: .yellow, text: bridge.status.rawValue.capitalized)
+                        }
                     }
+
                     AnnotationMapView(zoom: .constant(0.2), address: .constant(bridge.address), points: .constant([Annotations(title: bridge.name, subtitle: "", address: bridge.address, glyphImage: .assetImage("bridge-icon"))]))
                         .isUserInteractionEnabled(false)
                         .mask(RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -132,13 +124,6 @@ struct BridgeView: View {
             viewModel.fetchData(repeatFetch: false)
         }
     }
-    var status: some View {
-        Text(bridge.status.rawValue.capitalized)
-            .font(.headline)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 15)
-            .foregroundColor(Color.white)
-    }
 }
 
 struct BridgeView_Previews: PreviewProvider {
@@ -156,12 +141,17 @@ struct BridgeView_Previews: PreviewProvider {
     }
 }
 
-struct PlacePin: Identifiable {
-    let id: String
-    let location: CLLocationCoordinate2D
-    
-    init(id: String = UUID().uuidString, latitude: Double, longitude: Double) {
-        self.id = id
-        self.location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+struct Tag: View {
+    @State var backgroundColor: Color
+    @State var text: String
+    var body: some View {
+        Text(text)
+            .font(.headline)
+            .padding(.vertical, 12)
+            .padding(.horizontal, 15)
+            .foregroundColor(Color.white)
+            .background(backgroundColor)
+            .cornerRadius(12)
+            .padding(.top, 8)
     }
 }
