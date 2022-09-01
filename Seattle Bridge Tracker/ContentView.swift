@@ -39,13 +39,15 @@ struct ContentView: View {
                                 } header: {
                                     HStack {
                                         Text(key)
-                                        Spacer()
-                                        Button {
-                                            viewModel.toggleFavorite(bridgeLocation: key)
-                                        } label: {
-                                            Image(systemName: "star.fill")
-                                                .foregroundColor(.yellow)
-                                                .imageScale(.medium)
+                                        if viewModel.bridges.keys.count >= 3 {
+                                            Spacer()
+                                            Button {
+                                                viewModel.toggleFavorite(bridgeLocation: key)
+                                            } label: {
+                                                Image(systemName: "star.fill")
+                                                    .foregroundColor(.yellow)
+                                                    .imageScale(.medium)
+                                            }
                                         }
                                     }
 
@@ -67,13 +69,15 @@ struct ContentView: View {
                                     } header: {
                                         HStack {
                                             Text(key)
-                                            Spacer()
-                                            Button {
-                                                viewModel.toggleFavorite(bridgeLocation: key)
-                                            } label: {
-                                                Image(systemName: "star")
-                                                    .foregroundColor(.yellow)
-                                                    .imageScale(.medium)
+                                            if viewModel.bridges.keys.count >= 3 {
+                                                Spacer()
+                                                Button {
+                                                    viewModel.toggleFavorite(bridgeLocation: key)
+                                                } label: {
+                                                    Image(systemName: "star")
+                                                        .foregroundColor(.yellow)
+                                                        .imageScale(.medium)
+                                                }
                                             }
                                         }
 
