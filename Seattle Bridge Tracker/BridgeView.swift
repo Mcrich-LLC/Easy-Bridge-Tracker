@@ -128,6 +128,9 @@ struct BridgeView: View {
             .clipped()
             .navigationBarHidden(true)
         }
+        .onAppear {
+            viewModel.fetchData(repeatFetch: false)
+        }
     }
     var status: some View {
         Text(bridge.status.rawValue.capitalized)
