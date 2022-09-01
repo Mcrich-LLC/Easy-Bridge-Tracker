@@ -23,7 +23,6 @@ class TwitterFetch {
             
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
-                    print("ERROR! \(error)")
                     if error?.localizedDescription.range(of: "Could not connect to the server.") != nil {
                         print("Could not connect to the server!")
                         errorHandler(.networkConnectTimeoutError)
