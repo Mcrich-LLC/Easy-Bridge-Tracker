@@ -43,7 +43,7 @@ class ContentViewModel: ObservableObject {
                                 br.name == br.name
                             }!
                             self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
-                            print("addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
+                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
                         } else {
                             if self.bridges[bridge.bridgeLocation] != nil {
                                 self.bridges[bridge.bridgeLocation]!.append(addBridge)
