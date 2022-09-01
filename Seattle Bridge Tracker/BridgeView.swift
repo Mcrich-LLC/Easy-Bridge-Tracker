@@ -14,6 +14,7 @@ import Mcrich23_Toolkit
 
 struct BridgeView: View {
     @State var bridge: Bridge
+    @ObservedObject var viewModel: ContentViewModel
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
@@ -62,6 +63,20 @@ struct BridgeView: View {
                             .padding()
                     }
                     Spacer()
+                    Button {
+                        viewModel.fetchData(repeatFetch: false)
+                    } label: {
+                        Circle()
+                            .frame(width: 40, height: 40)
+                            .clipped()
+                            .foregroundColor(Color(.systemBackground))
+                            .overlay(Image(systemName: "arrow.clockwise")
+                                .foregroundColor(Color.primary)
+                                .font(.title3), alignment: .center)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .clipped()
+                            .padding()
+                    }
                 }
                 .padding(.vertical, 76)
                 .padding(.horizontal, 24)
@@ -133,7 +148,7 @@ struct BridgeView_Previews: PreviewProvider {
                            address: "Ballard Bridge, Seattle, WA 98199, United States",
                            latitude: 47.65704,
                            longitude: -122.37624,
-                           bridgeLocation: "Seattle, Wa")
+                           bridgeLocation: "Seattle, Wa"), viewModel: ContentViewModel()
         )
     }
 }

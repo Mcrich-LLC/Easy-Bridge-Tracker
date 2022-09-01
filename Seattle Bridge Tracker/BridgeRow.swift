@@ -14,9 +14,10 @@ import Foundation
 
 struct BridgeRow: View {
     @State var bridge: Bridge
+    @ObservedObject var viewModel: ContentViewModel
     var body: some View {
         NavigationLink {
-            BridgeView(bridge: bridge)
+            BridgeView(bridge: bridge, viewModel: viewModel)
         } label: {
             HStack {
                 if #available(iOS 15, *) {
@@ -72,6 +73,6 @@ struct BridgeRow: View {
 
 struct BridgeRow_Previews: PreviewProvider {
     static var previews: some View {
-        BridgeRow(bridge: Bridge(name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa"))
+        BridgeRow(bridge: Bridge(name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa"), viewModel: ContentViewModel())
     }
 }

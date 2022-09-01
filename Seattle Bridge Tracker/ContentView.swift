@@ -30,7 +30,7 @@ struct ContentView: View {
                             ForEach(viewModel.bridgeFavorites, id: \.self) { key in
                                 Section {
                                     ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                        BridgeRow(bridge: bridge)
+                                        BridgeRow(bridge: bridge, viewModel: viewModel)
                                     }
                                 } header: {
                                     HStack {
@@ -51,7 +51,7 @@ struct ContentView: View {
                                 if !Array(viewModel.bridgeFavorites).contains(key) {
                                     Section {
                                         ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                            BridgeRow(bridge: bridge)
+                                            BridgeRow(bridge: bridge, viewModel: viewModel)
                                                 .onChange(of: viewModel.bridges) { _ in
                                                     print("bridges = \(viewModel.bridges)")
                                                 }
@@ -74,7 +74,7 @@ struct ContentView: View {
                             }
                         }
                         .backport.refreshable(action: {
-                            await viewModel.fetchData()
+                            await viewModel.fetchData(repeatFetch: false)
                         })
                         .tag(0)
                         .listStyle(GroupedListStyle())
@@ -82,7 +82,7 @@ struct ContentView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchData()
+                viewModel.fetchData(repeatFetch: true)
             }
             .introspectNavigationController { navController in
                 let bar = navController.navigationBar

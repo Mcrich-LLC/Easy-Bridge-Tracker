@@ -27,7 +27,7 @@ class ContentViewModel: ObservableObject {
     private var response: [Response] = []
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
-    func fetchData() {
+    func fetchData(repeatFetch: Bool) {
         self.dataFetch.fetchTweet { error in
                 print("❌ Status code is \(error.statusCode)")
                 self.status = .failed(error.description)
@@ -54,8 +54,10 @@ class ContentViewModel: ObservableObject {
                 }
             }
             }
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
-            self.fetchData()
+        if repeatFetch {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
+                self.fetchData(repeatFetch: true)
+            }
         }
     }
     func toggleFavorite(bridgeLocation: String) {
