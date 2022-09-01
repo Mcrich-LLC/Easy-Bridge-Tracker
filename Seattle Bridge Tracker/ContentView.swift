@@ -27,38 +27,49 @@ struct ContentView: View {
                         errors(error: error)
                     case .success:
                         List {
-                            ForEach(Array(viewModel.bridges.keys), id: \.self) { key in
+                            ForEach(viewModel.bridgeFavorites, id: \.self) { key in
                                 Section {
-//                                    Section {
-//                                        ForEach(viewModel.bridges.sorted(), id: \.self) { bridge in
-//                                            if #available(iOS 15.0, *) {
-//                                                BridgeRow(bridge: bridge)
-//                                                    .swipeActions(edge: .leading, allowsFullSwipe: true, content: {
-//                                                        Favorite(viewModel: viewModel)
-//                                                            .tint(.yellow)
-//                                                    })
-//                                            } else {
-//                                                // Fallback on earlier versions
-//                                                BridgeRow(bridge: bridge)
-//                                            }
-//                                        }
-//                                    } header: {
-//                                        Text("Favorites")
-//                                    }
                                     ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                        if #available(iOS 15.0, *) {
-                                            BridgeRow(bridge: bridge)
-                                                .swipeActions(edge: .leading, allowsFullSwipe: true, content: {
-                                                    Favorite(viewModel: viewModel)
-                                                        .tint(.yellow)
-                                                })
-                                        } else {
-                                            // Fallback on earlier versions
-                                            BridgeRow(bridge: bridge)
-                                        }
+                                        BridgeRow(bridge: bridge)
                                     }
                                 } header: {
-                                    Text(key)
+                                    HStack {
+                                        Text(key)
+                                        Spacer()
+                                        Button {
+                                            viewModel.toggleFavorite(bridgeLocation: key)
+                                        } label: {
+                                            Image(systemName: "star.fill")
+                                                .foregroundColor(.yellow)
+                                                .imageScale(.medium)
+                                        }
+                                    }
+
+                                }
+                            }
+                            ForEach(Array(viewModel.bridges.keys), id: \.self) { key in
+                                if !Array(viewModel.bridgeFavorites).contains(key) {
+                                    Section {
+                                        ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
+                                            BridgeRow(bridge: bridge)
+                                                .onChange(of: viewModel.bridges) { _ in
+                                                    print("bridges = \(viewModel.bridges)")
+                                                }
+                                        }
+                                    } header: {
+                                        HStack {
+                                            Text(key)
+                                            Spacer()
+                                            Button {
+                                                viewModel.toggleFavorite(bridgeLocation: key)
+                                            } label: {
+                                                Image(systemName: "star")
+                                                    .foregroundColor(.yellow)
+                                                    .imageScale(.medium)
+                                            }
+                                        }
+
+                                    }
                                 }
                             }
                         }

@@ -22,7 +22,7 @@ class ContentViewModel: ObservableObject {
             }
         }
     }
-    @Published var bridgeFavorites: [String : [Bridge]] = [:]
+    @Published var bridgeFavorites: [String] = []
     @Published var status: LoadingStatus = .loading
     private var response: [Response] = []
     let dataFetch = TwitterFetch()
@@ -43,6 +43,7 @@ class ContentViewModel: ObservableObject {
                                 br.name == br.name
                             }!
                             self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
+                            print("addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
                         } else {
                             if self.bridges[bridge.bridgeLocation] != nil {
                                 self.bridges[bridge.bridgeLocation]!.append(addBridge)
@@ -55,6 +56,16 @@ class ContentViewModel: ObservableObject {
             }
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
             self.fetchData()
+        }
+    }
+    func toggleFavorite(bridgeLocation: String) {
+        if self.bridgeFavorites.contains(bridgeLocation) {
+            let bridges = self.bridgeFavorites.firstIndex { bridge in
+                bridge == bridgeLocation
+            }!
+            self.bridgeFavorites.remove(at: bridges)
+        } else {
+            self.bridgeFavorites.append(bridgeLocation)
         }
     }
 }
