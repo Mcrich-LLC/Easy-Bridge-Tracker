@@ -55,7 +55,7 @@ class ContentViewModel: ObservableObject {
             }
             }
         if repeatFetch {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 self.fetchData(repeatFetch: true)
             }
         }
