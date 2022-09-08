@@ -16,6 +16,7 @@ struct BridgeView: View {
     @Binding var bridge: Bridge
     @ObservedObject var viewModel: ContentViewModel
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.colorScheme) var colorScheme
     @State var isMapHorizantal: Bool = false
     init(bridge: Binding<Bridge>, viewModel: ContentViewModel) {
         self._bridge = bridge

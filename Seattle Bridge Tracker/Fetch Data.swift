@@ -52,7 +52,7 @@ class TwitterFetch {
                     do {
                         let jsonDecoder = JSONDecoder()
                         jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                        if Utilities.isFastlaneRunning {
+                        if  Utilities.isFastlaneRunning {
                             if let bundlePath = Bundle.main.url(forResource: "DummyPromo", withExtension: "json") {
                                 let result = try jsonDecoder.decode([Response].self, from: Data(contentsOf: bundlePath))
                                 
