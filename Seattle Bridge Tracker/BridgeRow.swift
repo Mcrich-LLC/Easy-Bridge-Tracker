@@ -15,8 +15,9 @@ import Foundation
 struct BridgeRow: View {
     @Binding var bridge: Bridge
     @ObservedObject var viewModel: ContentViewModel
+    @State var showView = false
     var body: some View {
-        NavigationLink {
+        NavigationLink(isActive: $showView) {
             BridgeView(bridge: $bridge, viewModel: viewModel)
         } label: {
             HStack {
@@ -66,6 +67,18 @@ struct BridgeRow: View {
                             .foregroundColor(.yellow)
                     }
                 }
+            }
+            
+            .contextMenu {
+                showView.toggle()
+            } preview: {
+                BridgeView(bridge: $bridge, viewModel: viewModel)
+            } menu: {
+                let openUrl = UIAction(title: "Open", image: UIImage(systemName: "arrow.right")) { _ in
+                    showView.toggle()
+                }
+                let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [openUrl]) // Menu
+                    return menu
             }
         }
     }

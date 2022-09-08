@@ -16,6 +16,11 @@ struct BridgeView: View {
     @Binding var bridge: Bridge
     @ObservedObject var viewModel: ContentViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State var isMapHorizantal: Bool = false
+    init(bridge: Binding<Bridge>, viewModel: ContentViewModel) {
+        self._bridge = bridge
+        self.viewModel = viewModel
+    }
     var body: some View {
         ZStack {
             if #available(iOS 15, *) {
@@ -85,34 +90,33 @@ struct BridgeView: View {
                 .padding(.horizontal, 24)
                 .foregroundColor(Color.white)
                 Spacer()
-                VStack(alignment: .leading, spacing: 11) {
-                    Text(bridge.name)
-                        .font(.system(size: 24, weight: .medium, design: .default))
-                        .foregroundColor(Color.white)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .clipped()
-                    HStack {
-                        Tag(backgroundColor: .blue, text: bridge.bridgeLocation)
-                        switch bridge.status {
-                        case .up:
-                            Tag(backgroundColor: .red, text: bridge.status.rawValue.capitalized)
-                        case .down:
-                            Tag(backgroundColor: .green, text: bridge.status.rawValue.capitalized)
-                        case .maintenance:
-                            Tag(backgroundColor: .yellow, text: bridge.status.rawValue.capitalized)
-                        case .unknown:
-                            Tag(backgroundColor: .yellow, text: bridge.status.rawValue.capitalized)
+                HStack {
+                    VStack(alignment: .leading, spacing: 11) {
+                        Text(bridge.name)
+                            .font(.system(size: 24, weight: .medium, design: .default))
+                            .foregroundColor(Color.white)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .clipped()
+                        HStack {
+                            Tag(backgroundColor: .blue, text: bridge.bridgeLocation)
+                            switch bridge.status {
+                            case .up:
+                                Tag(backgroundColor: .red, text: bridge.status.rawValue.capitalized)
+                            case .down:
+                                Tag(backgroundColor: .green, text: bridge.status.rawValue.capitalized)
+                            case .maintenance:
+                                Tag(backgroundColor: .yellow, text: bridge.status.rawValue.capitalized)
+                            case .unknown:
+                                Tag(backgroundColor: .yellow, text: bridge.status.rawValue.capitalized)
+                            }
+                        }
+                        if !isMapHorizantal {
+                            map
                         }
                     }
-
-                    AnnotationMapView(zoom: .constant(0.2), address: .constant(bridge.address), points: .constant([Annotations(title: bridge.name, subtitle: "", address: bridge.address, glyphImage: .assetImage("bridge-icon"))]))
-                        .isUserInteractionEnabled(false)
-                        .mask(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .onTapGesture {
-                            SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Open", style: .default, handler: { _ in
-                                UIApplication.shared.open(bridge.mapsUrl)
-                            }), UIAlertAction(title: "Cancel", style: .cancel)])
-                        }
+                    if isMapHorizantal {
+                        map
+                    }
                 }
                 .padding(.horizontal, 24)
                 Spacer()
@@ -124,7 +128,29 @@ struct BridgeView: View {
             .navigationBarHidden(true)
         }
         .onAppear {
+            getIsMapHorizantal(orientation: UIDevice.current.orientation)
             viewModel.fetchData(repeatFetch: false)
+        }
+        .onRotate { orientation in
+            getIsMapHorizantal(orientation: orientation)
+        }
+    }
+    var map: some View {
+        AnnotationMapView(zoom: .constant(0.05), coordinates: .constant(LocationCoordinate(latitude: bridge.latitude, longitude: bridge.longitude)), points: .constant([Annotations(title: bridge.name, subtitle: "", location: .coordinates(LocationCoordinate(latitude: bridge.latitude, longitude: bridge.longitude)), glyphImage: .assetImage("bridge-icon"))]))
+            .isUserInteractionEnabled(false)
+            .pointsOfInterest(.excludingAll)
+            .mask(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .onTapGesture {
+                SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Open", style: .default, handler: { _ in
+                    UIApplication.shared.open(bridge.mapsUrl)
+                }), UIAlertAction(title: "Cancel", style: .cancel)])
+            }
+    }
+    func getIsMapHorizantal(orientation: UIDeviceOrientation) {
+        if UIDevice.current.userInterfaceIdiom == .phone && (orientation == .landscapeLeft || orientation == .landscapeRight || orientation == .portraitUpsideDown) {
+            self.isMapHorizantal = true
+        } else {
+            self.isMapHorizantal = false
         }
     }
 }
@@ -156,5 +182,11 @@ struct Tag: View {
             .background(backgroundColor)
             .cornerRadius(12)
             .padding(.top, 8)
+    }
+}
+extension UINavigationController {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = nil
     }
 }
