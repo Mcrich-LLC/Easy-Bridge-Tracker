@@ -19,7 +19,7 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     #sh("rm -r ~/Library/Developer/Xcode/DerivedData/*")
-    precheck
+    #precheck
     getVersion = get_version_number(xcodeproj: "Easy Bridge Tracker.xcodeproj", target: "Easy Bridge Tracker")
     increment_build_number(build_number: latest_testflight_build_number(version: getVersion) + 1, xcodeproj: "Easy Bridge Tracker.xcodeproj")
     getBuild = get_build_number(xcodeproj: "Easy Bridge Tracker.xcodeproj")
