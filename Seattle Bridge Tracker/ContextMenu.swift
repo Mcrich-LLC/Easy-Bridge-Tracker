@@ -52,7 +52,7 @@ struct ContextMenuHelper<Content: View, Preview: View>: UIViewRepresentable {
             return UIContextMenuConfiguration(identifier: nil) {
                 let previewController = UIHostingController(rootView: self.parent.preview)
                 return previewController
-            } actionProvider: { items in
+            } actionProvider: { _ in
                 return self.parent.menu
             }
         }
