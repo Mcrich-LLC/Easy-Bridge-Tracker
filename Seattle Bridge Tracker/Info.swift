@@ -48,6 +48,7 @@ struct Info: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 
