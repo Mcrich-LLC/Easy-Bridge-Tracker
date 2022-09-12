@@ -1,0 +1,701 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A305122628B33C3F002BB056 /* GoogleMobileAds */; };
+		A305122A28B33C50002BB056 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = A305122928B33C50002BB056 /* Shimmer */; };
+		A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */; };
+		A33F930528AC90A800391EBB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F930428AC90A800391EBB /* ContentView.swift */; };
+		A33F930728AC90A900391EBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33F930628AC90A900391EBB /* Assets.xcassets */; };
+		A33F930A28AC90A900391EBB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A33F930928AC90A900391EBB /* Preview Assets.xcassets */; };
+		A33F931328AC912500391EBB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A33F931228AC912500391EBB /* .gitignore */; };
+		A33F931528AC926100391EBB /* Fetch Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F931428AC926100391EBB /* Fetch Data.swift */; };
+		A33F931928AC97A300391EBB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A33F931828AC97A300391EBB /* .swiftlint.yml */; };
+		A3413A0328AFDD5B0016710C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3413A0228AFDD5B0016710C /* Response.swift */; };
+		A3413A0528AFDD680016710C /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3413A0428AFDD680016710C /* ContentViewModel.swift */; };
+		A3413A1028B065BC0016710C /* Mcrich23-Toolkit in Frameworks */ = {isa = PBXBuildFile; productRef = A3413A0F28B065BC0016710C /* Mcrich23-Toolkit */; };
+		A35F850A28C9AA2E00ED0D2D /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35F850928C9AA2D00ED0D2D /* ContextMenu.swift */; };
+		A37E4BB028B1359E007644D5 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAA28B1359D007644D5 /* Appfile */; };
+		A37E4BB228B1359E007644D5 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAC28B1359D007644D5 /* Fastfile */; };
+		A37E4BB328B1359E007644D5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAD28B1359D007644D5 /* README.md */; };
+		A37E4BB428B1359E007644D5 /* Precheckfile in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAE28B1359D007644D5 /* Precheckfile */; };
+		A37E4BB528B1359E007644D5 /* report.xml in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAF28B1359D007644D5 /* report.xml */; };
+		A37E4BB728B13627007644D5 /* Snapfile in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BB628B13627007644D5 /* Snapfile */; };
+		A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E8B3A28BB2DA200A6A8D4 /* Info.swift */; };
+		A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80128BFBEE1003E5273 /* BridgeRow.swift */; };
+		A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80328BFBF64003E5273 /* HelpMenu.swift */; };
+		A394A80628BFC057003E5273 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80528BFC057003E5273 /* Favorite.swift */; };
+		A394A80828C0725B003E5273 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80728C0725B003E5273 /* BridgeView.swift */; };
+		A3D22D7428C149C900AD4C0A /* HTTPStatusCodes in Frameworks */ = {isa = PBXBuildFile; productRef = A3D22D7328C149C900AD4C0A /* HTTPStatusCodes */; };
+		A3D22D7528C14ADB00AD4C0A /* DummyPromo.json in Resources */ = {isa = PBXBuildFile; fileRef = A394A80D28C13C1F003E5273 /* DummyPromo.json */; };
+		A3F2AFEE28B28BB500D38A59 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
+		A3F2AFEF28B28BFD00D38A59 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
+		A3F2AFF228B2B5F900D38A59 /* Mcrich23-Toolkit in Frameworks */ = {isa = PBXBuildFile; productRef = A3F2AFF128B2B5F900D38A59 /* Mcrich23-Toolkit */; };
+		A3F2AFF728B2B67B00D38A59 /* Banner Ads.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F2AFF528B2B67B00D38A59 /* Banner Ads.swift */; };
+		A3F2AFFA28B2B7F500D38A59 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F2AFF928B2B7F500D38A59 /* Utilities.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A3F2AFE928B28B7E00D38A59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A33F92F728AC90A800391EBB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A33F92FE28AC90A800391EBB;
+			remoteInfo = "Easy Bridge Tracker";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A305122B28B33C8C002BB056 /* Mcrich23-Toolkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Mcrich23-Toolkit"; path = "../Packages/Mcrich23-Toolkit"; sourceTree = "<group>"; };
+		A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy Bridge Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seattle_Bridge_TrackerApp.swift; sourceTree = "<group>"; };
+		A33F930428AC90A800391EBB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A33F930628AC90A900391EBB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A33F930928AC90A900391EBB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A33F931228AC912500391EBB /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A33F931428AC926100391EBB /* Fetch Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch Data.swift"; sourceTree = "<group>"; };
+		A33F931828AC97A300391EBB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A3413A0228AFDD5B0016710C /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		A3413A0428AFDD680016710C /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		A3413A0828AFEDA00016710C /* Seattle-Bridge-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Seattle-Bridge-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
+		A35F850928C9AA2D00ED0D2D /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
+		A37E4BAA28B1359D007644D5 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
+		A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		A37E4BAC28B1359D007644D5 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
+		A37E4BAD28B1359D007644D5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A37E4BAE28B1359D007644D5 /* Precheckfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Precheckfile; sourceTree = "<group>"; };
+		A37E4BAF28B1359D007644D5 /* report.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = report.xml; sourceTree = "<group>"; };
+		A37E4BB628B13627007644D5 /* Snapfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Snapfile; sourceTree = "<group>"; };
+		A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Easy_Bridge_TrackerUITests.swift; sourceTree = "<group>"; };
+		A37E8B3A28BB2DA200A6A8D4 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		A394A80128BFBEE1003E5273 /* BridgeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRow.swift; sourceTree = "<group>"; };
+		A394A80328BFBF64003E5273 /* HelpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpMenu.swift; sourceTree = "<group>"; };
+		A394A80528BFC057003E5273 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
+		A394A80728C0725B003E5273 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
+		A394A80D28C13C1F003E5273 /* DummyPromo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyPromo.json; sourceTree = "<group>"; };
+		A3F2AFE328B28B7E00D38A59 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3F2AFF528B2B67B00D38A59 /* Banner Ads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Banner Ads.swift"; sourceTree = "<group>"; };
+		A3F2AFF928B2B7F500D38A59 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A33F92FC28AC90A800391EBB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3D22D7428C149C900AD4C0A /* HTTPStatusCodes in Frameworks */,
+				A305122A28B33C50002BB056 /* Shimmer in Frameworks */,
+				A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */,
+				A3F2AFF228B2B5F900D38A59 /* Mcrich23-Toolkit in Frameworks */,
+				A3413A1028B065BC0016710C /* Mcrich23-Toolkit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3F2AFE028B28B7E00D38A59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A33F92F628AC90A800391EBB = {
+			isa = PBXGroup;
+			children = (
+				A33F931228AC912500391EBB /* .gitignore */,
+				A33F931828AC97A300391EBB /* .swiftlint.yml */,
+				A33F930128AC90A800391EBB /* Seattle Bridge Tracker */,
+				A3413A1128B069220016710C /* Packages */,
+				A37E4BA928B1359D007644D5 /* fastlane */,
+				A37E4BBD28B13720007644D5 /* Easy Bridge TrackerUITests */,
+				A33F930028AC90A800391EBB /* Products */,
+				A37E59D828C1487F00037758 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A33F930028AC90A800391EBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */,
+				A3F2AFE328B28B7E00D38A59 /* Easy Bridge TrackerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A33F930128AC90A800391EBB /* Seattle Bridge Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				A3413A0828AFEDA00016710C /* Seattle-Bridge-Tracker-Info.plist */,
+				A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */,
+				A33F930428AC90A800391EBB /* ContentView.swift */,
+				A3413A0428AFDD680016710C /* ContentViewModel.swift */,
+				A394A80128BFBEE1003E5273 /* BridgeRow.swift */,
+				A394A80728C0725B003E5273 /* BridgeView.swift */,
+				A394A80328BFBF64003E5273 /* HelpMenu.swift */,
+				A394A80528BFC057003E5273 /* Favorite.swift */,
+				A37E8B3A28BB2DA200A6A8D4 /* Info.swift */,
+				A33F931428AC926100391EBB /* Fetch Data.swift */,
+				A3413A0228AFDD5B0016710C /* Response.swift */,
+				A3F2AFF928B2B7F500D38A59 /* Utilities.swift */,
+				A35F850928C9AA2D00ED0D2D /* ContextMenu.swift */,
+				A394A80D28C13C1F003E5273 /* DummyPromo.json */,
+				A3F2AFF428B2B67B00D38A59 /* AdMob */,
+				A33F930628AC90A900391EBB /* Assets.xcassets */,
+				A33F930828AC90A900391EBB /* Preview Content */,
+			);
+			path = "Seattle Bridge Tracker";
+			sourceTree = "<group>";
+		};
+		A33F930828AC90A900391EBB /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A33F930928AC90A900391EBB /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A3413A1128B069220016710C /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				A305122B28B33C8C002BB056 /* Mcrich23-Toolkit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		A37E4BA928B1359D007644D5 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				A37E4BAA28B1359D007644D5 /* Appfile */,
+				A37E4BB628B13627007644D5 /* Snapfile */,
+				A37E4BAC28B1359D007644D5 /* Fastfile */,
+				A37E4BAD28B1359D007644D5 /* README.md */,
+				A37E4BAE28B1359D007644D5 /* Precheckfile */,
+				A37E4BAF28B1359D007644D5 /* report.xml */,
+			);
+			path = fastlane;
+			sourceTree = "<group>";
+		};
+		A37E4BBD28B13720007644D5 /* Easy Bridge TrackerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */,
+				A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */,
+			);
+			path = "Easy Bridge TrackerUITests";
+			sourceTree = "<group>";
+		};
+		A37E59D828C1487F00037758 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A3F2AFF428B2B67B00D38A59 /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				A3F2AFF528B2B67B00D38A59 /* Banner Ads.swift */,
+			);
+			path = AdMob;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A33F930D28AC90A900391EBB /* Build configuration list for PBXNativeTarget "Easy Bridge Tracker" */;
+			buildPhases = (
+				A33F92FB28AC90A800391EBB /* Sources */,
+				A33F92FC28AC90A800391EBB /* Frameworks */,
+				A33F92FD28AC90A800391EBB /* Resources */,
+				A33F931A28AC97BA00391EBB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Easy Bridge Tracker";
+			packageProductDependencies = (
+				A3413A0F28B065BC0016710C /* Mcrich23-Toolkit */,
+				A3F2AFF128B2B5F900D38A59 /* Mcrich23-Toolkit */,
+				A305122628B33C3F002BB056 /* GoogleMobileAds */,
+				A305122928B33C50002BB056 /* Shimmer */,
+				A3D22D7328C149C900AD4C0A /* HTTPStatusCodes */,
+			);
+			productName = "Seattle Bridge Tracker";
+			productReference = A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A3F2AFE228B28B7E00D38A59 /* Easy Bridge TrackerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3F2AFED28B28B7E00D38A59 /* Build configuration list for PBXNativeTarget "Easy Bridge TrackerUITests" */;
+			buildPhases = (
+				A3F2AFDF28B28B7E00D38A59 /* Sources */,
+				A3F2AFE028B28B7E00D38A59 /* Frameworks */,
+				A3F2AFE128B28B7E00D38A59 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3F2AFEA28B28B7E00D38A59 /* PBXTargetDependency */,
+			);
+			name = "Easy Bridge TrackerUITests";
+			productName = "Easy Bridge TrackerUITests1";
+			productReference = A3F2AFE328B28B7E00D38A59 /* Easy Bridge TrackerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A33F92F728AC90A800391EBB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					A33F92FE28AC90A800391EBB = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					A3F2AFE228B28B7E00D38A59 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = A33F92FE28AC90A800391EBB;
+					};
+				};
+			};
+			buildConfigurationList = A33F92FA28AC90A800391EBB /* Build configuration list for PBXProject "Easy Bridge Tracker" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A33F92F628AC90A800391EBB;
+			packageReferences = (
+				A3413A0E28B065BC0016710C /* XCRemoteSwiftPackageReference "Mcrich23-Toolkit" */,
+				A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
+				A305122828B33C50002BB056 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				A3D22D7228C149C900AD4C0A /* XCRemoteSwiftPackageReference "SwiftHTTPStatusCodes" */,
+			);
+			productRefGroup = A33F930028AC90A800391EBB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */,
+				A3F2AFE228B28B7E00D38A59 /* Easy Bridge TrackerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A33F92FD28AC90A800391EBB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3D22D7528C14ADB00AD4C0A /* DummyPromo.json in Resources */,
+				A37E4BB728B13627007644D5 /* Snapfile in Resources */,
+				A37E4BB528B1359E007644D5 /* report.xml in Resources */,
+				A37E4BB228B1359E007644D5 /* Fastfile in Resources */,
+				A37E4BB428B1359E007644D5 /* Precheckfile in Resources */,
+				A33F931928AC97A300391EBB /* .swiftlint.yml in Resources */,
+				A37E4BB028B1359E007644D5 /* Appfile in Resources */,
+				A37E4BB328B1359E007644D5 /* README.md in Resources */,
+				A33F930A28AC90A900391EBB /* Preview Assets.xcassets in Resources */,
+				A33F931328AC912500391EBB /* .gitignore in Resources */,
+				A33F930728AC90A900391EBB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3F2AFE128B28B7E00D38A59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A33F931A28AC97BA00391EBB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github#.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A33F92FB28AC90A800391EBB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3413A0328AFDD5B0016710C /* Response.swift in Sources */,
+				A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */,
+				A3F2AFF728B2B67B00D38A59 /* Banner Ads.swift in Sources */,
+				A394A80828C0725B003E5273 /* BridgeView.swift in Sources */,
+				A3F2AFFA28B2B7F500D38A59 /* Utilities.swift in Sources */,
+				A33F930528AC90A800391EBB /* ContentView.swift in Sources */,
+				A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */,
+				A394A80628BFC057003E5273 /* Favorite.swift in Sources */,
+				A33F931528AC926100391EBB /* Fetch Data.swift in Sources */,
+				A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */,
+				A3413A0528AFDD680016710C /* ContentViewModel.swift in Sources */,
+				A35F850A28C9AA2E00ED0D2D /* ContextMenu.swift in Sources */,
+				A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3F2AFDF28B28B7E00D38A59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3F2AFEF28B28BFD00D38A59 /* Easy_Bridge_TrackerUITests.swift in Sources */,
+				A3F2AFEE28B28BB500D38A59 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A3F2AFEA28B28B7E00D38A59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */;
+			targetProxy = A3F2AFE928B28B7E00D38A59 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A33F930B28AC90A900391EBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A33F930C28AC90A900391EBB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A33F930E28AC90A900391EBB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Seattle-Bridge-Tracker-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Bridges;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A33F930F28AC90A900391EBB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 10;
+				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Seattle-Bridge-Tracker-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Bridges;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A3F2AFEB28B28B7E00D38A59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Easy Bridge Tracker";
+			};
+			name = Debug;
+		};
+		A3F2AFEC28B28B7E00D38A59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Easy Bridge Tracker";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A33F92FA28AC90A800391EBB /* Build configuration list for PBXProject "Easy Bridge Tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A33F930B28AC90A900391EBB /* Debug */,
+				A33F930C28AC90A900391EBB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A33F930D28AC90A900391EBB /* Build configuration list for PBXNativeTarget "Easy Bridge Tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A33F930E28AC90A900391EBB /* Debug */,
+				A33F930F28AC90A900391EBB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3F2AFED28B28B7E00D38A59 /* Build configuration list for PBXNativeTarget "Easy Bridge TrackerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3F2AFEB28B28B7E00D38A59 /* Debug */,
+				A3F2AFEC28B28B7E00D38A59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		A305122828B33C50002BB056 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		A3413A0E28B065BC0016710C /* XCRemoteSwiftPackageReference "Mcrich23-Toolkit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mcrich23/Mcrich23-Toolkit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		A3D22D7228C149C900AD4C0A /* XCRemoteSwiftPackageReference "SwiftHTTPStatusCodes" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jaderfeijo/SwiftHTTPStatusCodes";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A305122628B33C3F002BB056 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */;
+			productName = GoogleMobileAds;
+		};
+		A305122928B33C50002BB056 /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A305122828B33C50002BB056 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
+		A3413A0F28B065BC0016710C /* Mcrich23-Toolkit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3413A0E28B065BC0016710C /* XCRemoteSwiftPackageReference "Mcrich23-Toolkit" */;
+			productName = "Mcrich23-Toolkit";
+		};
+		A3D22D7328C149C900AD4C0A /* HTTPStatusCodes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3D22D7228C149C900AD4C0A /* XCRemoteSwiftPackageReference "SwiftHTTPStatusCodes" */;
+			productName = HTTPStatusCodes;
+		};
+		A3F2AFF128B2B5F900D38A59 /* Mcrich23-Toolkit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3413A0E28B065BC0016710C /* XCRemoteSwiftPackageReference "Mcrich23-Toolkit" */;
+			productName = "Mcrich23-Toolkit";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A33F92F728AC90A800391EBB /* Project object */;
+}
