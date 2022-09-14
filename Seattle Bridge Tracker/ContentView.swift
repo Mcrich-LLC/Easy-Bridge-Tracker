@@ -58,11 +58,12 @@ struct ContentView: View {
                                 if !Array(viewModel.bridgeFavorites).contains(key) {
                                     Section {
                                         ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                            BridgeRow(bridge: Binding(get: {
-                                                print("get \(bridge)")
-                                                return bridge
-                                            }, set: { _ in
-                                            }), viewModel: viewModel)
+//                                            BridgeRow(bridge: Binding(get: {
+//                                                print("get \(bridge)")
+//                                                return bridge
+//                                            }, set: { _ in
+//                                            }), viewModel: viewModel)
+                                            rowView(bridge: bridge)
                                             .tag(bridge.name)
                                         }
                                     } header: {
@@ -126,6 +127,12 @@ struct ContentView: View {
             Spacer()
         }
         .padding()
+    }
+    func rowView(bridge: Bridge) -> some View {
+        BridgeRow(bridge: Binding(get: {
+            return bridge
+        }, set: { _ in
+        }), viewModel: viewModel)
     }
 }
 
