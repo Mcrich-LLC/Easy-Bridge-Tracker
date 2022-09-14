@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "f54f60d0164d887e1174fa51ab2efe48a8e9d178",
-          "version": "9.3.0"
+          "revision": "c1cfde8067668027b23a42c29d11c246152fe046",
+          "version": "9.6.0"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "f4abe56ce62a779e64b525eb133c8fc2a84bbc1f",
-          "version": "7.7.1"
+          "revision": "22907832079d808e82f1182b21af58ef3880666f",
+          "version": "7.8.0"
         }
       },
       {
@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/shaps80/SwiftUIBackports",
         "state": {
           "branch": null,
-          "revision": "4cab730480277c5ae6ac3ea8ee02b4845dee4903",
-          "version": "1.6.3"
+          "revision": "252d01385a0730cc604310373ac934a64f1d4b1a",
+          "version": "1.8.2"
         }
       },
       {

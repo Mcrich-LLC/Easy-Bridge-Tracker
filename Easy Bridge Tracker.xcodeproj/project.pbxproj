@@ -19,7 +19,6 @@
 		A3413A0328AFDD5B0016710C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3413A0228AFDD5B0016710C /* Response.swift */; };
 		A3413A0528AFDD680016710C /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3413A0428AFDD680016710C /* ContentViewModel.swift */; };
 		A3413A1028B065BC0016710C /* Mcrich23-Toolkit in Frameworks */ = {isa = PBXBuildFile; productRef = A3413A0F28B065BC0016710C /* Mcrich23-Toolkit */; };
-		A35F850A28C9AA2E00ED0D2D /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35F850928C9AA2D00ED0D2D /* ContextMenu.swift */; };
 		A37E4BB028B1359E007644D5 /* Appfile in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAA28B1359D007644D5 /* Appfile */; };
 		A37E4BB228B1359E007644D5 /* Fastfile in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAC28B1359D007644D5 /* Fastfile */; };
 		A37E4BB328B1359E007644D5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A37E4BAD28B1359D007644D5 /* README.md */; };
@@ -63,7 +62,6 @@
 		A3413A0228AFDD5B0016710C /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		A3413A0428AFDD680016710C /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		A3413A0828AFEDA00016710C /* Seattle-Bridge-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Seattle-Bridge-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
-		A35F850928C9AA2D00ED0D2D /* ContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenu.swift; sourceTree = "<group>"; };
 		A37E4BAA28B1359D007644D5 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		A37E4BAC28B1359D007644D5 /* Fastfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fastfile; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				A33F931428AC926100391EBB /* Fetch Data.swift */,
 				A3413A0228AFDD5B0016710C /* Response.swift */,
 				A3F2AFF928B2B7F500D38A59 /* Utilities.swift */,
-				A35F850928C9AA2D00ED0D2D /* ContextMenu.swift */,
 				A394A80D28C13C1F003E5273 /* DummyPromo.json */,
 				A3F2AFF428B2B67B00D38A59 /* AdMob */,
 				A33F930628AC90A900391EBB /* Assets.xcassets */,
@@ -361,7 +358,6 @@
 				A33F931528AC926100391EBB /* Fetch Data.swift in Sources */,
 				A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */,
 				A3413A0528AFDD680016710C /* ContentViewModel.swift in Sources */,
-				A35F850A28C9AA2E00ED0D2D /* ContextMenu.swift in Sources */,
 				A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,7 +520,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -558,7 +554,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
