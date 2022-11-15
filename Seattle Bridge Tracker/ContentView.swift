@@ -101,15 +101,18 @@ struct ContentView: View {
                 let hosting = UIHostingController(rootView: HelpMenu())
                 
                 guard let hostingView = hosting.view else { return }
-                // bar.addSubview(hostingView)                                          // <--- OPTION 1
-                 bar.subviews.first(where: \.clipsToBounds)?.addSubview(hostingView)  // <--- OPTION 2
-                hostingView.backgroundColor = .clear
-                
-                hostingView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    hostingView.trailingAnchor.constraint(equalTo: bar.trailingAnchor),
-                    hostingView.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -8)
-                ])
+                if bar.subviews.first(where: \.clipsToBounds) != nil {
+                    bar.subviews.first(where: \.clipsToBounds)?.addSubview(hostingView)
+                   hostingView.backgroundColor = .clear
+                   
+                   hostingView.translatesAutoresizingMaskIntoConstraints = false
+                   NSLayoutConstraint.activate([
+                       hostingView.trailingAnchor.constraint(equalTo: bar.trailingAnchor),
+                       hostingView.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -8)
+                   ])
+                } else {
+                    print("Cannot add menu bar")
+                }
             }
             .navigationBarTitle("Bridges", displayMode: .large)
         }
