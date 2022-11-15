@@ -23,6 +23,12 @@ struct HelpMenu: View {
                 Label("Get Support", systemImage: "questionmark.circle")
             }
             Button {
+                Mcrich23_Toolkit.presentShareSheet(activityItems: ["I found this app that tells you when bridges are up and down in real time! You should download it here: https://mcrich23.com/easy-bridge-tracker"], excludedActivityTypes: [])
+            } label: {
+                Label("Share", systemImage: "square.and.arrow.up")
+            }
+
+            Button {
                 Mcrich23_Toolkit.topVC().present {
                     Info()
                 }
