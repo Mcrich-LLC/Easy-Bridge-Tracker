@@ -76,21 +76,23 @@ class ContentViewModel: ObservableObject {
     func toggleSubscription(for bridge: Bridge) {
         let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
         if bridge.subscribed {
-            Analytics.setUserProperty("subscribed", forName: bridgeName)
-            Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : bridgeName])
+            Analytics.setUserProperty("unsubscribed", forName: bridgeName)
+            Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : bridgeName])
+            Messaging.messaging().unsubscribe(fromTopic: bridgeName)
             let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                 bridgeArray.name == bridge.name
             })!
             self.bridges[bridge.bridgeLocation]![index!].subscribed = false
             UserDefaults.standard.set(false, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
         } else {
-            Analytics.setUserProperty("unsubscribed", forName: bridgeName)
-            Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : bridgeName])
+            Analytics.setUserProperty("subscribed", forName: bridgeName)
+            Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : bridgeName])
+            Messaging.messaging().subscribe(toTopic: bridgeName)
             let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                 bridgeArray.name == bridge.name
             })!
             self.bridges[bridge.bridgeLocation]![index!].subscribed = true
-            UserDefaults.standard.set(true, forKey: "\(bridge.bridgeLocation)_\(bridge.name).subscribed")
+            UserDefaults.standard.set(true, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
         }
     }
     

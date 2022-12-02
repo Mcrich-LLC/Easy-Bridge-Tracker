@@ -81,6 +81,7 @@
 /* Begin PBXFileReference section */
 		22C28A0F2939785A00D37696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22C28A4829398F7800D37696 /* FPN Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPN Manager.swift"; sourceTree = "<group>"; };
+		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
 		A305122B28B33C8C002BB056 /* Mcrich23-Toolkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Mcrich23-Toolkit"; path = "../Packages/Mcrich23-Toolkit"; sourceTree = "<group>"; };
 		A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy Bridge Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seattle_Bridge_TrackerApp.swift; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 		A33F92F628AC90A800391EBB = {
 			isa = PBXGroup;
 			children = (
+				22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */,
 				A33F931228AC912500391EBB /* .gitignore */,
 				A33F931828AC97A300391EBB /* .swiftlint.yml */,
 				A33F930128AC90A800391EBB /* Seattle Bridge Tracker */,
@@ -591,6 +593,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
@@ -625,6 +628,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
