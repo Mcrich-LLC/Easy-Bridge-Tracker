@@ -31,6 +31,14 @@ Push a new beta build to TestFlight
 
 
 
+### ios uploadToCrashlytics
+
+```sh
+[bundle exec] fastlane ios uploadToCrashlytics
+```
+
+
+
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.

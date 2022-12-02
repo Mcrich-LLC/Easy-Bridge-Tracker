@@ -25,6 +25,7 @@ platform :ios do
     getBuild = get_build_number(xcodeproj: "Easy Bridge Tracker.xcodeproj")
     build_app(scheme: "Easy Bridge Tracker", output_directory: "./Builds/#{getVersion}/#{getBuild}")
     upload_to_testflight
+    uploadToCrashlytics
     notification(subtitle: "Finished Uploading", message: "Ready to test...", open: "https://appstoreconnect.apple.com/apps/1640954057/testflight/ios")
   end
     lane :getScreenshots do
@@ -40,5 +41,15 @@ platform :ios do
       sh("sh './Promo Images/Remove png Screenshots.sh'")
     end
     #frame_screenshots(path: "./Promo Images")
+  end
+    lane :uploadToCrashlytics do
+    sh("open ~/Library/Developer/Xcode/DerivedData")
+    getVersion = get_version_number(xcodeproj: "Easy Bridge Tracker.xcodeproj", target: "Easy Bridge Tracker")
+    getBuild = get_build_number(xcodeproj: "Easy Bridge Tracker.xcodeproj")
+    getDerivedData = prompt(text: "Enter Derived Data Location")
+    #download_dsyms(version: "latest", output_directory: "./Builds/#{getVersion}/#{getBuild}")
+    Dir.chdir("..") do
+      sh("#{getDerivedData}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp './Pickt/GoogleService-Info.plist' -p ios ./Builds/#{getVersion}/#{getBuild}/Pickt.app.dSYM.zip")
+    end
   end
 end
