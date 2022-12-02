@@ -131,6 +131,10 @@ struct BridgeRowBody: View {
                         .foregroundColor(.gray)
                 }
                 Spacer()
+                if bridge.subscribed {
+                    Image(systemName: "bell.fill")
+                        .foregroundColor(.primary)
+                }
                 BridgeStatusView(status: $bridge.status)
             }
         }
