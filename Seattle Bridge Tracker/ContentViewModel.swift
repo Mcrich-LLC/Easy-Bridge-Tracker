@@ -7,6 +7,8 @@
 
 import Foundation
 import Firebase
+import Mcrich23_Toolkit
+import UserNotifications
 
 class ContentViewModel: ObservableObject {
     @Published var bridges: [String: [Bridge]] = [:] {
@@ -37,21 +39,24 @@ class ContentViewModel: ObservableObject {
         } completion: { response in
             self.response = response
             for bridge in response {
-                DispatchQueue.main.async {
-                    let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation, subscribed: UserDefaults.standard.bool(forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed"))
-                    if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
-                        br.name == addBridge.name
-                    }) {
-                        let index = self.bridges[bridge.bridgeLocation]!.firstIndex { br in
+                self.getNotificationAuthStatus { authStatus in
+                    DispatchQueue.main.async {
+                        let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation, subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed") : false))
+                        if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
                             br.name == addBridge.name
-                        }!
-                        self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
-                        print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
-                    } else {
-                        if self.bridges[bridge.bridgeLocation] != nil {
-                            self.bridges[bridge.bridgeLocation]!.append(addBridge)
+                        }) {
+                            let index = self.bridges[bridge.bridgeLocation]!.firstIndex { br in
+                                br.name == addBridge.name
+                            }!
+                            self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
+                            self.bridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
+                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
                         } else {
-                            self.bridges[bridge.bridgeLocation] = [addBridge]
+                            if self.bridges[bridge.bridgeLocation] != nil {
+                                self.bridges[bridge.bridgeLocation]!.append(addBridge)
+                            } else {
+                                self.bridges[bridge.bridgeLocation] = [addBridge]
+                            }
                         }
                     }
                 }
@@ -61,6 +66,11 @@ class ContentViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 self.fetchData(repeatFetch: true)
             }
+        }
+    }
+    func getNotificationAuthStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { setting in
+            completion(setting.authorizationStatus)
         }
     }
     func toggleFavorite(bridgeLocation: String) {
@@ -74,25 +84,39 @@ class ContentViewModel: ObservableObject {
         }
     }
     func toggleSubscription(for bridge: Bridge) {
-        let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
-        if bridge.subscribed {
-            Analytics.setUserProperty("unsubscribed", forName: bridgeName)
-            Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : bridgeName])
-            Messaging.messaging().unsubscribe(fromTopic: bridgeName)
-            let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                bridgeArray.name == bridge.name
-            })!
-            self.bridges[bridge.bridgeLocation]![index!].subscribed = false
-            UserDefaults.standard.set(false, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
-        } else {
-            Analytics.setUserProperty("subscribed", forName: bridgeName)
-            Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : bridgeName])
-            Messaging.messaging().subscribe(toTopic: bridgeName)
-            let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                bridgeArray.name == bridge.name
-            })!
-            self.bridges[bridge.bridgeLocation]![index!].subscribed = true
-            UserDefaults.standard.set(true, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
+        UNUserNotificationCenter.current().getNotificationSettings { setting in
+            DispatchQueue.main.async {
+                if setting.authorizationStatus == .authorized {
+                    let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
+                    if bridge.subscribed {
+                        Analytics.setUserProperty("unsubscribed", forName: bridgeName)
+                        Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : bridgeName])
+                        Messaging.messaging().unsubscribe(fromTopic: bridgeName)
+                        let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                            bridgeArray.name == bridge.name
+                        })!
+                        self.bridges[bridge.bridgeLocation]![index!].subscribed = false
+                        UserDefaults.standard.set(false, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
+                    } else {
+                        Analytics.setUserProperty("subscribed", forName: bridgeName)
+                        Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : bridgeName])
+                        Messaging.messaging().subscribe(toTopic: bridgeName)
+                        let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                            bridgeArray.name == bridge.name
+                        })!
+                        self.bridges[bridge.bridgeLocation]![index!].subscribed = true
+                        UserDefaults.standard.set(true, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
+                    }
+                } else {
+                    SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
+                        // continue your work
+                    }, UIAlertAction(title: "Open Settings", style: .cancel, handler: { _ in
+                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(appSettings)
+                        }
+                    })])
+                }
+            }
         }
     }
     
