@@ -82,10 +82,23 @@ struct BridgeView: View {
                             .overlay(Image(systemName: "arrow.clockwise")
                                 .foregroundColor(Color.primary)
                                 .font(.title3), alignment: .center)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
                             .clipped()
                             .padding()
                     }
+                    Button {
+                        viewModel.toggleSubscription(for: bridge)
+                    } label: {
+                        Circle()
+                            .frame(width: 40, height: 40)
+                            .clipped()
+                            .foregroundColor(Color(.systemBackground))
+                            .overlay(Image(systemName: "bell.fill")
+                                .foregroundColor(bridge.subscribed ? Color.yellow : Color.primary)
+                                .font(.title3), alignment: .center)
+                            .clipped()
+                            .padding()
+                    }
+
                 }
                 .padding(.vertical, 76)
                 .padding(.horizontal, 24)
@@ -159,14 +172,17 @@ struct BridgeView: View {
 struct BridgeView_Previews: PreviewProvider {
     static var previews: some View {
         BridgeView(
-            bridge: .constant(Bridge(name: "Ballard Bridge",
-                           status: .down,
-                           imageUrl: URL(string: "https://s3-media0.fl.yelpcdn.com/bphoto/rq2iSswXqRp5Nmp7MIEVJg/o.jpg")!,
-                           mapsUrl: URL(string: "https://maps.apple.com/?address=Ballard%20Bridge,%20Seattle,%20WA%20%2098199,%20United%20States&ll=47.657044,-122.376245&q=Ballard%20Bridge&_ext=EiYpoLms1YbTR0AxFkGkn4GYXsA5Ho/SMa3UR0BBNmKBHaeXXsBQBA%3D%3D")!,
-                           address: "Ballard Bridge, Seattle, WA 98199, United States",
-                           latitude: 47.65704,
-                           longitude: -122.37624,
-                           bridgeLocation: "Seattle, Wa")), viewModel: ContentViewModel()
+            bridge: .constant(
+                Bridge(name: "Ballard Bridge",
+                       status: .down,
+                       imageUrl: URL(string: "https://s3-media0.fl.yelpcdn.com/bphoto/rq2iSswXqRp5Nmp7MIEVJg/o.jpg")!,
+                       mapsUrl: URL(string: "https://maps.apple.com/?address=Ballard%20Bridge,%20Seattle,%20WA%20%2098199,%20United%20States&ll=47.657044,-122.376245&q=Ballard%20Bridge&_ext=EiYpoLms1YbTR0AxFkGkn4GYXsA5Ho/SMa3UR0BBNmKBHaeXXsBQBA%3D%3D")!,
+                       address: "Ballard Bridge, Seattle, WA 98199, United States",
+                       latitude: 47.65704,
+                       longitude: -122.37624,
+                       bridgeLocation: "Seattle, Wa",
+                       subscribed: false)
+            ), viewModel: ContentViewModel()
         )
     }
 }

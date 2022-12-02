@@ -66,6 +66,11 @@ struct ContentView: View {
                                             rowView(bridge: bridge)
                                             .tag(bridge.name)
                                         }
+                                        HStack {
+                                            Spacer()
+                                            BannerAds()
+                                            Spacer()
+                                        }
                                     } header: {
                                         HStack {
                                             Text(key)
@@ -80,7 +85,6 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
-
                                     }
                                 }
                             }
@@ -117,11 +121,6 @@ struct ContentView: View {
             .navigationBarTitle("Bridges", displayMode: .large)
         }
         .navigationViewStyle(.stack)
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-//                BannerAds()
-            }
-        }
     }
     
     func errors(error: String) -> some View {

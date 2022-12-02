@@ -10,7 +10,7 @@ import SwiftUI
 import GoogleMobileAds
 import Shimmer
 
-final class BannerViewController: UIViewControllerRepresentable {
+struct BannerViewController: UIViewControllerRepresentable {
     
     let adUnitID: String = "ca-app-pub-8092077340719182/1348152099"
     
@@ -75,17 +75,19 @@ struct BannerAds: View {
                 if shimmering {
                 Rectangle()
                     .shimmering(active: true, duration: 0.75, bounce: false)
-                    .frame(width: 320, height: 50)
+                    .frame(height: 50)
                     .onDisappear {
                         print("stopped shimmering")
                     }
             }
                 BannerViewController(startLoading: {
-                    shimmering = true
+                    DispatchQueue.main.async {
+                        shimmering = true
+                    }
                 }, finishedLoading: {
                     shimmering = false
                 })
-                    .frame(width: 320, height: 50)
+                    .frame(height: 50)
             }
         }
     }

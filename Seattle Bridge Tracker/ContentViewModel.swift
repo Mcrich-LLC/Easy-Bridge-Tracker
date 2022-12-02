@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 class ContentViewModel: ObservableObject {
     @Published var bridges: [String: [Bridge]] = [:] {
@@ -37,7 +38,7 @@ class ContentViewModel: ObservableObject {
             self.response = response
             for bridge in response {
                 DispatchQueue.main.async {
-                    let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation)
+                    let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation, subscribed: UserDefaults.standard.bool(forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed"))
                     if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
                         br.name == addBridge.name
                     }) {
@@ -72,6 +73,27 @@ class ContentViewModel: ObservableObject {
             self.bridgeFavorites.append(bridgeLocation)
         }
     }
+    func toggleSubscription(for bridge: Bridge) {
+        let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
+        if bridge.subscribed {
+            Analytics.setUserProperty("subscribed", forName: bridgeName)
+            Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : bridgeName])
+            let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                bridgeArray.name == bridge.name
+            })!
+            self.bridges[bridge.bridgeLocation]![index!].subscribed = false
+            UserDefaults.standard.set(false, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
+        } else {
+            Analytics.setUserProperty("unsubscribed", forName: bridgeName)
+            Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : bridgeName])
+            let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                bridgeArray.name == bridge.name
+            })!
+            self.bridges[bridge.bridgeLocation]![index!].subscribed = true
+            UserDefaults.standard.set(true, forKey: "\(bridge.bridgeLocation)_\(bridge.name).subscribed")
+        }
+    }
+    
 }
 struct Bridge: Identifiable, Hashable, Comparable {
     static func < (lhs: Bridge, rhs: Bridge) -> Bool {
@@ -87,6 +109,7 @@ struct Bridge: Identifiable, Hashable, Comparable {
     let latitude: Double
     let longitude: Double
     let bridgeLocation: String
+    var subscribed: Bool
 }
 enum BridgeStatus: String {
     case up
