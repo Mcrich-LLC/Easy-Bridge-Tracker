@@ -25,10 +25,13 @@ struct Seattle_Bridge_TrackerApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
     let gcmMessageIDKey = "gcm.Message_ID"
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        Utilities.getAppType()
         NetworkMonitor.shared.startMonitoring()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         FirebaseApp.configure()
         setupFPN(application: application)
+        Analytics.setUserProperty(Utilities.appType.rawValue, forName: "application_type")
+        Analytics.logEvent("set_application_type", parameters: ["application_type" : Utilities.appType.rawValue])
         return true
     }
 }
