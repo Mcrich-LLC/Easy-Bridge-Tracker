@@ -161,7 +161,7 @@ struct BridgeView: View {
             }
     }
     func getIsMapHorizantal(orientation: UIDeviceOrientation) {
-        if UIDevice.current.userInterfaceIdiom == .phone && (orientation == .landscapeLeft || orientation == .landscapeRight || orientation == .portraitUpsideDown) {
+        if UIDevice.current.userInterfaceIdiom == .phone && (orientation != UIDeviceOrientation.portrait) {
             self.isMapHorizantal = true
         } else {
             self.isMapHorizantal = false
