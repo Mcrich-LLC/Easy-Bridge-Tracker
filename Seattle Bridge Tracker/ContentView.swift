@@ -36,6 +36,33 @@ struct ContentView: View {
                                         }, set: { _ in
                                         }), viewModel: viewModel)
                                         .tag(bridge.name)
+                                        
+                                        if #available(iOS 15.0, *) {
+                                            BridgeRow(bridge: Binding(get: {
+                                                print("get \(bridge)")
+                                                return bridge
+                                            }, set: { _ in
+                                            }), viewModel: viewModel)
+                                            .tag(bridge.name)
+                                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                                Button {
+                                                    viewModel.toggleSubscription(for: bridge)
+                                                } label: {
+                                                    if bridge.subscribed {
+                                                        Image(systemName: "bell.slash.fill")
+                                                    } else {
+                                                        Image(systemName: "bell.fill")
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            BridgeRow(bridge: Binding(get: {
+                                                print("get \(bridge)")
+                                                return bridge
+                                            }, set: { _ in
+                                            }), viewModel: viewModel)
+                                            .tag(bridge.name)
+                                        }
                                     }
                                 } header: {
                                     HStack {
@@ -63,8 +90,25 @@ struct ContentView: View {
 //                                                return bridge
 //                                            }, set: { _ in
 //                                            }), viewModel: viewModel)
-                                            rowView(bridge: bridge)
-                                            .tag(bridge.name)
+                                            if #available(iOS 15.0, *) {
+                                                rowView(bridge: bridge)
+                                                .tag(bridge.name)
+                                                .swipeActions(allowsFullSwipe: true) {
+                                                    Button {
+                                                        viewModel.toggleSubscription(for: bridge)
+                                                    } label: {
+                                                        if bridge.subscribed {
+                                                            Image(systemName: "bell.slash.fill")
+                                                        } else {
+                                                            Image(systemName: "bell.fill")
+                                                        }
+                                                    }
+                                                    .tint(.yellow)
+                                                }
+                                            } else {
+                                                rowView(bridge: bridge)
+                                                .tag(bridge.name)
+                                            }
                                         }
                                         HStack {
                                             Spacer()
