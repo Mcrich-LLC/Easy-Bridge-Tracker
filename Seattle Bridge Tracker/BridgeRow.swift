@@ -34,38 +34,6 @@ struct BridgeRow: View {
                     }
                     return UIMenu(title: "", children: [openView, openUrl])
                 }))
-//                .contextMenu(CustomContextMenu(navigate: {
-//                    showView.toggle()
-//                }, content: {
-//                    Button {
-//                        showView.toggle()
-//                    } label: {
-//                        Text("Open")
-//                        Image(systemName: "arrow.right")
-//                    }
-//
-//                }, preview: {
-//                    BridgeView(bridge: $bridge, viewModel: viewModel)
-//                }, menu: {
-//                    let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: []) // Menu
-//                        return menu
-//                }))
-//                            .contextMenu {
-//                                showView.toggle()
-//                            } preview: {
-//                                BridgeView(bridge: $bridge, viewModel: viewModel)
-//                            } menu: {
-//                                let openView = UIAction(title: "Open", image: UIImage(systemName: "arrow.right")) { _ in
-//                                    showView.toggle()
-//                                }
-//                                let openUrl = UIAction(title: "Open in Maps", image: UIImage(systemName: "map")) { _ in
-//                                    SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Open", style: .default, handler: { _ in
-//                                        UIApplication.shared.open(bridge.mapsUrl)
-//                                    }), UIAlertAction(title: "Cancel", style: .cancel)])
-//                                }
-//                                let menu = UIMenu(title: "", image: nil, identifier: nil, options: .displayInline, children: [openView, openUrl]) // Menu
-//                                    return menu
-//                            }
 
         }
     }
