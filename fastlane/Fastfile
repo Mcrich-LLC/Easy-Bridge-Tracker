@@ -49,7 +49,7 @@ platform :ios do
     getDerivedData = prompt(text: "Enter Derived Data Location")
     #download_dsyms(version: "latest", output_directory: "./Builds/#{getVersion}/#{getBuild}")
     Dir.chdir("..") do
-      sh("#{getDerivedData}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp './Pickt/GoogleService-Info.plist' -p ios ./Builds/#{getVersion}/#{getBuild}/Pickt.app.dSYM.zip")
+      sh("#{getDerivedData}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp './Seattle Bridge Tracker/GoogleService-Info.plist' -p ios ./Builds/#{getVersion}/#{getBuild}/Easy\ Bridge\ Tracker.app.dSYM.zip")
     end
   end
 end
