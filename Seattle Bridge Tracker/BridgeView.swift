@@ -124,13 +124,11 @@ struct BridgeView: View {
                                 Tag(backgroundColor: .yellow, text: bridge.status.rawValue.capitalized)
                             }
                         }
-                        if !isMapHorizantal {
-                            map
-                        }
-                    }
-                    if isMapHorizantal {
                         map
+                            .frame(maxWidth: (isMapHorizantal ? 0 : .infinity), maxHeight: (isMapHorizantal ? 0 : .infinity))
                     }
+                    map
+                        .frame(maxWidth: (!isMapHorizantal ? 0 : .infinity), maxHeight: (!isMapHorizantal ? 0 : .infinity))
                 }
                 .padding(.horizontal, 24)
                 Spacer()
@@ -161,8 +159,9 @@ struct BridgeView: View {
             }
     }
     func getIsMapHorizantal(orientation: UIDeviceOrientation) {
-        if UIDevice.current.userInterfaceIdiom == .phone && (orientation != UIDeviceOrientation.portrait) {
+        if UIDevice.current.userInterfaceIdiom == .phone && [UIDeviceOrientation.landscapeLeft, UIDeviceOrientation.landscapeRight, UIDeviceOrientation.portraitUpsideDown].contains(orientation) {
             self.isMapHorizantal = true
+        } else if [UIDeviceOrientation.faceDown, UIDeviceOrientation.faceUp].contains(orientation) {
         } else {
             self.isMapHorizantal = false
         }
