@@ -30,6 +30,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         GADMobileAds.sharedInstance().start(completionHandler: nil)
         FirebaseApp.configure()
         setupFPN(application: application)
+        Utilities.fetchRemoteConfig()
         Analytics.setUserProperty(Utilities.appType.rawValue, forName: "application_type")
         Analytics.logEvent("set_application_type", parameters: ["application_type" : Utilities.appType.rawValue])
         return true

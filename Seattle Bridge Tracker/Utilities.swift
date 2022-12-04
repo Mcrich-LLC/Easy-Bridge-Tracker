@@ -6,11 +6,37 @@
 //
 
 import Foundation
+import Firebase
 
 class Utilities {
     static let isFastlaneRunning = UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT")
     static var areAdsDisabled = UserDefaults.standard.bool(forKey: "adsDisabled")
     static var appType = AppConfiguration.AppStore
+    static var remoteConfig: RemoteConfig!
+    
+    static func fetchRemoteConfig() {
+        print("refreshing")
+        remoteConfig = RemoteConfig.remoteConfig()
+        let settings = RemoteConfigSettings()
+        if Utilities.appType == .Debug {
+            settings.minimumFetchInterval = 0
+        } else {
+            settings.minimumFetchInterval = 43200 // 12 hours
+        }
+        print("min fetch interval = \(settings.minimumFetchInterval)")
+        remoteConfig.configSettings = settings
+        remoteConfig.setDefaults(fromPlist: "RemoteConfigDefaults")
+        remoteConfig.fetchAndActivate { status, error in
+            if status == .successFetchedFromRemote {
+                print("fetched from remote, \(String(describing: remoteConfig))")
+            } else if status == .successUsingPreFetchedData {
+                print("fetched locally, \(String(describing: remoteConfig))")
+            } else if status == .error {
+                print("error fetching = \(String(describing: error))")
+            }
+        }
+        print("remote config = \(String(describing: remoteConfig))")
+    }
     
     enum AppConfiguration: String {
       case Debug

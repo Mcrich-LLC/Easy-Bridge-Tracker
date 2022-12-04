@@ -36,6 +36,7 @@
 		22C28A4529397B9500D37696 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4429397B9500D37696 /* FirebaseStorage */; };
 		22C28A4729397B9500D37696 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4629397B9500D37696 /* FirebaseStorageCombine-Community */; };
 		22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28A4829398F7800D37696 /* FPN Manager.swift */; };
+		22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */; };
 		A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A305122628B33C3F002BB056 /* GoogleMobileAds */; };
 		A305122A28B33C50002BB056 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = A305122928B33C50002BB056 /* Shimmer */; };
 		A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */; };
@@ -82,6 +83,7 @@
 		22C28A0F2939785A00D37696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22C28A4829398F7800D37696 /* FPN Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPN Manager.swift"; sourceTree = "<group>"; };
 		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
+		22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A305122B28B33C8C002BB056 /* Mcrich23-Toolkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Mcrich23-Toolkit"; path = "../Packages/Mcrich23-Toolkit"; sourceTree = "<group>"; };
 		A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy Bridge Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seattle_Bridge_TrackerApp.swift; sourceTree = "<group>"; };
@@ -192,8 +194,10 @@
 			children = (
 				A3413A0828AFEDA00016710C /* Seattle-Bridge-Tracker-Info.plist */,
 				22C28A0F2939785A00D37696 /* GoogleService-Info.plist */,
+				22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */,
 				A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */,
 				22C28A4829398F7800D37696 /* FPN Manager.swift */,
+				A3F2AFF928B2B7F500D38A59 /* Utilities.swift */,
 				A33F930428AC90A800391EBB /* ContentView.swift */,
 				A3413A0428AFDD680016710C /* ContentViewModel.swift */,
 				A394A80128BFBEE1003E5273 /* BridgeRow.swift */,
@@ -203,7 +207,6 @@
 				A37E8B3A28BB2DA200A6A8D4 /* Info.swift */,
 				A33F931428AC926100391EBB /* Fetch Data.swift */,
 				A3413A0228AFDD5B0016710C /* Response.swift */,
-				A3F2AFF928B2B7F500D38A59 /* Utilities.swift */,
 				A394A80D28C13C1F003E5273 /* DummyPromo.json */,
 				A3F2AFF428B2B67B00D38A59 /* AdMob */,
 				A33F930628AC90A900391EBB /* Assets.xcassets */,
@@ -392,6 +395,7 @@
 				A37E4BB728B13627007644D5 /* Snapfile in Resources */,
 				22C28A102939785A00D37696 /* GoogleService-Info.plist in Resources */,
 				A37E4BB528B1359E007644D5 /* report.xml in Resources */,
+				22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */,
 				A37E4BB228B1359E007644D5 /* Fastfile in Resources */,
 				A37E4BB428B1359E007644D5 /* Precheckfile in Resources */,
 				A33F931928AC97A300391EBB /* .swiftlint.yml in Resources */,

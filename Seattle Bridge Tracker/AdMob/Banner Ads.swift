@@ -12,7 +12,7 @@ import Shimmer
 
 struct BannerViewController: UIViewControllerRepresentable {
     
-    let adUnitID: String = "ca-app-pub-8092077340719182/1348152099"
+    let adUnitID: String = Utilities.remoteConfig["GADBannerAdID"].stringValue!
     
     var finishedLoading: () -> Void = {}
     var startLoading: () -> Void = {}
