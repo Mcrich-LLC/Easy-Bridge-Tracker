@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
+		22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 22AB7C80293EDFA4008BD92F /* FirebaseMessaging */; };
 		22C28A102939785A00D37696 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22C28A0F2939785A00D37696 /* GoogleService-Info.plist */; };
 		22C28A1329397B9500D37696 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A1229397B9500D37696 /* FirebaseAnalytics */; };
 		22C28A1529397B9500D37696 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A1429397B9500D37696 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -70,6 +73,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		22AB7C79293EDF2A008BD92F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A33F92F728AC90A800391EBB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22AB7C73293EDF2A008BD92F;
+			remoteInfo = NotificationService;
+		};
 		A3F2AFE928B28B7E00D38A59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A33F92F728AC90A800391EBB /* Project object */;
@@ -79,7 +89,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		22AB7C7C293EDF2B008BD92F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		22AB7C76293EDF2A008BD92F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		22AB7C78293EDF2A008BD92F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22C28A0F2939785A00D37696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22C28A4829398F7800D37696 /* FPN Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPN Manager.swift"; sourceTree = "<group>"; };
 		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
@@ -116,6 +143,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		22AB7C71293EDF2A008BD92F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A33F92FC28AC90A800391EBB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,6 +200,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22AB7C75293EDF2A008BD92F /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				22AB7C76293EDF2A008BD92F /* NotificationService.swift */,
+				22AB7C78293EDF2A008BD92F /* Info.plist */,
+			);
+			path = NotificationService;
+			sourceTree = "<group>";
+		};
 		A33F92F628AC90A800391EBB = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +219,7 @@
 				A3413A1128B069220016710C /* Packages */,
 				A37E4BA928B1359D007644D5 /* fastlane */,
 				A37E4BBD28B13720007644D5 /* Easy Bridge TrackerUITests */,
+				22AB7C75293EDF2A008BD92F /* NotificationService */,
 				A33F930028AC90A800391EBB /* Products */,
 				A37E59D828C1487F00037758 /* Frameworks */,
 			);
@@ -185,6 +230,7 @@
 			children = (
 				A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */,
 				A3F2AFE328B28B7E00D38A59 /* Easy Bridge TrackerUITests.xctest */,
+				22AB7C74293EDF2A008BD92F /* NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -271,6 +317,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		22AB7C73293EDF2A008BD92F /* NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22AB7C7F293EDF2B008BD92F /* Build configuration list for PBXNativeTarget "NotificationService" */;
+			buildPhases = (
+				22AB7C70293EDF2A008BD92F /* Sources */,
+				22AB7C71293EDF2A008BD92F /* Frameworks */,
+				22AB7C72293EDF2A008BD92F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationService;
+			packageProductDependencies = (
+				22AB7C80293EDFA4008BD92F /* FirebaseMessaging */,
+			);
+			productName = NotificationService;
+			productReference = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A33F930D28AC90A900391EBB /* Build configuration list for PBXNativeTarget "Easy Bridge Tracker" */;
@@ -279,10 +345,12 @@
 				A33F92FC28AC90A800391EBB /* Frameworks */,
 				A33F92FD28AC90A800391EBB /* Resources */,
 				A33F931A28AC97BA00391EBB /* ShellScript */,
+				22AB7C7C293EDF2B008BD92F /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				22AB7C7A293EDF2A008BD92F /* PBXTargetDependency */,
 			);
 			name = "Easy Bridge Tracker";
 			packageProductDependencies = (
@@ -348,9 +416,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					22AB7C73293EDF2A008BD92F = {
+						CreatedOnToolsVersion = 14.1;
+					};
 					A33F92FE28AC90A800391EBB = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -382,11 +453,19 @@
 			targets = (
 				A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */,
 				A3F2AFE228B28B7E00D38A59 /* Easy Bridge TrackerUITests */,
+				22AB7C73293EDF2A008BD92F /* NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		22AB7C72293EDF2A008BD92F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A33F92FD28AC90A800391EBB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -438,6 +517,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		22AB7C70293EDF2A008BD92F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A33F92FB28AC90A800391EBB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -470,6 +557,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		22AB7C7A293EDF2A008BD92F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22AB7C73293EDF2A008BD92F /* NotificationService */;
+			targetProxy = 22AB7C79293EDF2A008BD92F /* PBXContainerItemProxy */;
+		};
 		A3F2AFEA28B28B7E00D38A59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */;
@@ -478,6 +570,62 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		22AB7C7D293EDF2B008BD92F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker.NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22AB7C7E293EDF2B008BD92F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationService/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationService;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker.NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A33F930B28AC90A900391EBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -597,6 +745,7 @@
 		A33F930E28AC90A900391EBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
@@ -634,6 +783,7 @@
 		A33F930F28AC90A900391EBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
@@ -707,6 +857,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		22AB7C7F293EDF2B008BD92F /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22AB7C7D293EDF2B008BD92F /* Debug */,
+				22AB7C7E293EDF2B008BD92F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A33F92FA28AC90A800391EBB /* Build configuration list for PBXProject "Easy Bridge Tracker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -780,6 +939,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		22AB7C80293EDFA4008BD92F /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		22C28A1229397B9500D37696 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
