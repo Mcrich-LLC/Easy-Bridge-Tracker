@@ -18,6 +18,7 @@ class NotificationService: UNNotificationServiceExtension {
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         guard let bestAttemptContent = bestAttemptContent else { return }
         func complete() {
+            bestAttemptContent.categoryIdentifier = request.content.title
             if let RawInterruptionLevel = request.content.userInfo["interruption_level"] as? String {
                 let interruptionLevel = UInt(RawInterruptionLevel) ?? 1
                 print("interruptionLevel = \(interruptionLevel)")
