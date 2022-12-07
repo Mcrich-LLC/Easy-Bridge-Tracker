@@ -16,24 +16,30 @@ struct HelpMenu: View {
     
     var body: some View {
         Menu {
-            Link(destination: URL(string: "mailto:feedback@mcrich23@icloud.com")!) {
-                Label("Give Feedback", systemImage: "tray")
-            }
-            Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
-                Label("Get Support", systemImage: "questionmark.circle")
-            }
-            Button {
-                Mcrich23_Toolkit.presentShareSheet(activityItems: ["I found this app that tells you when bridges are up and down in real time! You should download it here: https://mcrich23.com/easy-bridge-tracker"], excludedActivityTypes: [])
-            } label: {
-                Label("Share", systemImage: "square.and.arrow.up")
-            }
-
-            Button {
-                Mcrich23_Toolkit.topVC().present {
-                    Info()
+            Section {
+                Link(destination: URL(string: "mailto:feedback@mcrich23@icloud.com")!) {
+                    Label("Give Feedback", systemImage: "tray")
                 }
-            } label: {
-                Label("Info", systemImage: "info.circle")
+                Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
+                    Label("Get Support", systemImage: "questionmark.circle")
+                }
+                Button {
+                    Mcrich23_Toolkit.presentShareSheet(activityItems: ["I found this app that tells you when bridges are up and down in real time! You should download it here: https://mcrich23.com/easy-bridge-tracker"], excludedActivityTypes: [])
+                } label: {
+                    Label("Share", systemImage: "square.and.arrow.up")
+                }
+            }
+            Section {
+                Button {
+                    Mcrich23_Toolkit.topVC().present {
+                        Info()
+                    }
+                } label: {
+                    Label("Info", systemImage: "info.circle")
+                }
+                Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+                    Label("Settings", systemImage: "switch.2")
+                }
             }
 
         } label: {
