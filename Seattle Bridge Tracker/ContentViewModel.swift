@@ -70,8 +70,12 @@ class ContentViewModel: ObservableObject {
         }
     }
     func getNotificationAuthStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
-        UNUserNotificationCenter.current().getNotificationSettings { setting in
-            completion(setting.authorizationStatus)
+        if Utilities.isFastlaneRunning {
+            completion(.authorized)
+        } else {
+            UNUserNotificationCenter.current().getNotificationSettings { setting in
+                completion(setting.authorizationStatus)
+            }
         }
     }
     func toggleFavorite(bridgeLocation: String) {

@@ -33,11 +33,11 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-FASTLANE_SNAPSHOT true"
+            argument = "-Seattle_Wa_Ballard.subscribed true"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-Seattle_Wa_Ballard.subscribed true"
+            argument = "-FASTLANE_SNAPSHOT true"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
