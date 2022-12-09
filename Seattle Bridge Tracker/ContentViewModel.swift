@@ -41,7 +41,7 @@ class ContentViewModel: ObservableObject {
             for bridge in response {
                 self.getNotificationAuthStatus { authStatus in
                     DispatchQueue.main.async {
-                        let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation, subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed") : false))
+                        let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation, subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(self.bridgeName(bridge: bridge)).subscribed") : false))
                         if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
                             br.name == addBridge.name
                         }) {
@@ -87,25 +87,24 @@ class ContentViewModel: ObservableObject {
         UNUserNotificationCenter.current().getNotificationSettings { setting in
             DispatchQueue.main.async {
                 if setting.authorizationStatus == .authorized {
-                    let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
                     if bridge.subscribed {
-                        Analytics.setUserProperty("unsubscribed", forName: bridgeName)
-                        Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : bridgeName])
-                        Messaging.messaging().unsubscribe(fromTopic: bridgeName)
+                        Analytics.setUserProperty("unsubscribed", forName: self.bridgeName(bridge: bridge))
+                        Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : self.bridgeName(bridge: bridge)])
+                        Messaging.messaging().unsubscribe(fromTopic: self.bridgeName(bridge: bridge))
                         let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                             bridgeArray.name == bridge.name
                         })!
                         self.bridges[bridge.bridgeLocation]![index!].subscribed = false
-                        UserDefaults.standard.set(false, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
+                        UserDefaults.standard.set(false, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     } else {
-                        Analytics.setUserProperty("subscribed", forName: bridgeName)
-                        Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : bridgeName])
-                        Messaging.messaging().subscribe(toTopic: bridgeName)
+                        Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
+                        Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
+                        Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
                         let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                             bridgeArray.name == bridge.name
                         })!
                         self.bridges[bridge.bridgeLocation]![index!].subscribed = true
-                        UserDefaults.standard.set(true, forKey: "\(bridge.bridgeLocation).\(bridge.name).subscribed")
+                        UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     }
                 } else {
                     SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
@@ -119,7 +118,14 @@ class ContentViewModel: ObservableObject {
             }
         }
     }
-    
+    func bridgeName(bridge: Bridge) -> String {
+        let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
+        return bridgeName
+    }
+    func bridgeName(bridge: Response) -> String {
+        let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
+        return bridgeName
+    }
 }
 struct Bridge: Identifiable, Hashable, Comparable {
     static func < (lhs: Bridge, rhs: Bridge) -> Bool {
