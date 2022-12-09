@@ -4,9 +4,9 @@
  devices([
    "iPhone 11 Pro Max",
    "iPhone 8 Plus",
-   "iPhone 13",
+   "iPhone 14 Pro",
 #   "iPhone X",
-   "iPad Pro (12.9-inch) (5th generation)"
+   "iPad Pro (12.9-inch) (6th generation)"
 #   "iPad Pro (9.7-inch)",
 #   "Apple TV 1080p",
 #   "Apple Watch Series 6 - 44mm"
@@ -32,7 +32,7 @@ clear_previous_screenshots(true)
 override_status_bar(true)
 
 # Arguments to pass to the app on launch. See https://docs.fastlane.tools/actions/snapshot/#launch-arguments
-launch_arguments(["-FASTLANE_SNAPSHOT true"])
+launch_arguments(["-FASTLANE_SNAPSHOT true", "-'Seattle, Wa.Ballard Bridge.subscribed true'", "-'Seattle, Wa.South Park Bridge.subscribed' true"])
 
 # For more information about all available options run
 # fastlane action snapshot
