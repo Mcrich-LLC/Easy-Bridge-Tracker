@@ -25,6 +25,7 @@ class ContentViewModel: ObservableObject {
             }
         }
     }
+    @Published var demoLink = false
     @Published var bridgeFavorites: [String] = []
     @Published var status: LoadingStatus = .loading
     private var response: [Response] = []
@@ -125,6 +126,13 @@ class ContentViewModel: ObservableObject {
     func bridgeName(bridge: Response) -> String {
         let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
         return bridgeName
+    }
+    func showDemoView() {
+        if Utilities.isFastlaneRunning {
+            demoLink = true
+        } else {
+            demoLink = false
+        }
     }
 }
 struct Bridge: Identifiable, Hashable, Comparable {

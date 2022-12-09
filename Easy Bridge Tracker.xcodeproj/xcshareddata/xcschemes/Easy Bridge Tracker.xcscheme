@@ -26,7 +26,21 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "NO">
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-Seattle_Wa_Sou_Park.subscribed true"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-FASTLANE_SNAPSHOT true"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-Seattle_Wa_Ballard.subscribed true"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -63,14 +77,6 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-FASTLANE_SNAPSHOT true"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-Seattle_Wa_South_Park.subscribed true"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-Seattle_Wa_Ballard.subscribed true"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

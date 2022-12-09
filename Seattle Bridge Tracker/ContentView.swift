@@ -26,74 +26,33 @@ struct ContentView: View {
                     case .failed(let error):
                         errors(error: error)
                     case .success:
-                        List {
-                            ForEach(viewModel.bridgeFavorites, id: \.self) { key in
-                                Section {
-                                    ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                        BridgeRow(bridge: Binding(get: {
-                                            print("get \(bridge)")
-                                            return bridge
-                                        }, set: { _ in
-                                        }), viewModel: viewModel)
-                                        .tag(bridge.name)
-                                        
-                                        if #available(iOS 15.0, *) {
-                                            BridgeRow(bridge: Binding(get: {
-                                                print("get \(bridge)")
-                                                return bridge
-                                            }, set: { _ in
-                                            }), viewModel: viewModel)
-                                            .tag(bridge.name)
-                                            .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                                Button {
-                                                    viewModel.toggleSubscription(for: bridge)
-                                                } label: {
-                                                    if bridge.subscribed {
-                                                        Image(systemName: "bell.slash.fill")
-                                                    } else {
-                                                        Image(systemName: "bell.fill")
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            BridgeRow(bridge: Binding(get: {
-                                                print("get \(bridge)")
-                                                return bridge
-                                            }, set: { _ in
-                                            }), viewModel: viewModel)
-                                            .tag(bridge.name)
-                                        }
-                                    }
-                                } header: {
-                                    HStack {
-                                        Text(key)
-                                        if viewModel.bridges.keys.count >= 3 {
-                                            Spacer()
-                                            Button {
-                                                viewModel.toggleFavorite(bridgeLocation: key)
-                                            } label: {
-                                                Image(systemName: "star.fill")
-                                                    .foregroundColor(.yellow)
-                                                    .imageScale(.medium)
-                                            }
-                                        }
-                                    }
-
+                        ZStack {
+                            if Utilities.isFastlaneRunning {
+                                NavigationLink(destination: demoView(), isActive: $viewModel.demoLink) {
+                                    Text("South Park Bridge Link")
                                 }
+//                                .hidden()
+                                .tag("South Park Bridge Link")
                             }
-                            ForEach(Array(viewModel.bridges.keys), id: \.self) { key in
-                                if !Array(viewModel.bridgeFavorites).contains(key) {
+                            List {
+                                ForEach(viewModel.bridgeFavorites, id: \.self) { key in
                                     Section {
                                         ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-//                                            BridgeRow(bridge: Binding(get: {
-//                                                print("get \(bridge)")
-//                                                return bridge
-//                                            }, set: { _ in
-//                                            }), viewModel: viewModel)
+                                            BridgeRow(bridge: Binding(get: {
+                                                print("get \(bridge)")
+                                                return bridge
+                                            }, set: { _ in
+                                            }), viewModel: viewModel)
+                                            .tag(bridge.name)
+                                            
                                             if #available(iOS 15.0, *) {
-                                                rowView(bridge: bridge)
+                                                BridgeRow(bridge: Binding(get: {
+                                                    print("get \(bridge)")
+                                                    return bridge
+                                                }, set: { _ in
+                                                }), viewModel: viewModel)
                                                 .tag(bridge.name)
-                                                .swipeActions(allowsFullSwipe: true) {
+                                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                                     Button {
                                                         viewModel.toggleSubscription(for: bridge)
                                                     } label: {
@@ -103,18 +62,14 @@ struct ContentView: View {
                                                             Image(systemName: "bell.fill")
                                                         }
                                                     }
-                                                    .tint(.yellow)
                                                 }
                                             } else {
-                                                rowView(bridge: bridge)
+                                                BridgeRow(bridge: Binding(get: {
+                                                    print("get \(bridge)")
+                                                    return bridge
+                                                }, set: { _ in
+                                                }), viewModel: viewModel)
                                                 .tag(bridge.name)
-                                            }
-                                        }
-                                        if !Utilities.areAdsDisabled || !Utilities.isFastlaneRunning {
-                                            HStack {
-                                                Spacer()
-                                                BannerAds()
-                                                Spacer()
                                             }
                                         }
                                     } header: {
@@ -125,21 +80,75 @@ struct ContentView: View {
                                                 Button {
                                                     viewModel.toggleFavorite(bridgeLocation: key)
                                                 } label: {
-                                                    Image(systemName: "star")
+                                                    Image(systemName: "star.fill")
                                                         .foregroundColor(.yellow)
                                                         .imageScale(.medium)
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                                ForEach(Array(viewModel.bridges.keys), id: \.self) { key in
+                                    if !Array(viewModel.bridgeFavorites).contains(key) {
+                                        Section {
+                                            ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
+    //                                            BridgeRow(bridge: Binding(get: {
+    //                                                print("get \(bridge)")
+    //                                                return bridge
+    //                                            }, set: { _ in
+    //                                            }), viewModel: viewModel)
+                                                if #available(iOS 15.0, *) {
+                                                    rowView(bridge: bridge)
+                                                    .tag(bridge.name)
+                                                    .swipeActions(allowsFullSwipe: true) {
+                                                        Button {
+                                                            viewModel.toggleSubscription(for: bridge)
+                                                        } label: {
+                                                            if bridge.subscribed {
+                                                                Image(systemName: "bell.slash.fill")
+                                                            } else {
+                                                                Image(systemName: "bell.fill")
+                                                            }
+                                                        }
+                                                        .tint(.yellow)
+                                                    }
+                                                } else {
+                                                    rowView(bridge: bridge)
+                                                    .tag(bridge.name)
+                                                }
+                                            }
+                                            if !Utilities.areAdsDisabled && !Utilities.isFastlaneRunning {
+                                                HStack {
+                                                    Spacer()
+                                                    BannerAds()
+                                                    Spacer()
+                                                }
+                                            }
+                                        } header: {
+                                            HStack {
+                                                Text(key)
+                                                if viewModel.bridges.keys.count >= 3 {
+                                                    Spacer()
+                                                    Button {
+                                                        viewModel.toggleFavorite(bridgeLocation: key)
+                                                    } label: {
+                                                        Image(systemName: "star")
+                                                            .foregroundColor(.yellow)
+                                                            .imageScale(.medium)
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                        .backport.refreshable(action: {
-                            await viewModel.fetchData(repeatFetch: false)
-                        })
-                        .tag("bridges")
+                            .backport.refreshable(action: {
+                                await viewModel.fetchData(repeatFetch: false)
+                            })
+                            .tag("bridges")
                         .listStyle(GroupedListStyle())
+                        }
                     }
                 }
             }
@@ -148,7 +157,7 @@ struct ContentView: View {
             }
             .introspectNavigationController { navController in
                 let bar = navController.navigationBar
-                let hosting = UIHostingController(rootView: HelpMenu())
+                let hosting = UIHostingController(rootView: HelpMenu(viewModel: self.viewModel))
                 
                 guard let hostingView = hosting.view else { return }
                 if bar.subviews.first(where: \.clipsToBounds) != nil {
@@ -178,6 +187,16 @@ struct ContentView: View {
     }
     func rowView(bridge: Bridge) -> some View {
         BridgeRow(bridge: Binding(get: {
+            return bridge
+        }, set: { _ in
+        }), viewModel: viewModel)
+    }
+    func demoView() -> some View {
+        BridgeView(bridge: Binding(get: {
+            let index = viewModel.bridges["Seattle, Wa"]?.firstIndex(where: { bridge in
+                bridge.name == "South Park Bridge"
+            })
+            let bridge = viewModel.bridges["Seattle, Wa"]![index!]
             return bridge
         }, set: { _ in
         }), viewModel: viewModel)
