@@ -66,6 +66,14 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
+            argument = "-Seattle_Wa_South_Park.subscribed true"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-Seattle_Wa_Ballard.subscribed true"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
             argument = "-FIRDebugEnabled"
             isEnabled = "YES">
          </CommandLineArgument>
