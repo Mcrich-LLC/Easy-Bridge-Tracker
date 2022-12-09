@@ -110,10 +110,12 @@ struct ContentView: View {
                                                 .tag(bridge.name)
                                             }
                                         }
-                                        HStack {
-                                            Spacer()
-                                            BannerAds()
-                                            Spacer()
+                                        if !Utilities.areAdsDisabled || !Utilities.isFastlaneRunning {
+                                            HStack {
+                                                Spacer()
+                                                BannerAds()
+                                                Spacer()
+                                            }
                                         }
                                     } header: {
                                         HStack {
