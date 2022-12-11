@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224C81FA29459B33004C5722 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
+		224C81FB29459B47004C5722 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
 		22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 22AB7C80293EDFA4008BD92F /* FirebaseMessaging */; };
@@ -65,27 +67,25 @@
 		A394A80828C0725B003E5273 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80728C0725B003E5273 /* BridgeView.swift */; };
 		A3D22D7428C149C900AD4C0A /* HTTPStatusCodes in Frameworks */ = {isa = PBXBuildFile; productRef = A3D22D7328C149C900AD4C0A /* HTTPStatusCodes */; };
 		A3D22D7528C14ADB00AD4C0A /* DummyPromo.json in Resources */ = {isa = PBXBuildFile; fileRef = A394A80D28C13C1F003E5273 /* DummyPromo.json */; };
-		A3F2AFEE28B28BB500D38A59 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
-		A3F2AFEF28B28BFD00D38A59 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
 		A3F2AFF228B2B5F900D38A59 /* Mcrich23-Toolkit in Frameworks */ = {isa = PBXBuildFile; productRef = A3F2AFF128B2B5F900D38A59 /* Mcrich23-Toolkit */; };
 		A3F2AFF728B2B67B00D38A59 /* Banner Ads.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F2AFF528B2B67B00D38A59 /* Banner Ads.swift */; };
 		A3F2AFFA28B2B7F500D38A59 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F2AFF928B2B7F500D38A59 /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		224C81F529459999004C5722 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A33F92F728AC90A800391EBB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A33F92FE28AC90A800391EBB;
+			remoteInfo = "Easy Bridge Tracker";
+		};
 		22AB7C79293EDF2A008BD92F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A33F92F728AC90A800391EBB /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 22AB7C73293EDF2A008BD92F;
 			remoteInfo = NotificationService;
-		};
-		A3F2AFE928B28B7E00D38A59 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A33F92F728AC90A800391EBB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A33F92FE28AC90A800391EBB;
-			remoteInfo = "Easy Bridge Tracker";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -104,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB7C76293EDF2A008BD92F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		22AB7C78293EDF2A008BD92F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -137,12 +138,18 @@
 		A394A80528BFC057003E5273 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A394A80728C0725B003E5273 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
 		A394A80D28C13C1F003E5273 /* DummyPromo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyPromo.json; sourceTree = "<group>"; };
-		A3F2AFE328B28B7E00D38A59 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F2AFF528B2B67B00D38A59 /* Banner Ads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Banner Ads.swift"; sourceTree = "<group>"; };
 		A3F2AFF928B2B7F500D38A59 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		224C81EC29459999004C5722 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22AB7C71293EDF2A008BD92F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -190,13 +197,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A3F2AFE028B28B7E00D38A59 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -229,8 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */,
-				A3F2AFE328B28B7E00D38A59 /* Easy Bridge TrackerUITests.xctest */,
 				22AB7C74293EDF2A008BD92F /* NotificationService.appex */,
+				224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,6 +317,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		224C81EE29459999004C5722 /* Easy Bridge TrackerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 224C81F729459999004C5722 /* Build configuration list for PBXNativeTarget "Easy Bridge TrackerUITests" */;
+			buildPhases = (
+				224C81EB29459999004C5722 /* Sources */,
+				224C81EC29459999004C5722 /* Frameworks */,
+				224C81ED29459999004C5722 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				224C81F629459999004C5722 /* PBXTargetDependency */,
+			);
+			name = "Easy Bridge TrackerUITests";
+			productName = "Easy Bridge TrackerUITests";
+			productReference = 224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		22AB7C73293EDF2A008BD92F /* NotificationService */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 22AB7C7F293EDF2B008BD92F /* Build configuration list for PBXNativeTarget "NotificationService" */;
@@ -391,24 +409,6 @@
 			productReference = A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A3F2AFE228B28B7E00D38A59 /* Easy Bridge TrackerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A3F2AFED28B28B7E00D38A59 /* Build configuration list for PBXNativeTarget "Easy Bridge TrackerUITests" */;
-			buildPhases = (
-				A3F2AFDF28B28B7E00D38A59 /* Sources */,
-				A3F2AFE028B28B7E00D38A59 /* Frameworks */,
-				A3F2AFE128B28B7E00D38A59 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A3F2AFEA28B28B7E00D38A59 /* PBXTargetDependency */,
-			);
-			name = "Easy Bridge TrackerUITests";
-			productName = "Easy Bridge TrackerUITests1";
-			productReference = A3F2AFE328B28B7E00D38A59 /* Easy Bridge TrackerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -419,15 +419,15 @@
 				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					224C81EE29459999004C5722 = {
+						CreatedOnToolsVersion = 14.1;
+						TestTargetID = A33F92FE28AC90A800391EBB;
+					};
 					22AB7C73293EDF2A008BD92F = {
 						CreatedOnToolsVersion = 14.1;
 					};
 					A33F92FE28AC90A800391EBB = {
 						CreatedOnToolsVersion = 13.4.1;
-					};
-					A3F2AFE228B28B7E00D38A59 = {
-						CreatedOnToolsVersion = 13.4.1;
-						TestTargetID = A33F92FE28AC90A800391EBB;
 					};
 				};
 			};
@@ -452,13 +452,20 @@
 			projectRoot = "";
 			targets = (
 				A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */,
-				A3F2AFE228B28B7E00D38A59 /* Easy Bridge TrackerUITests */,
 				22AB7C73293EDF2A008BD92F /* NotificationService */,
+				224C81EE29459999004C5722 /* Easy Bridge TrackerUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		224C81ED29459999004C5722 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22AB7C72293EDF2A008BD92F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -486,13 +493,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A3F2AFE128B28B7E00D38A59 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -517,6 +517,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		224C81EB29459999004C5722 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				224C81FA29459B33004C5722 /* Easy_Bridge_TrackerUITests.swift in Sources */,
+				224C81FB29459B47004C5722 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		22AB7C70293EDF2A008BD92F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -545,31 +554,60 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A3F2AFDF28B28B7E00D38A59 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A3F2AFEF28B28BFD00D38A59 /* Easy_Bridge_TrackerUITests.swift in Sources */,
-				A3F2AFEE28B28BB500D38A59 /* SnapshotHelper.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		224C81F629459999004C5722 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */;
+			targetProxy = 224C81F529459999004C5722 /* PBXContainerItemProxy */;
+		};
 		22AB7C7A293EDF2A008BD92F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 22AB7C73293EDF2A008BD92F /* NotificationService */;
 			targetProxy = 22AB7C79293EDF2A008BD92F /* PBXContainerItemProxy */;
 		};
-		A3F2AFEA28B28B7E00D38A59 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A33F92FE28AC90A800391EBB /* Easy Bridge Tracker */;
-			targetProxy = A3F2AFE928B28B7E00D38A59 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		224C81F829459999004C5722 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Easy Bridge Tracker";
+			};
+			name = Debug;
+		};
+		224C81F929459999004C5722 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L7JQRVXU2V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Easy Bridge Tracker";
+			};
+			name = Release;
+		};
 		22AB7C7D293EDF2B008BD92F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -818,45 +856,18 @@
 			};
 			name = Release;
 		};
-		A3F2AFEB28B28B7E00D38A59 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = L7JQRVXU2V;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Easy Bridge Tracker";
-			};
-			name = Debug;
-		};
-		A3F2AFEC28B28B7E00D38A59 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
-				DEVELOPMENT_TEAM = L7JQRVXU2V;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Easy Bridge Tracker";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		224C81F729459999004C5722 /* Build configuration list for PBXNativeTarget "Easy Bridge TrackerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				224C81F829459999004C5722 /* Debug */,
+				224C81F929459999004C5722 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		22AB7C7F293EDF2B008BD92F /* Build configuration list for PBXNativeTarget "NotificationService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -880,15 +891,6 @@
 			buildConfigurations = (
 				A33F930E28AC90A900391EBB /* Debug */,
 				A33F930F28AC90A900391EBB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A3F2AFED28B28B7E00D38A59 /* Build configuration list for PBXNativeTarget "Easy Bridge TrackerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A3F2AFEB28B28B7E00D38A59 /* Debug */,
-				A3F2AFEC28B28B7E00D38A59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3F2AFE228B28B7E00D38A59"
+               BlueprintIdentifier = "224C81EE29459999004C5722"
                BuildableName = "Easy Bridge TrackerUITests.xctest"
                BlueprintName = "Easy Bridge TrackerUITests"
                ReferencedContainer = "container:Easy Bridge Tracker.xcodeproj">
@@ -77,7 +77,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-FASTLANE_SNAPSHOT true"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-FIRDebugEnabled"

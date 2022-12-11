@@ -22,6 +22,7 @@ class Seattle_Bridge_TrackerUITests: XCTestCase {
         super.setUp()
 
         let app = XCUIApplication()
+        app.launchArguments += ProcessInfo().arguments
         setupSnapshot(app)
         app.launch()
     }
