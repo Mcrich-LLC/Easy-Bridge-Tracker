@@ -4,7 +4,7 @@
  devices([
    "iPhone 11 Pro Max",
    "iPhone 8 Plus",
-   "iPhone 14 Pro",
+#   "iPhone 14 Pro",
 #   "iPhone X",
    "iPad Pro (12.9-inch) (6th generation)"
 #   "iPad Pro (9.7-inch)",
