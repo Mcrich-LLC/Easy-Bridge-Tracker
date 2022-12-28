@@ -50,16 +50,16 @@ struct BridgeStatusView: View {
     var body: some View {
         switch status {
         case .up:
-            Text("Up")
+            Text(status.rawValue.capitalized)
                 .foregroundColor(.red)
         case .down:
-            Text("Down")
+            Text(status.rawValue.capitalized)
                 .foregroundColor(.green)
         case .maintenance:
-            Text("Under Maintenance")
+            Text(status.rawValue.capitalized)
                 .foregroundColor(.yellow)
         case .unknown:
-            Text("Unknown")
+            Text(status.rawValue.capitalized)
                 .foregroundColor(.yellow)
         }
     }

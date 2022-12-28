@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import Mcrich23_Toolkit
 import UserNotifications
+import SwiftUI
 
 class ContentViewModel: ObservableObject {
     @Published var bridges: [String: [Bridge]] = [:] {
@@ -156,9 +157,21 @@ struct Bridge: Identifiable, Hashable, Comparable {
     var subscribed: Bool
 }
 enum BridgeStatus: String {
+    init?(rawValue: String) {
+        switch rawValue {
+        case "up":
+            self = .up
+        case "down":
+            self = .down
+        case "maintenance":
+            self = .maintenance
+        default:
+            self = .unknown
+        }
+    }
     case up
     case down
-    case maintenance
+    case maintenance = "under maintenance"
     case unknown
 }
 
