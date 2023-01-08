@@ -16,7 +16,7 @@ enum HttpError: Error {
 class TwitterFetch {
     func fetchTweet(errorHandler: @escaping (HTTPStatusCode) -> Void, completion: @escaping ([Response]) -> Void) {
         do {
-            var request = URLRequest(url: URL(string: "https://mc.mcrich23.com:8080/bridges")!,
+            var request = URLRequest(url: URL(string: "http://mc.mcrich23.com:8080/bridges")!,
                                      timeoutInterval: 5.0)
             
             request.httpMethod = "GET"
