@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bridge Table</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <style>
+        .bridge-image {
+            max-height: 100px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Bridge Table</h1>
+
+            <div class="field">
+                <label class="label">Location Filter</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="locationFilter">
+                            <option value="">All Locations</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tableLoading" class="has-text-centered">
+                <i class="fas fa-spinner fa-spin fa-3x"></i>
+            </div>
+
+            <table id="bridgeTable" class="table is-fullwidth is-hoverable is-striped is-bordered">
+                <thead>
+                    <tr>
+                        <th>Picture</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"></script>
+    <script>
+        const bridgeTable = document.getElementById('bridgeTable');
+        const locationFilter = document.getElementById('locationFilter');
+        const tableLoading = document.getElementById('tableLoading');
+
+        function renderTable(bridges) {
+            const tbody = bridgeTable.getElementsByTagName('tbody')[0];
+            tbody.innerHTML = '';
+
+            bridges.forEach((bridge) => {
+                const row = tbody.insertRow();
+
+                const pictureCell = row.insertCell();
+                const picture = document.createElement('img');
+                picture.src = bridge.image_url;
+                picture.alt = bridge.name;
+                picture.classList.add('bridge-image');
+                pictureCell.appendChild(picture);
+
+                const nameCell = row.insertCell();
+                nameCell.textContent = bridge.name;
+
+                const statusCell = row.insertCell();
+                const statusText = bridge.status.charAt(0).toUpperCase() + bridge.status.slice(1).toLowerCase();
+                statusCell.textContent = statusText;
+
+                if (statusText === "Down") {
+                    statusCell.style.color = "green";
+                } else if (statusText === "Up") {
+                    statusCell.style.color = "red";
+                } else {
+                    statusCell.style.color = "yellow";
+                }
+
+            });
+        }
+
+        function filterByLocation() {
+            const location = locationFilter.value;
+            let bridgesToShow = bridges;
+            if (location !== '') {
+                bridgesToShow = bridges.filter((bridge) => bridge.bridge_location === location);
+            }
+            renderTable(bridgesToShow);
+        }
+
+        let bridges;
+        fetch('http://mc.mcrich23.com:8080/bridges')
+            .then((response) => response.json())
+            .then((data) => {
+                bridges = data;
+
+                const locations = [...new Set(bridges.map((bridge) => bridge.bridge_location))];
+                locations.forEach((location) => {
+                    const option = document.createElement('option');
+                    option.value = location;
+                    option.textContent = location;
+                    locationFilter.appendChild(option);
+                });
+
+                tableLoading.style.display = 'none';
+                renderTable(bridges);
+            })
+            .catch((error) => console.error(error));
+
+        locationFilter.addEventListener('change', filterByLocation);
+    </script>
+</body>
+
+</html>
