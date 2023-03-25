@@ -24,7 +24,7 @@
 
         #bridgeTable {
             width: 100%;
-                height: 100%;
+            height: 100%;
             border-collapse: collapse;
         }
 
@@ -162,13 +162,17 @@
                 .then((data) => {
                     bridges = data;
 
-                    const uniqueLocations = new Set(bridges.map((bridge) => bridge.bridge_location));
-                    const locations = Array.from(uniqueLocations);
+                    const locations = [...new Set(bridges.map((bridge) => bridge.bridge_location))];
                     locations.forEach((location) => {
-                        const option = document.createElement('option');
-                        option.value = location;
-                        option.textContent = location;
-                        locationFilter.appendChild(option);
+                        const optionExists = Array.from(locationFilter.options).some((opt) => opt.value === location);
+
+                        // only append option if it doesn't already exist
+                        if (!optionExists) {
+                            const option = document.createElement('option');
+                            option.value = location;
+                            option.textContent = location;
+                            locationFilter.appendChild(option);
+                        }
                     });
 
                     tableLoading.style.display = 'none';
