@@ -121,7 +121,8 @@
                 .then((data) => {
                     bridges = data;
 
-                    const locations = [...new Set(bridges.map((bridge) => bridge.bridge_location))];
+                const uniqueLocations = new Set(bridges.map((bridge) => bridge.bridge_location));
+                const locations = Array.from(uniqueLocations);
                     locations.forEach((location) => {
                         const option = document.createElement('option');
                         option.value = location;
