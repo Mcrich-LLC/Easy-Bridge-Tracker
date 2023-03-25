@@ -15,7 +15,7 @@
             display: none;
         }
 
-       .table-container {
+        .table-container {
             overflow-y: auto;
         }
     </style>
@@ -115,24 +115,28 @@
             renderTable(bridgesToShow);
         }
 
-        let bridges;
-        fetch('https://mc.mcrich23.com/bridges')
-            .then((response) => response.json())
-            .then((data) => {
-                bridges = data;
+        const fetchData = () => {
+            fetch('https://mc.mcrich23.com/bridges')
+                .then((response) => response.json())
+                .then((data) => {
+                    bridges = data;
 
-                const locations = [...new Set(bridges.map((bridge) => bridge.bridge_location))];
-                locations.forEach((location) => {
-                    const option = document.createElement('option');
-                    option.value = location;
-                    option.textContent = location;
-                    locationFilter.appendChild(option);
-                });
+                    const locations = [...new Set(bridges.map((bridge) => bridge.bridge_location))];
+                    locations.forEach((location) => {
+                        const option = document.createElement('option');
+                        option.value = location;
+                        option.textContent = location;
+                        locationFilter.appendChild(option);
+                    });
 
-                tableLoading.style.display = 'none';
-                renderTable(bridges);
-            })
-            .catch((error) => console.error(error));
+                    tableLoading.style.display = 'none';
+                    renderTable(bridges);
+                })
+                .catch((error) => console.error(error));
+        };
+
+        fetchData();
+        setInterval(fetchData, 3000);
 
         locationFilter.addEventListener('change', filterByLocation);
     </script>
