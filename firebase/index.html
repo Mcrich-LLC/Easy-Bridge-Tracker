@@ -3,10 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bridges</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <style>
         .bridge-image {
+            max-width: 100%;
             max-height: 100px;
             object-fit: contain;
         }
@@ -15,8 +17,46 @@
             display: none;
         }
 
-        .table-container {
-            overflow-y: auto;
+        /* Default styles */
+        #bridgeTable {
+            font-size: 16px;
+        }
+
+        #bridgeTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #bridgeTable th,
+        #bridgeTable td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        /* Styles for mobile devices */
+        @media (max-width: 767px) {
+            #bridgeTable {
+                font-size: 14px;
+            }
+
+            .bridge-image {
+                max-width: 100%;
+            }
+        }
+
+        /* Style for tiny mobile devices */
+        @media (max-width: 568px) {
+            #bridgeTable {
+                font-size: 10px;
+            }
+        }
+
+        /* Styles for desktop devices */
+        @media (min-width: 768px) {
+            #bridgeTable {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -121,8 +161,8 @@
                 .then((data) => {
                     bridges = data;
 
-                const uniqueLocations = new Set(bridges.map((bridge) => bridge.bridge_location));
-                const locations = Array.from(uniqueLocations);
+                    const uniqueLocations = new Set(bridges.map((bridge) => bridge.bridge_location));
+                    const locations = Array.from(uniqueLocations);
                     locations.forEach((location) => {
                         const option = document.createElement('option');
                         option.value = location;
