@@ -10,6 +10,10 @@
             max-height: 100px;
             object-fit: contain;
         }
+
+        .hide-column {
+            display: none;
+        }
     </style>
 </head>
 
@@ -38,6 +42,7 @@
                     <tr>
                         <th>Picture</th>
                         <th>Name</th>
+                        <th>Location</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -51,6 +56,7 @@
         const bridgeTable = document.getElementById('bridgeTable');
         const locationFilter = document.getElementById('locationFilter');
         const tableLoading = document.getElementById('tableLoading');
+        const locationHeader = document.querySelector('#bridgeTable th:nth-of-type(3)');
 
         function renderTable(bridges) {
             const tbody = bridgeTable.getElementsByTagName('tbody')[0];
@@ -69,6 +75,9 @@
                 const nameCell = row.insertCell();
                 nameCell.textContent = bridge.name;
 
+                const locationCell = row.insertCell();
+                locationCell.textContent = bridge.bridge_location;
+
                 const statusCell = row.insertCell();
                 const statusText = bridge.status.charAt(0).toUpperCase() + bridge.status.slice(1).toLowerCase();
                 statusCell.textContent = statusText;
@@ -81,6 +90,13 @@
                     statusCell.style.color = "yellow";
                 }
 
+                if (locationFilter.value === '' || 'All Locations' === locationFilter.value) {
+                    locationCell.style.display = 'table-cell';
+                    locationHeader.classList.remove('hide-column');
+                } else {
+                    locationCell.style.display = 'none';
+                    locationHeader.classList.add('hide-column');
+                }
             });
         }
 
