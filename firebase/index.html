@@ -24,7 +24,6 @@
 
         #bridgeTable {
             width: 100%;
-            height: 100%;
             border-collapse: collapse;
         }
 
@@ -91,7 +90,7 @@
                 <table id="bridgeTable" class="table is-fullwidth is-hoverable is-striped is-bordered">
                     <thead>
                         <tr>
-                            <th>Picture</th>
+                            <th class="picture-column">Picture</th>
                             <th>Name</th>
                             <th>Location</th>
                             <th>Status</th>
@@ -109,10 +108,14 @@
         const locationFilter = document.getElementById('locationFilter');
         const tableLoading = document.getElementById('tableLoading');
         const locationHeader = document.querySelector('#bridgeTable th:nth-of-type(3)');
+const initialWidth = document.querySelector('.picture-column').clientWidth;
+
 
         function renderTable(bridges) {
             const tbody = bridgeTable.getElementsByTagName('tbody')[0];
             tbody.innerHTML = '';
+// Set the width of the picture column to the initial width
+document.querySelector('.picture-column').style.width = initialWidth + 'px';
 
             bridges.forEach((bridge) => {
                 const row = tbody.insertRow();
