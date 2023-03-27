@@ -123,7 +123,7 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
-    func setTitle(for preferences: NotificationPreferences) {
+    func updateTitle(for preferences: NotificationPreferences) {
         var title = preferences.title
         SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
             return title
@@ -134,5 +134,16 @@ final class NotificationPreferencesModel: ObservableObject {
                 self.preferencesArray[index].title = title
             }
         })])
+    }
+        
+    func setTitle(onDone completion: @escaping (_ title: String) -> Void) {
+            var title = "Untitled"
+            SwiftUIAlert.textfieldShow(title: "Set Schedule Name", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                return title
+            }, set: { newValue in
+                title = newValue
+            }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                completion(title)
+            })])
     }
 }

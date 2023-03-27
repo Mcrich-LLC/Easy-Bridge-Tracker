@@ -19,79 +19,41 @@ struct NotificationContentView: View {
     let toggleBridgeCallback: (Bridge) -> Void
     @Environment(\.backportDismiss) var dismiss
     var body: some View {
-        VStack {
-            if !NetworkMonitor.shared.isConnected {
-                Text("Please check your internet and try again.")
-            } else {
-                switch viewModel.status {
-                case .loading:
-                    ProgressView()
-                case .failed(let error):
-                    errors(error: error)
-                case .success:
-                    List {
-                        ForEach(viewModel.bridgeFavorites, id: \.self) { key in
-                            Section {
-                                ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
-                                    if #available(iOS 15.0, *) {
-                                        NotificationBridgeRow(bridge: Binding(get: {
-                                            print("get \(bridge)")
-                                            return bridge
-                                        }, set: { _ in
-                                        }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
-                                            toggleBridgeCallback(bridge)
-                                            self.dismiss.callAsFunction()
-                                        })
-                                        .tag(bridge.name)
-                                    } else {
-                                        NotificationBridgeRow(bridge: Binding(get: {
-                                            print("get \(bridge)")
-                                            return bridge
-                                        }, set: { _ in
-                                        }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
-                                            toggleBridgeCallback(bridge)
-                                            self.dismiss.callAsFunction()
-                                        })
-                                        .tag(bridge.name)
-                                    }
-                                }
-                            } header: {
-                                HStack {
-                                    Text(key)
-                                    if viewModel.sortedBridges.keys.count >= 3 {
-                                        Spacer()
-                                        Button {
-                                            viewModel.toggleFavorite(bridgeLocation: key)
-                                        } label: {
-                                            Image(systemName: "star.fill")
-                                                .foregroundColor(.yellow)
-                                                .imageScale(.medium)
-                                        }
-                                    }
-                                }
-                                
-                            }
-                        }
-                        ForEach(Array(viewModel.sortedBridges.keys), id: \.self) { key in
-                            if !Array(viewModel.bridgeFavorites).contains(key) {
+        NavigationView {
+            VStack {
+                if !NetworkMonitor.shared.isConnected {
+                    Text("Please check your internet and try again.")
+                } else {
+                    switch viewModel.status {
+                    case .loading:
+                        ProgressView()
+                    case .failed(let error):
+                        errors(error: error)
+                    case .success:
+                        List {
+                            ForEach(viewModel.bridgeFavorites, id: \.self) { key in
                                 Section {
                                     ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
-                                        //                                            NotificationBridgeRow(bridge: Binding(get: {
-                                        //                                                print("get \(bridge)")
-                                        //                                                return bridge
-                                        //                                            }, set: { _ in
-                                        //                                            }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id.uuidString), toggleBridgeCallback: { bridge in
-                                        //                                                toggleBridgeCallback(bridge)
-                                        //                                                self.dismiss.callAsFunction()
-                                        //                                            })
-                                        rowView(bridge: bridge)
+                                        if #available(iOS 15.0, *) {
+                                            NotificationBridgeRow(bridge: Binding(get: {
+                                                print("get \(bridge)")
+                                                return bridge
+                                            }, set: { _ in
+                                            }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
+                                                toggleBridgeCallback(bridge)
+                                                self.dismiss.callAsFunction()
+                                            })
                                             .tag(bridge.name)
-                                    }
-                                    if !Utilities.areAdsDisabled && !Utilities.isFastlaneRunning {
-                                        HStack {
-                                            Spacer()
-                                            BannerAds()
-                                            Spacer()
+                                        } else {
+                                            NotificationBridgeRow(bridge: Binding(get: {
+                                                print("get \(bridge)")
+                                                return bridge
+                                            }, set: { _ in
+                                            }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
+                                                toggleBridgeCallback(bridge)
+                                                self.dismiss.callAsFunction()
+                                            })
+                                            .tag(bridge.name)
                                         }
                                     }
                                 } header: {
@@ -102,28 +64,68 @@ struct NotificationContentView: View {
                                             Button {
                                                 viewModel.toggleFavorite(bridgeLocation: key)
                                             } label: {
-                                                Image(systemName: "star")
+                                                Image(systemName: "star.fill")
                                                     .foregroundColor(.yellow)
                                                     .imageScale(.medium)
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            ForEach(Array(viewModel.sortedBridges.keys), id: \.self) { key in
+                                if !Array(viewModel.bridgeFavorites).contains(key) {
+                                    Section {
+                                        ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
+                                            //                                            NotificationBridgeRow(bridge: Binding(get: {
+                                            //                                                print("get \(bridge)")
+                                            //                                                return bridge
+                                            //                                            }, set: { _ in
+                                            //                                            }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id.uuidString), toggleBridgeCallback: { bridge in
+                                            //                                                toggleBridgeCallback(bridge)
+                                            //                                                self.dismiss.callAsFunction()
+                                            //                                            })
+                                            rowView(bridge: bridge)
+                                                .tag(bridge.name)
+                                        }
+                                        if !Utilities.areAdsDisabled && !Utilities.isFastlaneRunning {
+                                            HStack {
+                                                Spacer()
+                                                BannerAds()
+                                                Spacer()
+                                            }
+                                        }
+                                    } header: {
+                                        HStack {
+                                            Text(key)
+                                            if viewModel.sortedBridges.keys.count >= 3 {
+                                                Spacer()
+                                                Button {
+                                                    viewModel.toggleFavorite(bridgeLocation: key)
+                                                } label: {
+                                                    Image(systemName: "star")
+                                                        .foregroundColor(.yellow)
+                                                        .imageScale(.medium)
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        .backport.refreshable(action: {
+                            await viewModel.fetchData(repeatFetch: false)
+                        })
+                        .tag("bridges")
+                        .listStyle(GroupedListStyle())
                     }
-                    .backport.refreshable(action: {
-                        await viewModel.fetchData(repeatFetch: false)
-                    })
-                    .tag("bridges")
-                    .listStyle(GroupedListStyle())
                 }
             }
+            .onAppear {
+                viewModel.fetchData(repeatFetch: true)
+            }
+            .navigationBarTitle("Subscribed Bridges", displayMode: .large)
         }
-        .onAppear {
-            viewModel.fetchData(repeatFetch: true)
-        }
-        .navigationBarTitle("Subscribed Bridges", displayMode: .large)
         .navigationViewStyle(.stack)
     }
     

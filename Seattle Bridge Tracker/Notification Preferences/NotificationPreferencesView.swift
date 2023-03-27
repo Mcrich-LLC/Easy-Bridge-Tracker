@@ -35,7 +35,16 @@ struct NotificationPreferencesView: View {
             }
             LazyVStack(spacing: 10) {
                 ForEach(preferencesModel.preferencesArray, id: \.self) { preference in
-                    NotificationPreferencesBody(preference: preference)
+                    NotificationPreferencesBody(preference: Binding(get: {
+                        guard let prefs = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) else {
+                            return .defaultPreferences
+                        }
+                        return prefs
+                    }, set: { newValue in
+                        if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
+                            preferencesModel.preferencesArray[index] = newValue
+                        }
+                    }))
                 }
             }
         }

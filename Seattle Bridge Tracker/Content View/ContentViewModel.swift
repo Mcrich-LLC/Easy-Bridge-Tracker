@@ -112,7 +112,9 @@ class ContentViewModel: ObservableObject {
                 if setting.authorizationStatus == .authorized {
                     if bridge.subscribed {
                         for index in NotificationPreferencesModel.shared.preferencesArray.indices {
-                            NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.remove(at: index)
+                            if let bridgeIdIndex = NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.firstIndex(where: { $0 == bridge.id }) {
+                                NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.remove(at: bridgeIdIndex)
+                            }
                         }
                         Analytics.setUserProperty("unsubscribed", forName: self.bridgeName(bridge: bridge))
                         Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : self.bridgeName(bridge: bridge)])
@@ -141,11 +143,13 @@ class ContentViewModel: ObservableObject {
                                 }
                             }
                         }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
-                            var defaultPrefs = NotificationPreferences.defaultPreferences
-                            defaultPrefs.bridgeIds.append(bridge.id)
-                            NotificationPreferencesModel.shared.preferencesArray.append(defaultPrefs)
-                            NotificationPreferencesModel.shared.setTitle(for: defaultPrefs)
-                            complete()
+                            NotificationPreferencesModel.shared.setTitle { title in
+                                var defaultPrefs = NotificationPreferences.defaultPreferences
+                                defaultPrefs.bridgeIds.append(bridge.id)
+                                defaultPrefs.title = title
+                                NotificationPreferencesModel.shared.preferencesArray.append(defaultPrefs)
+                                complete()
+                            }
                         })]
                         SwiftUIAlert.show(
                             title: "Select Notification Schedule",
