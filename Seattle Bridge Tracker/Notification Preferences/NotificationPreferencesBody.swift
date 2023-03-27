@@ -12,7 +12,6 @@ struct NotificationPreferencesBody: View {
     @Binding var preference: NotificationPreferences
     @ObservedObject var preferencesModel = NotificationPreferencesModel.shared
     @ObservedObject var contentViewModel = ContentViewModel.shared
-    @State var timeHeight: Double? = nil
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 12)
@@ -70,52 +69,7 @@ struct NotificationPreferencesBody: View {
                     Spacer()
                 }
                 .padding(.bottom)
-                Toggle("All Day", isOn: Binding(get: {
-                    preference.isAllDay
-                }, set: { isAllDay in
-                    self.preference.isAllDay = isAllDay
-                    if isAllDay {
-                        withAnimation {
-                            self.timeHeight = 0
-                        }
-                    }
-                    if !isAllDay {
-                        withAnimation {
-                            self.timeHeight = nil
-                        }
-                    }
-                }))
-                    Section {
-                        DatePicker("Start Time: ", selection: Binding(get: {
-                            let startTime = preferencesModel.preferencesArray.first(where: { $0.id == preference.id })?.startTime
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.locale = .init(identifier: "en_US_POSIX")
-                            dateFormatter.defaultDate = Calendar.current.startOfDay(for: Date())
-                            dateFormatter.dateFormat = "hh:mm a"
-                            return dateFormatter.date(from: startTime ?? "8:00 AM")!
-                        }, set: { newValue in
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.locale = .init(identifier: "en_US_POSIX")
-                            dateFormatter.defaultDate = Calendar.current.startOfDay(for: Date())
-                            dateFormatter.dateFormat = "hh:mm a"
-                                self.preference.startTime = dateFormatter.string(from: newValue)
-                        }), displayedComponents: [.hourAndMinute])
-                        DatePicker("End Time: ", selection: Binding(get: {
-                            let endTime = preferencesModel.preferencesArray.first(where: { $0.id == preference.id })?.endTime
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.locale = .init(identifier: "en_US_POSIX")
-                            dateFormatter.defaultDate = Calendar.current.startOfDay(for: Date())
-                            dateFormatter.dateFormat = "hh:mm a"
-                            return dateFormatter.date(from: endTime ?? "8:00 AM")!
-                        }, set: { newValue in
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.locale = .init(identifier: "en_US_POSIX")
-                            dateFormatter.defaultDate = Calendar.current.startOfDay(for: Date())
-                            dateFormatter.dateFormat = "hh:mm a"
-                                self.preference.endTime = dateFormatter.string(from: newValue)
-                        }), displayedComponents: [.hourAndMinute])
-                    }
-                    .frame(height: preference.isAllDay ? 0 : nil)
+                NotificationPreferencesTimePicker(preference: $preference)
                 HStack {
                     if #available(iOS 15, *) {
                         Text("Importance: ")
@@ -165,20 +119,9 @@ struct NotificationPreferencesBody: View {
             }
             .padding()
         }
-        .onAppear {
-            if preference.isAllDay {
-                withAnimation {
-                    self.timeHeight = 0
-                }
-            }
-            if !preference.isAllDay {
-                withAnimation {
-                    self.timeHeight = nil
-                }
-            }
-        }
     }
 }
+
 
 struct NotificationPreferencesBody_Previews: PreviewProvider {
     static var previews: some View {
