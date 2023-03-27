@@ -135,7 +135,7 @@ class ContentViewModel: ObservableObject {
                             self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
                             UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                         }
-                        let actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + (NotificationPreferencesModel.shared.preferencesArray.map { pref in
+                        let actions: [UIAlertAction] = (NotificationPreferencesModel.shared.preferencesArray.map { pref in
                             UIAlertAction(title: pref.title, style: .default) { _ in
                                 if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
                                     NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
@@ -150,7 +150,7 @@ class ContentViewModel: ObservableObject {
                                 NotificationPreferencesModel.shared.preferencesArray.append(defaultPrefs)
                                 complete()
                             }
-                        })]
+                        }), .init(title: "Cancel", style: .destructive)]
                         SwiftUIAlert.show(
                             title: "Select Notification Schedule",
                             message: "Choose the notification schedule to add \(bridge.name) to.",
