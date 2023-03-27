@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2224CDB729D1442B006D4338 /* NotificationPreferences.json in Resources */ = {isa = PBXBuildFile; fileRef = 2224CDB629D1442B006D4338 /* NotificationPreferences.json */; };
+		2224CDB829D1442D006D4338 /* NotificationPreferences.json in Resources */ = {isa = PBXBuildFile; fileRef = 2224CDB629D1442B006D4338 /* NotificationPreferences.json */; };
 		224C81FA29459B33004C5722 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
 		224C81FB29459B47004C5722 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
@@ -104,6 +106,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2224CDB629D1442B006D4338 /* NotificationPreferences.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotificationPreferences.json; sourceTree = "<group>"; };
 		224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB7C76293EDF2A008BD92F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -253,6 +256,7 @@
 				A37E8B3A28BB2DA200A6A8D4 /* Info.swift */,
 				A33F931428AC926100391EBB /* Fetch Data.swift */,
 				A3413A0228AFDD5B0016710C /* Response.swift */,
+				2224CDB629D1442B006D4338 /* NotificationPreferences.json */,
 				A394A80D28C13C1F003E5273 /* DummyPromo.json */,
 				A3F2AFF428B2B67B00D38A59 /* AdMob */,
 				A33F930628AC90A900391EBB /* Assets.xcassets */,
@@ -470,6 +474,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2224CDB829D1442D006D4338 /* NotificationPreferences.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +487,7 @@
 				22C28A102939785A00D37696 /* GoogleService-Info.plist in Resources */,
 				A37E4BB528B1359E007644D5 /* report.xml in Resources */,
 				22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */,
+				2224CDB729D1442B006D4338 /* NotificationPreferences.json in Resources */,
 				A37E4BB228B1359E007644D5 /* Fastfile in Resources */,
 				A37E4BB428B1359E007644D5 /* Precheckfile in Resources */,
 				A33F931928AC97A300391EBB /* .swiftlint.yml in Resources */,
