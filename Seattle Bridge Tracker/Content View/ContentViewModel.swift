@@ -123,17 +123,17 @@ class ContentViewModel: ObservableObject {
                         self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = false
                         UserDefaults.standard.set(false, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     } else {
+                        func complete() {
+                            Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
+                            Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
+                            Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
+                            let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                                bridgeArray.name == bridge.name
+                            })!
+                            self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
+                            UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
+                        }
                         let actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + (NotificationPreferencesModel.shared.preferencesArray.map { pref in
-                            func complete() {
-                                Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
-                                Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
-                                Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
-                                let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                                    bridgeArray.name == bridge.name
-                                })!
-                                self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
-                                UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
-                            }
                             UIAlertAction(title: pref.title, style: .default) { _ in
                                 if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
                                     NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
@@ -141,7 +141,7 @@ class ContentViewModel: ObservableObject {
                                 }
                             }
                         }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
-                            let defaultPrefs = NotificationPreferences.defaultPreferences
+                            var defaultPrefs = NotificationPreferences.defaultPreferences
                             defaultPrefs.bridgeIds.append(bridge.id)
                             NotificationPreferencesModel.shared.preferencesArray.append(defaultPrefs)
                             NotificationPreferencesModel.shared.setTitle(for: defaultPrefs)
@@ -151,7 +151,7 @@ class ContentViewModel: ObservableObject {
                             title: "Select Notification Schedule",
                             message: "Choose the notification schedule to add \(bridge.name) to.",
                             preferredStyle: .alert,
-                            actions: actions,
+                            actions: actions
                         )
                     }
                 } else {
