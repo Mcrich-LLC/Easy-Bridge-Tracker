@@ -43,16 +43,7 @@ struct NotificationPreferencesView: View {
                                 Text(preference.title)
                                     .font(.title2)
                                 Button {
-                                    var title = preference.title
-                                    SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-                                        return title
-                                    }, set: { newValue in
-                                        title = newValue
-                                    }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                                        if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
-                                            preferencesModel.preferencesArray[index].title = title
-                                        }
-                                    })])
+                                    preferencesModel.setTitle(for: preference)
                                 } label: {
                                     Image(systemName: "square.and.pencil")
                                         .imageScale(.large)

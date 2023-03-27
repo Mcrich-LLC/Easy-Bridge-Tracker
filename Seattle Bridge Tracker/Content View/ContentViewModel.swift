@@ -123,20 +123,30 @@ class ContentViewModel: ObservableObject {
                         self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = false
                         UserDefaults.standard.set(false, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     } else {
-                        let actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + NotificationPreferencesModel.shared.preferencesArray.map { pref in
+                        let actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + (NotificationPreferencesModel.shared.preferencesArray.map { pref in
+                            func complete() {
+                                Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
+                                Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
+                                Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
+                                let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                                    bridgeArray.name == bridge.name
+                                })!
+                                self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
+                                UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
+                            }
                             UIAlertAction(title: pref.title, style: .default) { _ in
                                 if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
-                                    NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
-                                    Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
-                                    Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
-                                    let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                                        bridgeArray.name == bridge.name
-                                    })!
-                                    self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
-                                    UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
+                                    NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
+                                    complete()
                                 }
                             }
-                        }
+                        }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
+                            let defaultPrefs = NotificationPreferences.defaultPreferences
+                            defaultPrefs.bridgeIds.append(bridge.id)
+                            NotificationPreferencesModel.shared.preferencesArray.append(defaultPrefs)
+                            NotificationPreferencesModel.shared.setTitle(for: defaultPrefs)
+                            complete()
+                        })]
                         SwiftUIAlert.show(
                             title: "Select Notification Schedule",
                             message: "Choose the notification schedule to add \(bridge.name) to.",

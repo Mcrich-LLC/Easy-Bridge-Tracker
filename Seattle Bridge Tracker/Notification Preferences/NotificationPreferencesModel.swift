@@ -96,6 +96,7 @@ final class NotificationPreferencesModel: ObservableObject {
             print("Unable to write json")
         }
     }
+    
     func getPreferences() {
         do {
             enum throwError: Error {
@@ -119,5 +120,18 @@ final class NotificationPreferencesModel: ObservableObject {
         } catch {
             print("NotificationPreferences.json doesn't exist")
         }
+    }
+    
+    func setTitle(for preferences: NotificationPreferences) {
+        var title = preference.title
+        SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+            return title
+        }, set: { newValue in
+            title = newValue
+        }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+            if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
+                preferencesModel.preferencesArray[index].title = title
+            }
+        })])
     }
 }
