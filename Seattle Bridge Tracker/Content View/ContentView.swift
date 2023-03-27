@@ -14,7 +14,7 @@ import SwiftUIX
 import Foundation
 
 struct ContentView: View {
-    @StateObject var viewModel = ContentViewModel()
+    @ObservedObject var viewModel = ContentViewModel.shared
     var body: some View {
         NavigationView {
             VStack {
@@ -38,45 +38,40 @@ struct ContentView: View {
                             List {
                                 ForEach(viewModel.bridgeFavorites, id: \.self) { key in
                                     Section {
-                                        ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
-                                            BridgeRow(bridge: Binding(get: {
-                                                print("get \(bridge)")
-                                                return bridge
-                                            }, set: { _ in
-                                            }), viewModel: viewModel)
-                                            .tag(bridge.name)
-                                            
-                                            if #available(iOS 15.0, *) {
-                                                BridgeRow(bridge: Binding(get: {
-                                                    print("get \(bridge)")
-                                                    return bridge
-                                                }, set: { _ in
-                                                }), viewModel: viewModel)
-                                                .tag(bridge.name)
-                                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                                    Button {
-                                                        viewModel.toggleSubscription(for: bridge)
-                                                    } label: {
-                                                        if bridge.subscribed {
-                                                            Image(systemName: "bell.slash.fill")
-                                                        } else {
-                                                            Image(systemName: "bell.fill")
+                                        VStack {
+                                            ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
+                                                if #available(iOS 15.0, *) {
+                                                    BridgeRow(bridge: Binding(get: {
+                                                        print("get \(bridge)")
+                                                        return bridge
+                                                    }, set: { _ in
+                                                    }), viewModel: viewModel)
+                                                    .tag(bridge.name)
+                                                    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                                                        Button {
+                                                            viewModel.toggleSubscription(for: bridge)
+                                                        } label: {
+                                                            if bridge.subscribed {
+                                                                Image(systemName: "bell.slash.fill")
+                                                            } else {
+                                                                Image(systemName: "bell.fill")
+                                                            }
                                                         }
                                                     }
+                                                } else {
+                                                    BridgeRow(bridge: Binding(get: {
+                                                        print("get \(bridge)")
+                                                        return bridge
+                                                    }, set: { _ in
+                                                    }), viewModel: viewModel)
+                                                    .tag(bridge.name)
                                                 }
-                                            } else {
-                                                BridgeRow(bridge: Binding(get: {
-                                                    print("get \(bridge)")
-                                                    return bridge
-                                                }, set: { _ in
-                                                }), viewModel: viewModel)
-                                                .tag(bridge.name)
                                             }
                                         }
                                     } header: {
                                         HStack {
                                             Text(key)
-                                            if viewModel.bridges.keys.count >= 3 {
+                                            if viewModel.sortedBridges.keys.count >= 3 {
                                                 Spacer()
                                                 Button {
                                                     viewModel.toggleFavorite(bridgeLocation: key)
@@ -87,13 +82,12 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
-
                                     }
                                 }
-                                ForEach(Array(viewModel.bridges.keys), id: \.self) { key in
+                                ForEach(Array(viewModel.sortedBridges.keys), id: \.self) { key in
                                     if !Array(viewModel.bridgeFavorites).contains(key) {
                                         Section {
-                                            ForEach((viewModel.bridges[key] ?? []).sorted()) { bridge in
+                                            ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
     //                                            BridgeRow(bridge: Binding(get: {
     //                                                print("get \(bridge)")
     //                                                return bridge
@@ -129,7 +123,7 @@ struct ContentView: View {
                                         } header: {
                                             HStack {
                                                 Text(key)
-                                                if viewModel.bridges.keys.count >= 3 {
+                                                if viewModel.sortedBridges.keys.count >= 3 {
                                                     Spacer()
                                                     Button {
                                                         viewModel.toggleFavorite(bridgeLocation: key)
@@ -194,10 +188,10 @@ struct ContentView: View {
     }
     func demoView() -> some View {
         BridgeView(bridge: Binding(get: {
-            let index = viewModel.bridges["Seattle, Wa"]?.firstIndex(where: { bridge in
+            let index = viewModel.sortedBridges["Seattle, Wa"]?.firstIndex(where: { bridge in
                 bridge.name == "South Park Bridge"
             })
-            let bridge = viewModel.bridges["Seattle, Wa"]![index!]
+            let bridge = viewModel.sortedBridges["Seattle, Wa"]![index!]
             return bridge
         }, set: { _ in
         }), viewModel: viewModel)

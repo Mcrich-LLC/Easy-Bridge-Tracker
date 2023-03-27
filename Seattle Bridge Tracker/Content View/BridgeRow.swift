@@ -41,7 +41,7 @@ struct BridgeRow: View {
 
 struct BridgeRow_Previews: PreviewProvider {
     static var previews: some View {
-        BridgeRow(bridge: .constant(Bridge(name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa", subscribed: false)), viewModel: ContentViewModel())
+        BridgeRow(bridge: .constant(Bridge(id: UUID(), name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa", subscribed: false)), viewModel: ContentViewModel())
     }
 }
 

@@ -14,6 +14,7 @@ import Foundation
 
 struct HelpMenu: View {
     @ObservedObject var viewModel: ContentViewModel
+    @State var isShowingNotificationSettings = false
     var body: some View {
         if Utilities.isFastlaneRunning {
             Button {
@@ -52,6 +53,11 @@ struct HelpMenu: View {
                     Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
                         Label("Settings", systemImage: "switch.2")
                     }
+                    Button {
+                        self.isShowingNotificationSettings.toggle()
+                    } label: {
+                        Label("Notification Settings", systemImage: "bell")
+                    }
                 }
                 
             } label: {
@@ -60,6 +66,9 @@ struct HelpMenu: View {
                     .scaledToFit()
                     .frame(width: 40, height: 40)
                     .padding(.horizontal)
+            }
+            .sheet(isPresented: $isShowingNotificationSettings) {
+                NotificationPreferencesView(contentViewModel: viewModel)
             }
         }
     }

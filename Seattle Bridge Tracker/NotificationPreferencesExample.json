@@ -1,11 +1,13 @@
 [
     {
+        "id": "DE2CB125-1680-4A77-9A07-CE0134E1CD96",
+        "title": "Test",
         "days": [
             "monday",
             "wednesday"
-        ]
+        ],
         "start_time": "10:00 AM",
-        "end_time": "7:00 PM"
+        "end_time": "7:00 PM",
         "notification_priority": "time sensitive",
         "bridge_ids": [
             "65C163B6-8B32-477A-B292-69AB0BCEFC15",

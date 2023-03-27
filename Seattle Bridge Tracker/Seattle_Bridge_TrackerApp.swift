@@ -14,10 +14,15 @@ import Firebase
 struct Seattle_Bridge_TrackerApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @ObservedObject var notificationPreferences = NotificationPreferencesModel.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(notificationPreferences)
+                .onAppear {
+                    notificationPreferences.getPreferences()
+                }
         }
     }
 }

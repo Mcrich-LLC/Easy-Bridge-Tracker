@@ -17,7 +17,6 @@ class NotificationService: UNNotificationServiceExtension {
         
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        guard let bestAttemptContent = bestAttemptContent else { return }
         
         do {
             enum throwError: Error {
@@ -31,11 +30,11 @@ class NotificationService: UNNotificationServiceExtension {
                 
                 if let day = Day.currentDay(),
                    let bridgeId = request.content.userInfo["bridge_id"] as? String,
-                   let preferences = preferences.first(where: { pref in
-                       pref.days.contains(day) && currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) && pref.bridgeIds.contains(bridgeId)
+                   let preferences = preferencesArray.first(where: { pref in
+                       (pref.days ?? []).contains(day) && currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) && pref.bridgeIds.contains(UUID(uuidString: bridgeId)!)
                    }) {
                     removeOldNotifications {
-                        pushNotification(preferences: preferences)
+                        self.pushNotification(request: request, preferences: preferences)
                     }
                 } else {
                     throw throwError.preferenceDoesNotExist
@@ -50,13 +49,16 @@ class NotificationService: UNNotificationServiceExtension {
         }
     }
     
-    func pushNotification(preferences: NotificationPreferences) {
+    func pushNotification(request: UNNotificationRequest, preferences: NotificationPreferences) {
+        guard let bestAttemptContent, let contentHandler else { return }
         bestAttemptContent.categoryIdentifier = request.content.title
         if #available(iOSApplicationExtension 15.0, *) {
             switch preferences.notificationPriority {
             case .timeSensitive: bestAttemptContent.interruptionLevel = .timeSensitive
             case .normal: bestAttemptContent.interruptionLevel = .active
             case .silent: bestAttemptContent.interruptionLevel = .passive
+            case .none:
+                break
             }
         }
         
@@ -66,9 +68,10 @@ class NotificationService: UNNotificationServiceExtension {
     }
     
     func removeOldNotifications(then completion: @escaping () -> Void) {
+        guard let bestAttemptContent else { return }
         UNUserNotificationCenter.current().getDeliveredNotifications { deliveredNotifications in
             if deliveredNotifications.isEmpty {
-                complete()
+                completion()
             } else {
                 let filteredNotifications = deliveredNotifications.filter { getNotification in
                     getNotification.request.content.body.removeBridgeStatus() == bestAttemptContent.body.removeBridgeStatus()
@@ -114,59 +117,4 @@ extension String {
     func removeBridgeStatus() -> String {
         return self.replacingOccurrences(of: "up", with: "").replacingOccurrences(of: "down", with: "").replacingOccurrences(of: "unknown", with: "")
     }
-}
-
-struct NotificationPreferences: Codable, Identifiable, Equatable {
-    let id = UUID()
-    let days: [Day]
-    let startTime: String
-    let endTime: String
-    let notificationPriority: NotificationPriority
-    let bridgeIds: [String]
-    
-    init(days: [Day], startTime: String, endTime: String, notificationPriority: NotificationPriority, bridgeIds: [String]) {
-        self.days = days
-        self.startTime = startTime
-        self.endTime = endTime
-        self.notificationPriority = notificationPriority
-        self.bridgeIds = bridgeIds
-    }
-}
-
-enum NotificationPriority: String, CaseIterable {
-    case timeSensitive = "time sensitive"
-    case normal = "normal"
-    case silent = "silent"
-}
-
-enum Day: String, CaseIterable, Codable {
-    case monday
-    case tuesday
-    case wednesday
-    case thursday
-    case friday
-    case saturday
-    case sunday
-    
-    static func currentDay() -> Self? {
-        Self(rawValue: Date().dayOfWeek())
-    }
-}
-
-extension Date {
-    func dayOfWeek() -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: self).lowercased()
-    }
-}
-
-extension Formatter {
-    static let today: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = .init(identifier: "en_US_POSIX")
-        dateFormatter.defaultDate = Calendar.current.startOfDay(for: Date())
-        dateFormatter.dateFormat = "hh:mm a"
-        return dateFormatter
-    }()
 }

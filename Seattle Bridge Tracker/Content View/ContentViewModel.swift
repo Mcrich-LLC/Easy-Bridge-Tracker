@@ -12,7 +12,11 @@ import UserNotifications
 import SwiftUI
 
 class ContentViewModel: ObservableObject {
-    @Published var bridges: [String: [Bridge]] = [:] {
+    static let shared = ContentViewModel()
+    @Published var sortedBridges: [String: [Bridge]] = [:] {
+        willSet {
+            allBridges.removeAll()
+        }
         didSet {
             var count = 0 {
                 didSet {
@@ -21,11 +25,13 @@ class ContentViewModel: ObservableObject {
                     }
                 }
             }
-            for bridgeArray in self.bridges {
+            for bridgeArray in self.sortedBridges {
                 count += bridgeArray.value.count
+                allBridges.append(contentsOf: bridgeArray.value)
             }
         }
     }
+    @Published var allBridges = [Bridge]()
     @Published var demoLink = false
     @Published var bridgeFavorites: [String] = []
     @Published var status: LoadingStatus = .loading
@@ -43,21 +49,32 @@ class ContentViewModel: ObservableObject {
             for bridge in response {
                 self.getNotificationAuthStatus { authStatus in
                     DispatchQueue.main.async {
-                        let addBridge = Bridge(name: bridge.name, status: BridgeStatus(rawValue: bridge.status) ?? .unknown, imageUrl: URL(string: bridge.imageUrl) ?? self.noImage, mapsUrl: URL(string: bridge.mapsUrl)!, address: bridge.address, latitude: bridge.latitude, longitude: bridge.longitude, bridgeLocation: bridge.bridgeLocation, subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(self.bridgeName(bridge: bridge)).subscribed") : false))
-                        if (self.bridges[bridge.bridgeLocation] ?? []).contains(where: { br in
+                        let addBridge = Bridge(
+                            id: UUID(uuidString: bridge.id)!,
+                            name: bridge.name,
+                            status: BridgeStatus(rawValue: bridge.status) ?? .unknown,
+                            imageUrl: URL(string: bridge.imageUrl) ?? self.noImage,
+                            mapsUrl: URL(string: bridge.mapsUrl)!,
+                            address: bridge.address,
+                            latitude: bridge.latitude,
+                            longitude: bridge.longitude,
+                            bridgeLocation: bridge.bridgeLocation,
+                            subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(self.bridgeName(bridge: bridge)).subscribed") : false)
+                        )
+                        if (self.sortedBridges[bridge.bridgeLocation] ?? []).contains(where: { br in
                             br.name == addBridge.name
                         }) {
-                            let index = self.bridges[bridge.bridgeLocation]!.firstIndex { br in
+                            let index = self.sortedBridges[bridge.bridgeLocation]!.firstIndex { br in
                                 br.name == addBridge.name
                             }!
-                            self.bridges[bridge.bridgeLocation]![index].status = addBridge.status
-                            self.bridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
-                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.bridges[bridge.bridgeLocation]![index].status)")
+                            self.sortedBridges[bridge.bridgeLocation]![index].status = addBridge.status
+                            self.sortedBridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
+                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.sortedBridges[bridge.bridgeLocation]![index].status)")
                         } else {
-                            if self.bridges[bridge.bridgeLocation] != nil {
-                                self.bridges[bridge.bridgeLocation]!.append(addBridge)
+                            if self.sortedBridges[bridge.bridgeLocation] != nil {
+                                self.sortedBridges[bridge.bridgeLocation]!.append(addBridge)
                             } else {
-                                self.bridges[bridge.bridgeLocation] = [addBridge]
+                                self.sortedBridges[bridge.bridgeLocation] = [addBridge]
                             }
                         }
                     }
@@ -94,22 +111,38 @@ class ContentViewModel: ObservableObject {
             DispatchQueue.main.async {
                 if setting.authorizationStatus == .authorized {
                     if bridge.subscribed {
+                        for index in NotificationPreferencesModel.shared.preferencesArray.indices {
+                            NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.remove(at: index)
+                        }
                         Analytics.setUserProperty("unsubscribed", forName: self.bridgeName(bridge: bridge))
                         Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : self.bridgeName(bridge: bridge)])
                         Messaging.messaging().unsubscribe(fromTopic: self.bridgeName(bridge: bridge))
-                        let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                        let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                             bridgeArray.name == bridge.name
                         })!
-                        self.bridges[bridge.bridgeLocation]![index!].subscribed = false
+                        self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = false
                         UserDefaults.standard.set(false, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     } else {
+                        var actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + NotificationPreferencesModel.shared.preferencesArray.map { pref in
+                            UIAlertAction(title: pref.title, style: .default) { _ in
+                                if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
+                                    NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
+                                }
+                            }
+                        }
+                        SwiftUIAlert.show(
+                            title: "Select Notification Schedule",
+                            message: "Choose the notification schedule to add \(bridge.name) to.",
+                            preferredStyle: .alert,
+                            actions: actions
+                        )
                         Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
                         Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
                         Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
-                        let index = self.bridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                        let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                             bridgeArray.name == bridge.name
                         })!
-                        self.bridges[bridge.bridgeLocation]![index!].subscribed = true
+                        self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
                         UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     }
                 } else {
@@ -145,7 +178,7 @@ struct Bridge: Identifiable, Hashable, Comparable {
         return lhs.name < rhs.name
     }
     
-    let id = UUID()
+    let id: UUID
     let name: String
     var status: BridgeStatus
     let imageUrl: URL
@@ -155,6 +188,19 @@ struct Bridge: Identifiable, Hashable, Comparable {
     let longitude: Double
     let bridgeLocation: String
     var subscribed: Bool
+    
+    init(id: UUID, name: String, status: BridgeStatus, imageUrl: URL, mapsUrl: URL, address: String, latitude: Double, longitude: Double, bridgeLocation: String, subscribed: Bool) {
+        self.id = id
+        self.name = name
+        self.status = status
+        self.imageUrl = imageUrl
+        self.mapsUrl = mapsUrl
+        self.address = address
+        self.latitude = latitude
+        self.longitude = longitude
+        self.bridgeLocation = bridgeLocation
+        self.subscribed = subscribed
+    }
 }
 enum BridgeStatus: String {
     init?(rawValue: String) {

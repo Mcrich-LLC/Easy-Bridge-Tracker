@@ -146,6 +146,15 @@
         }
       },
       {
+        "package": "ScrollViewIfNeeded",
+        "repositoryURL": "https://github.com/dkk/ScrollViewIfNeeded",
+        "state": {
+          "branch": null,
+          "revision": "a14bb7355f317fd43e194021cbd813dbc0c298e6",
+          "version": "1.0.1"
+        }
+      },
+      {
         "package": "StepperView",
         "repositoryURL": "https://github.com/badrinathvm/StepperView",
         "state": {
@@ -161,15 +170,6 @@
           "branch": null,
           "revision": "ab3a58b7209a17d781c0d1dbb3e1ff3da306bae8",
           "version": "1.20.3"
-        }
-      },
-      {
-        "package": "SwiftBackports",
-        "repositoryURL": "https://github.com/shaps80/SwiftBackports",
-        "state": {
-          "branch": null,
-          "revision": "fafbeabf78b7e364abbbb7565cdfeee42af16211",
-          "version": "1.0.2"
         }
       },
       {
@@ -203,18 +203,18 @@
         "package": "SwiftUIBackports",
         "repositoryURL": "https://github.com/shaps80/SwiftUIBackports",
         "state": {
-          "branch": null,
-          "revision": "4219b528e3fdba9d07b4ecba65e50ebd19fbeed9",
-          "version": "1.15.0"
+          "branch": "1.7.0",
+          "revision": "0098109c130dd6ec02eaa21f4aa00ea14c306b8f",
+          "version": null
         }
       },
       {
         "package": "SwiftUIMap",
         "repositoryURL": "https://github.com/Mcrich23/SwiftUIMap",
         "state": {
-          "branch": null,
-          "revision": "735caf1e2d1349d72335726e3c41a60e03bae024",
-          "version": "1.5.6"
+          "branch": "main",
+          "revision": "37ef8e6fea9f208e86189a4a2f331f3539bc32b9",
+          "version": null
         }
       },
       {
