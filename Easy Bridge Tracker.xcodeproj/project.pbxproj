@@ -138,7 +138,7 @@
 		A33F931428AC926100391EBB /* Fetch Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch Data.swift"; sourceTree = "<group>"; };
 		A33F931828AC97A300391EBB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A3413A0228AFDD5B0016710C /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		A3413A0428AFDD680016710C /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		A3413A0428AFDD680016710C /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		A3413A0828AFEDA00016710C /* Seattle-Bridge-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Seattle-Bridge-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A37E4BAA28B1359D007644D5 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };

@@ -126,7 +126,14 @@ class ContentViewModel: ObservableObject {
                         let actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + NotificationPreferencesModel.shared.preferencesArray.map { pref in
                             UIAlertAction(title: pref.title, style: .default) { _ in
                                 if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
-                                    NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
+                                    NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
+                                    Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
+                                    Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
+                                    let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                                        bridgeArray.name == bridge.name
+                                    })!
+                                    self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
+                                    UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                                 }
                             }
                         }
@@ -134,16 +141,8 @@ class ContentViewModel: ObservableObject {
                             title: "Select Notification Schedule",
                             message: "Choose the notification schedule to add \(bridge.name) to.",
                             preferredStyle: .alert,
-                            actions: actions
+                            actions: actions,
                         )
-                        Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
-                        Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
-                        Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
-                        let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                            bridgeArray.name == bridge.name
-                        })!
-                        self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
-                        UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     }
                 } else {
                     SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
