@@ -23,10 +23,10 @@ class NotificationService: UNNotificationServiceExtension {
                 case fileDoesNotExist
                 case preferenceDoesNotExist
             }
-            if let bundlePath = Bundle.main.url(forResource: "NotificationPreferences", withExtension: "json") {
+            if let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("NotificationPreferences.json") {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                let preferencesArray = try jsonDecoder.decode([NotificationPreferences].self, from: Data(contentsOf: bundlePath))
+                let preferencesArray = try jsonDecoder.decode([NotificationPreferences].self, from: Data(contentsOf: filePath))
                 
                 if let day = Day.currentDay(),
                    let bridgeId = request.content.userInfo["bridge_id"] as? String,
