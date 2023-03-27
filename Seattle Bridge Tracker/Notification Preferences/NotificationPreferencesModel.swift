@@ -24,7 +24,6 @@ final class NotificationPreferencesModel: ObservableObject {
         UNUserNotificationCenter.current().getNotificationSettings { setting in
             DispatchQueue.main.async {
                 if setting.authorizationStatus == .authorized {
-                    if !bridge.subscribed {
                         Analytics.setUserProperty("subscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
                         Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
                         Messaging.messaging().subscribe(toTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
@@ -33,7 +32,6 @@ final class NotificationPreferencesModel: ObservableObject {
                         })!
                         ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
                         UserDefaults.standard.set(true, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
-                    }
                 } else {
                     SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
                         // continue your work
@@ -51,7 +49,6 @@ final class NotificationPreferencesModel: ObservableObject {
         UNUserNotificationCenter.current().getNotificationSettings { setting in
             DispatchQueue.main.async {
                 if setting.authorizationStatus == .authorized {
-                    if bridge.subscribed {
                         let allBridgeIds = self.preferencesArray.map { $0.bridgeIds }.joined()
                         if !allBridgeIds.contains(bridge.id) {
                             Analytics.setUserProperty("unsubscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
@@ -64,7 +61,6 @@ final class NotificationPreferencesModel: ObservableObject {
                             }
                             UserDefaults.standard.set(false, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
                         }
-                    }
                 } else {
                     SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
                         // continue your work
