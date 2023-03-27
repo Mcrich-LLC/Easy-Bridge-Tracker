@@ -51,7 +51,7 @@ final class NotificationPreferencesModel: ObservableObject {
             DispatchQueue.main.async {
                 if setting.authorizationStatus == .authorized {
                     if bridge.subscribed {
-                        let allBridgeIds = preferencesArray.map { $0.bridgeIds }.joined()
+                        let allBridgeIds = self.preferencesArray.map { $0.bridgeIds }.joined()
                         if !allBridgeIds.contains(bridge.id) {
                             Analytics.setUserProperty("unsubscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
                             Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
@@ -59,7 +59,7 @@ final class NotificationPreferencesModel: ObservableObject {
                             if let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                                 bridgeArray.name == bridge.name
                             }) {
-                                ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index!].subscribed = false
+                                ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index].subscribed = false
                             }
                             UserDefaults.standard.set(false, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
                         }
