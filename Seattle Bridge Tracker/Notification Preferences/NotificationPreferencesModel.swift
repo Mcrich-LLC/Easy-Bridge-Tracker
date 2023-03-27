@@ -9,6 +9,7 @@ import Foundation
 import UserNotifications
 import Firebase
 import Mcrich23_Toolkit
+import SwiftUI
 
 final class NotificationPreferencesModel: ObservableObject {
     static let shared = NotificationPreferencesModel()
@@ -123,14 +124,14 @@ final class NotificationPreferencesModel: ObservableObject {
     }
     
     func setTitle(for preferences: NotificationPreferences) {
-        var title = preference.title
+        var title = preferences.title
         SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
             return title
         }, set: { newValue in
             title = newValue
         }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-            if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
-                preferencesModel.preferencesArray[index].title = title
+            if let index = self.preferencesArray.firstIndex(where: { $0.id == preferences.id }) {
+                self.preferencesArray[index].title = title
             }
         })])
     }

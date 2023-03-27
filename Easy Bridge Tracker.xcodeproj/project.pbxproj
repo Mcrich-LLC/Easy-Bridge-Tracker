@@ -19,6 +19,7 @@
 		224C81FA29459B33004C5722 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
 		224C81FB29459B47004C5722 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
 		2253C9BC29D1940A00F22F3B /* NotificationPreferencesDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */; };
+		229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
 		22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 22AB7C80293EDFA4008BD92F /* FirebaseMessaging */; };
@@ -121,6 +122,7 @@
 		2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesModel.swift; sourceTree = "<group>"; };
 		224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesBody.swift; sourceTree = "<group>"; };
 		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB7C76293EDF2A008BD92F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		22AB7C78293EDF2A008BD92F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */,
+				229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */,
 				2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */,
 				2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */,
 				2222EBB529D18EAD00837F79 /* NotificationContentView.swift */,
@@ -585,6 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */,
 				2224CDC029D15105006D4338 /* NotificationPreferencesView.swift in Sources */,
 				A3413A0328AFDD5B0016710C /* Response.swift in Sources */,
 				A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */,

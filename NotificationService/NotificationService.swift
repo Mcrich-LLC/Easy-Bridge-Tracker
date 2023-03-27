@@ -31,7 +31,7 @@ class NotificationService: UNNotificationServiceExtension {
                 if let day = Day.currentDay(),
                    let bridgeId = request.content.userInfo["bridge_id"] as? String,
                    let preferences = preferencesArray.first(where: { pref in
-                       (pref.days ?? []).contains(day) && currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) && pref.bridgeIds.contains(UUID(uuidString: bridgeId)!)
+                       (pref.days ?? []).contains(day) && (currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) || pref.isAllDay) && pref.bridgeIds.contains(UUID(uuidString: bridgeId)!)
                    }) {
                     removeOldNotifications {
                         self.pushNotification(request: request, preferences: preferences)

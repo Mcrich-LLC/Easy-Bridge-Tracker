@@ -11,32 +11,35 @@ struct NotificationPreferences: Hashable, Codable, Identifiable, Equatable {
     var id = UUID()
     var title: String
     var days: [Day]?
+    var isAllDay: Bool
     var startTime: String
     var endTime: String
     var notificationPriority: NotificationPriority?
     var bridgeIds: [UUID]
     
-    init(id: UUID = UUID(), title: String, days: [Day]? = nil, startTime: String, endTime: String, notificationPriority: NotificationPriority? = nil, bridgeIds: [String]) {
+    init(id: UUID = UUID(), title: String, days: [Day]?, isAllDay: Bool, startTime: String, endTime: String, notificationPriority: NotificationPriority? = nil, bridgeIds: [String]) {
         self.id = id
         self.title = title
         self.days = days
+        self.isAllDay = isAllDay
         self.startTime = startTime
         self.endTime = endTime
         self.notificationPriority = notificationPriority
         self.bridgeIds = bridgeIds.map({ UUID(uuidString: $0)! })
     }
     
-    init(id: UUID = UUID(), title: String, days: [String], startTime: String, endTime: String, notificationPriority: String, bridgeIds: [String]) {
+    init(id: UUID = UUID(), title: String, days: [String], isAllDay: Bool, startTime: String, endTime: String, notificationPriority: String, bridgeIds: [String]) {
         self.id = id
         self.title = title
         self.days = days.map { Day(rawValue: $0)! }
+        self.isAllDay = isAllDay
         self.startTime = startTime
         self.endTime = endTime
         self.notificationPriority = NotificationPriority(rawValue: notificationPriority)
         self.bridgeIds = bridgeIds.map({ UUID(uuidString: $0)! })
     }
     
-    static let defaultPreferences = Self(id: UUID(), title: "Untitled", days: [], startTime: "8:00 AM", endTime: "5:00 PM", notificationPriority: .normal, bridgeIds: [])
+    static let defaultPreferences = Self(id: UUID(), title: "Untitled", days: [], isAllDay: false, startTime: "8:00 AM", endTime: "5:00 PM", notificationPriority: .normal, bridgeIds: [])
 }
 
 enum NotificationPriority: String, CaseIterable, Codable, Hashable {

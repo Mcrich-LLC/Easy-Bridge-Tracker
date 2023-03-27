@@ -6,6 +6,7 @@
             "monday",
             "wednesday"
         ],
+        "is_all_day": false
         "start_time": "10:00 AM",
         "end_time": "7:00 PM",
         "notification_priority": "time sensitive",
