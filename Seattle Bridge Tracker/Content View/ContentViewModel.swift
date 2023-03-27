@@ -123,7 +123,7 @@ class ContentViewModel: ObservableObject {
                         self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = false
                         UserDefaults.standard.set(false, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     } else {
-                        var actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + NotificationPreferencesModel.shared.preferencesArray.map { pref in
+                        let actions: [UIAlertAction] = [.init(title: "Cancel", style: .destructive)] + NotificationPreferencesModel.shared.preferencesArray.map { pref in
                             UIAlertAction(title: pref.title, style: .default) { _ in
                                 if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
                                     NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
