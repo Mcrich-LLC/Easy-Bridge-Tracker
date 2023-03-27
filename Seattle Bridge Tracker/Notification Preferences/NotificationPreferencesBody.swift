@@ -45,83 +45,15 @@ struct NotificationPreferencesBody: View {
                 }
                 Divider()
                     .padding(.bottom)
-                HStack {
-                    AdaptiveCapsuleMultiFilter("Days: ", menuContent: .constant({
-                        VStack {
-                            ForEach(Day.allCases, id: \.self) { day in
-                                if let days = preference.days, !days.contains(day) {
-                                    Button {
-                                        self.preference.days?.append(day)
-                                    } label: {
-                                        Text(day.rawValue.capitalized)
-                                    }
-                                }
-                            }
-                        }
-                    }), opt: .constant(Day.stringsCapitalized(for: Day.allCases)), selected: Binding(get: {
-                        let days = self.preference.days ?? []
-                        return Day.stringsCapitalized(for: days)
-                    }, set: { newValue in
-                        let lowercasedDays = newValue.map { $0.lowercased() }
-                        let days = lowercasedDays.map({ Day(rawValue: $0)! })
-                        self.preference.days = days
-                    }))
-                    Spacer()
-                }
-                .padding(.bottom)
+                NotificationPreferenceDaysPicker(preference: $preference)
                 NotificationPreferencesTimePicker(preference: $preference)
-                HStack {
-                    if #available(iOS 15, *) {
-                        Text("Importance: ")
-                    }
-                    Spacer()
-                    Picker(selection: Binding(get: {
-                        preferencesModel.preferencesArray.first(where: { $0.id == preference.id })?.notificationPriority
-                    }, set: { newValue in
-                            self.preference.notificationPriority = newValue
-                    })) {
-                        ForEach(NotificationPriority.allCases, id: \.self) { notificationPriority in
-                            Text(notificationPriority.rawValue.capitalized)
-                        }
-                    } label: {
-                        Text("Importance: ")
-                    }
-                }
-                HStack {
-                    Text("Bridges: ")
-                    Spacer()
-                    Button {
-                        Mcrich23_Toolkit.topVC().present {
-                            if let prefs = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) {
-                                NotificationContentView(viewModel: contentViewModel, bridgeIds: prefs.bridgeIds) { bridge in
-                                    if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
-                                        if self.preference.bridgeIds.contains(bridge.id) {
-                                            self.preference.bridgeIds.remove(at: index)
-                                            preferencesModel.removeSubscription(for: bridge)
-                                        } else if !self.preference.bridgeIds.contains(bridge.id) {
-                                            self.preference.bridgeIds.append(bridge.id)
-                                            preferencesModel.addSubscription(for: bridge)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } label: {
-                        if preference.bridgeIds.isEmpty {
-                            Text("Select Bridge")
-                        } else if let bridgeId = preference.bridgeIds.first, let bridge = contentViewModel.allBridges.first(where: { $0.id == bridgeId }), preference.bridgeIds.count == 1 {
-                            Text("\(bridge.name), \(bridge.bridgeLocation)")
-                        } else {
-                            Text("\(preference.bridgeIds.count) Bridges Selected")
-                        }
-                    }
-                }
+                NotificationPreferencesImportance(preference: $preference)
+                NotificationPreferencesSelectedBridges(preference: $preference)
             }
             .padding()
         }
     }
 }
-
 
 struct NotificationPreferencesBody_Previews: PreviewProvider {
     static var previews: some View {

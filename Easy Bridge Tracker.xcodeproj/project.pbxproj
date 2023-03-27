@@ -24,6 +24,9 @@
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
 		22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 22AB7C80293EDFA4008BD92F /* FirebaseMessaging */; };
+		22BB211729D20E80002F753B /* NotificationPreferencesImportance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB211629D20E80002F753B /* NotificationPreferencesImportance.swift */; };
+		22BB211929D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB211829D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift */; };
+		22BB211B29D2127A002F753B /* NotificationPreferenceDaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB211A29D2127A002F753B /* NotificationPreferenceDaysPicker.swift */; };
 		22C28A102939785A00D37696 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22C28A0F2939785A00D37696 /* GoogleService-Info.plist */; };
 		22C28A1329397B9500D37696 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A1229397B9500D37696 /* FirebaseAnalytics */; };
 		22C28A1529397B9500D37696 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A1429397B9500D37696 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -128,6 +131,9 @@
 		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB7C76293EDF2A008BD92F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		22AB7C78293EDF2A008BD92F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22BB211629D20E80002F753B /* NotificationPreferencesImportance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesImportance.swift; sourceTree = "<group>"; };
+		22BB211829D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesSelectedBridges.swift; sourceTree = "<group>"; };
+		22BB211A29D2127A002F753B /* NotificationPreferenceDaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferenceDaysPicker.swift; sourceTree = "<group>"; };
 		22C28A0F2939785A00D37696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22C28A4829398F7800D37696 /* FPN Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPN Manager.swift"; sourceTree = "<group>"; };
 		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
@@ -249,7 +255,10 @@
 		229E72C829D20CAE00A6DD8A /* Body Components */ = {
 			isa = PBXGroup;
 			children = (
+				22BB211A29D2127A002F753B /* NotificationPreferenceDaysPicker.swift */,
 				229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */,
+				22BB211629D20E80002F753B /* NotificationPreferencesImportance.swift */,
+				22BB211829D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift */,
 			);
 			path = "Body Components";
 			sourceTree = "<group>";
@@ -603,6 +612,7 @@
 				2224CDC029D15105006D4338 /* NotificationPreferencesView.swift in Sources */,
 				A3413A0328AFDD5B0016710C /* Response.swift in Sources */,
 				A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */,
+				22BB211B29D2127A002F753B /* NotificationPreferenceDaysPicker.swift in Sources */,
 				229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */,
 				A3F2AFF728B2B67B00D38A59 /* Banner Ads.swift in Sources */,
 				A394A80828C0725B003E5273 /* BridgeView.swift in Sources */,
@@ -611,6 +621,7 @@
 				A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */,
 				2224CDBF29D15102006D4338 /* NotificationPreferencesModel.swift in Sources */,
 				A394A80628BFC057003E5273 /* Favorite.swift in Sources */,
+				22BB211729D20E80002F753B /* NotificationPreferencesImportance.swift in Sources */,
 				A33F931528AC926100391EBB /* Fetch Data.swift in Sources */,
 				A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */,
 				22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */,
@@ -619,6 +630,7 @@
 				A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */,
 				2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */,
 				2222EBB629D18EAD00837F79 /* NotificationContentView.swift in Sources */,
+				22BB211929D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
