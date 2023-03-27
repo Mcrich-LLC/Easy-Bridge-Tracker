@@ -55,7 +55,7 @@ final class NotificationPreferencesModel: ObservableObject {
                         if !allBridgeIds.contains(bridge.id) {
                             Analytics.setUserProperty("unsubscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
                             Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
-                            Messaging.messaging().unsubscribe(fromTopic: self.bridgeName(bridge: bridge))
+                            Messaging.messaging().unsubscribe(fromTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
                             if let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                                 bridgeArray.name == bridge.name
                             }) {
