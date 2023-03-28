@@ -7,12 +7,14 @@
 
 import SwiftUI
 import Mcrich23_Toolkit
+import SwiftUIX
 
 struct NotificationPreferencesBody: View {
     @Binding var preference: NotificationPreferences
     @ObservedObject var preferencesModel = NotificationPreferencesModel.shared
     @ObservedObject var contentViewModel = ContentViewModel.shared
     @State var isEditingTitle = false
+    @State var titleEditorIsFocused = false
     @State var editedTitle = ""
     var body: some View {
         ZStack {
@@ -24,39 +26,31 @@ struct NotificationPreferencesBody: View {
                         if isEditingTitle {
                             HStack {
                                 Group {
-                                    TextField(text: $editedTitle, onCommit: {
+                                    TitleTextEditor(text: $editedTitle, isEditing: $titleEditorIsFocused, clearButtonMode: .whileEditing) {
                                         preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
                                             isEditingTitle = false
                                         }
-                                    })
+                                    }
                                     .minimumScaleFactor(0.6)
                                     .padding(.leading)
                                     .accessibility(identifier: "Title Editor")
-                                    if !editedTitle.isEmpty {
-                                        Button(action: {
-                                            editedTitle = ""
-                                        }, label: {
-                                            Image(systemName: "xmark.circle")
-                                                .foregroundColor(Color.gray)
-                                        })
-                                        .hoverEffect(.highlight)
-                                    }
                                 }
                                 .padding([.top, .trailing, .bottom], 5.0)
                             }
                             .background(Color.gray.opacity(0.3))
                             .clipShape(RoundedRectangle(cornerRadius: 15))
+                            .frame(maxWidth: 150)
                         } else {
                             Text(preference.title)
                                 .font(.title2)
                         }
                     }
-                    
                     if isEditingTitle {
                         HStack {
                             Button {
                                 editedTitle = preference.title
                                 withAnimation {
+                                    self.titleEditorIsFocused = false
                                     self.isEditingTitle = false
                                 }
                             } label: {
@@ -66,6 +60,7 @@ struct NotificationPreferencesBody: View {
                             Button {
                                 preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
                                     withAnimation {
+                                        self.titleEditorIsFocused = false
                                         self.isEditingTitle = false
                                     }
                                 }
@@ -78,6 +73,7 @@ struct NotificationPreferencesBody: View {
                         Button {
                             withAnimation {
                                 self.isEditingTitle = true
+                                self.titleEditorIsFocused = true
                             }
                         } label: {
                             Image(systemName: "square.and.pencil")
