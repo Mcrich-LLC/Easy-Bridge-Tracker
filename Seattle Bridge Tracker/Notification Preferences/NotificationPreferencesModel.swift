@@ -108,7 +108,7 @@ final class NotificationPreferencesModel: ObservableObject {
     func saveTitle(for preferences: NotificationPreferences, with title: String, completion: @escaping () -> Void) {
         var defaultPrefs = preferences
         if self.preferencesArray.contains(where: { $0.title == title }) {
-            self.duplicateTitleAlert(for: title) { newTitle in
+            self.duplicateTitleAlert(for: title, hasEditor: true) { newTitle in
                 defaultPrefs.title = newTitle
                 self.preferencesArray.append(defaultPrefs)
                 completion()
@@ -120,9 +120,9 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
-    func saveUpdatedTitle(for preferences: NotificationPreferences, with title: String, completion: @escaping () -> Void) {
+    func saveUpdatedTitle(for preferences: NotificationPreferences, with title: String, showTextEditorIfDuplicate showEditor: Bool, completion: @escaping () -> Void) {
         if self.preferencesArray.contains(where: { $0.title == title && $0.id != preferences.id }) {
-            self.duplicateTitleAlert(for: title) { newTitle in
+            self.duplicateTitleAlert(for: title, hasEditor: showEditor) { newTitle in
                 if let index = self.preferencesArray.firstIndex(where: { $0.id == preferences.id }) {
                     self.preferencesArray[index].title = newTitle
                     completion()
@@ -138,12 +138,12 @@ final class NotificationPreferencesModel: ObservableObject {
     
     func updateTitleAlert(for preferences: NotificationPreferences) {
         var title = preferences.title
-        SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+        SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
             return title
         }, set: { newValue in
             title = newValue
         }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-            self.saveUpdatedTitle(for: preferences, with: title) {}
+            self.saveUpdatedTitle(for: preferences, with: title, showTextEditorIfDuplicate: true) {}
         })])
     }
     
@@ -155,7 +155,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 self.adjustTitleForDuplicates(for: defaultPrefs.title) { newTitle in
                     title = newTitle
                 }
-                SwiftUIAlert.textfieldShow(title: "Set Schedule Name", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
                     return title
                 }, set: { newValue in
                     title = newValue
@@ -169,12 +169,12 @@ final class NotificationPreferencesModel: ObservableObject {
     func createNotificationPreferenceAlert(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
-                var defaultPrefs = preferences
+                let defaultPrefs = preferences
                 var title = preferences.title
                 self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
                     title = newTitle
                 }
-                SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
                     return title
                 }, set: { newValue in
                     title = newValue
@@ -193,7 +193,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 var title = preferences.title
                 self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
                     title = newTitle
-                    SwiftUIAlert.textfieldShow(title: "Duplicate Notification Schedule", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                    SwiftUIAlert.textfieldShow(title: "Duplicate Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
                         return title
                     }, set: { newValue in
                         title = newValue
@@ -247,19 +247,24 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
-    private func duplicateTitleAlert(for duplicateTitle: String, onDone completion: @escaping (_ title: String) -> Void) {
+    private func duplicateTitleAlert(for duplicateTitle: String, hasEditor: Bool, onDone completion: @escaping (_ title: String) -> Void) {
         var title = duplicateTitle
-        SwiftUIAlert.textfieldShow(title: "Duplicate Name", message: "You can't have more than one notification schedule with the same name.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-            return title
-        }, set: { newValue in
-            title = newValue
-        }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-            if self.preferencesArray.contains(where: { $0.title == title }) {
-                self.duplicateTitleAlert(for: title, onDone: completion)
-            } else {
-                completion(title)
-            }
-        })])
+        
+        if !hasEditor {
+            SwiftUIAlert.show(title: "Duplicate Name", message: "You can't have more than one notification schedule with the same name", preferredStyle: .alert, actions: [.init(title: "Done", style: .default)])
+        } else {
+            SwiftUIAlert.textfieldShow(title: "Duplicate Name", message: "You can't have more than one notification schedule with the same name. Please fix it below:", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                return title
+            }, set: { newValue in
+                title = newValue
+            }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                if self.preferencesArray.contains(where: { $0.title == title }) {
+                    self.duplicateTitleAlert(for: title, hasEditor: true, onDone: completion)
+                } else {
+                    completion(title)
+                }
+            })])
+        }
     }
 }
 

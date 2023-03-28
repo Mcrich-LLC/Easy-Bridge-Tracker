@@ -25,7 +25,7 @@ struct NotificationPreferencesBody: View {
                             HStack {
                                 Group {
                                     TextField(text: $editedTitle, onCommit: {
-                                        preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle) {
+                                        preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
                                             isEditingTitle = false
                                         }
                                     })
@@ -64,7 +64,7 @@ struct NotificationPreferencesBody: View {
                                     .foregroundColor(.red)
                             }
                             Button {
-                                preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle) {
+                                preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
                                     withAnimation {
                                         self.isEditingTitle = false
                                     }
