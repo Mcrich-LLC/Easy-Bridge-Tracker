@@ -137,7 +137,7 @@ class ContentViewModel: ObservableObject {
                             return [UIAlertAction(title: "Cancel", style: .destructive), UIAlertAction(title: "Create New", style: .default, handler: { _ in
                                 var defaultPrefs = NotificationPreferences.defaultPreferences
                                 defaultPrefs.bridgeIds.append(bridge.id)
-                                NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
+                                NotificationPreferencesModel.shared.createNotificationPreferenceAlert(basedOn: defaultPrefs) {
                                     complete()
                                 }
                             })]
@@ -152,7 +152,7 @@ class ContentViewModel: ObservableObject {
                             }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
                                 var defaultPrefs = NotificationPreferences.defaultPreferences
                                 defaultPrefs.bridgeIds.append(bridge.id)
-                                NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
+                                NotificationPreferencesModel.shared.createNotificationPreferenceAlert(basedOn: defaultPrefs) {
                                     complete()
                                 }
                             }), UIAlertAction(title: "Cancel", style: .destructive)])

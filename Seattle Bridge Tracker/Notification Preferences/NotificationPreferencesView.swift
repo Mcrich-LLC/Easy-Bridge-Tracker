@@ -26,18 +26,18 @@ struct NotificationPreferencesView: View {
                         HStack {
                             Spacer()
                             Button {
-                                preferencesModel.createNotificationPreference(onDone: {})
+                                preferencesModel.createNotificationPreferenceAlert(onDone: {})
                             } label: {
                                 Image(systemName: "plus.circle")
-                                    .imageScale(.large)
+                                    .foregroundColor(.green)
                             }
                             Button {
                                 dismiss.callAsFunction()
                             } label: {
                                 Image(systemName: "x.circle")
-                                    .imageScale(.large)
                             }
                         }
+                        .imageScale(.large)
                         .if(!preferencesModel.preferencesArray.isEmpty, content: { view in
                             view
                                 .padding(.bottom, 1)
@@ -94,7 +94,7 @@ struct NotificationPreferencesView: View {
                         Spacer()
                         Text("You don't have any notification schedules.")
                         Button {
-                            preferencesModel.createNotificationPreference {}
+                            preferencesModel.createNotificationPreferenceAlert {}
                         } label: {
                             Text("Get Started")
                         }

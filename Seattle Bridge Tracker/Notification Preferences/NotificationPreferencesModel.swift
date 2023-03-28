@@ -105,31 +105,52 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
-    func updateTitle(for preferences: NotificationPreferences) {
+    func saveTitle(for preferences: NotificationPreferences, with title: String, completion: @escaping () -> Void) {
+        var defaultPrefs = preferences
+        if self.preferencesArray.contains(where: { $0.title == title }) {
+            self.duplicateTitleAlert(for: title) { newTitle in
+                defaultPrefs.title = newTitle
+                self.preferencesArray.append(defaultPrefs)
+                completion()
+            }
+        } else {
+            defaultPrefs.title = title
+            self.preferencesArray.append(defaultPrefs)
+            completion()
+        }
+    }
+    
+    func saveUpdatedTitle(for preferences: NotificationPreferences, with title: String, completion: @escaping () -> Void) {
+        if self.preferencesArray.contains(where: { $0.title == title && $0.id != preferences.id }) {
+            self.duplicateTitleAlert(for: title) { newTitle in
+                if let index = self.preferencesArray.firstIndex(where: { $0.id == preferences.id }) {
+                    self.preferencesArray[index].title = newTitle
+                    completion()
+                }
+            }
+        } else {
+            if let index = self.preferencesArray.firstIndex(where: { $0.id == preferences.id }) {
+                self.preferencesArray[index].title = title
+                completion()
+            }
+        }
+    }
+    
+    func updateTitleAlert(for preferences: NotificationPreferences) {
         var title = preferences.title
         SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
             return title
         }, set: { newValue in
             title = newValue
         }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-            if self.preferencesArray.contains(where: { $0.title == title }) {
-                self.duplicateTitleAlert(for: title) { newTitle in
-                    if let index = self.preferencesArray.firstIndex(where: { $0.id == preferences.id }) {
-                        self.preferencesArray[index].title = newTitle
-                    }
-                }
-            } else {
-                if let index = self.preferencesArray.firstIndex(where: { $0.id == preferences.id }) {
-                    self.preferencesArray[index].title = title
-                }
-            }
+            self.saveUpdatedTitle(for: preferences, with: title) {}
         })])
     }
     
-    func createNotificationPreference(onDone completion: @escaping () -> Void) {
+    func createNotificationPreferenceAlert(onDone completion: @escaping () -> Void) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
-                var defaultPrefs = NotificationPreferences.defaultPreferences
+                let defaultPrefs = NotificationPreferences.defaultPreferences
                 var title = defaultPrefs.title
                 self.adjustTitleForDuplicates(for: defaultPrefs.title) { newTitle in
                     title = newTitle
@@ -139,23 +160,13 @@ final class NotificationPreferencesModel: ObservableObject {
                 }, set: { newValue in
                     title = newValue
                 }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                    if self.preferencesArray.contains(where: { $0.title == title }) {
-                        self.duplicateTitleAlert(for: title) { newTitle in
-                            defaultPrefs.title = newTitle
-                            self.preferencesArray.append(defaultPrefs)
-                            completion()
-                        }
-                    } else {
-                        defaultPrefs.title = title
-                        self.preferencesArray.append(defaultPrefs)
-                        completion()
-                    }
+                    self.saveTitle(for: defaultPrefs, with: title, completion: completion)
                 })])
             }
         }
     }
     
-    func createNotificationPreference(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
+    func createNotificationPreferenceAlert(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
                 var defaultPrefs = preferences
@@ -168,23 +179,13 @@ final class NotificationPreferencesModel: ObservableObject {
                 }, set: { newValue in
                     title = newValue
                 }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                    if self.preferencesArray.contains(where: { $0.title == title }) {
-                        self.duplicateTitleAlert(for: title) { newTitle in
-                            defaultPrefs.title = newTitle
-                            self.preferencesArray.append(defaultPrefs)
-                            completion()
-                        }
-                    } else {
-                        defaultPrefs.title = title
-                        self.preferencesArray.append(defaultPrefs)
-                        completion()
-                    }
+                    self.saveTitle(for: defaultPrefs, with: title, completion: completion)
                 })])
             }
         }
     }
     
-    func duplicateNotificationPreference(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
+    func duplicateNotificationPreferenceAlert(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
                 var prefs = preferences
@@ -197,17 +198,7 @@ final class NotificationPreferencesModel: ObservableObject {
                     }, set: { newValue in
                         title = newValue
                     }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                        if self.preferencesArray.contains(where: { $0.title == title }) {
-                            self.duplicateTitleAlert(for: title) { newTitle in
-                                prefs.title = newTitle
-                                self.preferencesArray.append(prefs)
-                                completion()
-                            }
-                        } else {
-                            prefs.title = title
-                            self.preferencesArray.append(prefs)
-                            completion()
-                        }
+                        self.saveTitle(for: prefs, with: title, completion: completion)
                     })])
                 }
             }
