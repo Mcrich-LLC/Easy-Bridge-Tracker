@@ -133,20 +133,32 @@ class ContentViewModel: ObservableObject {
                             self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
                             UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                         }
-                        let actions: [UIAlertAction] = (NotificationPreferencesModel.shared.preferencesArray.map { pref in
-                            UIAlertAction(title: pref.title, style: .default) { _ in
-                                if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
-                                    NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
-                                    complete()
-                                }
+                        var actions: [UIAlertAction] {
+                            if NotificationPreferencesModel.shared.preferencesArray.isEmpty {
+                                return [UIAlertAction(title: "Cancel", style: .destructive), UIAlertAction(title: "Create New", style: .default, handler: { _ in
+                                    var defaultPrefs = NotificationPreferences.defaultPreferences
+                                    defaultPrefs.bridgeIds.append(bridge.id)
+                                    NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
+                                        complete()
+                                    }
+                                })]
+                            } else {
+                                return ((NotificationPreferencesModel.shared.preferencesArray.map { pref in
+                                    UIAlertAction(title: pref.title, style: .default) { _ in
+                                        if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
+                                            NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
+                                            complete()
+                                        }
+                                    }
+                                }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
+                                    var defaultPrefs = NotificationPreferences.defaultPreferences
+                                    defaultPrefs.bridgeIds.append(bridge.id)
+                                    NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
+                                        complete()
+                                    }
+                                }), UIAlertAction(title: "Cancel", style: .destructive)])
                             }
-                        }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
-                            var defaultPrefs = NotificationPreferences.defaultPreferences
-                            defaultPrefs.bridgeIds.append(bridge.id)
-                            NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
-                                complete()
-                            }
-                        }), .init(title: "Cancel", style: .destructive)]
+                        }
                         SwiftUIAlert.show(
                             title: "Select Notification Schedule",
                             message: "Choose the notification schedule to add \(bridge.name) to.",
