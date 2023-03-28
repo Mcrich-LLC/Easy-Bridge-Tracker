@@ -216,6 +216,24 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
+    func deleteNotificationPreference(preference: NotificationPreferences) {
+        var title = "this"
+        if let pref = self.preferencesArray.first(where: { $0.id == preference.id }) {
+            title = "your \(pref.title)"
+        }
+        SwiftUIAlert.show(title: "Confirm Deletion", message: "Are you sure that you want to delete \(title) schedule?", preferredStyle: .alert, actions: [.init(title: "Cancel", style: .destructive), .init(title: "Yes", style: .default, handler: { _ in
+            if let index = self.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
+                self.preferencesArray.remove(at: index)
+                for bridge in ContentViewModel.shared.allBridges {
+                    let sortedBridgesIndex = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { $0.id == bridge.id })
+                    if let sortedBridgesIndex, !(self.preferencesArray.map({ $0.bridgeIds }).joined()).contains(bridge.id) {
+                        self.removeSubscription(for: ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![sortedBridgesIndex])
+                    }
+                }
+            }
+        })])
+    }
+    
     private func adjustTitleForDuplicates(for startTitle: String, completion: @escaping (String) -> Void) {
         var title = startTitle {
             didSet {

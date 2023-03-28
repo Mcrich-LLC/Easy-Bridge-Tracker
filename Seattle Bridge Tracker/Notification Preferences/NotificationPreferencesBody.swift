@@ -33,15 +33,7 @@ struct NotificationPreferencesBody: View {
                         Image(systemName: "doc.on.doc")
                     }
                     Button {
-                        var title = "this"
-                        if let pref = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) {
-                            title = "your \(pref.title)"
-                        }
-                        SwiftUIAlert.show(title: "Confirm Deletion", message: "Are you sure that you want to delete \(title) schedule?", preferredStyle: .alert, actions: [.init(title: "Cancel", style: .destructive), .init(title: "Yes", style: .default, handler: { _ in
-                            if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
-                                self.preferencesModel.preferencesArray.remove(at: index)
-                            }
-                        })])
+                        preferencesModel.deleteNotificationPreference(preference: preference)
                     } label: {
                         Image(systemName: "minus.circle.fill")
                         .foregroundColor(Color.red)

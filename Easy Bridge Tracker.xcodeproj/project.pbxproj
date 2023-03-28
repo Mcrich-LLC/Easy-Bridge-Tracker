@@ -124,7 +124,7 @@
 		2222EBB529D18EAD00837F79 /* NotificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContentView.swift; sourceTree = "<group>"; };
 		2224CDB629D1442B006D4338 /* NotificationPreferencesExample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotificationPreferencesExample.json; sourceTree = "<group>"; };
 		2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesView.swift; sourceTree = "<group>"; wrapsLines = 1; };
-		2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesModel.swift; sourceTree = "<group>"; };
+		2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesModel.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesBody.swift; sourceTree = "<group>"; };
 		229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesTimePicker.swift; sourceTree = "<group>"; };

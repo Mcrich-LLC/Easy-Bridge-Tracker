@@ -14,9 +14,6 @@ import SwiftUI
 class ContentViewModel: ObservableObject {
     static let shared = ContentViewModel()
     @Published var sortedBridges: [String: [Bridge]] = [:] {
-        willSet {
-            allBridges.removeAll()
-        }
         didSet {
             var count = 0 {
                 didSet {
@@ -27,11 +24,12 @@ class ContentViewModel: ObservableObject {
             }
             for bridgeArray in self.sortedBridges {
                 count += bridgeArray.value.count
-                allBridges.append(contentsOf: bridgeArray.value)
             }
         }
     }
-    @Published var allBridges = [Bridge]()
+    var allBridges: [Bridge] {
+        ContentViewModel.shared.sortedBridges.flatMap({ $0.value })
+    }
     @Published var demoLink = false
     @Published var bridgeFavorites: [String] = []
     @Published var status: LoadingStatus = .loading
