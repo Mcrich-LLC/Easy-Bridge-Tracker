@@ -25,6 +25,7 @@ struct HelpMenu: View {
                     .scaledToFit()
                     .frame(width: 40, height: 40)
                     .padding(.horizontal)
+                    .backgroundFill(.clear)
             }
             .tag("Help Menu Button")
         } else {
@@ -41,17 +42,17 @@ struct HelpMenu: View {
                     } label: {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
-                    Menu("Purchases") {
-                        Button {
-                            PurchaseService.shared.purchase(offering: .removeAds, completion: {_ in})
-                        } label: {
-                            Label("Remove Ads", systemImage: "rectangle.slash")
-                        }
-                        Button {
-                            PurchaseService.shared.restore {}
-                        } label: {
-                            Label("Restore Purchases", systemImage: "purchased")
-                        }
+                }
+                Section {
+                    Button {
+                        PurchaseService.shared.purchase(offering: .removeAds, completion: {_ in})
+                    } label: {
+                        Label("Remove Ads", systemImage: "rectangle.slash")
+                    }
+                    Button {
+                        PurchaseService.shared.restore {}
+                    } label: {
+                        Label("Restore Purchases", systemImage: "purchased")
                     }
                 }
                 Section {
@@ -78,6 +79,7 @@ struct HelpMenu: View {
                     .scaledToFit()
                     .frame(width: 40, height: 40)
                     .padding(.horizontal)
+                    .backgroundFill(.clear)
             }
             .sheet(isPresented: $isShowingNotificationSettings) {
                 NotificationPreferencesView()

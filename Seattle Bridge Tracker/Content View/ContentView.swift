@@ -151,25 +151,8 @@ struct ContentView: View {
             .onAppear {
                 viewModel.fetchData(repeatFetch: true)
             }
-            .introspectNavigationController { navController in
-                let bar = navController.navigationBar
-                let hosting = UIHostingController(rootView: HelpMenu())
-                
-                guard let hostingView = hosting.view else { return }
-                if bar.subviews.first(where: \.clipsToBounds) != nil {
-                    bar.subviews.first(where: \.clipsToBounds)?.addSubview(hostingView)
-                   hostingView.backgroundColor = .clear
-                   
-                   hostingView.translatesAutoresizingMaskIntoConstraints = false
-                   NSLayoutConstraint.activate([
-                       hostingView.trailingAnchor.constraint(equalTo: bar.trailingAnchor),
-                       hostingView.bottomAnchor.constraint(equalTo: bar.bottomAnchor, constant: -8)
-                   ])
-                } else {
-                    print("Cannot add menu bar")
-                }
-            }
             .navigationBarTitle("Bridges", displayMode: .large)
+            .navigationBarLargeTitleItems(trailing: HelpMenu())
         }
         .navigationViewStyle(.stack)
     }

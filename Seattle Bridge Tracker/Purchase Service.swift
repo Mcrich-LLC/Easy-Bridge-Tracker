@@ -115,7 +115,7 @@ class PurchaseService {
     static func checkIAPEnabled() -> Bool {
         print("IAPs = \(enabled)")
         if !enabled {
-            // Create OK button with action handler
+//             Create OK button with action handler
             SwiftUIAlert.show(title: NSLocalizedString("Uh Oh", comment: "Shown in In App Purchases are not availble alert"), message: NSLocalizedString("In App Purchases are not availble at this time.", comment: "Shown in In App Purchases are not availble alert"), preferredStyle: .alert, actions: [
                 UIAlertAction(title: NSLocalizedString("Ok", comment: "Shown in In App Purchases are not availble alert"), style: .default, handler: { _ -> Void in
                     print("\"IAP Unavailible\" alert was dismised")
