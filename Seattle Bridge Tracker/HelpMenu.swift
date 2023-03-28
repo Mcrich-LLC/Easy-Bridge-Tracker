@@ -41,6 +41,18 @@ struct HelpMenu: View {
                     } label: {
                         Label("Share", systemImage: "square.and.arrow.up")
                     }
+                    Menu("Purchases") {
+                        Button {
+                            PurchaseService.shared.purchase(offering: .removeAds, completion: {_ in})
+                        } label: {
+                            Label("Remove Ads", systemImage: "rectangle.slash")
+                        }
+                        Button {
+                            PurchaseService.shared.restore {}
+                        } label: {
+                            Label("Restore Purchases", systemImage: "purchased")
+                        }
+                    }
                 }
                 Section {
                     Button {

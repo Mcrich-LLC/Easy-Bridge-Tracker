@@ -16,6 +16,7 @@ import Foundation
 struct NotificationContentView: View {
     @ObservedObject var viewModel = ContentViewModel.shared
     @ObservedObject var preferencesModel = NotificationPreferencesModel.shared
+    @ObservedObject var adController = AdController.shared
     @Binding var preference: NotificationPreferences
     @Environment(\.backportDismiss) var dismiss
     
@@ -102,7 +103,7 @@ struct NotificationContentView: View {
                                             rowView(bridge: bridge)
                                                 .tag(bridge.name)
                                         }
-                                        if !Utilities.areAdsDisabled && !Utilities.isFastlaneRunning {
+                                        if !adController.areAdsDisabled && !Utilities.isFastlaneRunning {
                                             HStack {
                                                 Spacer()
                                                 BannerAds()

@@ -37,7 +37,7 @@ struct BannerViewController: UIViewControllerRepresentable {
         banner.rootViewController = viewController
         banner.load(GADRequest())
         
-        if !Utilities.isFastlaneRunning && !Utilities.areAdsDisabled {
+        if !Utilities.isFastlaneRunning && !AdController.shared.areAdsDisabled {
             viewController.view.addSubview(banner)
             viewController.view.backgroundColor = .clear
             viewController.view.frame = CGRect(origin: .zero, size: GADAdSizeBanner.size)
@@ -68,9 +68,10 @@ struct BannerViewController: UIViewControllerRepresentable {
 }
 
 struct BannerAds: View {
+    @ObservedObject var adController = AdController.shared
     @State var shimmering = true
     var body: some View {
-        if !Utilities.isFastlaneRunning && !Utilities.areAdsDisabled {
+        if !Utilities.isFastlaneRunning && !adController.areAdsDisabled {
             ZStack {
                 if shimmering {
                 Rectangle()

@@ -11,9 +11,12 @@ import Mcrich23_Toolkit
 
 class Utilities {
     static let isFastlaneRunning = UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT")
-    static var areAdsDisabled = UserDefaults.standard.bool(forKey: "adsDisabled")
     static var appType = AppConfiguration.AppStore
     static var remoteConfig: RemoteConfig!
+    
+    static func handleRemoteConfigLoaded() {
+        PurchaseService.shared.config()
+    }
     
     static func fetchRemoteConfig() {
         print("refreshing")
@@ -30,10 +33,13 @@ class Utilities {
         remoteConfig.fetchAndActivate { status, error in
             if status == .successFetchedFromRemote {
                 print("fetched from remote, \(String(describing: remoteConfig))")
+                handleRemoteConfigLoaded()
             } else if status == .successUsingPreFetchedData {
                 print("fetched locally, \(String(describing: remoteConfig))")
+                handleRemoteConfigLoaded()
             } else if status == .error {
                 print("error fetching = \(String(describing: error))")
+                handleRemoteConfigLoaded()
             }
         }
         print("remote config = \(String(describing: remoteConfig))")

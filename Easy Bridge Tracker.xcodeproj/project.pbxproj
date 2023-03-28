@@ -58,6 +58,10 @@
 		22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28A4829398F7800D37696 /* FPN Manager.swift */; };
 		22D8688629D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */; };
 		22D8688829D2B5C600E7D647 /* NotificationPreferencesAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */; };
+		22D8688A29D2BEA400E7D647 /* Purchase Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688929D2BEA400E7D647 /* Purchase Service.swift */; };
+		22D8688D29D2BEDC00E7D647 /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 22D8688C29D2BEDC00E7D647 /* ReceiptParser */; };
+		22D8688F29D2BEDC00E7D647 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 22D8688E29D2BEDC00E7D647 /* RevenueCat */; };
+		22D8689129D2BF2600E7D647 /* AdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8689029D2BF2600E7D647 /* AdController.swift */; };
 		22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */; };
 		A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A305122628B33C3F002BB056 /* GoogleMobileAds */; };
 		A305122A28B33C50002BB056 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = A305122928B33C50002BB056 /* Shimmer */; };
@@ -140,6 +144,9 @@
 		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
 		22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesActiveToggle.swift; sourceTree = "<group>"; };
 		22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesAd.swift; sourceTree = "<group>"; };
+		22D8688929D2BEA400E7D647 /* Purchase Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Purchase Service.swift"; sourceTree = "<group>"; };
+		22D8689029D2BF2600E7D647 /* AdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdController.swift; sourceTree = "<group>"; };
+		22D8689229D2C29E00E7D647 /* In App Purchases.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = "In App Purchases.storekit"; sourceTree = "<group>"; };
 		22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A305122B28B33C8C002BB056 /* Mcrich23-Toolkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Mcrich23-Toolkit"; path = "../Packages/Mcrich23-Toolkit"; sourceTree = "<group>"; };
 		A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy Bridge Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +221,7 @@
 				A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */,
 				A3F2AFF228B2B5F900D38A59 /* Mcrich23-Toolkit in Frameworks */,
 				22C28A4129397B9500D37696 /* FirebaseRemoteConfig in Frameworks */,
+				22D8688D29D2BEDC00E7D647 /* ReceiptParser in Frameworks */,
 				22C28A1F29397B9500D37696 /* FirebaseAuth in Frameworks */,
 				22C28A3129397B9500D37696 /* FirebaseFunctions in Frameworks */,
 				22C28A3929397B9500D37696 /* FirebaseInstallations in Frameworks */,
@@ -221,6 +229,7 @@
 				22C28A1929397B9500D37696 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				22C28A1B29397B9500D37696 /* FirebaseAppCheck in Frameworks */,
 				22C28A3D29397B9500D37696 /* FirebaseMLModelDownloader in Frameworks */,
+				22D8688F29D2BEDC00E7D647 /* RevenueCat in Frameworks */,
 				22C28A4329397B9500D37696 /* FirebaseRemoteConfigSwift in Frameworks */,
 				22C28A1D29397B9500D37696 /* FirebaseAppDistribution-Beta in Frameworks */,
 				A3413A1028B065BC0016710C /* Mcrich23-Toolkit in Frameworks */,
@@ -311,6 +320,9 @@
 				A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */,
 				22C28A4829398F7800D37696 /* FPN Manager.swift */,
 				A3F2AFF928B2B7F500D38A59 /* Utilities.swift */,
+				22D8689029D2BF2600E7D647 /* AdController.swift */,
+				22D8688929D2BEA400E7D647 /* Purchase Service.swift */,
+				22D8689229D2C29E00E7D647 /* In App Purchases.storekit */,
 				2222EBB229D18D0C00837F79 /* Notification Preferences */,
 				2222EBB129D18CFB00837F79 /* Content View */,
 				A394A80728C0725B003E5273 /* BridgeView.swift */,
@@ -472,6 +484,8 @@
 				22C28A4629397B9500D37696 /* FirebaseStorageCombine-Community */,
 				2222EBAF29D1779900837F79 /* ScrollViewIfNeeded */,
 				221BEC7C29D1A1420099A015 /* SwiftUIMap */,
+				22D8688C29D2BEDC00E7D647 /* ReceiptParser */,
+				22D8688E29D2BEDC00E7D647 /* RevenueCat */,
 			);
 			productName = "Seattle Bridge Tracker";
 			productReference = A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */;
@@ -516,6 +530,7 @@
 				22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2222EBAE29D1779900837F79 /* XCRemoteSwiftPackageReference "ScrollViewIfNeeded" */,
 				221BEC7B29D1A1420099A015 /* XCRemoteSwiftPackageReference "SwiftUIMap" */,
+				22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = A33F930028AC90A800391EBB /* Products */;
 			projectDirPath = "";
@@ -615,6 +630,7 @@
 				229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */,
 				2224CDC029D15105006D4338 /* NotificationPreferencesView.swift in Sources */,
 				A3413A0328AFDD5B0016710C /* Response.swift in Sources */,
+				22D8689129D2BF2600E7D647 /* AdController.swift in Sources */,
 				A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */,
 				22BB211B29D2127A002F753B /* NotificationPreferenceDaysPicker.swift in Sources */,
 				229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */,
@@ -629,6 +645,7 @@
 				A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */,
 				22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */,
 				A3413A0528AFDD680016710C /* ContentViewModel.swift in Sources */,
+				22D8688A29D2BEA400E7D647 /* Purchase Service.swift in Sources */,
 				2222EBAC29D163B000837F79 /* NotificationPreferencesDecoder.swift in Sources */,
 				A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */,
 				2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */,
@@ -1006,6 +1023,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
@@ -1190,6 +1215,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		22D8688C29D2BEDC00E7D647 /* ReceiptParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = ReceiptParser;
+		};
+		22D8688E29D2BEDC00E7D647 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
 		};
 		A305122628B33C3F002BB056 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;

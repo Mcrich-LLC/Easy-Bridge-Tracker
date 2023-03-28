@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NotificationPreferencesAd: View {
+    @ObservedObject var adController = AdController.shared
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 12)
@@ -16,7 +17,7 @@ struct NotificationPreferencesAd: View {
                 .padding()
                 .frame(alignment: .center)
         }
-        .frame(height: Utilities.areAdsDisabled ? 0 : nil)
+        .frame(height: adController.areAdsDisabled ? 0 : nil)
     }
 }
 

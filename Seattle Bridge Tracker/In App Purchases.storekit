@@ -1,0 +1,35 @@
+{
+  "identifier" : "C83A614D",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6446878955",
+      "localizations" : [
+        {
+          "description" : "Remove ads from Easy Bridge Tracker",
+          "displayName" : "Remove Ads",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.Mcrich23.EasyBridgeTracker.removeAds",
+      "referenceName" : "Remove Ads",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1640954057",
+    "_developerTeamID" : "L7JQRVXU2V",
+    "_lastSynchronizedDate" : 701678241.48619199
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

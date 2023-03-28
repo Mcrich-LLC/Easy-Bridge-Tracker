@@ -146,6 +146,15 @@
         }
       },
       {
+        "package": "RevenueCat",
+        "repositoryURL": "https://github.com/RevenueCat/purchases-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "5d77aeccee3622dd2a5dbfd7af5aed195b84767e",
+          "version": "4.17.8"
+        }
+      },
+      {
         "package": "ScrollViewIfNeeded",
         "repositoryURL": "https://github.com/dkk/ScrollViewIfNeeded",
         "state": {

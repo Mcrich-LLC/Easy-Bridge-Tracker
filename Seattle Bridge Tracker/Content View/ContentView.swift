@@ -15,6 +15,7 @@ import Foundation
 
 struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel.shared
+    @ObservedObject var adController = AdController.shared
     var body: some View {
         NavigationView {
             VStack {
@@ -113,7 +114,7 @@ struct ContentView: View {
                                                     .tag(bridge.name)
                                                 }
                                             }
-                                            if !Utilities.areAdsDisabled && !Utilities.isFastlaneRunning {
+                                            if !adController.areAdsDisabled && !Utilities.isFastlaneRunning {
                                                 HStack {
                                                     Spacer()
                                                     BannerAds()
