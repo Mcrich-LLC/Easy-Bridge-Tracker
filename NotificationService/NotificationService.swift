@@ -57,8 +57,6 @@ class NotificationService: UNNotificationServiceExtension {
             case .timeSensitive: bestAttemptContent.interruptionLevel = .timeSensitive
             case .normal: bestAttemptContent.interruptionLevel = .active
             case .silent: bestAttemptContent.interruptionLevel = .passive
-            case .none:
-                break
             }
         }
         

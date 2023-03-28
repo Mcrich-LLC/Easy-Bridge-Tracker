@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import Mcrich23_Toolkit
 
 class Utilities {
     static let isFastlaneRunning = UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT")
@@ -36,6 +37,28 @@ class Utilities {
             }
         }
         print("remote config = \(String(describing: remoteConfig))")
+    }
+    
+    static func checkNotificationPermissions(completion: @escaping (_ notificationsAreAllowed: Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { setting in
+            DispatchQueue.main.async {
+                if setting.authorizationStatus == .authorized {
+                    NotificationPreferencesModel.shared.notificationsAllowed = true
+                    completion(true)
+                } else {
+                    NotificationPreferencesModel.shared.notificationsAllowed = false
+                    SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { _ in
+                        // continue your work
+                        completion(false)
+                    }, UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(appSettings)
+                        }
+                        completion(false)
+                    })])
+                }
+            }
+        }
     }
     
     enum AppConfiguration: String {

@@ -105,75 +105,65 @@ class ContentViewModel: ObservableObject {
         }
     }
     func toggleSubscription(for bridge: Bridge) {
-        UNUserNotificationCenter.current().getNotificationSettings { setting in
-            DispatchQueue.main.async {
-                if setting.authorizationStatus == .authorized {
-                    if bridge.subscribed {
-                        for index in NotificationPreferencesModel.shared.preferencesArray.indices {
-                            if let bridgeIdIndex = NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.firstIndex(where: { $0 == bridge.id }) {
-                                NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.remove(at: bridgeIdIndex)
-                            }
+        Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            if notificationsAreAllowed {
+                if bridge.subscribed {
+                    for index in NotificationPreferencesModel.shared.preferencesArray.indices {
+                        if let bridgeIdIndex = NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.firstIndex(where: { $0 == bridge.id }) {
+                            NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.remove(at: bridgeIdIndex)
                         }
-                        Analytics.setUserProperty("unsubscribed", forName: self.bridgeName(bridge: bridge))
-                        Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : self.bridgeName(bridge: bridge)])
-                        Messaging.messaging().unsubscribe(fromTopic: self.bridgeName(bridge: bridge))
+                    }
+                    Analytics.setUserProperty("unsubscribed", forName: self.bridgeName(bridge: bridge))
+                    Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : self.bridgeName(bridge: bridge)])
+                    Messaging.messaging().unsubscribe(fromTopic: self.bridgeName(bridge: bridge))
+                    let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                        bridgeArray.name == bridge.name
+                    })!
+                    self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = false
+                    UserDefaults.standard.set(false, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
+                } else {
+                    func complete() {
+                        Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
+                        Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
+                        Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
                         let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                             bridgeArray.name == bridge.name
                         })!
-                        self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = false
-                        UserDefaults.standard.set(false, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
-                    } else {
-                        func complete() {
-                            Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
-                            Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
-                            Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
-                            let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                                bridgeArray.name == bridge.name
-                            })!
-                            self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
-                            UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
-                        }
-                        var actions: [UIAlertAction] {
-                            if NotificationPreferencesModel.shared.preferencesArray.isEmpty {
-                                return [UIAlertAction(title: "Cancel", style: .destructive), UIAlertAction(title: "Create New", style: .default, handler: { _ in
-                                    var defaultPrefs = NotificationPreferences.defaultPreferences
-                                    defaultPrefs.bridgeIds.append(bridge.id)
-                                    NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
-                                        complete()
-                                    }
-                                })]
-                            } else {
-                                return ((NotificationPreferencesModel.shared.preferencesArray.map { pref in
-                                    UIAlertAction(title: pref.title, style: .default) { _ in
-                                        if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
-                                            NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
-                                            complete()
-                                        }
-                                    }
-                                }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
-                                    var defaultPrefs = NotificationPreferences.defaultPreferences
-                                    defaultPrefs.bridgeIds.append(bridge.id)
-                                    NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
-                                        complete()
-                                    }
-                                }), UIAlertAction(title: "Cancel", style: .destructive)])
-                            }
-                        }
-                        SwiftUIAlert.show(
-                            title: "Select Notification Schedule",
-                            message: "Choose the notification schedule to add \(bridge.name) to.",
-                            preferredStyle: .alert,
-                            actions: actions
-                        )
+                        self.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
+                        UserDefaults.standard.set(true, forKey: "\(self.bridgeName(bridge: bridge)).subscribed")
                     }
-                } else {
-                    SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
-                        // continue your work
-                    }, UIAlertAction(title: "Open Settings", style: .cancel, handler: { _ in
-                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(appSettings)
+                    var actions: [UIAlertAction] {
+                        if NotificationPreferencesModel.shared.preferencesArray.isEmpty {
+                            return [UIAlertAction(title: "Cancel", style: .destructive), UIAlertAction(title: "Create New", style: .default, handler: { _ in
+                                var defaultPrefs = NotificationPreferences.defaultPreferences
+                                defaultPrefs.bridgeIds.append(bridge.id)
+                                NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
+                                    complete()
+                                }
+                            })]
+                        } else {
+                            return ((NotificationPreferencesModel.shared.preferencesArray.map { pref in
+                                UIAlertAction(title: pref.title, style: .default) { _ in
+                                    if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
+                                        NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
+                                        complete()
+                                    }
+                                }
+                            }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
+                                var defaultPrefs = NotificationPreferences.defaultPreferences
+                                defaultPrefs.bridgeIds.append(bridge.id)
+                                NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
+                                    complete()
+                                }
+                            }), UIAlertAction(title: "Cancel", style: .destructive)])
                         }
-                    })])
+                    }
+                    SwiftUIAlert.show(
+                        title: "Select Notification Schedule",
+                        message: "Choose the notification schedule to add \(bridge.name) to.",
+                        preferredStyle: .alert,
+                        actions: actions
+                    )
                 }
             }
         }

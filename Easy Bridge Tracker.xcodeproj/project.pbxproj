@@ -78,7 +78,6 @@
 		A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E8B3A28BB2DA200A6A8D4 /* Info.swift */; };
 		A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80128BFBEE1003E5273 /* BridgeRow.swift */; };
 		A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80328BFBF64003E5273 /* HelpMenu.swift */; };
-		A394A80628BFC057003E5273 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80528BFC057003E5273 /* Favorite.swift */; };
 		A394A80828C0725B003E5273 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80728C0725B003E5273 /* BridgeView.swift */; };
 		A3D22D7428C149C900AD4C0A /* HTTPStatusCodes in Frameworks */ = {isa = PBXBuildFile; productRef = A3D22D7328C149C900AD4C0A /* HTTPStatusCodes */; };
 		A3D22D7528C14ADB00AD4C0A /* DummyPromo.json in Resources */ = {isa = PBXBuildFile; fileRef = A394A80D28C13C1F003E5273 /* DummyPromo.json */; };
@@ -161,7 +160,6 @@
 		A37E8B3A28BB2DA200A6A8D4 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		A394A80128BFBEE1003E5273 /* BridgeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRow.swift; sourceTree = "<group>"; };
 		A394A80328BFBF64003E5273 /* HelpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpMenu.swift; sourceTree = "<group>"; };
-		A394A80528BFC057003E5273 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A394A80728C0725B003E5273 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
 		A394A80D28C13C1F003E5273 /* DummyPromo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyPromo.json; sourceTree = "<group>"; };
 		A3F2AFF528B2B67B00D38A59 /* Banner Ads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Banner Ads.swift"; sourceTree = "<group>"; };
@@ -311,7 +309,6 @@
 				2222EBB129D18CFB00837F79 /* Content View */,
 				A394A80728C0725B003E5273 /* BridgeView.swift */,
 				A394A80328BFBF64003E5273 /* HelpMenu.swift */,
-				A394A80528BFC057003E5273 /* Favorite.swift */,
 				A37E8B3A28BB2DA200A6A8D4 /* Info.swift */,
 				A33F931428AC926100391EBB /* Fetch Data.swift */,
 				A3413A0228AFDD5B0016710C /* Response.swift */,
@@ -620,7 +617,6 @@
 				A33F930528AC90A800391EBB /* ContentView.swift in Sources */,
 				A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */,
 				2224CDBF29D15102006D4338 /* NotificationPreferencesModel.swift in Sources */,
-				A394A80628BFC057003E5273 /* Favorite.swift in Sources */,
 				22BB211729D20E80002F753B /* NotificationPreferencesImportance.swift in Sources */,
 				A33F931528AC926100391EBB /* Fetch Data.swift in Sources */,
 				A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */,

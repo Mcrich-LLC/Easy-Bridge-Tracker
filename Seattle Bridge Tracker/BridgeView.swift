@@ -14,13 +14,12 @@ import Mcrich23_Toolkit
 
 struct BridgeView: View {
     @Binding var bridge: Bridge
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var contentViewModel = ContentViewModel.shared
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     @State var isMapHorizantal: Bool = false
-    init(bridge: Binding<Bridge>, viewModel: ContentViewModel) {
+    init(bridge: Binding<Bridge>) {
         self._bridge = bridge
-        self.viewModel = viewModel
     }
     var body: some View {
         ZStack {
@@ -73,7 +72,7 @@ struct BridgeView: View {
                     }
                     Spacer()
                     Button {
-                        viewModel.fetchData(repeatFetch: false)
+                        contentViewModel.fetchData(repeatFetch: false)
                     } label: {
                         Circle()
                             .frame(width: 40, height: 40)
@@ -86,7 +85,7 @@ struct BridgeView: View {
                             .padding()
                     }
                     Button {
-                        viewModel.toggleSubscription(for: bridge)
+                        contentViewModel.toggleSubscription(for: bridge)
                     } label: {
                         Circle()
                             .frame(width: 40, height: 40)
@@ -141,7 +140,7 @@ struct BridgeView: View {
         }
         .onAppear {
             getIsMapHorizantal(orientation: UIDevice.current.orientation)
-            viewModel.fetchData(repeatFetch: false)
+            contentViewModel.fetchData(repeatFetch: false)
         }
         .onRotate { orientation in
             getIsMapHorizantal(orientation: orientation)
@@ -182,7 +181,7 @@ struct BridgeView_Previews: PreviewProvider {
                        longitude: -122.37624,
                        bridgeLocation: "Seattle, Wa",
                        subscribed: false)
-            ), viewModel: ContentViewModel()
+            )
         )
     }
 }

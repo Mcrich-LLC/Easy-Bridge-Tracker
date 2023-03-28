@@ -14,16 +14,16 @@ import Foundation
 
 struct BridgeRow: View {
     @Binding var bridge: Bridge
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var contentViewModel = ContentViewModel.shared
     @State var showView = false
     var body: some View {
         NavigationLink(isActive: $showView) {
-            BridgeView(bridge: $bridge, viewModel: viewModel)
+            BridgeView(bridge: $bridge)
         } label: {
             BridgeRowBody(bridge: $bridge)
                 .contextMenu(PreviewContextMenu(navigate: .custom({
                     showView.toggle()
-                }), destination: BridgeView(bridge: $bridge, viewModel: viewModel), menu: {
+                }), destination: BridgeView(bridge: $bridge), menu: {
                     let openView = UIAction(title: "Open", image: UIImage(systemName: "arrow.right")) { _ in
                         showView.toggle()
                     }
@@ -41,7 +41,7 @@ struct BridgeRow: View {
 
 struct BridgeRow_Previews: PreviewProvider {
     static var previews: some View {
-        BridgeRow(bridge: .constant(Bridge(id: UUID(), name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa", subscribed: false)), viewModel: ContentViewModel())
+        BridgeRow(bridge: .constant(Bridge(id: UUID(), name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa", subscribed: false)))
     }
 }
 

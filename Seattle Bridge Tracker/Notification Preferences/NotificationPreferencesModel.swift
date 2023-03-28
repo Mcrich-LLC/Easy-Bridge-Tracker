@@ -20,55 +20,37 @@ final class NotificationPreferencesModel: ObservableObject {
     }
     let fileName = "NotificationPreferences.json"
     
+    @Published var notificationsAllowed = false
+    
     func addSubscription(for bridge: Bridge) {
-        UNUserNotificationCenter.current().getNotificationSettings { setting in
-            DispatchQueue.main.async {
-                if setting.authorizationStatus == .authorized {
-                        Analytics.setUserProperty("subscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
-                        Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
-                        Messaging.messaging().subscribe(toTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
-                        let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                            bridgeArray.name == bridge.name
-                        })!
-                        ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
-                        UserDefaults.standard.set(true, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
-                } else {
-                    SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
-                        // continue your work
-                    }, UIAlertAction(title: "Open Settings", style: .cancel, handler: { _ in
-                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(appSettings)
-                        }
-                    })])
-                }
+        Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            if notificationsAreAllowed {
+                Analytics.setUserProperty("subscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
+                Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
+                Messaging.messaging().subscribe(toTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
+                let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                    bridgeArray.name == bridge.name
+                })!
+                ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index!].subscribed = true
+                UserDefaults.standard.set(true, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
             }
         }
     }
     
     func removeSubscription(for bridge: Bridge) {
-        UNUserNotificationCenter.current().getNotificationSettings { setting in
-            DispatchQueue.main.async {
-                if setting.authorizationStatus == .authorized {
-                        let allBridgeIds = self.preferencesArray.map { $0.bridgeIds }.joined()
-                        if !allBridgeIds.contains(bridge.id) {
-                            Analytics.setUserProperty("unsubscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
-                            Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
-                            Messaging.messaging().unsubscribe(fromTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
-                            if let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
-                                bridgeArray.name == bridge.name
-                            }) {
-                                ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index].subscribed = false
-                            }
-                            UserDefaults.standard.set(false, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
-                        }
-                } else {
-                    SwiftUIAlert.show(title: "Uh Oh", message: "Notifications are disabled. Please enable them in settings.", preferredStyle: .alert, actions: [UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { _ in
-                        // continue your work
-                    }, UIAlertAction(title: "Open Settings", style: .cancel, handler: { _ in
-                        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                            UIApplication.shared.open(appSettings)
-                        }
-                    })])
+        Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            if notificationsAreAllowed {
+                let allBridgeIds = self.preferencesArray.map { $0.bridgeIds }.joined()
+                if !allBridgeIds.contains(bridge.id) {
+                    Analytics.setUserProperty("unsubscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
+                    Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
+                    Messaging.messaging().unsubscribe(fromTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
+                    if let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
+                        bridgeArray.name == bridge.name
+                    }) {
+                        ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index].subscribed = false
+                    }
+                    UserDefaults.standard.set(false, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
                 }
             }
         }
@@ -106,9 +88,13 @@ final class NotificationPreferencesModel: ObservableObject {
                 
                 self.preferencesArray = preferencesArray
                 let allBridgeIds = preferencesArray.map { $0.bridgeIds }.joined()
-                for id in allBridgeIds {
-                    if let bridge = ContentViewModel.shared.allBridges.first(where: { $0.id == id}) {
-                        addSubscription(for: bridge)
+                Utilities.checkNotificationPermissions { notificationsAreAllowed in
+                    if notificationsAreAllowed {
+                        for id in allBridgeIds {
+                            if let bridge = ContentViewModel.shared.allBridges.first(where: { $0.id == id}) {
+                                self.addSubscription(for: bridge)
+                            }
+                        }
                     }
                 }
             } else {
@@ -141,78 +127,90 @@ final class NotificationPreferencesModel: ObservableObject {
     }
     
     func createNotificationPreference(onDone completion: @escaping () -> Void) {
-        var defaultPrefs = NotificationPreferences.defaultPreferences
-        var title = defaultPrefs.title
-        adjustTitleForDuplicates(for: defaultPrefs.title) { newTitle in
-            title = newTitle
-        }
-        SwiftUIAlert.textfieldShow(title: "Set Schedule Name", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-            return title
-        }, set: { newValue in
-            title = newValue
-        }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-            if self.preferencesArray.contains(where: { $0.title == title }) {
-                self.duplicateTitleAlert(for: title) { newTitle in
-                    defaultPrefs.title = newTitle
-                    self.preferencesArray.append(defaultPrefs)
-                    completion()
+        Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            if notificationsAreAllowed {
+                var defaultPrefs = NotificationPreferences.defaultPreferences
+                var title = defaultPrefs.title
+                self.adjustTitleForDuplicates(for: defaultPrefs.title) { newTitle in
+                    title = newTitle
                 }
-            } else {
-                defaultPrefs.title = title
-                self.preferencesArray.append(defaultPrefs)
-                completion()
+                SwiftUIAlert.textfieldShow(title: "Set Schedule Name", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                    return title
+                }, set: { newValue in
+                    title = newValue
+                }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                    if self.preferencesArray.contains(where: { $0.title == title }) {
+                        self.duplicateTitleAlert(for: title) { newTitle in
+                            defaultPrefs.title = newTitle
+                            self.preferencesArray.append(defaultPrefs)
+                            completion()
+                        }
+                    } else {
+                        defaultPrefs.title = title
+                        self.preferencesArray.append(defaultPrefs)
+                        completion()
+                    }
+                })])
             }
-        })])
+        }
     }
     
     func createNotificationPreference(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
-        var defaultPrefs = preferences
-        var title = preferences.title
-        adjustTitleForDuplicates(for: preferences.title) { newTitle in
-            title = newTitle
-        }
-        SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-            return title
-        }, set: { newValue in
-            title = newValue
-        }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-            if self.preferencesArray.contains(where: { $0.title == title }) {
-                self.duplicateTitleAlert(for: title) { newTitle in
-                    defaultPrefs.title = newTitle
-                    self.preferencesArray.append(defaultPrefs)
-                    completion()
+        Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            if notificationsAreAllowed {
+                var defaultPrefs = preferences
+                var title = preferences.title
+                self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
+                    title = newTitle
                 }
-            } else {
-                defaultPrefs.title = title
-                self.preferencesArray.append(defaultPrefs)
-                completion()
+                SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                    return title
+                }, set: { newValue in
+                    title = newValue
+                }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                    if self.preferencesArray.contains(where: { $0.title == title }) {
+                        self.duplicateTitleAlert(for: title) { newTitle in
+                            defaultPrefs.title = newTitle
+                            self.preferencesArray.append(defaultPrefs)
+                            completion()
+                        }
+                    } else {
+                        defaultPrefs.title = title
+                        self.preferencesArray.append(defaultPrefs)
+                        completion()
+                    }
+                })])
             }
-        })])
+        }
     }
     
     func duplicateNotificationPreference(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
-        var prefs = preferences
-        prefs.id = UUID()
-        var title = preferences.title
-        adjustTitleForDuplicates(for: preferences.title) { newTitle in
-            title = newTitle
-            SwiftUIAlert.textfieldShow(title: "Duplicate Notification Schedule", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-                return title
-            }, set: { newValue in
-                title = newValue
-            }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                if self.preferencesArray.contains(where: { $0.title == title }) {
-                    self.duplicateTitleAlert(for: title) { newTitle in
-                        prefs.title = newTitle
-                        self.preferencesArray.append(prefs)
-                        completion()
-                    }
-                } else {
-                    prefs.title = title
-                    self.preferencesArray.append(prefs)
-                    completion()
+        Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            if notificationsAreAllowed {
+                var prefs = preferences
+                prefs.id = UUID()
+                var title = preferences.title
+                self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
+                    title = newTitle
+                    SwiftUIAlert.textfieldShow(title: "Duplicate Notification Schedule", message: "Set the name of this notification schedule.", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                        return title
+                    }, set: { newValue in
+                        title = newValue
+                    }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                        if self.preferencesArray.contains(where: { $0.title == title }) {
+                            self.duplicateTitleAlert(for: title) { newTitle in
+                                prefs.title = newTitle
+                                self.preferencesArray.append(prefs)
+                                completion()
+                            }
+                        } else {
+                            prefs.title = title
+                            self.preferencesArray.append(prefs)
+                            completion()
+                        }
+                    })])
                 }
-            })])
+            }
         }
     }
     

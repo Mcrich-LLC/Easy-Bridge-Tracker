@@ -45,7 +45,7 @@ struct ContentView: View {
                                                         print("get \(bridge)")
                                                         return bridge
                                                     }, set: { _ in
-                                                    }), viewModel: viewModel)
+                                                    }))
                                                     .tag(bridge.name)
                                                     .swipeActions(edge: .leading, allowsFullSwipe: true) {
                                                         Button {
@@ -63,7 +63,7 @@ struct ContentView: View {
                                                         print("get \(bridge)")
                                                         return bridge
                                                     }, set: { _ in
-                                                    }), viewModel: viewModel)
+                                                    }))
                                                     .tag(bridge.name)
                                                 }
                                             }
@@ -92,7 +92,7 @@ struct ContentView: View {
     //                                                print("get \(bridge)")
     //                                                return bridge
     //                                            }, set: { _ in
-    //                                            }), viewModel: viewModel)
+    //                                            }))
                                                 if #available(iOS 15.0, *) {
                                                     rowView(bridge: bridge)
                                                     .tag(bridge.name)
@@ -152,7 +152,7 @@ struct ContentView: View {
             }
             .introspectNavigationController { navController in
                 let bar = navController.navigationBar
-                let hosting = UIHostingController(rootView: HelpMenu(viewModel: self.viewModel))
+                let hosting = UIHostingController(rootView: HelpMenu())
                 
                 guard let hostingView = hosting.view else { return }
                 if bar.subviews.first(where: \.clipsToBounds) != nil {
@@ -184,7 +184,7 @@ struct ContentView: View {
         BridgeRow(bridge: Binding(get: {
             return bridge
         }, set: { _ in
-        }), viewModel: viewModel)
+        }))
     }
     func demoView() -> some View {
         BridgeView(bridge: Binding(get: {
@@ -194,7 +194,7 @@ struct ContentView: View {
             let bridge = viewModel.sortedBridges["Seattle, Wa"]![index!]
             return bridge
         }, set: { _ in
-        }), viewModel: viewModel)
+        }))
     }
 }
 

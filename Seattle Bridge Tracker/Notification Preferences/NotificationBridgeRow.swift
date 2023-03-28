@@ -14,7 +14,7 @@ import Foundation
 
 struct NotificationBridgeRow: View {
     @Binding var bridge: Bridge
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var contentViewModel = ContentViewModel.shared
     let isSelected: Bool
     let toggleBridgeCallback: (Bridge) -> Void
     var body: some View {
@@ -28,7 +28,7 @@ struct NotificationBridgeRow: View {
 
 struct NotificationBridgeRow_Previews: PreviewProvider {
     static var previews: some View {
-        BridgeRow(bridge: .constant(Bridge(id: UUID(), name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa", subscribed: false)), viewModel: ContentViewModel())
+        BridgeRow(bridge: .constant(Bridge(id: UUID(), name: "", status: .unknown, imageUrl: URL(string: "https://google.com")!, mapsUrl: URL(string: "https://google.com")!, address: "", latitude: 0, longitude: 0, bridgeLocation: "Seattle, Wa", subscribed: false)))
     }
 }
 

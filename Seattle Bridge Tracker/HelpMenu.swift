@@ -13,12 +13,12 @@ import Introspect
 import Foundation
 
 struct HelpMenu: View {
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var contentViewModel = ContentViewModel.shared
     @State var isShowingNotificationSettings = false
     var body: some View {
         if Utilities.isFastlaneRunning {
             Button {
-                viewModel.showDemoView()
+                contentViewModel.showDemoView()
             } label: {
                 Image(systemName: "ellipsis.circle")
                     .resizable()
@@ -68,7 +68,7 @@ struct HelpMenu: View {
                     .padding(.horizontal)
             }
             .sheet(isPresented: $isShowingNotificationSettings) {
-                NotificationPreferencesView(contentViewModel: viewModel)
+                NotificationPreferencesView()
             }
         }
     }
@@ -76,6 +76,6 @@ struct HelpMenu: View {
 
 struct HelpMenu_Previews: PreviewProvider {
     static var previews: some View {
-        HelpMenu(viewModel: ContentViewModel())
+        HelpMenu()
     }
 }

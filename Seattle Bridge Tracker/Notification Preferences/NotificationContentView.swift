@@ -14,10 +14,27 @@ import SwiftUIX
 import Foundation
 
 struct NotificationContentView: View {
-    @ObservedObject var viewModel: ContentViewModel
-    let bridgeIds: [UUID]
-    let toggleBridgeCallback: (Bridge) -> Void
+    @ObservedObject var viewModel = ContentViewModel.shared
+    @ObservedObject var preferencesModel = NotificationPreferencesModel.shared
+    @Binding var preference: NotificationPreferences
     @Environment(\.backportDismiss) var dismiss
+    
+    func toggleBridgeCallback(for bridge: Bridge) {
+        Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            if notificationsAreAllowed {
+                if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
+                    if self.preference.bridgeIds.contains(bridge.id) {
+                        self.preference.bridgeIds.remove(at: index)
+                        preferencesModel.removeSubscription(for: bridge)
+                    } else if !self.preference.bridgeIds.contains(bridge.id) {
+                        self.preference.bridgeIds.append(bridge.id)
+                        preferencesModel.addSubscription(for: bridge)
+                    }
+                }
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -39,9 +56,8 @@ struct NotificationContentView: View {
                                                 print("get \(bridge)")
                                                 return bridge
                                             }, set: { _ in
-                                            }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
-                                                toggleBridgeCallback(bridge)
-                                                self.dismiss.callAsFunction()
+                                            }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
+                                                toggleBridgeCallback(for: bridge)
                                             })
                                             .tag(bridge.name)
                                         } else {
@@ -49,9 +65,8 @@ struct NotificationContentView: View {
                                                 print("get \(bridge)")
                                                 return bridge
                                             }, set: { _ in
-                                            }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
-                                                toggleBridgeCallback(bridge)
-                                                self.dismiss.callAsFunction()
+                                            }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
+                                                toggleBridgeCallback(for: bridge)
                                             })
                                             .tag(bridge.name)
                                         }
@@ -81,9 +96,8 @@ struct NotificationContentView: View {
                                             //                                                print("get \(bridge)")
                                             //                                                return bridge
                                             //                                            }, set: { _ in
-                                            //                                            }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id.uuidString), toggleBridgeCallback: { bridge in
+                                            //                                            }), isSelected: bridgeIds.contains(bridge.id.uuidString), toggleBridgeCallback: { bridge in
                                             //                                                toggleBridgeCallback(bridge)
-                                            //                                                self.dismiss.callAsFunction()
                                             //                                            })
                                             rowView(bridge: bridge)
                                                 .tag(bridge.name)
@@ -125,6 +139,13 @@ struct NotificationContentView: View {
                 viewModel.fetchData(repeatFetch: true)
             }
             .navigationBarTitle("Subscribed Bridges", displayMode: .large)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Done") {
+                        self.dismiss.callAsFunction()
+                    }
+                }
+            }
         }
         .navigationViewStyle(.stack)
     }
@@ -140,9 +161,8 @@ struct NotificationContentView: View {
         NotificationBridgeRow(bridge: Binding(get: {
             return bridge
         }, set: { _ in
-        }), viewModel: viewModel, isSelected: bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
-            toggleBridgeCallback(bridge)
-            self.dismiss.callAsFunction()
+        }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
+            toggleBridgeCallback(for: bridge)
         })
     }
 }

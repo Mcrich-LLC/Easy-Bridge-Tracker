@@ -14,14 +14,28 @@ import Firebase
 struct Seattle_Bridge_TrackerApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @ObservedObject var notificationPreferences = NotificationPreferencesModel.shared
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(notificationPreferences)
-                .onAppear {
-                    notificationPreferences.getPreferences()
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+                        print("Active")
+                        UNUserNotificationCenter.current().getNotificationSettings { setting in
+                            DispatchQueue.main.async {
+                                if setting.authorizationStatus == .authorized {
+                                    NotificationPreferencesModel.shared.notificationsAllowed = true
+                                } else {
+                                    NotificationPreferencesModel.shared.notificationsAllowed = false
+                                }
+                            }
+                        }
+                    } else if newPhase == .inactive {
+                        print("Inactive")
+                    } else if newPhase == .background {
+                        print("Background")
+                    }
                 }
         }
     }

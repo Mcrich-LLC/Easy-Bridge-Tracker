@@ -12,7 +12,7 @@ import ScrollViewIfNeeded
 
 struct NotificationPreferencesView: View {
     @ObservedObject var preferencesModel = NotificationPreferencesModel.shared
-    @ObservedObject var contentViewModel: ContentViewModel
+    @ObservedObject var contentViewModel = ContentViewModel.shared
     @Environment(\.backportDismiss) var dismiss
     var body: some View {
         ScrollViewIfNeeded {
@@ -33,18 +33,48 @@ struct NotificationPreferencesView: View {
                         .imageScale(.large)
                 }
             }
-            LazyVStack(spacing: 10) {
-                ForEach(preferencesModel.preferencesArray, id: \.self) { preference in
-                    NotificationPreferencesBody(preference: Binding(get: {
-                        guard let prefs = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) else {
-                            return .defaultPreferences
+            if !preferencesModel.notificationsAllowed {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color.yellow)
+                    HStack {
+                        Text("Warning: Notifications Are Disabled")
+                            .foregroundColor(.white)
+                        Button("Fix It") {
+                            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                                UIApplication.shared.open(appSettings)
+                            }
                         }
-                        return prefs
-                    }, set: { newValue in
-                        if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
-                            preferencesModel.preferencesArray[index] = newValue
-                        }
-                    }))
+                    }
+                    .padding()
+                }
+                .frame(height: 70)
+            }
+            if preferencesModel.preferencesArray.isEmpty {
+                VStack {
+                    Spacer()
+                    Text("You don't have any notification schedules.")
+                    Button {
+                        preferencesModel.createNotificationPreference {}
+                    } label: {
+                        Text("Get Started")
+                    }
+                    Spacer()
+                }
+            } else {
+                LazyVStack(spacing: 10) {
+                    ForEach(preferencesModel.preferencesArray, id: \.self) { preference in
+                        NotificationPreferencesBody(preference: Binding(get: {
+                            guard let prefs = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) else {
+                                return .defaultPreferences
+                            }
+                            return prefs
+                        }, set: { newValue in
+                            if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
+                                preferencesModel.preferencesArray[index] = newValue
+                            }
+                        }))
+                    }
                 }
             }
         }

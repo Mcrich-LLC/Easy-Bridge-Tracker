@@ -19,17 +19,7 @@ struct NotificationPreferencesSelectedBridges: View {
             Button {
                 Mcrich23_Toolkit.topVC().present {
                     if let prefs = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) {
-                        NotificationContentView(viewModel: contentViewModel, bridgeIds: prefs.bridgeIds) { bridge in
-                            if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
-                                if self.preference.bridgeIds.contains(bridge.id) {
-                                    self.preference.bridgeIds.remove(at: index)
-                                    preferencesModel.removeSubscription(for: bridge)
-                                } else if !self.preference.bridgeIds.contains(bridge.id) {
-                                    self.preference.bridgeIds.append(bridge.id)
-                                    preferencesModel.addSubscription(for: bridge)
-                                }
-                            }
-                        }
+                        NotificationContentView(preference: $preference)
                     }
                 }
             } label: {

@@ -14,10 +14,10 @@ struct NotificationPreferences: Hashable, Codable, Identifiable, Equatable {
     var isAllDay: Bool
     var startTime: String
     var endTime: String
-    var notificationPriority: NotificationPriority?
+    var notificationPriority: NotificationPriority
     var bridgeIds: [UUID]
     
-    init(id: UUID = UUID(), title: String, days: [Day]?, isAllDay: Bool, startTime: String, endTime: String, notificationPriority: NotificationPriority? = nil, bridgeIds: [String]) {
+    init(id: UUID = UUID(), title: String, days: [Day]?, isAllDay: Bool, startTime: String, endTime: String, notificationPriority: NotificationPriority, bridgeIds: [String]) {
         self.id = id
         self.title = title
         self.days = days
@@ -35,7 +35,7 @@ struct NotificationPreferences: Hashable, Codable, Identifiable, Equatable {
         self.isAllDay = isAllDay
         self.startTime = startTime
         self.endTime = endTime
-        self.notificationPriority = NotificationPriority(rawValue: notificationPriority)
+        self.notificationPriority = NotificationPriority(rawValue: notificationPriority) ?? .normal
         self.bridgeIds = bridgeIds.map({ UUID(uuidString: $0)! })
     }
     
