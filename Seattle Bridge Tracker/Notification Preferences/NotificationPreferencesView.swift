@@ -21,17 +21,49 @@ struct NotificationPreferencesView: View {
                 Text("Notification Schedule")
                     .font(.title)
                 Spacer()
-                Button {
-                    preferencesModel.createNotificationPreference(onDone: {})
-                } label: {
-                    Image(systemName: "plus.circle")
-                        .imageScale(.large)
-                }
-                Button {
-                    dismiss.callAsFunction()
-                } label: {
-                    Image(systemName: "x.circle")
-                        .imageScale(.large)
+                VStack {
+                    HStack {
+                        Spacer()
+                        Button {
+                            preferencesModel.createNotificationPreference(onDone: {})
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .imageScale(.large)
+                        }
+                        Button {
+                            dismiss.callAsFunction()
+                        } label: {
+                            Image(systemName: "x.circle")
+                                .imageScale(.large)
+                        }
+                    }
+                    .padding(.bottom, 1)
+                    Button {
+                        if !preferencesModel.preferencesArray.compactMap({ $0.isActive }).contains(true) {
+                            for prefIndex in preferencesModel.preferencesArray.indices {
+                                preferencesModel.preferencesArray[prefIndex].isActive = true
+                            }
+                        } else {
+                            for prefIndex in preferencesModel.preferencesArray.indices {
+                                preferencesModel.preferencesArray[prefIndex].isActive = false
+                            }
+                        }
+                    } label: {
+                        HStack {
+                            Spacer()
+                            if !preferencesModel.preferencesArray.compactMap({ $0.isActive }).contains(true) {
+                                HStack {
+                                    Text("Resume All")
+                                    Image(systemName: "arrowtriangle.forward.circle")
+                                }
+                            } else {
+                                HStack {
+                                    Text("Pause All")
+                                    Image(systemName: "pause.circle")
+                                }
+                            }
+                        }
+                    }
                 }
             }
             if !preferencesModel.notificationsAllowed {
