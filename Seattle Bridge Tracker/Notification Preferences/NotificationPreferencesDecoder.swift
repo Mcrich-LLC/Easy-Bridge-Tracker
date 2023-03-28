@@ -39,7 +39,9 @@ struct NotificationPreferences: Hashable, Codable, Identifiable, Equatable {
         self.bridgeIds = bridgeIds.map({ UUID(uuidString: $0)! })
     }
     
-    static let defaultPreferences = Self(id: UUID(), title: "Untitled", days: [], isAllDay: false, startTime: "8:00 AM", endTime: "5:00 PM", notificationPriority: .normal, bridgeIds: [])
+    static var defaultPreferences: Self {
+        Self(id: UUID(), title: "Untitled", days: [], isAllDay: false, startTime: "8:00 AM", endTime: "5:00 PM", notificationPriority: .normal, bridgeIds: [])
+    }
 }
 
 enum NotificationPriority: String, CaseIterable, Codable, Hashable {

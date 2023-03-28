@@ -28,6 +28,11 @@ struct NotificationPreferencesBody: View {
                     }
                     Spacer()
                     Button {
+                        preferencesModel.duplicateNotificationPreference(basedOn: preference, onDone: {})
+                    } label: {
+                        Image(systemName: "doc.on.doc")
+                    }
+                    Button {
                         var title = "this"
                         if let pref = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) {
                             title = "your \(pref.title)"
@@ -41,7 +46,6 @@ struct NotificationPreferencesBody: View {
                         Image(systemName: "minus.circle.fill")
                         .foregroundColor(Color.red)
                     }
-
                 }
                 Divider()
                     .padding(.bottom)

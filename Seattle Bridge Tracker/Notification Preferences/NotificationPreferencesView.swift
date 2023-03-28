@@ -21,7 +21,7 @@ struct NotificationPreferencesView: View {
                     .font(.title)
                 Spacer()
                 Button {
-                    preferencesModel.preferencesArray.append(.defaultPreferences)
+                    preferencesModel.createNotificationPreference(onDone: {})
                 } label: {
                     Image(systemName: "plus.circle")
                         .imageScale(.large)

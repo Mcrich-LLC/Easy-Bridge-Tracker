@@ -18,7 +18,7 @@ struct NotificationPreferencesImportance: View {
             }
             Spacer()
             Picker(selection: Binding(get: {
-                preferencesModel.preferencesArray.first(where: { $0.id == preference.id })?.notificationPriority
+                preference.notificationPriority
             }, set: { newValue in
                     self.preference.notificationPriority = newValue
             })) {

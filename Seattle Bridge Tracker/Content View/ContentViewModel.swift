@@ -143,11 +143,9 @@ class ContentViewModel: ObservableObject {
                                 }
                             }
                         }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
-                            NotificationPreferencesModel.shared.setTitle { title in
-                                var defaultPrefs = NotificationPreferences.defaultPreferences
-                                defaultPrefs.bridgeIds.append(bridge.id)
-                                defaultPrefs.title = title
-                                NotificationPreferencesModel.shared.preferencesArray.append(defaultPrefs)
+                            var defaultPrefs = NotificationPreferences.defaultPreferences
+                            defaultPrefs.bridgeIds.append(bridge.id)
+                            NotificationPreferencesModel.shared.createNotificationPreference(basedOn: defaultPrefs) {
                                 complete()
                             }
                         }), .init(title: "Cancel", style: .destructive)]
