@@ -69,7 +69,7 @@ struct HelpMenu: View {
                     Button {
                         self.isShowingNotificationSettings.toggle()
                     } label: {
-                        Label("Notification Settings", systemImage: "bell")
+                        Label("Notification Schedules", systemImage: "bell")
                     }
                 }
                 

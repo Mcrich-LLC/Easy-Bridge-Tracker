@@ -19,7 +19,7 @@ struct NotificationPreferencesView: View {
         ScrollViewIfNeeded {
             VStack {
                 HStack {
-                    Text("Notification Schedule")
+                    Text("Notification Schedules")
                         .font(.title)
                     Spacer()
                     VStack {
@@ -38,29 +38,34 @@ struct NotificationPreferencesView: View {
                                     .imageScale(.large)
                             }
                         }
-                        .padding(.bottom, 1)
-                        Button {
-                            if !preferencesModel.preferencesArray.compactMap({ $0.isActive }).contains(true) {
-                                for prefIndex in preferencesModel.preferencesArray.indices {
-                                    preferencesModel.preferencesArray[prefIndex].isActive = true
-                                }
-                            } else {
-                                for prefIndex in preferencesModel.preferencesArray.indices {
-                                    preferencesModel.preferencesArray[prefIndex].isActive = false
-                                }
-                            }
-                        } label: {
-                            HStack {
-                                Spacer()
+                        .if(!preferencesModel.preferencesArray.isEmpty, content: { view in
+                            view
+                                .padding(.bottom, 1)
+                        })
+                            if !preferencesModel.preferencesArray.isEmpty {
+                            Button {
                                 if !preferencesModel.preferencesArray.compactMap({ $0.isActive }).contains(true) {
-                                    HStack {
-                                        Text("Resume All")
-                                        Image(systemName: "arrowtriangle.forward.circle")
+                                    for prefIndex in preferencesModel.preferencesArray.indices {
+                                        preferencesModel.preferencesArray[prefIndex].isActive = true
                                     }
                                 } else {
-                                    HStack {
-                                        Text("Pause All")
-                                        Image(systemName: "pause.circle")
+                                    for prefIndex in preferencesModel.preferencesArray.indices {
+                                        preferencesModel.preferencesArray[prefIndex].isActive = false
+                                    }
+                                }
+                            } label: {
+                                HStack {
+                                    Spacer()
+                                    if !preferencesModel.preferencesArray.compactMap({ $0.isActive }).contains(true) {
+                                        HStack {
+                                            Text("Resume All")
+                                            Image(systemName: "arrowtriangle.forward.circle")
+                                        }
+                                    } else {
+                                        HStack {
+                                            Text("Pause All")
+                                            Image(systemName: "pause.circle")
+                                        }
                                     }
                                 }
                             }
