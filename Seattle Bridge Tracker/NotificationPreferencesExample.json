@@ -13,6 +13,7 @@
         "bridge_ids": [
             "65C163B6-8B32-477A-B292-69AB0BCEFC15",
             "85C3D66A-B103-49AB-AA8B-26D153600D19"
-        ]
+        ],
+        "is_active": true
     }
 ]

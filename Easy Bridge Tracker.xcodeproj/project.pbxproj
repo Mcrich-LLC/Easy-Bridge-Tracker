@@ -56,6 +56,8 @@
 		22C28A4529397B9500D37696 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4429397B9500D37696 /* FirebaseStorage */; };
 		22C28A4729397B9500D37696 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4629397B9500D37696 /* FirebaseStorageCombine-Community */; };
 		22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28A4829398F7800D37696 /* FPN Manager.swift */; };
+		22D8688629D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */; };
+		22D8688829D2B5C600E7D647 /* NotificationPreferencesAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */; };
 		22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */; };
 		A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A305122628B33C3F002BB056 /* GoogleMobileAds */; };
 		A305122A28B33C50002BB056 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = A305122928B33C50002BB056 /* Shimmer */; };
@@ -136,6 +138,8 @@
 		22C28A0F2939785A00D37696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22C28A4829398F7800D37696 /* FPN Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPN Manager.swift"; sourceTree = "<group>"; };
 		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
+		22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesActiveToggle.swift; sourceTree = "<group>"; };
+		22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesAd.swift; sourceTree = "<group>"; };
 		22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A305122B28B33C8C002BB056 /* Mcrich23-Toolkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Mcrich23-Toolkit"; path = "../Packages/Mcrich23-Toolkit"; sourceTree = "<group>"; };
 		A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy Bridge Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -241,6 +245,7 @@
 			children = (
 				2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */,
 				229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */,
+				22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */,
 				229E72C829D20CAE00A6DD8A /* Body Components */,
 				2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */,
 				2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */,
@@ -257,6 +262,7 @@
 				229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */,
 				22BB211629D20E80002F753B /* NotificationPreferencesImportance.swift */,
 				22BB211829D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift */,
+				22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */,
 			);
 			path = "Body Components";
 			sourceTree = "<group>";
@@ -605,6 +611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D8688829D2B5C600E7D647 /* NotificationPreferencesAd.swift in Sources */,
 				229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */,
 				2224CDC029D15105006D4338 /* NotificationPreferencesView.swift in Sources */,
 				A3413A0328AFDD5B0016710C /* Response.swift in Sources */,
@@ -627,6 +634,7 @@
 				2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */,
 				2222EBB629D18EAD00837F79 /* NotificationContentView.swift in Sources */,
 				22BB211929D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift in Sources */,
+				22D8688629D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

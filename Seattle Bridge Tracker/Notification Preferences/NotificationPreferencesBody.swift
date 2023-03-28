@@ -45,6 +45,7 @@ struct NotificationPreferencesBody: View {
                 NotificationPreferencesTimePicker(preference: $preference)
                 NotificationPreferencesImportance(preference: $preference)
                 NotificationPreferencesSelectedBridges(preference: $preference)
+                NotificationPreferencesActiveToggle(preference: $preference)
             }
             .padding()
         }
