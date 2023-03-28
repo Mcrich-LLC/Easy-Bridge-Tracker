@@ -9,6 +9,7 @@ import SwiftUI
 import Mcrich23_Toolkit
 import SwiftUIBackports
 import ScrollViewIfNeeded
+import WrappingHStack
 
 struct NotificationPreferencesView: View {
     @ObservedObject var preferencesModel = NotificationPreferencesModel.shared
@@ -37,7 +38,7 @@ struct NotificationPreferencesView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color.yellow)
-                    HStack {
+                    WrappingHStack {
                         Text("Warning: Notifications Are Disabled")
                             .foregroundColor(.white)
                         Button("Fix It") {
