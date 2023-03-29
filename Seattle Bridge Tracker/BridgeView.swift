@@ -66,10 +66,11 @@ struct BridgeView: View {
                             .overlay(Image(systemName: "arrow.backward")
                                 .foregroundColor(Color.primary)
                                 .font(.title3), alignment: .center)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(alignment: .leading)
                             .clipped()
-                            .padding()
                     }
+                    .hoverEffect(.highlight)
+                    .padding()
                     Spacer()
                     Button {
                         contentViewModel.fetchData(repeatFetch: false)
@@ -82,8 +83,9 @@ struct BridgeView: View {
                                 .foregroundColor(Color.primary)
                                 .font(.title3), alignment: .center)
                             .clipped()
-                            .padding()
                     }
+                    .hoverEffect(.highlight)
+                    .padding()
                     Button {
                         contentViewModel.toggleSubscription(for: bridge)
                     } label: {
@@ -95,9 +97,9 @@ struct BridgeView: View {
                                 .foregroundColor(bridge.subscribed ? Color.yellow : Color.primary)
                                 .font(.title3), alignment: .center)
                             .clipped()
-                            .padding()
                     }
-
+                    .hoverEffect(.highlight)
+                    .padding()
                 }
                 .padding(.vertical, 76)
                 .padding(.horizontal, 24)

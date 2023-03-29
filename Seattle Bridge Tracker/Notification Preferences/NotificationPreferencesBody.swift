@@ -40,13 +40,6 @@ struct NotificationPreferencesBody: View {
                             .background(Color.gray.opacity(0.3))
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                             .frame(maxWidth: 150)
-                        } else {
-                            Text(preference.title)
-                                .font(.title2)
-                        }
-                    }
-                    if isEditingTitle {
-                        HStack {
                             Button {
                                 editedTitle = preference.title
                                 withAnimation {
@@ -57,6 +50,7 @@ struct NotificationPreferencesBody: View {
                                 Text("X")
                                     .foregroundColor(.red)
                             }
+                            .hoverEffect(.highlight)
                             Button {
                                 preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
                                     withAnimation {
@@ -68,15 +62,19 @@ struct NotificationPreferencesBody: View {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.green)
                             }
-                        }
-                    } else {
-                        Button {
-                            withAnimation {
-                                self.isEditingTitle = true
-                                self.titleEditorIsFocused = true
+                            .hoverEffect(.highlight)
+                        } else {
+                            Text(preference.title)
+                                .font(.title2)
+                            Button {
+                                withAnimation {
+                                    self.isEditingTitle = true
+                                    self.titleEditorIsFocused = true
+                                }
+                            } label: {
+                                Image(systemName: "square.and.pencil")
                             }
-                        } label: {
-                            Image(systemName: "square.and.pencil")
+                            .hoverEffect(.highlight)
                         }
                     }
                     Spacer()
@@ -85,12 +83,14 @@ struct NotificationPreferencesBody: View {
                     } label: {
                         Image(systemName: "doc.on.doc")
                     }
+                    .hoverEffect(.highlight)
                     Button {
                         preferencesModel.deleteNotificationPreference(preference: preference)
                     } label: {
                         Image(systemName: "minus.circle.fill")
                             .foregroundColor(Color.red)
                     }
+                    .hoverEffect(.highlight)
                 }
                 .imageScale(.large)
                 .frame(height: 40)
