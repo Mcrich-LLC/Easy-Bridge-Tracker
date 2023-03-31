@@ -84,6 +84,7 @@ struct BridgeView: View {
                                 .font(.title3), alignment: .center)
                             .clipped()
                     }
+                    .accessibilityHint(Text("Refresh"))
                     .hoverEffect(.highlight)
                     .padding()
                     Button {
