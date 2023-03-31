@@ -1,5 +1,5 @@
 {
-    "display": "minimal-ui",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/"
 }
