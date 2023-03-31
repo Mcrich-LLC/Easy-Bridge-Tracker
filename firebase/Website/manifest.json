@@ -1,5 +1,14 @@
 {
-    "display": "standalone",
-    "scope": "/",
-    "start_url": "/"
-}
+    "name": "Easy Bridge Tracker",
+    "short_name": "Bridges",
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "icons": [
+      {
+        "src": "Rounded Icon.png",
+        "sizes": "1000x1000",
+        "type": "image/png"
+      }
+    ]
+  }
+  
