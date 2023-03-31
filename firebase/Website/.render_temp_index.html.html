@@ -59,15 +59,17 @@
             color: #fff;
         }
 
-        body {
-            background-color: #fff;
-            color: #363636;
-        }
+body {
+    background-color: #fff;
+    color: #363636;
+    margin: 0;
+}
 
-        .dark-mode body {
-            background-color: #2b2b2b;
-            color: #fff;
-        }
+.dark-mode body {
+    background-color: #2b2b2b;
+    color: #fff;
+    margin: 0;
+}
 
         .hide-column {
             display: none;
@@ -159,22 +161,33 @@
         }
 
 
-        /* Style for the footer */
-        footer {
-            background-color: #f1f1f1;
-            text-align: center;
-            font-size: 12px;
-            font-family: Arial, sans-serif;
-            padding: 10px;
-            margin-top: -20px;
-            /* Add margin at the top */
-            margin-bottom: 20px;
-        }
+/* Style for the footer */
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    margin-top: -20px;
+    /* Add margin at the top */
+    margin-bottom: 0px;
+    color: #363636; /* Add default color for light mode */
+}
 
-        .footer a.more-apps {
-            color: blue;
-            text-decoration: none;
-        }
+/* Dark mode styles for the footer */
+.dark-mode footer {
+    background-color: #2b2b2b;
+    color: #fff;
+}
+
+.dark-mode .footer a.more-apps {
+    color: #4a90e2;
+}
+
+.dark-mode .footer a.more-apps:hover {
+    color: #fff;
+}
+
     </style>
 </head>
 
@@ -376,4 +389,4 @@ const fetchData = () => {
 
 </body>
 
-</html><script>window.scrollTo(0, 0); setTimeout(function() { window.scrollTo(0, 0); },200)</script>
+</html><script>window.scrollTo(0, 321); setTimeout(function() { window.scrollTo(0, 321); },200)</script>
