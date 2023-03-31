@@ -1,5 +1,6 @@
 const CACHE_NAME = 'bridges-cache-v1';
 const urlsToCache = [
+    '/',
   '/images/Rounded Icon.png'
 ];
 
