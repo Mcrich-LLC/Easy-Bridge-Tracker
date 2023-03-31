@@ -1,4 +1,6 @@
 {
+    "display": "standalone",
+    "scope": "/",
     "name": "Easy Bridge Tracker",
     "short_name": "Bridges",
     "start_url": "/",
