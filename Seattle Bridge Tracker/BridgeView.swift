@@ -99,6 +99,7 @@ struct BridgeView: View {
                                 .font(.title3), alignment: .center)
                             .clipped()
                     }
+                    .accessibilityHint(Text("Subscribe to Notifications"))
                     .hoverEffect(.highlight)
                     .padding()
                 }
@@ -153,6 +154,7 @@ struct BridgeView: View {
         AnnotationMapView(zoom: .constant(0.05), coordinates: .constant(LocationCoordinate(latitude: bridge.latitude, longitude: bridge.longitude)), points: .constant([Annotations(title: bridge.name, subtitle: "", location: .coordinates(LocationCoordinate(latitude: bridge.latitude, longitude: bridge.longitude)), glyphImage: .assetImage("bridge-icon"))]))
             .isUserInteractionEnabled(false)
             .pointsOfInterest(.excludingAll)
+            .accessibilityHint(Text("Map"))
             .mask(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .onTapGesture {
                 SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Open", style: .default, handler: { _ in
