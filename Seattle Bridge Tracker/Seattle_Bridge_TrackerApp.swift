@@ -52,6 +52,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         Utilities.fetchRemoteConfig()
         Analytics.setUserProperty(Utilities.appType.rawValue, forName: "application_type")
         Analytics.logEvent("set_application_type", parameters: ["application_type" : Utilities.appType.rawValue])
+        if Utilities.isFastlaneRunning {
+            AdController.shared.areAdsDisabled = true
+        }
         return true
     }
 }

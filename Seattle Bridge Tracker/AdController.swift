@@ -9,7 +9,7 @@ import Foundation
 
 class AdController: ObservableObject {
     static var shared = AdController()
-    @Published var areAdsDisabled = UserDefaults.standard.bool(forKey: "adsDisabled") && Utilities.isFastlaneRunning {
+    @Published var areAdsDisabled = UserDefaults.standard.bool(forKey: "adsDisabled") {
         didSet {
             UserDefaults.standard.set(areAdsDisabled, forKey: "adsDisabled")
         }
