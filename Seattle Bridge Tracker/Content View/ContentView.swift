@@ -38,11 +38,11 @@ struct ContentView: View {
                                 .tag("South Park Bridge Link")
                             }
                             Form {
-//                                if viewModel.sortedBridges.keys.count > 1 {
+                                if viewModel.sortedBridges.keys.count > 1 {
                                     Section {
                                         BridgeFilterView()
                                     }
-//                                }
+                                }
                                 switch viewModel.filterSelection {
                                 case .allBridges:
                                     FavoritedCities()

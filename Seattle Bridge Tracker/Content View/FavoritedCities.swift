@@ -11,6 +11,7 @@ import SwiftUI
 struct FavoritedCities: View {
     @ObservedObject var viewModel = ContentViewModel.shared
     @ObservedObject var favoritesModel = FavoritesModel.shared
+    @ObservedObject var adController = AdController.shared
     var body: some View {
         ForEach(favoritesModel.favorites, id: \.self) { key in
             Section {
@@ -41,6 +42,13 @@ struct FavoritedCities: View {
                             }, set: { _ in
                             }))
                             .tag(bridge.name)
+                        }
+                    }
+                    if !adController.areAdsDisabled && !Utilities.isFastlaneRunning {
+                        HStack {
+                            Spacer()
+                            BannerAds()
+                            Spacer()
                         }
                     }
                 }
