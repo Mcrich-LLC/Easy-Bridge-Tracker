@@ -69,6 +69,8 @@ struct BridgeView: View {
                             .frame(alignment: .leading)
                             .clipped()
                     }
+                    .accessibilityIdentifier("Back")
+                    .accessibilityHint(Text("Back"))
                     .hoverEffect(.highlight)
                     .padding()
                     Spacer()

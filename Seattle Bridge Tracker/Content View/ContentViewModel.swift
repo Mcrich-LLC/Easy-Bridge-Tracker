@@ -39,6 +39,7 @@ class ContentViewModel: ObservableObject {
     @Published var status: LoadingStatus = .loading
     @Published var filterOptions: [BridgesFilter] = [.allBridges]
     @Published var filterSelection = BridgesFilter.allBridges
+    @Published var menuScreenshotClickCount = 0
     private var response: [Response] = []
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!

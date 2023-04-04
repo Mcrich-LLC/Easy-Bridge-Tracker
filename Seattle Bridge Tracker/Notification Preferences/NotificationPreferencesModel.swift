@@ -77,26 +77,49 @@ final class NotificationPreferencesModel: ObservableObject {
     }
     
     func getPreferences() {
+        if Utilities.isFastlaneRunning {
+            getDemoPreferences()
+        } else {
+            do {
+                enum throwError: Error {
+                    case fileDoesNotExist
+                }
+                if let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(fileName) {
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let preferencesArray = try jsonDecoder.decode([NotificationPreferences].self, from: Data(contentsOf: filePath))
+                    
+                    self.preferencesArray = preferencesArray
+                    let allBridgeIds = preferencesArray.map { $0.bridgeIds }.joined()
+                    Utilities.checkNotificationPermissions { notificationsAreAllowed in
+                        if notificationsAreAllowed {
+                            for id in allBridgeIds {
+                                if let bridge = ContentViewModel.shared.allBridges.first(where: { $0.id == id}) {
+                                    self.addSubscription(for: bridge)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    throw throwError.fileDoesNotExist
+                }
+            } catch {
+                print("NotificationPreferences.json doesn't exist")
+            }
+        }
+    }
+    
+    private func getDemoPreferences() {
         do {
             enum throwError: Error {
                 case fileDoesNotExist
             }
-            if let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(fileName) {
+            if let filePath = Bundle.main.url(forResource: "NotificationPreferencesExample", withExtension: "json") {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 let preferencesArray = try jsonDecoder.decode([NotificationPreferences].self, from: Data(contentsOf: filePath))
                 
                 self.preferencesArray = preferencesArray
-                let allBridgeIds = preferencesArray.map { $0.bridgeIds }.joined()
-                Utilities.checkNotificationPermissions { notificationsAreAllowed in
-                    if notificationsAreAllowed {
-                        for id in allBridgeIds {
-                            if let bridge = ContentViewModel.shared.allBridges.first(where: { $0.id == id}) {
-                                self.addSubscription(for: bridge)
-                            }
-                        }
-                    }
-                }
             } else {
                 throw throwError.fileDoesNotExist
             }

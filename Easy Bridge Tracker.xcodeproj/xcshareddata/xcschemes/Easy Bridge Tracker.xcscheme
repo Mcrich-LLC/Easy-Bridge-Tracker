@@ -77,10 +77,10 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-FASTLANE_SNAPSHOT true"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-adsDisabled false"
+            argument = "-adsDisabled true"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
