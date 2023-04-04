@@ -128,6 +128,11 @@ class PurchaseService {
     }
     enum Offerings: String, CaseIterable {
         case removeAds
+        case supportUs1
+        case supportUs5
+        case supportUs10
+        case supportUs20
+        static let supportValues: [Offerings] = [.supportUs1, .supportUs5, .supportUs10, .supportUs20]
     }
     func config() {
         PurchaseService.enabled = Utilities.remoteConfig["areIAPsEnabled"].boolValue
@@ -216,7 +221,7 @@ class PurchaseService {
                             print("Success!")
                             if package.id == Offerings.removeAds.rawValue {
                                 self.removeAds()
-                            } /* else if Offerings.supportValues.contains(where: { offer in
+                            } else if Offerings.supportValues.contains(where: { offer in
                                 offer.rawValue == package.id
                             }) {
                                 SwiftUIAlert.show(
@@ -226,7 +231,7 @@ class PurchaseService {
                                     actions: [
                                         UIAlertAction(title: NSLocalizedString("Done", comment: "Done button in thank you for supporting us alert"), style: .default)
                                     ])
-                            }*/
+                            }
                             Analytics.logEvent("in_app_purchase", parameters: ["product" : String(describing: offering)])
                             completion("")
                         } else if userCancelled {
@@ -294,9 +299,9 @@ struct OfferingInfo: Identifiable, Equatable {
     }
     static var offerings: [OfferingInfo] = [
         OfferingInfo(id: .removeAds, name: "Remove Ads", price: "$0.99"),
-//        OfferingInfo(id: .supportUs1, name: "Support Us $0.99", price: "$0.99"),
-//        OfferingInfo(id: .supportUs5, name: "Support Us $4.99", price: "$4.99"),
-//        OfferingInfo(id: .supportUs10, name: "Support Us $9.99", price: "$9.99"),
-//        OfferingInfo(id: .supportUs20, name: "Support Us $19.99", price: "$19.99")
+        OfferingInfo(id: .supportUs1, name: "Support Us $0.99", price: "$0.99"),
+        OfferingInfo(id: .supportUs5, name: "Support Us $4.99", price: "$4.99"),
+        OfferingInfo(id: .supportUs10, name: "Support Us $9.99", price: "$9.99"),
+        OfferingInfo(id: .supportUs20, name: "Support Us $19.99", price: "$19.99")
     ]
 }

@@ -15,6 +15,18 @@ import Foundation
 struct HelpMenu: View {
     @ObservedObject var contentViewModel = ContentViewModel.shared
     @State var isShowingNotificationSettings = false
+    @State var supportUs1 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs1.rawValue
+    }!
+    @State var supportUs5 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs5.rawValue
+    }!
+    @State var supportUs10 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs10.rawValue
+    }!
+    @State var supportUs20 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs20.rawValue
+    }!
     var body: some View {
         Group {
             if Utilities.isFastlaneRunning {
@@ -55,6 +67,18 @@ struct HelpMenu: View {
                         } label: {
                             Label("Remove Ads", systemImage: "rectangle.slash")
                         }
+                        Button {
+                            SwiftUIAlert.show(title: NSLocalizedString("Support Us", comment: "Shown in support us alert"), message: NSLocalizedString("Help us make a better app by donating.", comment: "Shown in support us alert"), preferredStyle: .alert, actions: [
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs1.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs1, completion: {_ in})}),
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs5.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs5, completion: {_ in})}),
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs10.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs10, completion: {_ in})}),
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs20.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs20, completion: {_ in})}),
+                                UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button in Support Us Alert in the Menu view"), style: .default)
+                            ])
+                        } label: {
+                            Label(NSLocalizedString("Support Us", comment: "Support Us button in more screen"), systemImage: "dollarsign.circle")
+                        }
+
                         Button {
                             PurchaseService.shared.restore {}
                         } label: {
