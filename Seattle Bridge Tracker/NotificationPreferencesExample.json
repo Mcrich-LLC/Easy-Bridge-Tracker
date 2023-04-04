@@ -1,0 +1,42 @@
+[
+    {
+        "id": "DE2CB125-1680-4A77-9A07-CE0134E1CD96",
+        "title": "Weekdays Morning",
+        "days": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday"
+        ],
+        "is_all_day": false,
+        "start_time": "8:00 AM",
+        "end_time": "9:00 AM",
+        "notification_priority": "time sensitive",
+        "bridge_ids": [
+            "65C163B6-8B32-477A-B292-69AB0BCEFC15",
+            "85C3D66A-B103-49AB-AA8B-26D153600D19"
+        ],
+        "is_active": true
+    },
+    {
+        "id": "ED7C43C0-F357-4F3F-8BCB-8C4F212C8D01",
+        "title": "Weekdays Afternoon",
+        "days": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday"
+        ],
+        "is_all_day": false,
+        "start_time": "5:00 PM",
+        "end_time": "6:00 PM",
+        "notification_priority": "time sensitive",
+        "bridge_ids": [
+            "65C163B6-8B32-477A-B292-69AB0BCEFC15",
+            "85C3D66A-B103-49AB-AA8B-26D153600D19"
+        ],
+        "is_active": true
+    }
+]

@@ -14,10 +14,29 @@ import Firebase
 struct Seattle_Bridge_TrackerApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+                        print("Active")
+                        UNUserNotificationCenter.current().getNotificationSettings { setting in
+                            DispatchQueue.main.async {
+                                if setting.authorizationStatus == .authorized {
+                                    NotificationPreferencesModel.shared.notificationsAllowed = true
+                                } else {
+                                    NotificationPreferencesModel.shared.notificationsAllowed = false
+                                }
+                            }
+                        }
+                    } else if newPhase == .inactive {
+                        print("Inactive")
+                    } else if newPhase == .background {
+                        print("Background")
+                    }
+                }
         }
     }
 }
@@ -33,6 +52,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         Utilities.fetchRemoteConfig()
         Analytics.setUserProperty(Utilities.appType.rawValue, forName: "application_type")
         Analytics.logEvent("set_application_type", parameters: ["application_type" : Utilities.appType.rawValue])
+        if Utilities.isFastlaneRunning {
+            AdController.shared.areAdsDisabled = true
+        }
         return true
     }
 }

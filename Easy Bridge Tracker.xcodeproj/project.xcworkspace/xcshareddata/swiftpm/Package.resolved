@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {
           "branch": null,
-          "revision": "5056b15c5acbb90cd214fe4d6138bdf5a740e5a8",
-          "version": "9.2.0"
+          "revision": "f6b558e3f801f2cac336b04f615ce111fa9ddaa0",
+          "version": "9.2.1"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "22907832079d808e82f1182b21af58ef3880666f",
-          "version": "7.8.0"
+          "revision": "0543562f85620b5b7c510c6bcbef75b562a5127b",
+          "version": "7.11.0"
         }
       },
       {
@@ -101,6 +101,15 @@
         }
       },
       {
+        "package": "Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher",
+        "state": {
+          "branch": null,
+          "revision": "af4be924ad984cf4d16f4ae4df424e79a443d435",
+          "version": "7.6.2"
+        }
+      },
+      {
         "package": "leveldb",
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
@@ -119,15 +128,6 @@
         }
       },
       {
-        "package": "MultiModal",
-        "repositoryURL": "https://github.com/davdroman/MultiModal",
-        "state": {
-          "branch": null,
-          "revision": "1f9f5331ed0b374e5f9273162c8782a1884dfaa5",
-          "version": "2.1.0"
-        }
-      },
-      {
         "package": "nanopb",
         "repositoryURL": "https://github.com/firebase/nanopb.git",
         "state": {
@@ -141,8 +141,26 @@
         "repositoryURL": "https://github.com/google/promises.git",
         "state": {
           "branch": null,
-          "revision": "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
-          "version": "2.1.1"
+          "revision": "ec957ccddbcc710ccc64c9dcbd4c7006fcf8b73a",
+          "version": "2.2.0"
+        }
+      },
+      {
+        "package": "RevenueCat",
+        "repositoryURL": "https://github.com/RevenueCat/purchases-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "5d77aeccee3622dd2a5dbfd7af5aed195b84767e",
+          "version": "4.17.8"
+        }
+      },
+      {
+        "package": "ScrollViewIfNeeded",
+        "repositoryURL": "https://github.com/dkk/ScrollViewIfNeeded",
+        "state": {
+          "branch": null,
+          "revision": "a14bb7355f317fd43e194021cbd813dbc0c298e6",
+          "version": "1.0.1"
         }
       },
       {
@@ -159,8 +177,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
-          "revision": "ab3a58b7209a17d781c0d1dbb3e1ff3da306bae8",
-          "version": "1.20.3"
+          "revision": "0af9125c4eae12a4973fb66574c53a54962a9e1e",
+          "version": "1.21.0"
         }
       },
       {
@@ -177,8 +195,8 @@
         "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
         "state": {
           "branch": null,
-          "revision": "f2616860a41f9d9932da412a8978fec79c06fe24",
-          "version": "0.1.4"
+          "revision": "c18951c747ab62af7c15e17a81bd37d4fd5a9979",
+          "version": "0.2.3"
         }
       },
       {
@@ -186,7 +204,7 @@
         "repositoryURL": "https://github.com/markiv/SwiftUI-Shimmer",
         "state": {
           "branch": "main",
-          "revision": "61411771350a5a4e96666a8a202ae4b2be327a2b",
+          "revision": "17b66b0e7d94d2d3f220bbcb021b5026436f06c7",
           "version": null
         }
       },
@@ -194,18 +212,18 @@
         "package": "SwiftUIBackports",
         "repositoryURL": "https://github.com/shaps80/SwiftUIBackports",
         "state": {
-          "branch": null,
-          "revision": "d9842f24656ff7c6116dc207b60f0b6d302a5a9a",
-          "version": "1.9.0"
+          "branch": "1.7.0",
+          "revision": "0098109c130dd6ec02eaa21f4aa00ea14c306b8f",
+          "version": null
         }
       },
       {
         "package": "SwiftUIMap",
         "repositoryURL": "https://github.com/Mcrich23/SwiftUIMap",
         "state": {
-          "branch": null,
-          "revision": "0493ac10120cfddb768596c10d8b7a35632bb21e",
-          "version": "1.4.4"
+          "branch": "main",
+          "revision": "37ef8e6fea9f208e86189a4a2f331f3539bc32b9",
+          "version": null
         }
       },
       {
@@ -213,8 +231,8 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": null,
-          "revision": "1c2ba19b91a1541b803f9d1b01b360cae5a752fa",
-          "version": "0.1.3"
+          "revision": "1b8b443b61b8b37fafb06c1abad9b6be244c9de9",
+          "version": "0.1.4"
         }
       },
       {
@@ -227,12 +245,12 @@
         }
       },
       {
-        "package": "WKView",
-        "repositoryURL": "https://github.com/rebeloper/WKView",
+        "package": "WrappingHStack",
+        "repositoryURL": "https://github.com/dkk/WrappingHStack",
         "state": {
-          "branch": "main",
-          "revision": "16e1390b4ed59a82609462d85cd0670d5144f036",
-          "version": null
+          "branch": null,
+          "revision": "44987fbb01112e6ec72098dc6481187dd53ad4d2",
+          "version": "2.2.9"
         }
       }
     ]

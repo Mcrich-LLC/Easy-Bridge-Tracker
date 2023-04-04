@@ -45,8 +45,20 @@ class Seattle_Bridge_TrackerUITests: XCTestCase {
         let southParkBridgeStaticText = app.staticTexts["South Park Bridge"]
         XCTAssert(southParkBridgeStaticText.waitForExistence(timeout: 15))
         snapshot("02BridgeDetails")
-                
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        // Go back to parent view
+        let backToParent = app.buttons["Back"]
+        backToParent.tap()
+        
+        // Open Notification Schedule
+        XCTAssert(link.waitForExistence(timeout: 15))
+        menu.tap()
+        
+        // Take Notification Schedule Snapshot
+        let elementsQuery = XCUIApplication().scrollViews.otherElements
+        let editButton = elementsQuery.buttons["Compose"]
+        XCTAssert(editButton.waitForExistence(timeout: 15))
+        snapshot("03NotificationSchedules")
     }
 
     func testLaunchPerformance() throws {

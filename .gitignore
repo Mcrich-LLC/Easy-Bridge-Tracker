@@ -94,5 +94,10 @@ xcuserdata
 # End of https://www.toptal.com/developers/gitignore/api/swift,swiftpackagemanager,xcode
 
 /Seattle Bridge Tracker/Secrets.swift
-Bridge-Backend/
+Easy-Bridge-Backend/
 Builds/
+Bridge-Backend/
+.firebase/
+firebase/.render_temp_index.html.html
+firebase-debug.log
+firebase/.firebaserc

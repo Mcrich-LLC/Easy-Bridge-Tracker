@@ -7,11 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		221BEC7D29D1A1420099A015 /* SwiftUIMap in Frameworks */ = {isa = PBXBuildFile; productRef = 221BEC7C29D1A1420099A015 /* SwiftUIMap */; };
+		2222EBAC29D163B000837F79 /* NotificationPreferencesDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */; };
+		2222EBB029D1779900837F79 /* ScrollViewIfNeeded in Frameworks */ = {isa = PBXBuildFile; productRef = 2222EBAF29D1779900837F79 /* ScrollViewIfNeeded */; };
+		2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBB329D18D2C00837F79 /* NotificationBridgeRow.swift */; };
+		2222EBB629D18EAD00837F79 /* NotificationContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBB529D18EAD00837F79 /* NotificationContentView.swift */; };
+		2224CDB729D1442B006D4338 /* NotificationPreferencesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 2224CDB629D1442B006D4338 /* NotificationPreferencesExample.json */; };
+		2224CDB829D1442D006D4338 /* NotificationPreferencesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 2224CDB629D1442B006D4338 /* NotificationPreferencesExample.json */; };
+		2224CDBF29D15102006D4338 /* NotificationPreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */; };
+		2224CDC029D15105006D4338 /* NotificationPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */; };
 		224C81FA29459B33004C5722 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
 		224C81FB29459B47004C5722 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
+		2253C9BC29D1940A00F22F3B /* NotificationPreferencesDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */; };
+		2253E00D29DBC5430063DDE2 /* BridgeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */; };
+		2253E00F29DBCE840063DDE2 /* NotificationFavoritedCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E00E29DBCE840063DDE2 /* NotificationFavoritedCities.swift */; };
+		2253E01129DBD2110063DDE2 /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E01029DBD2110063DDE2 /* FavoritesModel.swift */; };
+		229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */; };
+		229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
 		22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 22AB7C80293EDFA4008BD92F /* FirebaseMessaging */; };
+		22BB211729D20E80002F753B /* NotificationPreferencesImportance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB211629D20E80002F753B /* NotificationPreferencesImportance.swift */; };
+		22BB211929D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB211829D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift */; };
+		22BB211B29D2127A002F753B /* NotificationPreferenceDaysPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB211A29D2127A002F753B /* NotificationPreferenceDaysPicker.swift */; };
 		22C28A102939785A00D37696 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22C28A0F2939785A00D37696 /* GoogleService-Info.plist */; };
 		22C28A1329397B9500D37696 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A1229397B9500D37696 /* FirebaseAnalytics */; };
 		22C28A1529397B9500D37696 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A1429397B9500D37696 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -41,6 +59,17 @@
 		22C28A4529397B9500D37696 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4429397B9500D37696 /* FirebaseStorage */; };
 		22C28A4729397B9500D37696 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4629397B9500D37696 /* FirebaseStorageCombine-Community */; };
 		22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28A4829398F7800D37696 /* FPN Manager.swift */; };
+		22D460F529DBB54B00163E16 /* BridgesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D460F429DBB54B00163E16 /* BridgesFilter.swift */; };
+		22D460F729DBBA6700163E16 /* FavoritedCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D460F629DBBA6700163E16 /* FavoritedCities.swift */; };
+		22D8688629D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */; };
+		22D8688829D2B5C600E7D647 /* NotificationPreferencesAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */; };
+		22D8688A29D2BEA400E7D647 /* Purchase Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688929D2BEA400E7D647 /* Purchase Service.swift */; };
+		22D8688D29D2BEDC00E7D647 /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 22D8688C29D2BEDC00E7D647 /* ReceiptParser */; };
+		22D8688F29D2BEDC00E7D647 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 22D8688E29D2BEDC00E7D647 /* RevenueCat */; };
+		22D8689129D2BF2600E7D647 /* AdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8689029D2BF2600E7D647 /* AdController.swift */; };
+		22D8689729D2CBFB00E7D647 /* NavigationBarLargeTitleItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8689629D2CBFB00E7D647 /* NavigationBarLargeTitleItems.swift */; };
+		22D8689929D2CDF100E7D647 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 22D8689829D2CDF000E7D647 /* Configuration.storekit */; };
+		22EE942729D3664F00EB8889 /* TitleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE942629D3664F00EB8889 /* TitleTextEditor.swift */; };
 		22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */; };
 		A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A305122628B33C3F002BB056 /* GoogleMobileAds */; };
 		A305122A28B33C50002BB056 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = A305122928B33C50002BB056 /* Shimmer */; };
@@ -63,7 +92,6 @@
 		A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E8B3A28BB2DA200A6A8D4 /* Info.swift */; };
 		A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80128BFBEE1003E5273 /* BridgeRow.swift */; };
 		A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80328BFBF64003E5273 /* HelpMenu.swift */; };
-		A394A80628BFC057003E5273 /* Favorite.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80528BFC057003E5273 /* Favorite.swift */; };
 		A394A80828C0725B003E5273 /* BridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A394A80728C0725B003E5273 /* BridgeView.swift */; };
 		A3D22D7428C149C900AD4C0A /* HTTPStatusCodes in Frameworks */ = {isa = PBXBuildFile; productRef = A3D22D7328C149C900AD4C0A /* HTTPStatusCodes */; };
 		A3D22D7528C14ADB00AD4C0A /* DummyPromo.json in Resources */ = {isa = PBXBuildFile; fileRef = A394A80D28C13C1F003E5273 /* DummyPromo.json */; };
@@ -104,13 +132,36 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesDecoder.swift; sourceTree = "<group>"; };
+		2222EBB329D18D2C00837F79 /* NotificationBridgeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBridgeRow.swift; sourceTree = "<group>"; };
+		2222EBB529D18EAD00837F79 /* NotificationContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContentView.swift; sourceTree = "<group>"; };
+		2224CDB629D1442B006D4338 /* NotificationPreferencesExample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NotificationPreferencesExample.json; sourceTree = "<group>"; };
+		2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesView.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesModel.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFilterView.swift; sourceTree = "<group>"; };
+		2253E00E29DBCE840063DDE2 /* NotificationFavoritedCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationFavoritedCities.swift; sourceTree = "<group>"; };
+		2253E01029DBD2110063DDE2 /* FavoritesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
+		229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesBody.swift; sourceTree = "<group>"; };
+		229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesTimePicker.swift; sourceTree = "<group>"; };
 		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		22AB7C76293EDF2A008BD92F /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		22AB7C78293EDF2A008BD92F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22BB211629D20E80002F753B /* NotificationPreferencesImportance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesImportance.swift; sourceTree = "<group>"; };
+		22BB211829D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesSelectedBridges.swift; sourceTree = "<group>"; };
+		22BB211A29D2127A002F753B /* NotificationPreferenceDaysPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferenceDaysPicker.swift; sourceTree = "<group>"; };
 		22C28A0F2939785A00D37696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22C28A4829398F7800D37696 /* FPN Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPN Manager.swift"; sourceTree = "<group>"; };
 		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
+		22D460F429DBB54B00163E16 /* BridgesFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgesFilter.swift; sourceTree = "<group>"; };
+		22D460F629DBBA6700163E16 /* FavoritedCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedCities.swift; sourceTree = "<group>"; };
+		22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesActiveToggle.swift; sourceTree = "<group>"; };
+		22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesAd.swift; sourceTree = "<group>"; };
+		22D8688929D2BEA400E7D647 /* Purchase Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Purchase Service.swift"; sourceTree = "<group>"; };
+		22D8689029D2BF2600E7D647 /* AdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdController.swift; sourceTree = "<group>"; };
+		22D8689629D2CBFB00E7D647 /* NavigationBarLargeTitleItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarLargeTitleItems.swift; sourceTree = "<group>"; };
+		22D8689829D2CDF000E7D647 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		22EE942629D3664F00EB8889 /* TitleTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextEditor.swift; sourceTree = "<group>"; };
 		22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RemoteConfigDefaults.plist; sourceTree = "<group>"; };
 		A305122B28B33C8C002BB056 /* Mcrich23-Toolkit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Mcrich23-Toolkit"; path = "../Packages/Mcrich23-Toolkit"; sourceTree = "<group>"; };
 		A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Easy Bridge Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,7 +173,7 @@
 		A33F931428AC926100391EBB /* Fetch Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Fetch Data.swift"; sourceTree = "<group>"; };
 		A33F931828AC97A300391EBB /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A3413A0228AFDD5B0016710C /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		A3413A0428AFDD680016710C /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		A3413A0428AFDD680016710C /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		A3413A0828AFEDA00016710C /* Seattle-Bridge-Tracker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Seattle-Bridge-Tracker-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A37E4BAA28B1359D007644D5 /* Appfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appfile; sourceTree = "<group>"; };
 		A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -135,7 +186,6 @@
 		A37E8B3A28BB2DA200A6A8D4 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		A394A80128BFBEE1003E5273 /* BridgeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeRow.swift; sourceTree = "<group>"; };
 		A394A80328BFBF64003E5273 /* HelpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpMenu.swift; sourceTree = "<group>"; };
-		A394A80528BFC057003E5273 /* Favorite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorite.swift; sourceTree = "<group>"; };
 		A394A80728C0725B003E5273 /* BridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeView.swift; sourceTree = "<group>"; };
 		A394A80D28C13C1F003E5273 /* DummyPromo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DummyPromo.json; sourceTree = "<group>"; };
 		A3F2AFF528B2B67B00D38A59 /* Banner Ads.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Banner Ads.swift"; sourceTree = "<group>"; };
@@ -162,6 +212,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2222EBB029D1779900837F79 /* ScrollViewIfNeeded in Frameworks */,
+				221BEC7D29D1A1420099A015 /* SwiftUIMap in Frameworks */,
 				22C28A2D29397B9500D37696 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				22C28A2529397B9500D37696 /* FirebaseDatabase in Frameworks */,
 				A3D22D7428C149C900AD4C0A /* HTTPStatusCodes in Frameworks */,
@@ -184,6 +236,7 @@
 				A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */,
 				A3F2AFF228B2B5F900D38A59 /* Mcrich23-Toolkit in Frameworks */,
 				22C28A4129397B9500D37696 /* FirebaseRemoteConfig in Frameworks */,
+				22D8688D29D2BEDC00E7D647 /* ReceiptParser in Frameworks */,
 				22C28A1F29397B9500D37696 /* FirebaseAuth in Frameworks */,
 				22C28A3129397B9500D37696 /* FirebaseFunctions in Frameworks */,
 				22C28A3929397B9500D37696 /* FirebaseInstallations in Frameworks */,
@@ -191,6 +244,7 @@
 				22C28A1929397B9500D37696 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				22C28A1B29397B9500D37696 /* FirebaseAppCheck in Frameworks */,
 				22C28A3D29397B9500D37696 /* FirebaseMLModelDownloader in Frameworks */,
+				22D8688F29D2BEDC00E7D647 /* RevenueCat in Frameworks */,
 				22C28A4329397B9500D37696 /* FirebaseRemoteConfigSwift in Frameworks */,
 				22C28A1D29397B9500D37696 /* FirebaseAppDistribution-Beta in Frameworks */,
 				A3413A1028B065BC0016710C /* Mcrich23-Toolkit in Frameworks */,
@@ -200,6 +254,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2222EBB129D18CFB00837F79 /* Content View */ = {
+			isa = PBXGroup;
+			children = (
+				A33F930428AC90A800391EBB /* ContentView.swift */,
+				2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */,
+				22D460F629DBBA6700163E16 /* FavoritedCities.swift */,
+				A3413A0428AFDD680016710C /* ContentViewModel.swift */,
+				A394A80128BFBEE1003E5273 /* BridgeRow.swift */,
+				22D460F429DBB54B00163E16 /* BridgesFilter.swift */,
+				2253E01029DBD2110063DDE2 /* FavoritesModel.swift */,
+			);
+			path = "Content View";
+			sourceTree = "<group>";
+		};
+		2222EBB229D18D0C00837F79 /* Notification Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */,
+				229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */,
+				22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */,
+				22EE942629D3664F00EB8889 /* TitleTextEditor.swift */,
+				229E72C829D20CAE00A6DD8A /* Body Components */,
+				2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */,
+				2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */,
+				2222EBB529D18EAD00837F79 /* NotificationContentView.swift */,
+				2253E00E29DBCE840063DDE2 /* NotificationFavoritedCities.swift */,
+				2222EBB329D18D2C00837F79 /* NotificationBridgeRow.swift */,
+			);
+			path = "Notification Preferences";
+			sourceTree = "<group>";
+		};
+		229E72C829D20CAE00A6DD8A /* Body Components */ = {
+			isa = PBXGroup;
+			children = (
+				22BB211A29D2127A002F753B /* NotificationPreferenceDaysPicker.swift */,
+				229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */,
+				22BB211629D20E80002F753B /* NotificationPreferencesImportance.swift */,
+				22BB211829D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift */,
+				22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */,
+			);
+			path = "Body Components";
+			sourceTree = "<group>";
+		};
 		22AB7C75293EDF2A008BD92F /* NotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,15 +341,18 @@
 				A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */,
 				22C28A4829398F7800D37696 /* FPN Manager.swift */,
 				A3F2AFF928B2B7F500D38A59 /* Utilities.swift */,
-				A33F930428AC90A800391EBB /* ContentView.swift */,
-				A3413A0428AFDD680016710C /* ContentViewModel.swift */,
-				A394A80128BFBEE1003E5273 /* BridgeRow.swift */,
+				22D8689029D2BF2600E7D647 /* AdController.swift */,
+				22D8688929D2BEA400E7D647 /* Purchase Service.swift */,
+				22D8689829D2CDF000E7D647 /* Configuration.storekit */,
+				2222EBB229D18D0C00837F79 /* Notification Preferences */,
+				2222EBB129D18CFB00837F79 /* Content View */,
 				A394A80728C0725B003E5273 /* BridgeView.swift */,
 				A394A80328BFBF64003E5273 /* HelpMenu.swift */,
-				A394A80528BFC057003E5273 /* Favorite.swift */,
 				A37E8B3A28BB2DA200A6A8D4 /* Info.swift */,
+				22D8689629D2CBFB00E7D647 /* NavigationBarLargeTitleItems.swift */,
 				A33F931428AC926100391EBB /* Fetch Data.swift */,
 				A3413A0228AFDD5B0016710C /* Response.swift */,
+				2224CDB629D1442B006D4338 /* NotificationPreferencesExample.json */,
 				A394A80D28C13C1F003E5273 /* DummyPromo.json */,
 				A3F2AFF428B2B67B00D38A59 /* AdMob */,
 				A33F930628AC90A900391EBB /* Assets.xcassets */,
@@ -404,6 +504,10 @@
 				22C28A4229397B9500D37696 /* FirebaseRemoteConfigSwift */,
 				22C28A4429397B9500D37696 /* FirebaseStorage */,
 				22C28A4629397B9500D37696 /* FirebaseStorageCombine-Community */,
+				2222EBAF29D1779900837F79 /* ScrollViewIfNeeded */,
+				221BEC7C29D1A1420099A015 /* SwiftUIMap */,
+				22D8688C29D2BEDC00E7D647 /* ReceiptParser */,
+				22D8688E29D2BEDC00E7D647 /* RevenueCat */,
 			);
 			productName = "Seattle Bridge Tracker";
 			productReference = A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */;
@@ -446,6 +550,9 @@
 				A305122828B33C50002BB056 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				A3D22D7228C149C900AD4C0A /* XCRemoteSwiftPackageReference "SwiftHTTPStatusCodes" */,
 				22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2222EBAE29D1779900837F79 /* XCRemoteSwiftPackageReference "ScrollViewIfNeeded" */,
+				221BEC7B29D1A1420099A015 /* XCRemoteSwiftPackageReference "SwiftUIMap" */,
+				22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = A33F930028AC90A800391EBB /* Products */;
 			projectDirPath = "";
@@ -470,6 +577,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2224CDB829D1442D006D4338 /* NotificationPreferencesExample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,10 +586,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3D22D7528C14ADB00AD4C0A /* DummyPromo.json in Resources */,
+				22D8689929D2CDF100E7D647 /* Configuration.storekit in Resources */,
 				A37E4BB728B13627007644D5 /* Snapfile in Resources */,
 				22C28A102939785A00D37696 /* GoogleService-Info.plist in Resources */,
 				A37E4BB528B1359E007644D5 /* report.xml in Resources */,
 				22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */,
+				2224CDB729D1442B006D4338 /* NotificationPreferencesExample.json in Resources */,
 				A37E4BB228B1359E007644D5 /* Fastfile in Resources */,
 				A37E4BB428B1359E007644D5 /* Precheckfile in Resources */,
 				A33F931928AC97A300391EBB /* .swiftlint.yml in Resources */,
@@ -530,6 +640,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2253C9BC29D1940A00F22F3B /* NotificationPreferencesDecoder.swift in Sources */,
 				22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,19 +649,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D460F729DBBA6700163E16 /* FavoritedCities.swift in Sources */,
+				22D8688829D2B5C600E7D647 /* NotificationPreferencesAd.swift in Sources */,
+				229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */,
+				22EE942729D3664F00EB8889 /* TitleTextEditor.swift in Sources */,
+				2224CDC029D15105006D4338 /* NotificationPreferencesView.swift in Sources */,
 				A3413A0328AFDD5B0016710C /* Response.swift in Sources */,
+				22D8689129D2BF2600E7D647 /* AdController.swift in Sources */,
 				A37E8B3B28BB2DA200A6A8D4 /* Info.swift in Sources */,
+				22BB211B29D2127A002F753B /* NotificationPreferenceDaysPicker.swift in Sources */,
+				229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */,
 				A3F2AFF728B2B67B00D38A59 /* Banner Ads.swift in Sources */,
 				A394A80828C0725B003E5273 /* BridgeView.swift in Sources */,
+				22D460F529DBB54B00163E16 /* BridgesFilter.swift in Sources */,
 				A3F2AFFA28B2B7F500D38A59 /* Utilities.swift in Sources */,
 				A33F930528AC90A800391EBB /* ContentView.swift in Sources */,
+				2253E01129DBD2110063DDE2 /* FavoritesModel.swift in Sources */,
 				A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */,
-				A394A80628BFC057003E5273 /* Favorite.swift in Sources */,
+				2224CDBF29D15102006D4338 /* NotificationPreferencesModel.swift in Sources */,
+				22BB211729D20E80002F753B /* NotificationPreferencesImportance.swift in Sources */,
 				A33F931528AC926100391EBB /* Fetch Data.swift in Sources */,
 				A394A80228BFBEE1003E5273 /* BridgeRow.swift in Sources */,
 				22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */,
+				2253E00F29DBCE840063DDE2 /* NotificationFavoritedCities.swift in Sources */,
 				A3413A0528AFDD680016710C /* ContentViewModel.swift in Sources */,
+				22D8688A29D2BEA400E7D647 /* Purchase Service.swift in Sources */,
+				22D8689729D2CBFB00E7D647 /* NavigationBarLargeTitleItems.swift in Sources */,
+				2222EBAC29D163B000837F79 /* NotificationPreferencesDecoder.swift in Sources */,
 				A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */,
+				2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */,
+				2222EBB629D18EAD00837F79 /* NotificationContentView.swift in Sources */,
+				22BB211929D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift in Sources */,
+				2253E00D29DBC5430063DDE2 /* BridgeFilterView.swift in Sources */,
+				22D8688629D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,10 +706,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -594,10 +725,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-TrackerUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -614,7 +745,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -626,7 +757,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -642,7 +773,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -654,7 +785,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -789,7 +920,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				ENABLE_PREVIEWS = YES;
@@ -807,7 +938,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -827,7 +958,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				ENABLE_PREVIEWS = YES;
@@ -845,7 +976,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -898,12 +1029,36 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		221BEC7B29D1A1420099A015 /* XCRemoteSwiftPackageReference "SwiftUIMap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mcrich23/SwiftUIMap";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		2222EBAE29D1779900837F79 /* XCRemoteSwiftPackageReference "ScrollViewIfNeeded" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/ScrollViewIfNeeded";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 9.0.0;
+			};
+		};
+		22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
 			};
 		};
 		A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
@@ -941,6 +1096,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		221BEC7C29D1A1420099A015 /* SwiftUIMap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 221BEC7B29D1A1420099A015 /* XCRemoteSwiftPackageReference "SwiftUIMap" */;
+			productName = SwiftUIMap;
+		};
+		2222EBAF29D1779900837F79 /* ScrollViewIfNeeded */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2222EBAE29D1779900837F79 /* XCRemoteSwiftPackageReference "ScrollViewIfNeeded" */;
+			productName = ScrollViewIfNeeded;
+		};
 		22AB7C80293EDFA4008BD92F /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1080,6 +1245,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		22D8688C29D2BEDC00E7D647 /* ReceiptParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = ReceiptParser;
+		};
+		22D8688E29D2BEDC00E7D647 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
 		};
 		A305122628B33C3F002BB056 /* GoogleMobileAds */ = {
 			isa = XCSwiftPackageProductDependency;

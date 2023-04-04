@@ -1,0 +1,95 @@
+{
+  "identifier" : "8B2E0D06",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6446878955",
+      "localizations" : [
+        {
+          "description" : "Remove ads from Easy Bridge Tracker",
+          "displayName" : "Remove Ads",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.Mcrich23.EasyBridgeTracker.removeAds",
+      "referenceName" : "Remove Ads",
+      "type" : "NonConsumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "6447232088",
+      "localizations" : [
+        {
+          "description" : "Help support us by donating.",
+          "displayName" : "Support Us",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.Mcrich23.EasyBridgeTracker.SupportUs20",
+      "referenceName" : "Support Us",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6447231851",
+      "localizations" : [
+        {
+          "description" : "Help support us by donating.",
+          "displayName" : "Support Us",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.Mcrich23.EasyBridgeTracker.SupportUs1",
+      "referenceName" : "Support Us $1",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "6447232017",
+      "localizations" : [
+        {
+          "description" : "Help support us by donating.",
+          "displayName" : "Support Us",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.Mcrich23.EasyBridgeTracker.SupportUs10",
+      "referenceName" : "Support Us $10",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6447232025",
+      "localizations" : [
+        {
+          "description" : "Help support us by donating.",
+          "displayName" : "Support Us",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.Mcrich23.EasyBridgeTracker.SupportUs5",
+      "referenceName" : "Support Us $5",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "1640954057",
+    "_developerTeamID" : "L7JQRVXU2V",
+    "_lastSynchronizedDate" : 702281705.34339201
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

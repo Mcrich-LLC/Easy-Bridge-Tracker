@@ -4,5 +4,9 @@
 <dict>
 	<key>GADBannerAdID</key>
 	<string>ca-app-pub-8092077340719182/1348152099</string>
+	<key>areIAPsEnabled</key>
+	<true/>
+	<key>revenueCatApiKey</key>
+	<string>appl_XnjQYrhRdrIQdPtXGGXrzkaUpmc</string>
 </dict>
 </plist>

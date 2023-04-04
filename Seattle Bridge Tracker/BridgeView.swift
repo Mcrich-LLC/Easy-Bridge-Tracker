@@ -14,13 +14,12 @@ import Mcrich23_Toolkit
 
 struct BridgeView: View {
     @Binding var bridge: Bridge
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var contentViewModel = ContentViewModel.shared
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.colorScheme) var colorScheme
     @State var isMapHorizantal: Bool = false
-    init(bridge: Binding<Bridge>, viewModel: ContentViewModel) {
+    init(bridge: Binding<Bridge>) {
         self._bridge = bridge
-        self.viewModel = viewModel
     }
     var body: some View {
         ZStack {
@@ -67,13 +66,16 @@ struct BridgeView: View {
                             .overlay(Image(systemName: "arrow.backward")
                                 .foregroundColor(Color.primary)
                                 .font(.title3), alignment: .center)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(alignment: .leading)
                             .clipped()
-                            .padding()
                     }
+                    .accessibilityIdentifier("Back")
+                    .accessibilityHint(Text("Back"))
+                    .hoverEffect(.highlight)
+                    .padding()
                     Spacer()
                     Button {
-                        viewModel.fetchData(repeatFetch: false)
+                        contentViewModel.fetchData(repeatFetch: false)
                     } label: {
                         Circle()
                             .frame(width: 40, height: 40)
@@ -83,10 +85,12 @@ struct BridgeView: View {
                                 .foregroundColor(Color.primary)
                                 .font(.title3), alignment: .center)
                             .clipped()
-                            .padding()
                     }
+                    .accessibilityHint(Text("Refresh"))
+                    .hoverEffect(.highlight)
+                    .padding()
                     Button {
-                        viewModel.toggleSubscription(for: bridge)
+                        contentViewModel.toggleSubscription(for: bridge)
                     } label: {
                         Circle()
                             .frame(width: 40, height: 40)
@@ -96,9 +100,10 @@ struct BridgeView: View {
                                 .foregroundColor(bridge.subscribed ? Color.yellow : Color.primary)
                                 .font(.title3), alignment: .center)
                             .clipped()
-                            .padding()
                     }
-
+                    .accessibilityHint(Text("Subscribe to Notifications"))
+                    .hoverEffect(.highlight)
+                    .padding()
                 }
                 .padding(.vertical, 76)
                 .padding(.horizontal, 24)
@@ -141,7 +146,7 @@ struct BridgeView: View {
         }
         .onAppear {
             getIsMapHorizantal(orientation: UIDevice.current.orientation)
-            viewModel.fetchData(repeatFetch: false)
+            contentViewModel.fetchData(repeatFetch: false)
         }
         .onRotate { orientation in
             getIsMapHorizantal(orientation: orientation)
@@ -151,6 +156,7 @@ struct BridgeView: View {
         AnnotationMapView(zoom: .constant(0.05), coordinates: .constant(LocationCoordinate(latitude: bridge.latitude, longitude: bridge.longitude)), points: .constant([Annotations(title: bridge.name, subtitle: "", location: .coordinates(LocationCoordinate(latitude: bridge.latitude, longitude: bridge.longitude)), glyphImage: .assetImage("bridge-icon"))]))
             .isUserInteractionEnabled(false)
             .pointsOfInterest(.excludingAll)
+            .accessibilityHint(Text("Map"))
             .mask(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .onTapGesture {
                 SwiftUIAlert.show(title: "Open Bridge?", message: "Do you want to open \(bridge.name) in maps?", preferredStyle: .alert, actions: [UIAlertAction(title: "Open", style: .default, handler: { _ in
@@ -172,7 +178,8 @@ struct BridgeView_Previews: PreviewProvider {
     static var previews: some View {
         BridgeView(
             bridge: .constant(
-                Bridge(name: "Ballard Bridge",
+                Bridge(id: UUID(),
+                       name: "Ballard Bridge",
                        status: .down,
                        imageUrl: URL(string: "https://s3-media0.fl.yelpcdn.com/bphoto/rq2iSswXqRp5Nmp7MIEVJg/o.jpg")!,
                        mapsUrl: URL(string: "https://maps.apple.com/?address=Ballard%20Bridge,%20Seattle,%20WA%20%2098199,%20United%20States&ll=47.657044,-122.376245&q=Ballard%20Bridge&_ext=EiYpoLms1YbTR0AxFkGkn4GYXsA5Ho/SMa3UR0BBNmKBHaeXXsBQBA%3D%3D")!,
@@ -181,7 +188,7 @@ struct BridgeView_Previews: PreviewProvider {
                        longitude: -122.37624,
                        bridgeLocation: "Seattle, Wa",
                        subscribed: false)
-            ), viewModel: ContentViewModel()
+            )
         )
     }
 }

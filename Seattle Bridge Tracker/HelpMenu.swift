@@ -13,60 +13,114 @@ import Introspect
 import Foundation
 
 struct HelpMenu: View {
-    @ObservedObject var viewModel: ContentViewModel
+    @ObservedObject var contentViewModel = ContentViewModel.shared
+    @State var isShowingNotificationSettings = false
+    @State var supportUs1 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs1.rawValue
+    }!
+    @State var supportUs5 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs5.rawValue
+    }!
+    @State var supportUs10 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs10.rawValue
+    }!
+    @State var supportUs20 = OfferingInfo.offerings.first { offering in
+        offering.id.rawValue == PurchaseService.Offerings.supportUs20.rawValue
+    }!
     var body: some View {
-        if Utilities.isFastlaneRunning {
-            Button {
-                viewModel.showDemoView()
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .padding(.horizontal)
-            }
-            .tag("Help Menu Button")
-        } else {
-            Menu {
-                Section {
-                    Link(destination: URL(string: "mailto:feedback@mcrich23@icloud.com")!) {
-                        Label("Give Feedback", systemImage: "tray")
+        Group {
+            if Utilities.isFastlaneRunning {
+                Button {
+                    contentViewModel.menuScreenshotClickCount += 1
+                    if contentViewModel.menuScreenshotClickCount == 1 {
+                        contentViewModel.showDemoView()
+                    } else  if contentViewModel.menuScreenshotClickCount == 2 {
+                        isShowingNotificationSettings.toggle()
                     }
-                    Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
-                        Label("Get Support", systemImage: "questionmark.circle")
-                    }
-                    Button {
-                        Mcrich23_Toolkit.presentShareSheet(activityItems: ["I found this app that tells you when bridges are up and down in real time! You should download it here: https://mcrich23.com/easy-bridge-tracker"], excludedActivityTypes: [])
-                    } label: {
-                        Label("Share", systemImage: "square.and.arrow.up")
-                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .padding(.horizontal)
+                        .backgroundFill(.clear)
                 }
-                Section {
-                    Button {
-                        Mcrich23_Toolkit.topVC().present {
-                            Info()
+                .tag("Help Menu Button")
+            } else {
+                Menu {
+                    Section {
+                        Link(destination: URL(string: "mailto:feedback@mcrich23@icloud.com")!) {
+                            Label("Give Feedback", systemImage: "tray")
                         }
-                    } label: {
-                        Label("Info", systemImage: "info.circle")
+                        Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
+                            Label("Get Support", systemImage: "questionmark.circle")
+                        }
+                        Button {
+                            Mcrich23_Toolkit.presentShareSheet(activityItems: ["I found this app that tells you when bridges are up and down in real time! You should download it here: https://mcrich23.com/easy-bridge-tracker"], excludedActivityTypes: [])
+                        } label: {
+                            Label("Share", systemImage: "square.and.arrow.up")
+                        }
                     }
-                    Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
-                        Label("Settings", systemImage: "switch.2")
+                    Section {
+                        Button {
+                            PurchaseService.shared.purchase(offering: .removeAds, completion: {_ in})
+                        } label: {
+                            Label("Remove Ads", systemImage: "rectangle.slash")
+                        }
+                        Button {
+                            SwiftUIAlert.show(title: NSLocalizedString("Support Us", comment: "Shown in support us alert"), message: NSLocalizedString("Help us make a better app by donating.", comment: "Shown in support us alert"), preferredStyle: .alert, actions: [
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs1.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs1, completion: {_ in})}),
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs5.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs5, completion: {_ in})}),
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs10.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs10, completion: {_ in})}),
+                                UIAlertAction(title: "\(NSLocalizedString("Donate", comment: "Donate button in Support Us Alert in the Menu view")) \(self.supportUs20.price)", style: .default, handler: {_ in PurchaseService.shared.purchase(offering: .supportUs20, completion: {_ in})}),
+                                UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button in Support Us Alert in the Menu view"), style: .default)
+                            ])
+                        } label: {
+                            Label(NSLocalizedString("Support Us", comment: "Support Us button in more screen"), systemImage: "dollarsign.circle")
+                        }
+
+                        Button {
+                            PurchaseService.shared.restore {}
+                        } label: {
+                            Label("Restore Purchases", systemImage: "purchased")
+                        }
                     }
+                    Section {
+                        Button {
+                            Mcrich23_Toolkit.topVC().present {
+                                Info()
+                            }
+                        } label: {
+                            Label("Info", systemImage: "info.circle")
+                        }
+                        Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+                            Label("Settings", systemImage: "switch.2")
+                        }
+                        Button {
+                            self.isShowingNotificationSettings.toggle()
+                        } label: {
+                            Label("Notification Schedules", systemImage: "bell")
+                        }
+                    }
+                    
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 40)
+                        .padding(.horizontal)
+                        .backgroundFill(.clear)
                 }
-                
-            } label: {
-                Image(systemName: "ellipsis.circle")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                    .padding(.horizontal)
             }
+        }
+        .sheet(isPresented: $isShowingNotificationSettings) {
+            NotificationPreferencesView()
         }
     }
 }
 
 struct HelpMenu_Previews: PreviewProvider {
     static var previews: some View {
-        HelpMenu(viewModel: ContentViewModel())
+        HelpMenu()
     }
 }
