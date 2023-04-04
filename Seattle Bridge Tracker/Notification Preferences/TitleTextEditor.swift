@@ -30,6 +30,7 @@ struct TitleTextEditor: UIViewRepresentable {
         if !isEditing {
             textField.resignFirstResponder()
         }
+        textField.text = self.text
         
         if let clearButtonMode {
             textField.clearButtonMode = clearButtonMode
@@ -39,7 +40,6 @@ struct TitleTextEditor: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<TitleTextEditor>) {
-        uiView.text = text
         if isEditing {
             uiView.becomeFirstResponder()
         }
@@ -69,12 +69,21 @@ struct TitleTextEditor: UIViewRepresentable {
         }
         
         func textFieldDidEndEditing(_ textField: UITextField) {
-            self.titleTextEditor.isEditing = false
-            self.titleTextEditor.onCommit()
+            DispatchQueue.main.async {
+                self.titleTextEditor.text = textField.text ?? self.titleTextEditor.text
+                self.titleTextEditor.isEditing = false
+                self.titleTextEditor.onCommit()
+            }
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            true
+            DispatchQueue.main.async {
+                self.titleTextEditor.text = textField.text ?? self.titleTextEditor.text
+                self.titleTextEditor.isEditing = false
+                self.titleTextEditor.onCommit()
+            }
+            textField.resignFirstResponder()
+            return true
         }
     }
 }

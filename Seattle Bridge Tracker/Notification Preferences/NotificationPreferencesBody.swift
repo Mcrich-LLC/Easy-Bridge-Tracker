@@ -27,8 +27,11 @@ struct NotificationPreferencesBody: View {
                             HStack {
                                 Group {
                                     TitleTextEditor(text: $editedTitle, isEditing: $titleEditorIsFocused, clearButtonMode: .whileEditing) {
-                                        preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
-                                            isEditingTitle = false
+                                        withAnimation {
+                                            preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
+                                                self.titleEditorIsFocused = false
+                                                self.isEditingTitle = false
+                                            }
                                         }
                                     }
                                     .minimumScaleFactor(0.6)
@@ -40,9 +43,16 @@ struct NotificationPreferencesBody: View {
                             .background(Color.gray.opacity(0.3))
                             .clipShape(RoundedRectangle(cornerRadius: 15))
                             .frame(maxWidth: 150)
+                        } else {
+                            Text(preference.title)
+                                .font(.title2)
+                        }
+                    }
+                    if isEditingTitle {
+                        HStack {
                             Button {
-                                editedTitle = preference.title
                                 withAnimation {
+                                    editedTitle = preference.title
                                     self.titleEditorIsFocused = false
                                     self.isEditingTitle = false
                                 }
@@ -50,10 +60,9 @@ struct NotificationPreferencesBody: View {
                                 Text("X")
                                     .foregroundColor(.red)
                             }
-                            .hoverEffect(.highlight)
                             Button {
-                                preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
-                                    withAnimation {
+                                withAnimation {
+                                    preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
                                         self.titleEditorIsFocused = false
                                         self.isEditingTitle = false
                                     }
@@ -62,19 +71,15 @@ struct NotificationPreferencesBody: View {
                                 Image(systemName: "checkmark")
                                     .foregroundColor(.green)
                             }
-                            .hoverEffect(.highlight)
-                        } else {
-                            Text(preference.title)
-                                .font(.title2)
-                            Button {
-                                withAnimation {
-                                    self.isEditingTitle = true
-                                    self.titleEditorIsFocused = true
-                                }
-                            } label: {
-                                Image(systemName: "square.and.pencil")
+                        }
+                    } else {
+                        Button {
+                            withAnimation {
+                                self.isEditingTitle = true
+                                self.titleEditorIsFocused = true
                             }
-                            .hoverEffect(.highlight)
+                        } label: {
+                            Image(systemName: "square.and.pencil")
                         }
                     }
                     Spacer()
