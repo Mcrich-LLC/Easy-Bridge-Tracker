@@ -1,0 +1,12 @@
+{
+  "aps" : {
+    "alert" : {
+      "title" : "Seattle, Wa",
+      "body" : "The South Park Bridge is now up"
+    },
+    "interruption-level":"time-sensitive",
+    "sound" : {
+      "name" : "default"
+    }
+  }
+}
