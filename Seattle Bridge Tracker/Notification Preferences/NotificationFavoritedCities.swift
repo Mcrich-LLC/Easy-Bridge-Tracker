@@ -28,6 +28,13 @@ struct NotificationFavoritedCities: View {
                         })
                         .tag(bridge.name)
                     }
+                    if !adController.areAdsDisabled && !Utilities.isFastlaneRunning {
+                        HStack {
+                            Spacer()
+                            BannerAds()
+                            Spacer()
+                        }
+                    }
                 }
             } header: {
                 HStack {
