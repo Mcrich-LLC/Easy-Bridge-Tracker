@@ -25,7 +25,7 @@ class ContentViewModel: ObservableObject {
             for bridgeArray in self.sortedBridges {
                 count += bridgeArray.value.count
             }
-            if !bridgeFavorites.isEmpty {
+            if !FavoritesModel.shared.favorites.isEmpty {
                 filterOptions = [.allBridges, .favorites] + self.sortedBridges.compactMap({ .city($0.key) })
             } else {
                 filterOptions = [.allBridges] + self.sortedBridges.compactMap({ .city($0.key) })
@@ -36,15 +36,6 @@ class ContentViewModel: ObservableObject {
         ContentViewModel.shared.sortedBridges.flatMap({ $0.value })
     }
     @Published var demoLink = false
-    @Published var bridgeFavorites: [String] = [] {
-        didSet {
-            if !bridgeFavorites.isEmpty {
-                filterOptions = [.allBridges, .favorites] + self.sortedBridges.compactMap({ .city($0.key) })
-            } else {
-                filterOptions = [.allBridges] + self.sortedBridges.compactMap({ .city($0.key) })
-            }
-        }
-    }
     @Published var status: LoadingStatus = .loading
     @Published var filterOptions: [BridgesFilter] = [.allBridges]
     @Published var filterSelection = BridgesFilter.allBridges
@@ -107,16 +98,6 @@ class ContentViewModel: ObservableObject {
             UNUserNotificationCenter.current().getNotificationSettings { setting in
                 completion(setting.authorizationStatus)
             }
-        }
-    }
-    func toggleFavorite(bridgeLocation: String) {
-        if self.bridgeFavorites.contains(bridgeLocation) {
-            let bridges = self.bridgeFavorites.firstIndex { bridge in
-                bridge == bridgeLocation
-            }!
-            self.bridgeFavorites.remove(at: bridges)
-        } else {
-            self.bridgeFavorites.append(bridgeLocation)
         }
     }
     func toggleSubscription(for bridge: Bridge) {
@@ -199,7 +180,7 @@ class ContentViewModel: ObservableObject {
         }
     }
 }
-struct Bridge: Identifiable, Hashable, Comparable {
+struct Bridge: Identifiable, Hashable, Comparable, Codable {
     static func < (lhs: Bridge, rhs: Bridge) -> Bool {
         return lhs.name < rhs.name
     }
@@ -228,7 +209,7 @@ struct Bridge: Identifiable, Hashable, Comparable {
         self.subscribed = subscribed
     }
 }
-enum BridgeStatus: String {
+enum BridgeStatus: String, Codable {
     init?(rawValue: String) {
         switch rawValue {
         case "up":

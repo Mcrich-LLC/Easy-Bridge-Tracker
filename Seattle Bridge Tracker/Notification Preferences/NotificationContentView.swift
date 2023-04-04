@@ -17,6 +17,7 @@ struct NotificationContentView: View {
     @ObservedObject var viewModel = ContentViewModel.shared
     @ObservedObject var preferencesModel = NotificationPreferencesModel.shared
     @ObservedObject var adController = AdController.shared
+    @ObservedObject var favoritesModel = FavoritesModel.shared
     @Binding var preference: NotificationPreferences
     @Environment(\.backportDismiss) var dismiss
     
@@ -48,82 +49,58 @@ struct NotificationContentView: View {
                     case .failed(let error):
                         errors(error: error)
                     case .success:
-                        List {
-                            ForEach(viewModel.bridgeFavorites, id: \.self) { key in
+                        Form {
+                            if viewModel.sortedBridges.keys.count > 1 {
                                 Section {
-                                    ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
-                                        if #available(iOS 15.0, *) {
-                                            NotificationBridgeRow(bridge: Binding(get: {
-                                                print("get \(bridge)")
-                                                return bridge
-                                            }, set: { _ in
-                                            }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
-                                                toggleBridgeCallback(for: bridge)
-                                            })
-                                            .tag(bridge.name)
-                                        } else {
-                                            NotificationBridgeRow(bridge: Binding(get: {
-                                                print("get \(bridge)")
-                                                return bridge
-                                            }, set: { _ in
-                                            }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
-                                                toggleBridgeCallback(for: bridge)
-                                            })
-                                            .tag(bridge.name)
-                                        }
-                                    }
-                                } header: {
-                                    HStack {
-                                        Text(key)
-                                        if viewModel.sortedBridges.keys.count >= 3 {
-                                            Spacer()
-                                            Button {
-                                                viewModel.toggleFavorite(bridgeLocation: key)
-                                            } label: {
-                                                Image(systemName: "star.fill")
-                                                    .foregroundColor(.yellow)
-                                                    .imageScale(.medium)
-                                            }
-                                        }
-                                    }
-                                    
+                                    BridgeFilterView()
                                 }
                             }
-                            ForEach(Array(viewModel.sortedBridges.keys), id: \.self) { key in
-                                if !Array(viewModel.bridgeFavorites).contains(key) {
-                                    Section {
-                                        ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
-                                            //                                            NotificationBridgeRow(bridge: Binding(get: {
-                                            //                                                print("get \(bridge)")
-                                            //                                                return bridge
-                                            //                                            }, set: { _ in
-                                            //                                            }), isSelected: bridgeIds.contains(bridge.id.uuidString), toggleBridgeCallback: { bridge in
-                                            //                                                toggleBridgeCallback(bridge)
-                                            //                                            })
-                                            rowView(bridge: bridge)
-                                                .tag(bridge.name)
-                                        }
-                                        if !adController.areAdsDisabled && !Utilities.isFastlaneRunning {
-                                            HStack {
-                                                Spacer()
-                                                BannerAds()
-                                                Spacer()
+                            switch viewModel.filterSelection {
+                            case .allBridges:
+                                NotificationFavoritedCities(preference: $preference, toggleBridgeCallback: toggleBridgeCallback)
+                                ForEach(Array(viewModel.sortedBridges.keys), id: \.self) { key in
+                                    if !Array(favoritesModel.favorites).contains(key) {
+                                        Section {
+                                            ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
+                                                    rowView(bridge: bridge)
+                                                        .tag(bridge.name)
                                             }
-                                        }
-                                    } header: {
-                                        HStack {
-                                            Text(key)
-                                            if viewModel.sortedBridges.keys.count >= 3 {
-                                                Spacer()
-                                                Button {
-                                                    viewModel.toggleFavorite(bridgeLocation: key)
-                                                } label: {
-                                                    Image(systemName: "star")
-                                                        .foregroundColor(.yellow)
-                                                        .imageScale(.medium)
+                                            if !adController.areAdsDisabled && !Utilities.isFastlaneRunning {
+                                                HStack {
+                                                    Spacer()
+                                                    BannerAds()
+                                                    Spacer()
+                                                }
+                                            }
+                                        } header: {
+                                            HStack {
+                                                Text(key)
+                                                if viewModel.sortedBridges.keys.count >= 3 {
+                                                    Spacer()
+                                                    Button {
+                                                        favoritesModel.toggleFavorite(bridgeLocation: key)
+                                                    } label: {
+                                                        Image(systemName: "star")
+                                                            .foregroundColor(.yellow)
+                                                            .imageScale(.medium)
+                                                    }
                                                 }
                                             }
                                         }
+                                    }
+                                }
+                            case .favorites:
+                                NotificationFavoritedCities(preference: $preference, toggleBridgeCallback: toggleBridgeCallback)
+                            case .city(let name):
+                                ForEach((viewModel.sortedBridges[name] ?? []).sorted()) { bridge in
+                                    rowView(bridge: bridge)
+                                        .tag(bridge.name)
+                                }
+                                if !adController.areAdsDisabled && !Utilities.isFastlaneRunning {
+                                    HStack {
+                                        Spacer()
+                                        BannerAds()
+                                        Spacer()
                                     }
                                 }
                             }

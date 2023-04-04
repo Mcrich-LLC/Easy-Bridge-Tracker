@@ -10,8 +10,9 @@ import SwiftUI
 
 struct FavoritedCities: View {
     @ObservedObject var viewModel = ContentViewModel.shared
+    @ObservedObject var favoritesModel = FavoritesModel.shared
     var body: some View {
-        ForEach(viewModel.bridgeFavorites, id: \.self) { key in
+        ForEach(favoritesModel.favorites, id: \.self) { key in
             Section {
                 VStack {
                     ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
@@ -49,7 +50,7 @@ struct FavoritedCities: View {
                     if viewModel.sortedBridges.keys.count >= 3 {
                         Spacer()
                         Button {
-                            viewModel.toggleFavorite(bridgeLocation: key)
+                            favoritesModel.toggleFavorite(bridgeLocation: key)
                         } label: {
                             Image(systemName: "star.fill")
                                 .foregroundColor(.yellow)

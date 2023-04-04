@@ -16,6 +16,7 @@ import Foundation
 struct ContentView: View {
     @ObservedObject var viewModel = ContentViewModel.shared
     @ObservedObject var adController = AdController.shared
+    @ObservedObject var favoritesModel = FavoritesModel.shared
     var body: some View {
         NavigationView {
             VStack {
@@ -37,22 +38,16 @@ struct ContentView: View {
                                 .tag("South Park Bridge Link")
                             }
                             Form {
-                                if viewModel.sortedBridges.keys.count > 1 {
+//                                if viewModel.sortedBridges.keys.count > 1 {
                                     Section {
-                                        if #available(iOS 15, *) {
-                                            BridgeFilterView()
-                                                .listRowBackground(Color.clear)
-                                                .listRowSeparator(.hidden)
-                                        } else {
-                                            BridgeFilterView()
-                                        }
+                                        BridgeFilterView()
                                     }
-                                }
+//                                }
                                 switch viewModel.filterSelection {
                                 case .allBridges:
                                     FavoritedCities()
                                     ForEach(Array(viewModel.sortedBridges.keys), id: \.self) { key in
-                                        if !Array(viewModel.bridgeFavorites).contains(key) {
+                                        if !Array(favoritesModel.favorites).contains(key) {
                                             Section {
                                                 ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
                                                     //                                            BridgeRow(bridge: Binding(get: {
@@ -93,7 +88,7 @@ struct ContentView: View {
                                                     if viewModel.sortedBridges.keys.count >= 3 {
                                                         Spacer()
                                                         Button {
-                                                            viewModel.toggleFavorite(bridgeLocation: key)
+                                                            favoritesModel.toggleFavorite(bridgeLocation: key)
                                                         } label: {
                                                             Image(systemName: "star")
                                                                 .foregroundColor(.yellow)

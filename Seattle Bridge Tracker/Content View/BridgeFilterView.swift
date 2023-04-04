@@ -10,6 +10,7 @@ import SwiftUIX
 
 struct BridgeFilterView: View {
     @ObservedObject var viewModel = ContentViewModel.shared
+    @ObservedObject var favoritesModel = FavoritesModel.shared
     var body: some View {
         HStack(spacing: 10) {
             Picker(selection: $viewModel.filterSelection) {
@@ -25,16 +26,16 @@ struct BridgeFilterView: View {
                 }
             }
             .pickerStyle(.menu)
-            if viewModel.sortedBridges.keys.count >= 3 {
+//            if viewModel.sortedBridges.keys.count >= 3 {
                 switch viewModel.filterSelection {
                 case .allBridges: EmptyView()
                 case .favorites: EmptyView()
                 case .city(let name):
                     Button {
-                        viewModel.toggleFavorite(bridgeLocation: name)
+                        favoritesModel.toggleFavorite(bridgeLocation: name)
                     } label: {
                         HStack {
-                            if viewModel.bridgeFavorites.contains(name) {
+                            if favoritesModel.favorites.contains(name) {
                                 Image(systemName: "star.fill")
                             } else {
                                 Image(systemName: "star")
@@ -44,9 +45,8 @@ struct BridgeFilterView: View {
                         .imageScale(.medium)
                     }
                 }
-            }
+//            }
         }
-        .padding(.horizontal)
     }
 }
 
