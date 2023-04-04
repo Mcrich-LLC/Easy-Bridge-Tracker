@@ -19,6 +19,7 @@
 		224C81FA29459B33004C5722 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
 		224C81FB29459B47004C5722 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
 		2253C9BC29D1940A00F22F3B /* NotificationPreferencesDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */; };
+		2253E00D29DBC5430063DDE2 /* BridgeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */; };
 		229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */; };
 		229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
@@ -56,6 +57,8 @@
 		22C28A4529397B9500D37696 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4429397B9500D37696 /* FirebaseStorage */; };
 		22C28A4729397B9500D37696 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 22C28A4629397B9500D37696 /* FirebaseStorageCombine-Community */; };
 		22C28A4929398F7900D37696 /* FPN Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C28A4829398F7800D37696 /* FPN Manager.swift */; };
+		22D460F529DBB54B00163E16 /* BridgesFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D460F429DBB54B00163E16 /* BridgesFilter.swift */; };
+		22D460F729DBBA6700163E16 /* FavoritedCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D460F629DBBA6700163E16 /* FavoritedCities.swift */; };
 		22D8688629D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */; };
 		22D8688829D2B5C600E7D647 /* NotificationPreferencesAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */; };
 		22D8688A29D2BEA400E7D647 /* Purchase Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D8688929D2BEA400E7D647 /* Purchase Service.swift */; };
@@ -134,6 +137,7 @@
 		2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesModel.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		224C81EF29459999004C5722 /* Easy Bridge TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Easy Bridge TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFilterView.swift; sourceTree = "<group>"; };
 		229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesBody.swift; sourceTree = "<group>"; };
 		229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesTimePicker.swift; sourceTree = "<group>"; };
 		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +149,8 @@
 		22C28A0F2939785A00D37696 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22C28A4829398F7800D37696 /* FPN Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPN Manager.swift"; sourceTree = "<group>"; };
 		22C28A4A2939DA6700D37696 /* Easy Bridge Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Easy Bridge Tracker.entitlements"; sourceTree = "<group>"; };
+		22D460F429DBB54B00163E16 /* BridgesFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgesFilter.swift; sourceTree = "<group>"; };
+		22D460F629DBBA6700163E16 /* FavoritedCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedCities.swift; sourceTree = "<group>"; };
 		22D8688529D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesActiveToggle.swift; sourceTree = "<group>"; };
 		22D8688729D2B5C600E7D647 /* NotificationPreferencesAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesAd.swift; sourceTree = "<group>"; };
 		22D8688929D2BEA400E7D647 /* Purchase Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Purchase Service.swift"; sourceTree = "<group>"; };
@@ -248,8 +254,11 @@
 			isa = PBXGroup;
 			children = (
 				A33F930428AC90A800391EBB /* ContentView.swift */,
+				2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */,
+				22D460F629DBBA6700163E16 /* FavoritedCities.swift */,
 				A3413A0428AFDD680016710C /* ContentViewModel.swift */,
 				A394A80128BFBEE1003E5273 /* BridgeRow.swift */,
+				22D460F429DBB54B00163E16 /* BridgesFilter.swift */,
 			);
 			path = "Content View";
 			sourceTree = "<group>";
@@ -634,6 +643,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D460F729DBBA6700163E16 /* FavoritedCities.swift in Sources */,
 				22D8688829D2B5C600E7D647 /* NotificationPreferencesAd.swift in Sources */,
 				229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */,
 				22EE942729D3664F00EB8889 /* TitleTextEditor.swift in Sources */,
@@ -645,6 +655,7 @@
 				229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */,
 				A3F2AFF728B2B67B00D38A59 /* Banner Ads.swift in Sources */,
 				A394A80828C0725B003E5273 /* BridgeView.swift in Sources */,
+				22D460F529DBB54B00163E16 /* BridgesFilter.swift in Sources */,
 				A3F2AFFA28B2B7F500D38A59 /* Utilities.swift in Sources */,
 				A33F930528AC90A800391EBB /* ContentView.swift in Sources */,
 				A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */,
@@ -661,6 +672,7 @@
 				2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */,
 				2222EBB629D18EAD00837F79 /* NotificationContentView.swift in Sources */,
 				22BB211929D20F0B002F753B /* NotificationPreferencesSelectedBridges.swift in Sources */,
+				2253E00D29DBC5430063DDE2 /* BridgeFilterView.swift in Sources */,
 				22D8688629D2B25800E7D647 /* NotificationPreferencesActiveToggle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

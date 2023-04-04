@@ -25,14 +25,29 @@ class ContentViewModel: ObservableObject {
             for bridgeArray in self.sortedBridges {
                 count += bridgeArray.value.count
             }
+            if !bridgeFavorites.isEmpty {
+                filterOptions = [.allBridges, .favorites] + self.sortedBridges.compactMap({ .city($0.key) })
+            } else {
+                filterOptions = [.allBridges] + self.sortedBridges.compactMap({ .city($0.key) })
+            }
         }
     }
     var allBridges: [Bridge] {
         ContentViewModel.shared.sortedBridges.flatMap({ $0.value })
     }
     @Published var demoLink = false
-    @Published var bridgeFavorites: [String] = []
+    @Published var bridgeFavorites: [String] = [] {
+        didSet {
+            if !bridgeFavorites.isEmpty {
+                filterOptions = [.allBridges, .favorites] + self.sortedBridges.compactMap({ .city($0.key) })
+            } else {
+                filterOptions = [.allBridges] + self.sortedBridges.compactMap({ .city($0.key) })
+            }
+        }
+    }
     @Published var status: LoadingStatus = .loading
+    @Published var filterOptions: [BridgesFilter] = [.allBridges]
+    @Published var filterSelection = BridgesFilter.allBridges
     private var response: [Response] = []
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
