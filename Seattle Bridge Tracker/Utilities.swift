@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Firebase
 import Mcrich23_Toolkit
+import UIKit
 
 class Utilities {
     static let isFastlaneRunning = UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT")
@@ -122,5 +123,11 @@ extension View {
         } else {
             self
         }
+    }
+}
+
+extension UIAlertAction {
+    static func ok(handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
+        UIAlertAction(title: "Ok", style: .default, handler: handler)
     }
 }
