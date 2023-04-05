@@ -24,7 +24,7 @@ struct NotificationContentView: View {
     func toggleBridgeCallback(for bridge: Bridge) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
-                if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
+                if let index = self.preference.bridgeIds.firstIndex(where: { $0 == bridge.id }) {
                     if self.preference.bridgeIds.contains(bridge.id) {
                         self.preference.bridgeIds.remove(at: index)
                         preferencesModel.removeSubscription(for: bridge)
@@ -32,6 +32,9 @@ struct NotificationContentView: View {
                         self.preference.bridgeIds.append(bridge.id)
                         preferencesModel.addSubscription(for: bridge)
                     }
+                } else if !self.preference.bridgeIds.contains(bridge.id) {
+                    self.preference.bridgeIds.append(bridge.id)
+                    preferencesModel.addSubscription(for: bridge)
                 }
             }
         }

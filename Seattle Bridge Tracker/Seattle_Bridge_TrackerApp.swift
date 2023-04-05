@@ -55,6 +55,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         if Utilities.isFastlaneRunning {
             AdController.shared.areAdsDisabled = true
         }
+        if Utilities.appType == .TestFlight || Utilities.appType == .Debug {
+            Messaging.messaging().subscribe(toTopic: "test")
+        }
         return true
     }
 }

@@ -34,7 +34,7 @@ class NotificationService: UNNotificationServiceExtension {
                        (pref.days ?? []).contains(day) && (currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) || pref.isAllDay) && pref.bridgeIds.contains(UUID(uuidString: bridgeId)!) && pref.isActive
                    }) {
                     removeOldNotifications {
-                        self.pushNotification(request: request, preferences: preferences)
+                        self.pushNotification(categoryIdentifier: request.content.title, preferences: preferences)
                     }
                 } else {
                     throw throwError.preferenceDoesNotExist
@@ -46,12 +46,14 @@ class NotificationService: UNNotificationServiceExtension {
 //            removeOldNotifications {
 //                pushNotification()
 //            }
+            print("empty notification")
+            FIRMessagingExtensionHelper().populateNotificationContent(UNMutableNotificationContent(), withContentHandler: {_ in})
         }
     }
     
-    func pushNotification(request: UNNotificationRequest, preferences: NotificationPreferences) {
+    func pushNotification(categoryIdentifier: String, preferences: NotificationPreferences) {
         guard let bestAttemptContent, let contentHandler else { return }
-        bestAttemptContent.categoryIdentifier = request.content.title
+        bestAttemptContent.categoryIdentifier = categoryIdentifier
         if #available(iOSApplicationExtension 15.0, *) {
             switch preferences.notificationPriority {
             case .timeSensitive: bestAttemptContent.interruptionLevel = .timeSensitive
