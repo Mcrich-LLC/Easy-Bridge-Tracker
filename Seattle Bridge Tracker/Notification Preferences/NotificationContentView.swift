@@ -25,11 +25,11 @@ struct NotificationContentView: View {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
                 if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }) {
-                    if self.preference.bridgeIds.contains(bridge.id) {
+                    if self.preference.bridgeIds.contains(bridge.notificationBridgeName()) {
                         self.preference.bridgeIds.remove(at: index)
                         preferencesModel.removeSubscription(for: bridge)
-                    } else if !self.preference.bridgeIds.contains(bridge.id) {
-                        self.preference.bridgeIds.append(bridge.id)
+                    } else if !self.preference.bridgeIds.contains(bridge.notificationBridgeName()) {
+                        self.preference.bridgeIds.append(bridge.notificationBridgeName())
                         preferencesModel.addSubscription(for: bridge)
                     }
                 }
@@ -139,7 +139,7 @@ struct NotificationContentView: View {
         NotificationBridgeRow(bridge: Binding(get: {
             return bridge
         }, set: { _ in
-        }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
+        }), isSelected: preference.bridgeIds.contains(bridge.notificationBridgeName()), toggleBridgeCallback: { bridge in
             toggleBridgeCallback(for: bridge)
         })
     }

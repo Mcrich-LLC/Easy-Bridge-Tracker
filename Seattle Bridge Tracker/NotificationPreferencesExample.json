@@ -14,8 +14,8 @@
         "end_time": "9:00 AM",
         "notification_priority": "time sensitive",
         "bridge_ids": [
-            "65C163B6-8B32-477A-B292-69AB0BCEFC15",
-            "85C3D66A-B103-49AB-AA8B-26D153600D19"
+            "Seattle_Wa_Ballard",
+            "Seattle_Wa_Fremont"
         ],
         "is_active": true
     },
@@ -34,8 +34,8 @@
         "end_time": "6:00 PM",
         "notification_priority": "time sensitive",
         "bridge_ids": [
-            "65C163B6-8B32-477A-B292-69AB0BCEFC15",
-            "85C3D66A-B103-49AB-AA8B-26D153600D19"
+            "Seattle_Wa_Ballard",
+            "Seattle_Wa_Fremont"
         ],
         "is_active": true
     }

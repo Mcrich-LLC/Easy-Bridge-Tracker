@@ -209,6 +209,15 @@
         }
       },
       {
+        "package": "SwiftUIAlert",
+        "repositoryURL": "https://github.com/Mcrich23/SwiftUIAlert",
+        "state": {
+          "branch": null,
+          "revision": "bd2528976467b6f7846344d5d89063ba77f3fbba",
+          "version": "1.0.2"
+        }
+      },
+      {
         "package": "SwiftUIBackports",
         "repositoryURL": "https://github.com/shaps80/SwiftUIBackports",
         "state": {

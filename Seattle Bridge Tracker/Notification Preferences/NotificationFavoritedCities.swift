@@ -23,7 +23,7 @@ struct NotificationFavoritedCities: View {
                             print("get \(bridge)")
                             return bridge
                         }, set: { _ in
-                        }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in
+                        }), isSelected: preference.bridgeIds.contains(bridge.notificationBridgeName()), toggleBridgeCallback: { bridge in
                             toggleBridgeCallback(bridge)
                         })
                         .tag(bridge.name)

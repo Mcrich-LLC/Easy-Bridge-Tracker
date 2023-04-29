@@ -10,6 +10,7 @@ import UserNotifications
 import Firebase
 import Mcrich23_Toolkit
 import SwiftUI
+import SwiftUIAlert
 
 final class NotificationPreferencesModel: ObservableObject {
     static let shared = NotificationPreferencesModel()
@@ -21,6 +22,43 @@ final class NotificationPreferencesModel: ObservableObject {
     let fileName = "NotificationPreferences.json"
     
     @Published var notificationsAllowed = false
+    
+    func shouldPresentNotification(for data: [AnyHashable : Any]) -> Bool {
+        do {
+            enum throwError: Error {
+                case fileDoesNotExist
+                case preferenceDoesNotExist
+            }
+            if let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("NotificationPreferences.json") {
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                let preferencesArray = try jsonDecoder.decode([NotificationPreferences].self, from: Data(contentsOf: filePath))
+                var yesBridges: [String] = []
+                for pref in preferencesArray {
+                    if let day = Day.currentDay(),
+                       ((pref.days ?? []).contains(day) && (currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) || pref.isAllDay) && pref.isActive) {
+                        yesBridges.append(contentsOf: pref.bridgeIds)
+                        for bridge in pref.bridgeIds {
+                            Messaging.messaging().subscribe(toTopic: bridge)
+                        }
+                    } else {
+                        for bridge in pref.bridgeIds where !yesBridges.contains(bridge) {
+                            Messaging.messaging().unsubscribe(fromTopic: bridge)
+                        }
+                    }
+                }
+                if let bridgeId = data["bridge_id"] as? String, yesBridges.contains(bridgeId) {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                throw throwError.fileDoesNotExist
+            }
+        } catch {
+            return true
+        }
+    }
     
     func addSubscription(for bridge: Bridge) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
@@ -41,7 +79,7 @@ final class NotificationPreferencesModel: ObservableObject {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
                 let allBridgeIds = self.preferencesArray.map { $0.bridgeIds }.joined()
-                if !allBridgeIds.contains(bridge.id) {
+                if !allBridgeIds.contains(bridge.notificationBridgeName()) {
                     Analytics.setUserProperty("unsubscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
                     Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
                     Messaging.messaging().unsubscribe(fromTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
@@ -94,7 +132,7 @@ final class NotificationPreferencesModel: ObservableObject {
                     Utilities.checkNotificationPermissions { notificationsAreAllowed in
                         if notificationsAreAllowed {
                             for id in allBridgeIds {
-                                if let bridge = ContentViewModel.shared.allBridges.first(where: { $0.id == id}) {
+                                if let bridge = ContentViewModel.shared.allBridges.first(where: { $0.notificationBridgeName() == id}) {
                                     self.addSubscription(for: bridge)
                                 }
                             }
@@ -238,7 +276,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 self.preferencesArray.remove(at: index)
                 for bridge in ContentViewModel.shared.allBridges {
                     let sortedBridgesIndex = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { $0.id == bridge.id })
-                    if let sortedBridgesIndex, !(self.preferencesArray.map({ $0.bridgeIds }).joined()).contains(bridge.id) {
+                    if let sortedBridgesIndex, !(self.preferencesArray.map({ $0.bridgeIds }).joined()).contains(bridge.notificationBridgeName()) {
                         self.removeSubscription(for: ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![sortedBridgesIndex])
                     }
                 }
@@ -289,6 +327,34 @@ final class NotificationPreferencesModel: ObservableObject {
             })])
         }
     }
+    
+    func removeOldNotifications(notification: UNMutableNotificationContent, then completion: @escaping () -> Void) {
+        UNUserNotificationCenter.current().getDeliveredNotifications { deliveredNotifications in
+            if deliveredNotifications.isEmpty {
+                completion()
+            } else {
+                let filteredNotifications = deliveredNotifications.filter { getNotification in
+                    getNotification.request.content.body.removeBridgeStatus() == notification.body.removeBridgeStatus()
+                }
+                for notification in filteredNotifications {
+                    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [notification.request.identifier])
+                    if notification == filteredNotifications.last {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(50)) {
+                            completion()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func currentTimeIsBetween(startTime: String, endTime: String) -> Bool {
+        guard let start = Formatter.today.date(from: startTime),
+              let end = Formatter.today.date(from: endTime) else {
+            return false
+        }
+        return DateInterval(start: start, end: end).contains(Date())
+    }
 }
 
 extension String {
@@ -306,5 +372,8 @@ extension String {
         } else {
             return false
         }
+    }
+    func removeBridgeStatus() -> String {
+        return self.replacingOccurrences(of: "up", with: "").replacingOccurrences(of: "down", with: "").replacingOccurrences(of: "unknown", with: "")
     }
 }

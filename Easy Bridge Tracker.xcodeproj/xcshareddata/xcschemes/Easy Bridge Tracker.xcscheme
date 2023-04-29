@@ -80,7 +80,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-adsDisabled true"
+            argument = "-adsDisabled false"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
