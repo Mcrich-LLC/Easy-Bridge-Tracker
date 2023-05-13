@@ -8,6 +8,7 @@
 import Foundation
 import UserNotifications
 import Firebase
+import FirebaseAnalytics
 import Mcrich23_Toolkit
 import SwiftUI
 import SwiftUIAlert
@@ -20,6 +21,10 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     let fileName = "NotificationPreferences.json"
+    
+    init() {
+        getPreferences()
+    }
     
     @Published var notificationsAllowed = false
     

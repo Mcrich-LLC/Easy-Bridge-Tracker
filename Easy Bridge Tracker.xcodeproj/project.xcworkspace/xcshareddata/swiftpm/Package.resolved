@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {
           "branch": null,
-          "revision": "f6b558e3f801f2cac336b04f615ce111fa9ddaa0",
-          "version": "9.2.1"
+          "revision": "7874c1b48cbffd086ce8a052c4be873a78613775",
+          "version": "9.2.3"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "0543562f85620b5b7c510c6bcbef75b562a5127b",
-          "version": "7.11.0"
+          "revision": "871d43135925cde39ef7421d8723ce47edfdcc39",
+          "version": "7.11.1"
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/RevenueCat/purchases-ios.git",
         "state": {
           "branch": null,
-          "revision": "5d77aeccee3622dd2a5dbfd7af5aed195b84767e",
-          "version": "4.17.8"
+          "revision": "3ad7fab62d44dd7053d6531d5b0bc90e0e4724a7",
+          "version": "4.18.0"
         }
       },
       {
@@ -195,8 +195,8 @@
         "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
         "state": {
           "branch": null,
-          "revision": "c18951c747ab62af7c15e17a81bd37d4fd5a9979",
-          "version": "0.2.3"
+          "revision": "5b3f3996c7a2a84d5f4ba0e03cd7d584154778f2",
+          "version": "0.3.1"
         }
       },
       {
@@ -213,8 +213,8 @@
         "repositoryURL": "https://github.com/Mcrich23/SwiftUIAlert",
         "state": {
           "branch": null,
-          "revision": "bd2528976467b6f7846344d5d89063ba77f3fbba",
-          "version": "1.0.2"
+          "revision": "cf9ffe9297f82bd8a2a94f318349d29abdf79b9b",
+          "version": "1.0.3"
         }
       },
       {

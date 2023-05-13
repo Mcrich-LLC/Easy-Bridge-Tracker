@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAnalytics
 import Mcrich23_Toolkit
 import UserNotifications
 import SwiftUI
