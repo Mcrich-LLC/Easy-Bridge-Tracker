@@ -65,6 +65,43 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
+    func notificationNotificationPriority(for data: [AnyHashable : Any]) -> NotificationPriority {
+        do {
+            enum throwError: Error {
+                case fileDoesNotExist
+                case preferenceDoesNotExist
+            }
+            if let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("NotificationPreferences.json") {
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+                let preferencesArray = try jsonDecoder.decode([NotificationPreferences].self, from: Data(contentsOf: filePath))
+                var yesBridges: [String : NotificationPriority] = [:]
+                for pref in preferencesArray {
+                    if let day = Day.currentDay(),
+                       ((pref.days ?? []).contains(day) && (currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) || pref.isAllDay) && pref.isActive) {
+                        for bridge in pref.bridgeIds {
+                            Messaging.messaging().subscribe(toTopic: bridge)
+                            yesBridges[bridge] = pref.notificationPriority
+                        }
+                    } else {
+                        for bridge in pref.bridgeIds where !yesBridges.keys.contains(bridge) {
+                            Messaging.messaging().unsubscribe(fromTopic: bridge)
+                        }
+                    }
+                }
+                if let bridgeId = data["bridge_id"] as? String, let bridge = yesBridges.first(where: { (key, _) in key == bridgeId }), yesBridges.keys.contains(bridgeId) {
+                    return bridge.value
+                } else {
+                    return .normal
+                }
+            } else {
+                throw throwError.fileDoesNotExist
+            }
+        } catch {
+            return .normal
+        }
+    }
+    
     func addSubscription(for bridge: Bridge) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
