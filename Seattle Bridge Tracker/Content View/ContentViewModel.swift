@@ -11,6 +11,7 @@ import FirebaseAnalytics
 import Mcrich23_Toolkit
 import UserNotifications
 import SwiftUI
+import SwiftUIAlert
 
 class ContentViewModel: ObservableObject {
     static let shared = ContentViewModel()
@@ -113,7 +114,6 @@ class ContentViewModel: ObservableObject {
                     }
                     Analytics.setUserProperty("unsubscribed", forName: self.bridgeName(bridge: bridge))
                     Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : self.bridgeName(bridge: bridge)])
-                    Messaging.messaging().unsubscribe(fromTopic: self.bridgeName(bridge: bridge))
                     let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                         bridgeArray.name == bridge.name
                     })!
@@ -123,7 +123,6 @@ class ContentViewModel: ObservableObject {
                     func complete() {
                         Analytics.setUserProperty("subscribed", forName: self.bridgeName(bridge: bridge))
                         Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : self.bridgeName(bridge: bridge)])
-                        Messaging.messaging().subscribe(toTopic: self.bridgeName(bridge: bridge))
                         let index = self.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                             bridgeArray.name == bridge.name
                         })!

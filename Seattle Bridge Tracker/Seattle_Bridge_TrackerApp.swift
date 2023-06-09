@@ -55,7 +55,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         if Utilities.isFastlaneRunning {
             AdController.shared.areAdsDisabled = true
         }
-        if UserDefaults.standard.string(forKey: "deviceID") == nil || UserDefaults.standard.string(forKey: "deviceID")?.isEmpty {
+        if UserDefaults.standard.string(forKey: "deviceID") == nil {
             let deviceID = UUID()
             UserDefaults.standard.setValue(deviceID.uuidString, forKey: "deviceID")
             Utilities.deviceID = deviceID.uuidString
