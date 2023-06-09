@@ -103,7 +103,10 @@ struct NotificationPreferencesView: View {
                 } else {
                     LazyVStack(spacing: 10) {
                         ForEach(preferencesModel.preferencesArray, id: \.self) { preference in
-                            if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }), index.isMultiple(of: 3) {
+                            if preferencesModel.preferencesArray.first?.id == preference.id {
+                                NotificationPreferencesAd()
+                            }
+                            if let index = preferencesModel.preferencesArray.firstIndex(where: { $0.id == preference.id }), index.isMultiple(of: 3), preferencesModel.preferencesArray.first?.id != preference.id {
                                 NotificationPreferencesAd()
                             }
                             NotificationPreferencesBody(preference: Binding(get: {

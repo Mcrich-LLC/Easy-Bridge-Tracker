@@ -11,7 +11,6 @@ import MapKit
 import SwiftUIMap
 import SwiftUIX
 import Mcrich23_Toolkit
-import SwiftUIAlert
 
 struct BridgeView: View {
     @Binding var bridge: Bridge

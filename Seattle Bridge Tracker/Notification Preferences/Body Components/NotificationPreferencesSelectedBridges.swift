@@ -25,7 +25,7 @@ struct NotificationPreferencesSelectedBridges: View {
             } label: {
                 if preference.bridgeIds.isEmpty {
                     Text("Select Bridge")
-                } else if let bridgeId = preference.bridgeIds.first, let bridge = contentViewModel.allBridges.first(where: { $0.notificationBridgeName() == bridgeId }), preference.bridgeIds.count == 1 {
+                } else if let bridgeId = preference.bridgeIds.first, let bridge = contentViewModel.allBridges.first(where: { $0.id == bridgeId }), preference.bridgeIds.count == 1 {
                     Text("\(bridge.name), \(bridge.bridgeLocation)")
                 } else {
                     Text("\(preference.bridgeIds.count) Bridges Selected")

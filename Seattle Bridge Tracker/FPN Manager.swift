@@ -83,11 +83,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
             userInfo: dataDict
         )
         // Note: This callback is fired at each app startup and whenever a new token is generated.
-        Messaging.messaging().subscribe(toTopic: "subscription_check")
     }
     
     // MARK: Handle Message
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification) async
+    -> UNNotificationPresentationOptions {
         let userInfo = notification.request.content.userInfo
         
         // With swizzling disabled you must let Messaging know about the message, for Analytics
@@ -100,18 +101,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate, MessagingDelegate {
         print("userInfo = \(userInfo)")
         
         // Change this to your preferred presentation option
-        let notificationModel = NotificationPreferencesModel.shared
-        guard let mutableCopy = (notification.request.content.mutableCopy() as? UNMutableNotificationContent) else {
-            completionHandler([[]])
-            return
-        }
-        if notificationModel.shouldPresentNotification(for: userInfo) {
-            notificationModel.removeOldNotifications(notification: mutableCopy) {
-                completionHandler([[.banner, .list, .sound]])
-            }
-        } else {
-            return completionHandler([[]])
-        }
+        return [[.banner, .list, .sound]]
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,

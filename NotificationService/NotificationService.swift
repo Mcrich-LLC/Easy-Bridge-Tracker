@@ -27,22 +27,17 @@ class NotificationService: UNNotificationServiceExtension {
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 let preferencesArray = try jsonDecoder.decode([NotificationPreferences].self, from: Data(contentsOf: filePath))
-                var yesBridges: [String] = []
-                for pref in preferencesArray {
-                    if let day = Day.currentDay(),
-                       ((pref.days ?? []).contains(day) && (currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) || pref.isAllDay) && pref.isActive) {
-                        yesBridges.append(contentsOf: pref.bridgeIds)
-                        for bridge in pref.bridgeIds {
-                            Messaging.messaging().subscribe(toTopic: bridge)
-                        }
-                        removeOldNotifications {
-                            self.pushNotification(request: request, preferences: pref)
-                        }
-                    } else {
-                        for bridge in pref.bridgeIds where !yesBridges.contains(bridge) {
-                            Messaging.messaging().unsubscribe(fromTopic: bridge)
-                        }
+                
+                if let day = Day.currentDay(),
+                   let bridgeId = request.content.userInfo["bridge_id"] as? String,
+                   let preferences = preferencesArray.first(where: { pref in
+                       (pref.days ?? []).contains(day) && (currentTimeIsBetween(startTime: pref.startTime, endTime: pref.endTime) || pref.isAllDay) && pref.bridgeIds.contains(UUID(uuidString: bridgeId)!) && pref.isActive
+                   }) {
+                    removeOldNotifications {
+                        self.pushNotification(request: request, preferences: preferences)
                     }
+                } else {
+                    throw throwError.preferenceDoesNotExist
                 }
             } else {
                 throw throwError.fileDoesNotExist
@@ -103,9 +98,7 @@ class NotificationService: UNNotificationServiceExtension {
         // Called just before the extension will be terminated by the system.
         // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
         if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
-            removeOldNotifications {
-                contentHandler(bestAttemptContent)
-            }
+            contentHandler(bestAttemptContent)
         }
     }
 

@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 import Firebase
 import Mcrich23_Toolkit
-import SwiftUIAlert
 
 class Utilities {
     static let isFastlaneRunning = UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT")

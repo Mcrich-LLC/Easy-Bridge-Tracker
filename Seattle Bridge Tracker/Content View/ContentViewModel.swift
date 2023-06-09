@@ -11,7 +11,6 @@ import FirebaseAnalytics
 import Mcrich23_Toolkit
 import UserNotifications
 import SwiftUI
-import SwiftUIAlert
 
 class ContentViewModel: ObservableObject {
     static let shared = ContentViewModel()
@@ -108,7 +107,7 @@ class ContentViewModel: ObservableObject {
             if notificationsAreAllowed {
                 if bridge.subscribed {
                     for index in NotificationPreferencesModel.shared.preferencesArray.indices {
-                        if let bridgeIdIndex = NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.firstIndex(where: { $0 == bridge.notificationBridgeName() }) {
+                        if let bridgeIdIndex = NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.firstIndex(where: { $0 == bridge.id }) {
                             NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.remove(at: bridgeIdIndex)
                         }
                     }
@@ -135,7 +134,7 @@ class ContentViewModel: ObservableObject {
                         if NotificationPreferencesModel.shared.preferencesArray.isEmpty {
                             return [UIAlertAction(title: "Cancel", style: .destructive), UIAlertAction(title: "Create New", style: .default, handler: { _ in
                                 var defaultPrefs = NotificationPreferences.defaultPreferences
-                                defaultPrefs.bridgeIds.append(bridge.notificationBridgeName())
+                                defaultPrefs.bridgeIds.append(bridge.id)
                                 NotificationPreferencesModel.shared.createNotificationPreferenceAlert(basedOn: defaultPrefs) {
                                     complete()
                                 }
@@ -144,13 +143,13 @@ class ContentViewModel: ObservableObject {
                             return ((NotificationPreferencesModel.shared.preferencesArray.map { pref in
                                 UIAlertAction(title: pref.title, style: .default) { _ in
                                     if let index = NotificationPreferencesModel.shared.preferencesArray.firstIndex(where: { $0.id == pref.id }) {
-                                        NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.notificationBridgeName())
+                                        NotificationPreferencesModel.shared.preferencesArray[index].bridgeIds.append(bridge.id)
                                         complete()
                                     }
                                 }
                             }) + [UIAlertAction(title: "Create New", style: .default, handler: { _ in
                                 var defaultPrefs = NotificationPreferences.defaultPreferences
-                                defaultPrefs.bridgeIds.append(bridge.notificationBridgeName())
+                                defaultPrefs.bridgeIds.append(bridge.id)
                                 NotificationPreferencesModel.shared.createNotificationPreferenceAlert(basedOn: defaultPrefs) {
                                     complete()
                                 }
@@ -198,10 +197,6 @@ struct Bridge: Identifiable, Hashable, Comparable, Codable {
     let longitude: Double
     let bridgeLocation: String
     var subscribed: Bool
-    
-    func notificationBridgeName() -> String {
-        ContentViewModel.shared.bridgeName(bridge: self)
-    }
     
     init(id: UUID, name: String, status: BridgeStatus, imageUrl: URL, mapsUrl: URL, address: String, latitude: Double, longitude: Double, bridgeLocation: String, subscribed: Bool) {
         self.id = id
