@@ -43,7 +43,7 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
-    func removeSubscription(for bridge: Bridge) {
+    func removeSubscription(for bridge: Bridge, preference: NotificationPreferences) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
                 let allBridgeIds = self.preferencesArray.map { $0.bridgeIds }.joined()
@@ -56,7 +56,7 @@ final class NotificationPreferencesModel: ObservableObject {
                         ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index].subscribed = false
                         if let deviceID = Utilities.deviceID {
                             self.db.collection("Directory").document(bridge.id.uuidString).setData([
-                                "subscribed_users" : FieldValue.arrayRemove([deviceID])
+                                "subscribed_users" : FieldValue.arrayRemove(["\(deviceID)/\(preference.id.uuidString)"])
                             ], merge: true)
                         }
                     }
@@ -78,14 +78,14 @@ final class NotificationPreferencesModel: ObservableObject {
                 "end_time": pref.endTime,
                 "notification_priority": pref.notificationPriority.rawValue,
                 "bridge_ids": pref.bridgeIds.map({ $0.uuidString }),
-                "is_active": pref.isActive
+                "is_active": pref.isActive,
+                "device_id": Messaging.messaging().fcmToken ?? "nil"
             ], merge: true)
-        }
-        let subscribedBridges = Array(Set(preferencesArray.flatMap({ $0.bridgeIds })))
-        for bridge in subscribedBridges {
-            db.collection("Directory").document(bridge.uuidString).setData([
-                "subscribed_users" : FieldValue.arrayUnion([deviceID])
-            ], merge: true)
+            for bridge in pref.bridgeIds {
+                db.collection("Directory").document(bridge.uuidString).setData([
+                    "subscribed_users" : FieldValue.arrayUnion(["\(deviceID)/\(pref.id.uuidString)"])
+                ], merge: true)
+            }
         }
     }
     
@@ -274,7 +274,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 for bridge in ContentViewModel.shared.allBridges {
                     let sortedBridgesIndex = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { $0.id == bridge.id })
                     if let sortedBridgesIndex, !(self.preferencesArray.map({ $0.bridgeIds }).joined()).contains(bridge.id) {
-                        self.removeSubscription(for: ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![sortedBridgesIndex])
+                        self.removeSubscription(for: ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![sortedBridgesIndex], preference: preference)
                     }
                 }
                 if let deviceID = Utilities.deviceID {
