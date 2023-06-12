@@ -84,6 +84,12 @@ struct NotificationPreferencesBody: View {
                     }
                     Spacer()
                     Button {
+                        Mcrich23_Toolkit.presentShareSheet(activityItems: [ "https://bridges.mcrich23.com/notifications/\(Utilities.deviceID ?? "")/\(preference.id)" ], excludedActivityTypes: [])
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .hoverEffect(.highlight)
+                    Button {
                         preferencesModel.duplicateNotificationPreferenceAlert(basedOn: preference, onDone: {})
                     } label: {
                         Image(systemName: "doc.on.doc")
