@@ -15,7 +15,6 @@ import SwiftUIAlert
 
 struct HelpMenu: View {
     @ObservedObject var contentViewModel = ContentViewModel.shared
-    @State var isShowingNotificationSettings = false
     @State var supportUs1 = OfferingInfo.offerings.first { offering in
         offering.id.rawValue == PurchaseService.Offerings.supportUs1.rawValue
     }!
@@ -36,7 +35,7 @@ struct HelpMenu: View {
                     if contentViewModel.menuScreenshotClickCount == 1 {
                         contentViewModel.showDemoView()
                     } else  if contentViewModel.menuScreenshotClickCount == 2 {
-                        isShowingNotificationSettings.toggle()
+                        contentViewModel.isShowingNotificationSettings.toggle()
                     }
                 } label: {
                     Image(systemName: "ellipsis.circle")
@@ -98,7 +97,7 @@ struct HelpMenu: View {
                             Label("Settings", systemImage: "switch.2")
                         }
                         Button {
-                            self.isShowingNotificationSettings.toggle()
+                            contentViewModel.isShowingNotificationSettings.toggle()
                         } label: {
                             Label("Notification Schedules", systemImage: "bell")
                         }
@@ -114,7 +113,7 @@ struct HelpMenu: View {
                 }
             }
         }
-        .sheet(isPresented: $isShowingNotificationSettings) {
+        .sheet(isPresented: $contentViewModel.isShowingNotificationSettings) {
             NotificationPreferencesView()
         }
     }
