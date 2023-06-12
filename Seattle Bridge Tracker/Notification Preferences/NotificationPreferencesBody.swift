@@ -109,7 +109,9 @@ struct NotificationPreferencesBody: View {
                     .padding(.bottom)
                 NotificationPreferenceDaysPicker(preference: $preference)
                 NotificationPreferencesTimePicker(preference: $preference)
-                NotificationPreferencesImportance(preference: $preference)
+                if #available(iOS 15, *) {
+                    NotificationPreferencesImportance(preference: $preference)
+                }
                 NotificationPreferencesSelectedBridges(preference: $preference)
                 NotificationPreferencesActiveToggle(preference: $preference)
             }
