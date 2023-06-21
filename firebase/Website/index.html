@@ -370,7 +370,9 @@
         }
 
         const fetchData = () => {
-            fetch('https://mc.mcrich23.com/bridges')
+            fetch('https://mc.mcrich23.com/bridges', {
+                mode: 'cors'
+            })
                 .then((response) => response.json())
                 .then((data) => {
                     bridges = data;
