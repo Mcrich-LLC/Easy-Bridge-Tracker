@@ -114,7 +114,9 @@ struct NotificationContentView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchData(repeatFetch: true)
+                Task(priority: .background) {
+                    viewModel.fetchData(repeatFetch: true)
+                }
             }
             .navigationBarTitle("Subscribed Bridges", displayMode: .large)
             .toolbar {
