@@ -370,10 +370,15 @@
         }
 
         const fetchData = () => {
-            fetch('https://mc.mcrich23.com/bridges', {
+            fetch('http://mc.mcrich23.com:8081/bridges', {
                 mode: 'cors'
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} - ${response.statusText}`);
+                    }
+                    return response.json();
+                })
                 .then((data) => {
                     bridges = data;
 
@@ -399,7 +404,17 @@
                     tableLoading.style.display = 'none';
                     renderTable(bridges);
                 })
-                .catch((error) => console.error(error));
+                .catch((error) => {
+                    console.error(error);
+                    tableLoading.style.display = 'none';
+
+                    // Display the error message on the website
+                    const banner = document.getElementById('banner');
+                    banner.textContent = `We had an issue contacting our servers: ${error.message}`;
+                    banner.style.backgroundColor = '#ff0000';
+                    banner.style.color = '#fff';
+                    banner.style.display = 'block';
+                });
         };
 
 
