@@ -14,6 +14,7 @@ import SwiftUIAlert
 
 class ContentViewModel: ObservableObject {
     static let shared = ContentViewModel()
+    @Published var isShowingInfo = false
     @Published var sortedBridges: [String: [Bridge]] = [:] {
         didSet {
             var count = 0 {

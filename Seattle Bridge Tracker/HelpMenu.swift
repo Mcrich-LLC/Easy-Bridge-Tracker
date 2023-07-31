@@ -88,9 +88,7 @@ struct HelpMenu: View {
                     }
                     Section {
                         Button {
-                            Mcrich23_Toolkit.topVC().present {
-                                Info()
-                            }
+                            contentViewModel.isShowingInfo.toggle()
                         } label: {
                             Label("Info", systemImage: "info.circle")
                         }
@@ -116,6 +114,9 @@ struct HelpMenu: View {
         }
         .sheet(isPresented: $isShowingNotificationSettings) {
             NotificationPreferencesView()
+        }
+        .sheet(isPresented: $contentViewModel.isShowingInfo) {
+            Info()
         }
     }
 }

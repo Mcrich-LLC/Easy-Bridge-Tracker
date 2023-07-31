@@ -2,24 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "abseil",
-        "repositoryURL": "https://github.com/firebase/abseil-cpp-SwiftPM.git",
-        "state": {
-          "branch": null,
-          "revision": "583de9bd60f66b40e78d08599cc92036c2e7e4e1",
-          "version": "0.20220203.2"
-        }
-      },
-      {
-        "package": "BoringSSL-GRPC",
-        "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
-        "state": {
-          "branch": null,
-          "revision": "dd3eda2b05a3f459fc3073695ad1b28659066eab",
-          "version": "0.9.1"
-        }
-      },
-      {
         "package": "DeviceKit",
         "repositoryURL": "https://github.com/devicekit/DeviceKit",
         "state": {
@@ -29,93 +11,12 @@
         }
       },
       {
-        "package": "Firebase",
-        "repositoryURL": "https://github.com/firebase/firebase-ios-sdk",
-        "state": {
-          "branch": null,
-          "revision": "7e80c25b51c2ffa238879b07fbfc5baa54bb3050",
-          "version": "9.6.0"
-        }
-      },
-      {
-        "package": "GoogleAppMeasurement",
-        "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
-        "state": {
-          "branch": null,
-          "revision": "c1cfde8067668027b23a42c29d11c246152fe046",
-          "version": "9.6.0"
-        }
-      },
-      {
-        "package": "GoogleDataTransport",
-        "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
-        "state": {
-          "branch": null,
-          "revision": "f6b558e3f801f2cac336b04f615ce111fa9ddaa0",
-          "version": "9.2.1"
-        }
-      },
-      {
-        "package": "GoogleMobileAds",
-        "repositoryURL": "https://github.com/quanghits/GoogleMobileAds",
-        "state": {
-          "branch": "main",
-          "revision": "271e6d6bc1d7756a88fe82df558145a264a34331",
-          "version": null
-        }
-      },
-      {
-        "package": "GoogleUserMessagingPlatform",
-        "repositoryURL": "https://github.com/quanghits/GoogleUserMessagingPlatform.git",
-        "state": {
-          "branch": null,
-          "revision": "f322d91b6b0497b727b228a5fa5b9394e7886d3a",
-          "version": "2.0.0"
-        }
-      },
-      {
-        "package": "GoogleUtilities",
-        "repositoryURL": "https://github.com/google/GoogleUtilities.git",
-        "state": {
-          "branch": null,
-          "revision": "0543562f85620b5b7c510c6bcbef75b562a5127b",
-          "version": "7.11.0"
-        }
-      },
-      {
-        "package": "gRPC",
-        "repositoryURL": "https://github.com/grpc/grpc-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "8440b914756e0d26d4f4d054a1c1581daedfc5b6",
-          "version": "1.44.3-grpc"
-        }
-      },
-      {
-        "package": "GTMSessionFetcher",
-        "repositoryURL": "https://github.com/google/gtm-session-fetcher.git",
-        "state": {
-          "branch": null,
-          "revision": "5ccda3981422a84186387dbb763ba739178b529c",
-          "version": "2.3.0"
-        }
-      },
-      {
         "package": "Kingfisher",
         "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {
           "branch": null,
-          "revision": "af4be924ad984cf4d16f4ae4df424e79a443d435",
-          "version": "7.6.2"
-        }
-      },
-      {
-        "package": "leveldb",
-        "repositoryURL": "https://github.com/firebase/leveldb.git",
-        "state": {
-          "branch": null,
-          "revision": "0706abcc6b0bd9cedfbb015ba840e4a780b5159b",
-          "version": "1.22.2"
+          "revision": "c75584ac759cbb16b204d0a7de3ebf53ea6b304d",
+          "version": "7.9.0"
         }
       },
       {
@@ -128,39 +29,12 @@
         }
       },
       {
-        "package": "nanopb",
-        "repositoryURL": "https://github.com/firebase/nanopb.git",
+        "package": "SFSafeSymbols",
+        "repositoryURL": "https://github.com/SFSafeSymbols/SFSafeSymbols",
         "state": {
           "branch": null,
-          "revision": "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-          "version": "2.30909.0"
-        }
-      },
-      {
-        "package": "Promises",
-        "repositoryURL": "https://github.com/google/promises.git",
-        "state": {
-          "branch": null,
-          "revision": "ec957ccddbcc710ccc64c9dcbd4c7006fcf8b73a",
-          "version": "2.2.0"
-        }
-      },
-      {
-        "package": "RevenueCat",
-        "repositoryURL": "https://github.com/RevenueCat/purchases-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "5d77aeccee3622dd2a5dbfd7af5aed195b84767e",
-          "version": "4.17.8"
-        }
-      },
-      {
-        "package": "ScrollViewIfNeeded",
-        "repositoryURL": "https://github.com/dkk/ScrollViewIfNeeded",
-        "state": {
-          "branch": null,
-          "revision": "a14bb7355f317fd43e194021cbd813dbc0c298e6",
-          "version": "1.0.1"
+          "revision": "7cca2d60925876b5953a2cf7341cd80fbeac983c",
+          "version": "4.1.1"
         }
       },
       {
@@ -173,39 +47,21 @@
         }
       },
       {
-        "package": "SwiftProtobuf",
-        "repositoryURL": "https://github.com/apple/swift-protobuf.git",
-        "state": {
-          "branch": null,
-          "revision": "0af9125c4eae12a4973fb66574c53a54962a9e1e",
-          "version": "1.21.0"
-        }
-      },
-      {
-        "package": "HTTPStatusCodes",
-        "repositoryURL": "https://github.com/jaderfeijo/SwiftHTTPStatusCodes",
-        "state": {
-          "branch": "master",
-          "revision": "8f5e0b8002820fadbabcce5523ebec46ccfe711b",
-          "version": null
-        }
-      },
-      {
-        "package": "Introspect",
+        "package": "swiftui-introspect",
         "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
         "state": {
           "branch": null,
-          "revision": "c18951c747ab62af7c15e17a81bd37d4fd5a9979",
-          "version": "0.2.3"
+          "revision": "ccb973cfff703cba53fb88197413485c060eb26b",
+          "version": "0.10.0"
         }
       },
       {
-        "package": "SwiftUI-Shimmer",
-        "repositoryURL": "https://github.com/markiv/SwiftUI-Shimmer",
+        "package": "SwiftUIAlert",
+        "repositoryURL": "https://github.com/Mcrich23/SwiftUIAlert",
         "state": {
-          "branch": "main",
-          "revision": "17b66b0e7d94d2d3f220bbcb021b5026436f06c7",
-          "version": null
+          "branch": null,
+          "revision": "d735131323a0b2e425c9fa0f6c98c4d488d6f5b6",
+          "version": "1.0.4"
         }
       },
       {
@@ -221,9 +77,9 @@
         "package": "SwiftUIMap",
         "repositoryURL": "https://github.com/Mcrich23/SwiftUIMap",
         "state": {
-          "branch": "main",
-          "revision": "37ef8e6fea9f208e86189a4a2f331f3539bc32b9",
-          "version": null
+          "branch": null,
+          "revision": "f3dad3a9c6ae4961797dcab325145862b4d4b3fd",
+          "version": "1.5.8"
         }
       },
       {
@@ -231,8 +87,8 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": null,
-          "revision": "1b8b443b61b8b37fafb06c1abad9b6be244c9de9",
-          "version": "0.1.4"
+          "revision": "75d5be2c85ec1e3ccbd9d99d321dd3abb5955e8d",
+          "version": "0.1.6"
         }
       },
       {
@@ -249,8 +105,8 @@
         "repositoryURL": "https://github.com/dkk/WrappingHStack",
         "state": {
           "branch": null,
-          "revision": "44987fbb01112e6ec72098dc6481187dd53ad4d2",
-          "version": "2.2.9"
+          "revision": "f31b8fdc57759c5aa5fc98c70746db5556e73300",
+          "version": "2.2.10"
         }
       }
     ]
