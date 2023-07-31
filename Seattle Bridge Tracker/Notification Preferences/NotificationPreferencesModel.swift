@@ -10,6 +10,7 @@ import UserNotifications
 import Firebase
 import Mcrich23_Toolkit
 import SwiftUI
+import SwiftUIAlert
 
 final class NotificationPreferencesModel: ObservableObject {
     static let shared = NotificationPreferencesModel()

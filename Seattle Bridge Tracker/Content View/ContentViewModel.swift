@@ -10,6 +10,7 @@ import Firebase
 import Mcrich23_Toolkit
 import UserNotifications
 import SwiftUI
+import SwiftUIAlert
 
 class ContentViewModel: ObservableObject {
     static let shared = ContentViewModel()

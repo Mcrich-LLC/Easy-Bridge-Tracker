@@ -18,7 +18,7 @@ struct NotificationPreferencesSelectedBridges: View {
             Spacer()
             Button {
                 Mcrich23_Toolkit.topVC().present {
-                    if let prefs = preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) {
+                    if preferencesModel.preferencesArray.first(where: { $0.id == preference.id }) != nil {
                         NotificationContentView(preference: $preference)
                     }
                 }

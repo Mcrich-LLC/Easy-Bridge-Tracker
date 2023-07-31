@@ -11,6 +11,7 @@ import Mcrich23_Toolkit
 import SwiftUIBackports
 import Introspect
 import Foundation
+import SwiftUIAlert
 
 struct HelpMenu: View {
     @ObservedObject var contentViewModel = ContentViewModel.shared
