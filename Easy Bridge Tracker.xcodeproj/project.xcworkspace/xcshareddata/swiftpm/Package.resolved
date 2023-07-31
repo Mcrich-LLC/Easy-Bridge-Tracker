@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {
           "branch": null,
-          "revision": "e8625b80c413457b13ea9be75d07f6e9f5830c19",
-          "version": "7.7.0"
+          "revision": "c75584ac759cbb16b204d0a7de3ebf53ea6b304d",
+          "version": "7.9.0"
         }
       },
       {
@@ -200,12 +200,12 @@
         }
       },
       {
-        "package": "Introspect",
+        "package": "swiftui-introspect",
         "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
         "state": {
           "branch": null,
-          "revision": "5b3f3996c7a2a84d5f4ba0e03cd7d584154778f2",
-          "version": "0.3.1"
+          "revision": "ccb973cfff703cba53fb88197413485c060eb26b",
+          "version": "0.10.0"
         }
       },
       {
@@ -222,8 +222,8 @@
         "repositoryURL": "https://github.com/Mcrich23/SwiftUIAlert",
         "state": {
           "branch": null,
-          "revision": "cf9ffe9297f82bd8a2a94f318349d29abdf79b9b",
-          "version": "1.0.3"
+          "revision": "d735131323a0b2e425c9fa0f6c98c4d488d6f5b6",
+          "version": "1.0.4"
         }
       },
       {
@@ -249,8 +249,8 @@
         "repositoryURL": "https://github.com/SwiftUIX/SwiftUIX",
         "state": {
           "branch": null,
-          "revision": "1b8b443b61b8b37fafb06c1abad9b6be244c9de9",
-          "version": "0.1.4"
+          "revision": "75d5be2c85ec1e3ccbd9d99d321dd3abb5955e8d",
+          "version": "0.1.6"
         }
       },
       {
@@ -267,8 +267,8 @@
         "repositoryURL": "https://github.com/dkk/WrappingHStack",
         "state": {
           "branch": null,
-          "revision": "44987fbb01112e6ec72098dc6481187dd53ad4d2",
-          "version": "2.2.9"
+          "revision": "f31b8fdc57759c5aa5fc98c70746db5556e73300",
+          "version": "2.2.10"
         }
       }
     ]

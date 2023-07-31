@@ -22,6 +22,7 @@
 		2253E00D29DBC5430063DDE2 /* BridgeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */; };
 		2253E00F29DBCE840063DDE2 /* NotificationFavoritedCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E00E29DBCE840063DDE2 /* NotificationFavoritedCities.swift */; };
 		2253E01129DBD2110063DDE2 /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E01029DBD2110063DDE2 /* FavoritesModel.swift */; };
+		2288FF852A78409700932ED1 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288FF842A78409700932ED1 /* Credits.swift */; };
 		229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */; };
 		229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
@@ -142,6 +143,7 @@
 		2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeFilterView.swift; sourceTree = "<group>"; };
 		2253E00E29DBCE840063DDE2 /* NotificationFavoritedCities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationFavoritedCities.swift; sourceTree = "<group>"; };
 		2253E01029DBD2110063DDE2 /* FavoritesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesModel.swift; sourceTree = "<group>"; };
+		2288FF842A78409700932ED1 /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 		229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesBody.swift; sourceTree = "<group>"; };
 		229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferencesTimePicker.swift; sourceTree = "<group>"; };
 		22AB7C74293EDF2A008BD92F /* NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationService.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -351,6 +353,7 @@
 				A37E8B3A28BB2DA200A6A8D4 /* Info.swift */,
 				22D8689629D2CBFB00E7D647 /* NavigationBarLargeTitleItems.swift */,
 				A33F931428AC926100391EBB /* Fetch Data.swift */,
+				2288FF842A78409700932ED1 /* Credits.swift */,
 				A3413A0228AFDD5B0016710C /* Response.swift */,
 				2224CDB629D1442B006D4338 /* NotificationPreferencesExample.json */,
 				A394A80D28C13C1F003E5273 /* DummyPromo.json */,
@@ -675,6 +678,7 @@
 				A3413A0528AFDD680016710C /* ContentViewModel.swift in Sources */,
 				22D8688A29D2BEA400E7D647 /* Purchase Service.swift in Sources */,
 				22D8689729D2CBFB00E7D647 /* NavigationBarLargeTitleItems.swift in Sources */,
+				2288FF852A78409700932ED1 /* Credits.swift in Sources */,
 				2222EBAC29D163B000837F79 /* NotificationPreferencesDecoder.swift in Sources */,
 				A394A80428BFBF64003E5273 /* HelpMenu.swift in Sources */,
 				2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */,

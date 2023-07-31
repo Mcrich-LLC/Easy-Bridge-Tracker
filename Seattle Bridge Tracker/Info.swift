@@ -10,6 +10,7 @@ import SwiftUI
 struct Info: View {
     @State var build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "x.x"
     @State var version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "x"
+    @State var isShowingCredits = false
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         NavigationView {
@@ -22,13 +23,15 @@ struct Info: View {
                 Text("Easy Bridge Tracker")
                     .font(.title)
                     .padding()
-                VStack {
+                VStack(spacing: 1) {
                     Text("Version: \(version)(\(build))")
                     HStack {
                         Image(systemName: "c.circle")
                         Text("Mcrich 2022")
                     }
-                    .padding(.top, 1)
+                    Button("Credits") {
+                        isShowingCredits.toggle()
+                    }
                 }
                 .padding()
                 .foregroundColor(.gray)
@@ -44,8 +47,11 @@ struct Info: View {
                             Image(systemName: "arrow.down")
                         }
                     }
-
+                    
                 }
+            }
+            .sheet(isPresented: $isShowingCredits) {
+                Credits()
             }
         }
         .navigationViewStyle(.stack)
