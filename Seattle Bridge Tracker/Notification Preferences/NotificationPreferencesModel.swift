@@ -80,7 +80,8 @@ final class NotificationPreferencesModel: ObservableObject {
                 "notification_priority": pref.notificationPriority.rawValue,
                 "bridge_ids": pref.bridgeIds.map({ $0.uuidString }),
                 "is_active": pref.isActive,
-                "device_id": Messaging.messaging().fcmToken ?? "nil"
+                "device_id": Messaging.messaging().fcmToken ?? "nil",
+                "isBeta": Utilities.appType != .AppStore
             ], merge: true)
             for bridge in pref.bridgeIds {
                 db.collection("Directory").document(bridge.uuidString).setData([
