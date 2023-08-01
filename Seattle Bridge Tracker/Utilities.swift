@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Firebase
 import Mcrich23_Toolkit
+import UIKit
 import SwiftUIAlert
 
 class Utilities {
@@ -124,5 +125,11 @@ extension View {
         } else {
             self
         }
+    }
+}
+
+extension UIAlertAction {
+    static func ok(handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
+        UIAlertAction(title: "Ok", style: .default, handler: handler)
     }
 }

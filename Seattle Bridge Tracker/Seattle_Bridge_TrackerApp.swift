@@ -100,6 +100,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             let deviceID = UUID()
             UserDefaults.standard.setValue(deviceID.uuidString, forKey: "deviceID")
             Utilities.deviceID = deviceID.uuidString
+        if Utilities.appType == .TestFlight || Utilities.appType == .Debug {
+            Messaging.messaging().subscribe(toTopic: "test")
         }
         return true
     }

@@ -101,7 +101,7 @@ struct NotificationPreferencesView: View {
                         Spacer()
                     }
                 } else {
-                    LazyVStack(spacing: 10) {
+                    VStack(spacing: 10) {
                         ForEach(preferencesModel.preferencesArray, id: \.self) { preference in
                             if preferencesModel.preferencesArray.first?.id == preference.id {
                                 NotificationPreferencesAd()

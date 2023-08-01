@@ -48,16 +48,16 @@ class ContentViewModel: ObservableObject {
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
     func fetchData(repeatFetch: Bool) {
-        self.dataFetch.fetchTweet { error in
-            print("❌ Status code is \(error.rawValue)")
-            DispatchQueue.main.async {
-                self.status = .failed("\(error.rawValue) - \(error.localizedReasonPhrase.capitalized)")
-            }
-        } completion: { response in
-            self.response = response
-            for bridge in response {
-                self.getNotificationAuthStatus { authStatus in
-                    DispatchQueue.main.async {
+        DispatchQueue.global(qos: .background).async {
+            self.dataFetch.fetchTweet { error in
+                print("❌ Status code is \(error.rawValue)")
+                DispatchQueue.main.async {
+                    self.status = .failed("\(error.rawValue) - \(error.localizedReasonPhrase.capitalized)")
+                }
+            } completion: { response in
+                self.response = response
+                for bridge in response {
+                    self.getNotificationAuthStatus { authStatus in
                         let addBridge = Bridge(
                             id: UUID(uuidString: bridge.id)!,
                             name: bridge.name,
@@ -70,32 +70,35 @@ class ContentViewModel: ObservableObject {
                             bridgeLocation: bridge.bridgeLocation,
                             subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(self.bridgeName(bridge: bridge)).subscribed") : false)
                         )
-                        if (self.sortedBridges[bridge.bridgeLocation] ?? []).contains(where: { br in
-                            br.name == addBridge.name
-                        }) {
-                            let index = self.sortedBridges[bridge.bridgeLocation]!.firstIndex { br in
+                        DispatchQueue.main.async {
+                            if (self.sortedBridges[bridge.bridgeLocation] ?? []).contains(where: { br in
                                 br.name == addBridge.name
-                            }!
-                            self.sortedBridges[bridge.bridgeLocation]![index].status = addBridge.status
-                            self.sortedBridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
-                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.sortedBridges[bridge.bridgeLocation]![index].status)")
-                        } else {
-                            if self.sortedBridges[bridge.bridgeLocation] != nil {
-                                self.sortedBridges[bridge.bridgeLocation]!.append(addBridge)
+                            }) {
+                                let index = self.sortedBridges[bridge.bridgeLocation]!.firstIndex { br in
+                                    br.name == addBridge.name
+                                }!
+                                self.sortedBridges[bridge.bridgeLocation]![index].status = addBridge.status
+                                self.sortedBridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
+                                print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.sortedBridges[bridge.bridgeLocation]![index].status)")
                             } else {
-                                self.sortedBridges[bridge.bridgeLocation] = [addBridge]
+                                if self.sortedBridges[bridge.bridgeLocation] != nil {
+                                    self.sortedBridges[bridge.bridgeLocation]!.append(addBridge)
+                                } else {
+                                    self.sortedBridges[bridge.bridgeLocation] = [addBridge]
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-        if repeatFetch {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-                self.fetchData(repeatFetch: true)
+            if repeatFetch {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                    self.fetchData(repeatFetch: true)
+                }
             }
         }
     }
+    
     func getNotificationAuthStatus(completion: @escaping (UNAuthorizationStatus) -> Void) {
         if Utilities.isFastlaneRunning {
             completion(.authorized)
@@ -105,6 +108,7 @@ class ContentViewModel: ObservableObject {
             }
         }
     }
+    
     func toggleSubscription(for bridge: Bridge) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
@@ -167,14 +171,17 @@ class ContentViewModel: ObservableObject {
             }
         }
     }
+    
     func bridgeName(bridge: Bridge) -> String {
         let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
         return bridgeName
     }
+    
     func bridgeName(bridge: Response) -> String {
         let bridgeName = "\(bridge.bridgeLocation)_\(bridge.name)".replacingOccurrences(of: " Bridge", with: "").replacingOccurrences(of: ",", with: "").replacingOccurrences(of: "st", with: "").replacingOccurrences(of: "nd", with: "").replacingOccurrences(of: "3rd", with: "").replacingOccurrences(of: "th", with: "").replacingOccurrences(of: " ", with: "_")
         return bridgeName
     }
+    
     func showDemoView() {
         if Utilities.isFastlaneRunning {
             demoLink = true

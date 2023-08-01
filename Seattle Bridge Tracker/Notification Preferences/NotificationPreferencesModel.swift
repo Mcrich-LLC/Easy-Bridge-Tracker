@@ -21,6 +21,7 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     let fileName = "NotificationPreferences.json"
+    let maxNumber = 6
     
     init() {
         getPreferences()
@@ -194,6 +195,14 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
+    func checkIfMaximumNumber(completionIfAble completion: @escaping () -> Void) {
+        if self.preferencesArray.count >= self.maxNumber {
+            SwiftUIAlert.show(title: "Uh Oh", message: "You can only have \(maxNumber) notification schedules. Please delete one to add another.", preferredStyle: .alert, actions: [.ok()])
+        } else {
+            completion()
+        }
+    }
+    
     func updateTitleAlert(for preferences: NotificationPreferences) {
         var title = preferences.title
         SwiftUIAlert.textfieldShow(title: "Update Schedule Name", message: "Update the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
@@ -208,37 +217,42 @@ final class NotificationPreferencesModel: ObservableObject {
     func createNotificationPreferenceAlert(onDone completion: @escaping () -> Void) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
-                let defaultPrefs = NotificationPreferences.defaultPreferences
-                var title = defaultPrefs.title
-                self.adjustTitleForDuplicates(for: defaultPrefs.title) { newTitle in
-                    title = newTitle
+                self.checkIfMaximumNumber {
+                    let defaultPrefs = NotificationPreferences.defaultPreferences
+                    var title = defaultPrefs.title
+                    self.adjustTitleForDuplicates(for: defaultPrefs.title) { newTitle in
+                        title = newTitle
+                    }
+                    SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                        return title
+                    }, set: { newValue in
+                        title = newValue
+                    }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                        self.saveTitle(for: defaultPrefs, with: title, completion: completion)
+                    })])
                 }
-                SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-                    return title
-                }, set: { newValue in
-                    title = newValue
-                }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                    self.saveTitle(for: defaultPrefs, with: title, completion: completion)
-                })])
             }
         }
     }
     
     func createNotificationPreferenceAlert(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
+            
             if notificationsAreAllowed {
-                let defaultPrefs = preferences
-                var title = preferences.title
-                self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
-                    title = newTitle
+                self.checkIfMaximumNumber {
+                    let defaultPrefs = preferences
+                    var title = preferences.title
+                    self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
+                        title = newTitle
+                    }
+                    SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                        return title
+                    }, set: { newValue in
+                        title = newValue
+                    }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                        self.saveTitle(for: defaultPrefs, with: title, completion: completion)
+                    })])
                 }
-                SwiftUIAlert.textfieldShow(title: "Create Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-                    return title
-                }, set: { newValue in
-                    title = newValue
-                }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                    self.saveTitle(for: defaultPrefs, with: title, completion: completion)
-                })])
             }
         }
     }
@@ -246,18 +260,20 @@ final class NotificationPreferencesModel: ObservableObject {
     func duplicateNotificationPreferenceAlert(basedOn preferences: NotificationPreferences, onDone completion: @escaping () -> Void) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
-                var prefs = preferences
-                prefs.id = UUID()
-                var title = preferences.title
-                self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
-                    title = newTitle
-                    SwiftUIAlert.textfieldShow(title: "Duplicate Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
-                        return title
-                    }, set: { newValue in
-                        title = newValue
-                    }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
-                        self.saveTitle(for: prefs, with: title, completion: completion)
-                    })])
+                self.checkIfMaximumNumber {
+                    var prefs = preferences
+                    prefs.id = UUID()
+                    var title = preferences.title
+                    self.adjustTitleForDuplicates(for: preferences.title) { newTitle in
+                        title = newTitle
+                        SwiftUIAlert.textfieldShow(title: "Duplicate Notification Schedule", message: "Set the name of this notification schedule", preferredStyle: .alert, textfield: .init(text: Binding(get: {
+                            return title
+                        }, set: { newValue in
+                            title = newValue
+                        }), placeholder: "Schedule Name"), actions: [.init(title: "Cancel", style: .destructive), .init(title: "Done", style: .default, handler: { _ in
+                            self.saveTitle(for: prefs, with: title, completion: completion)
+                        })])
+                    }
                 }
             }
         }
