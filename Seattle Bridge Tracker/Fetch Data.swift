@@ -18,9 +18,9 @@ class TwitterFetch {
         do {
             var url: URL? {
                 if Utilities.appType == .AppStore {
-                    return URL(string: "http://mc.mcrich23.com/bridges")
+                    return URL(string: "http://mc.mcrich23.com/bridges/")
                 } else {
-                    return URL(string: "http://mc.mcrich23.com/beta/bridges")
+                    return URL(string: "http://mc.mcrich23.com/beta/bridges/")
                 }
             }
             
