@@ -43,13 +43,13 @@ platform :ios do
     #frame_screenshots(path: "./Promo Images")
   end
     lane :uploadToCrashlytics do
-    sh("open ~/Library/Developer/Xcode/DerivedData")
     getVersion = get_version_number(xcodeproj: "Easy Bridge Tracker.xcodeproj", target: "Easy Bridge Tracker")
     getBuild = get_build_number(xcodeproj: "Easy Bridge Tracker.xcodeproj")
-    getDerivedData = prompt(text: "Enter Derived Data Location")
     #download_dsyms(version: "latest", output_directory: "./Builds/#{getVersion}/#{getBuild}")
     Dir.chdir("..") do
-      sh("#{getDerivedData}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols -gsp './Seattle Bridge Tracker/GoogleService-Info.plist' -p ios ./Builds/#{getVersion}/#{getBuild}/Easy\ Bridge\ Tracker.app.dSYM.zip")
+      sh("git clone https://github.com/firebase/firebase-ios-sdk.git")
+      sh("./firebase-ios-sdk/Crashlytics/upload-symbols -gsp './Seattle Bridge Tracker/GoogleService-Info.plist' -p ios './Builds/#{getVersion}/#{getBuild}/Easy Bridge Tracker.app.dSYM.zip'")
+      sh("rm -rf firebase-ios-sdk")
     end
   end
 end
