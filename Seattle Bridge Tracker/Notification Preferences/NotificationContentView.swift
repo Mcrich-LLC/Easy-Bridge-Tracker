@@ -27,7 +27,7 @@ struct NotificationContentView: View {
                 if let index = self.preference.bridgeIds.firstIndex(where: { $0 == bridge.id }) {
                     if self.preference.bridgeIds.contains(bridge.id) {
                         self.preference.bridgeIds.remove(at: index)
-                        preferencesModel.removeSubscription(for: bridge)
+                        preferencesModel.removeSubscription(for: bridge, preference: preference)
                     } else if !self.preference.bridgeIds.contains(bridge.id) {
                         self.preference.bridgeIds.append(bridge.id)
                         preferencesModel.addSubscription(for: bridge)
@@ -117,7 +117,9 @@ struct NotificationContentView: View {
                 }
             }
             .onAppear {
-                viewModel.fetchData(repeatFetch: true)
+                Task(priority: .background) {
+                    viewModel.fetchData(repeatFetch: true)
+                }
             }
             .navigationBarTitle("Subscribed Bridges", displayMode: .large)
             .toolbar {

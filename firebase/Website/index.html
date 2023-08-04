@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-itunes-app" content="app-id=1640954057">
     <title>Easy Bridge Tracker | Mcrich23</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
     <link rel="icon" type="image/png" href="Rounded Icon.png">
@@ -59,17 +60,37 @@
             color: #fff;
         }
 
-body {
-    background-color: #fff;
-    color: #363636;
-    margin: 0;
-}
+        /* Banner Styles */
+        .banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: yellow;
+            color: red;
+            text-align: center;
+            margin: 0;
+        }
 
-.dark-mode body {
-    background-color: #2b2b2b;
-    color: #fff;
-    margin: 0;
-}
+        /* Dark mode styles for the banner */
+        .dark-mode .banner {
+            background-color: #ffcc00;
+            color: red;
+        }
+
+        body {
+            background-color: #fff;
+            color: #363636;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dark-mode body {
+            background-color: #2b2b2b;
+            color: #fff;
+            margin: 0;
+        }
 
         .hide-column {
             display: none;
@@ -109,6 +130,48 @@ body {
             align-items: center;
             justify-content: space-between;
             margin-bottom: 0px;
+            padding-top: 40px;
+            /* Add this line to create space for the banner */
+        }
+
+        /* Add a new class to remove padding when showBanner is false */
+        .title-container.no-padding {
+            padding: 0;
+        }
+
+        @media screen and (max-width: 857px) {
+            .title-container {
+                padding-top: 50px;
+                /* Adjust the font size as needed */
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .title-container {
+                padding-top: 80px;
+                /* Adjust the font size as needed */
+            }
+        }
+
+        @media screen and (max-width: 444px) {
+            .title-container {
+                padding-top: 90px;
+                /* Adjust the font size as needed */
+            }
+        }
+
+        @media screen and (max-width: 375px) {
+            .title-container {
+                padding-top: 110px;
+                /* Adjust the font size as needed */
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            .title-container {
+                padding-top: 130px;
+                /* Adjust the font size as needed */
+            }
         }
 
         /* Toggle Styles */
@@ -161,39 +224,45 @@ body {
         }
 
 
-/* Style for the footer */
-footer {
-    background-color: #f1f1f1;
-    text-align: center;
-    font-size: 12px;
-    font-family: Arial, sans-serif;
-    padding: 10px;
-    margin-top: -20px;
-    /* Add margin at the top */
-    margin-bottom: 0px;
-    color: #363636; /* Add default color for light mode */
-}
+        /* Style for the footer */
+        footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            font-size: 12px;
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            margin-top: -20px;
+            /* Add margin at the top */
+            margin-bottom: 0px;
+            color: #363636;
+            /* Add default color for light mode */
+        }
 
-/* Dark mode styles for the footer */
-.dark-mode footer {
-    background-color: #2b2b2b;
-    color: #fff;
-}
+        /* Dark mode styles for the footer */
+        .dark-mode footer {
+            background-color: #2b2b2b;
+            color: #fff;
+        }
 
-.dark-mode .footer a.more-apps {
-    color: #4a90e2;
-}
+        .dark-mode .footer a.more-apps {
+            color: #4a90e2;
+        }
 
-.dark-mode .footer a.more-apps:hover {
-    color: #fff;
-}
-
+        .dark-mode .footer a.more-apps:hover {
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
     <section class="section">
-        <div class="title-container">
+        <!-- Banner -->
+        <div class="banner" id="banner">
+            Our data source has changed their policy and as a result, we have been forced to stop updating Easy Bridge
+            Tracker (at least for Seattle, Washington). We are trying hard to find an alternative and hope to start
+            updating data soon.
+        </div>
+        <div class="title-container" id="titleContainer">
             <div class="left">
                 <h1 class="title">Bridges</h1>
             </div>
@@ -300,36 +369,53 @@ footer {
             renderTable(bridgesToShow);
         }
 
-const fetchData = () => {
-    fetch('https://mc.mcrich23.com/bridges')
-        .then((response) => response.json())
-        .then((data) => {
-            bridges = data;
+        const fetchData = () => {
+            fetch('http://mc.mcrich23.com:8081/bridges', {
+                mode: 'cors'
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`${response.status} - ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    bridges = data;
 
-            // sort the data by location
-            bridges.sort((a, b) => (a.bridge_location > b.bridge_location) ? 1 : -1);
+                    // sort the data by location
+                    bridges.sort((a, b) => (a.bridge_location > b.bridge_location) ? 1 : -1);
 
-            const locations = [...new Set(bridges.map((bridge) => bridge.bridge_location))];
-            locations.forEach((location) => {
-                const optionExists = Array.from(locationFilter.options).some((opt) => opt.value === location);
+                    const locations = [...new Set(bridges.map((bridge) => bridge.bridge_location))];
+                    locations.forEach((location) => {
+                        const optionExists = Array.from(locationFilter.options).some((opt) => opt.value === location);
 
-                // only append option if it doesn't already exist
-                if (!optionExists) {
-                    const option = document.createElement('option');
-                    option.value = location;
-                    option.textContent = location;
-                    locationFilter.appendChild(option);
-                }
-            });
+                        // only append option if it doesn't already exist
+                        if (!optionExists) {
+                            const option = document.createElement('option');
+                            option.value = location;
+                            option.textContent = location;
+                            locationFilter.appendChild(option);
+                        }
+                    });
 
-            // sort the data alphabetically by name
-            bridges.sort((a, b) => (a.name > b.name) ? 1 : -1);
+                    // sort the data alphabetically by name
+                    bridges.sort((a, b) => (a.name > b.name) ? 1 : -1);
 
-            tableLoading.style.display = 'none';
-            renderTable(bridges);
-        })
-        .catch((error) => console.error(error));
-};
+                    tableLoading.style.display = 'none';
+                    renderTable(bridges);
+                })
+                .catch((error) => {
+                    console.error(error);
+                    tableLoading.style.display = 'none';
+
+                    // Display the error message on the website
+                    const banner = document.getElementById('banner');
+                    banner.textContent = `We had an issue contacting our servers: ${error.message}`;
+                    banner.style.backgroundColor = '#ff0000';
+                    banner.style.color = '#fff';
+                    banner.style.display = 'block';
+                });
+        };
 
 
 
@@ -382,6 +468,27 @@ const fetchData = () => {
                 enableDarkMode();
             }
         });
+        // Check if the banner should be shown or hidden
+        const showBanner = true;
+
+        // Function to show or hide the banner based on the showBanner variable
+        function toggleBanner() {
+            const banner = document.getElementById('banner');
+            const titleContainer = document.getElementById('titleContainer');
+
+            if (showBanner) {
+                banner.style.display = 'block';
+                titleContainer.classList.remove('no-padding');
+            } else {
+                banner.style.display = 'none';
+                titleContainer.classList.add('no-padding');
+            }
+        }
+
+        // Call the function to toggle the banner on page load
+        toggleBanner();
+
+        // Rest of the JavaScript code
     </script>
     <footer>
         Presented By Mcrich™ | <a href="https://www.mcrich23.com/#nchr1-w27" class="more-apps">More Apps</a>

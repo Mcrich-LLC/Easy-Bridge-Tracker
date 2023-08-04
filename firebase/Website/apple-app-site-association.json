@@ -1,0 +1,22 @@
+{
+    "applinks": {
+        "details": [
+             {
+               "appIDs": [ "L7JQRVXU2V.com.Mcrich23.Easy-Bridge-Tracker" ],
+               "components": [
+                 {
+                    "/*": "/notifications/*",
+                    "comment": "Matches any URL whose path starts with /notifications/"
+                 }
+               ]
+             }
+         ]
+     },
+     "webcredentials": {
+        "apps": [ "L7JQRVXU2V.com.Mcrich23.Easy-Bridge-Tracker" ]
+     },
+  
+      "appclips": {
+          "apps": ["L7JQRVXU2V.com.Mcrich23.Easy-Bridge-Tracker.Clip"]
+      }
+}

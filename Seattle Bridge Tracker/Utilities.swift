@@ -16,6 +16,7 @@ class Utilities {
     static let isFastlaneRunning = UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT")
     static var appType = AppConfiguration.AppStore
     static var remoteConfig: RemoteConfig!
+    static var deviceID = UserDefaults.standard.string(forKey: "deviceID")
     
     static func handleRemoteConfigLoaded() {
         PurchaseService.shared.config()

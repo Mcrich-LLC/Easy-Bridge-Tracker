@@ -17,100 +17,108 @@ struct NotificationPreferencesBody: View {
     @State var titleEditorIsFocused = false
     @State var editedTitle = ""
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.systemGroupedBackground)
-            VStack {
+        VStack {
+            HStack {
                 HStack {
-                    HStack {
-                        if isEditingTitle {
-                            HStack {
-                                Group {
-                                    TitleTextEditor(text: $editedTitle, isEditing: $titleEditorIsFocused, clearButtonMode: .whileEditing) {
-                                        withAnimation {
-                                            preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
-                                                self.titleEditorIsFocused = false
-                                                self.isEditingTitle = false
-                                            }
-                                        }
-                                    }
-                                    .minimumScaleFactor(0.6)
-                                    .padding(.leading)
-                                    .accessibility(identifier: "Title Editor")
-                                }
-                                .padding([.top, .trailing, .bottom], 5.0)
-                            }
-                            .background(Color.gray.opacity(0.3))
-                            .clipShape(RoundedRectangle(cornerRadius: 15))
-                            .frame(maxWidth: 150)
-                        } else {
-                            Text(preference.title)
-                                .font(.title2)
-                        }
-                    }
                     if isEditingTitle {
                         HStack {
-                            Button {
-                                withAnimation {
-                                    editedTitle = preference.title
+                            Group {
+                                TitleTextEditor(text: $editedTitle, isEditing: $titleEditorIsFocused, clearButtonMode: .whileEditing) {
+                                    withAnimation {
+                                        preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
+                                            self.titleEditorIsFocused = false
+                                            self.isEditingTitle = false
+                                        }
+                                    }
+                                }
+                                .minimumScaleFactor(0.6)
+                                .padding(.leading)
+                                .accessibility(identifier: "Title Editor")
+                            }
+                            .padding([.top, .trailing, .bottom], 5.0)
+                        }
+                        .background(Color.gray.opacity(0.3))
+                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                        .frame(maxWidth: 150)
+                    } else {
+                        Text(preference.title)
+                            .font(.title2)
+                    }
+                }
+                if isEditingTitle {
+                    HStack {
+                        Button {
+                            withAnimation {
+                                editedTitle = preference.title
+                                self.titleEditorIsFocused = false
+                                self.isEditingTitle = false
+                            }
+                        } label: {
+                            Text("X")
+                                .foregroundColor(.red)
+                        }
+                        Button {
+                            withAnimation {
+                                preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
                                     self.titleEditorIsFocused = false
                                     self.isEditingTitle = false
                                 }
-                            } label: {
-                                Text("X")
-                                    .foregroundColor(.red)
-                            }
-                            Button {
-                                withAnimation {
-                                    preferencesModel.saveUpdatedTitle(for: preference, with: editedTitle, showTextEditorIfDuplicate: false) {
-                                        self.titleEditorIsFocused = false
-                                        self.isEditingTitle = false
-                                    }
-                                }
-                            } label: {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.green)
-                            }
-                        }
-                    } else {
-                        Button {
-                            withAnimation {
-                                self.isEditingTitle = true
-                                self.titleEditorIsFocused = true
                             }
                         } label: {
-                            Image(systemName: "square.and.pencil")
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.green)
                         }
                     }
-                    Spacer()
+                } else {
                     Button {
-                        preferencesModel.duplicateNotificationPreferenceAlert(basedOn: preference, onDone: {})
+                        withAnimation {
+                            self.isEditingTitle = true
+                            self.titleEditorIsFocused = true
+                        }
                     } label: {
-                        Image(systemName: "doc.on.doc")
+                        Image(systemName: "square.and.pencil")
                     }
-                    .hoverEffect(.highlight)
-                    Button {
-                        preferencesModel.deleteNotificationPreference(preference: preference)
-                    } label: {
-                        Image(systemName: "minus.circle.fill")
-                            .foregroundColor(Color.red)
-                    }
-                    .hoverEffect(.highlight)
                 }
-                .imageScale(.large)
-                .frame(height: 40)
-                Divider()
-                    .padding(.bottom)
-                NotificationPreferenceDaysPicker(preference: $preference)
-                NotificationPreferencesTimePicker(preference: $preference)
-                NotificationPreferencesImportance(preference: $preference)
-                NotificationPreferencesSelectedBridges(preference: $preference)
-                NotificationPreferencesActiveToggle(preference: $preference)
+                Spacer()
+                Button {
+                    Mcrich23_Toolkit.presentShareSheet(activityItems: [ "https://bridges.mcrich23.com/notifications/\(Utilities.deviceID ?? "")/\(preference.id)" ], excludedActivityTypes: [])
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .hoverEffect(.highlight)
+                Button {
+                    preferencesModel.duplicateNotificationPreferenceAlert(basedOn: preference, onDone: {})
+                } label: {
+                    Image(systemName: "doc.on.doc")
+                }
+                .hoverEffect(.highlight)
+                Button {
+                    preferencesModel.deleteNotificationPreference(preference: preference)
+                } label: {
+                    Image(systemName: "minus.circle.fill")
+                        .foregroundColor(Color.red)
+                }
+                .hoverEffect(.highlight)
             }
-            .padding()
+            .imageScale(.large)
+            .frame(height: 40)
+            Divider()
+                .padding(.bottom)
+            NotificationPreferenceDaysPicker(preference: $preference)
+            NotificationPreferencesTimePicker(preference: $preference)
+            if #available(iOS 15, *) {
+                NotificationPreferencesImportance(preference: $preference)
+            }
+            NotificationPreferencesSelectedBridges(preference: $preference)
+            NotificationPreferencesActiveToggle(preference: $preference)
         }
+        .padding()
         .onAppear {
             self.editedTitle = preference.title
+        }
+        .background {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.systemGroupedBackground)
         }
     }
 }

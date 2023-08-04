@@ -8,6 +8,7 @@
 import Foundation
 import UserNotifications
 import Firebase
+import FirebaseAnalytics
 import Mcrich23_Toolkit
 import SwiftUI
 import SwiftUIAlert
@@ -22,6 +23,11 @@ final class NotificationPreferencesModel: ObservableObject {
     let fileName = "NotificationPreferences.json"
     let maxNumber = 6
     
+    init() {
+        getPreferences()
+    }
+    let db = Firestore.firestore()
+    
     @Published var notificationsAllowed = false
     
     func addSubscription(for bridge: Bridge) {
@@ -29,7 +35,6 @@ final class NotificationPreferencesModel: ObservableObject {
             if notificationsAreAllowed {
                 Analytics.setUserProperty("subscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
                 Analytics.logEvent("subscribed_to_bridge", parameters: ["subscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
-                Messaging.messaging().subscribe(toTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
                 let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                     bridgeArray.name == bridge.name
                 })!
@@ -39,21 +44,49 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
-    func removeSubscription(for bridge: Bridge) {
+    func removeSubscription(for bridge: Bridge, preference: NotificationPreferences) {
         Utilities.checkNotificationPermissions { notificationsAreAllowed in
             if notificationsAreAllowed {
                 let allBridgeIds = self.preferencesArray.map { $0.bridgeIds }.joined()
                 if !allBridgeIds.contains(bridge.id) {
                     Analytics.setUserProperty("unsubscribed", forName: ContentViewModel.shared.bridgeName(bridge: bridge))
                     Analytics.logEvent("unsubscribed_to_bridge", parameters: ["unsubscribed" : ContentViewModel.shared.bridgeName(bridge: bridge)])
-                    Messaging.messaging().unsubscribe(fromTopic: ContentViewModel.shared.bridgeName(bridge: bridge))
                     if let index = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { bridgeArray in
                         bridgeArray.name == bridge.name
                     }) {
                         ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![index].subscribed = false
+                        if let deviceID = Utilities.deviceID {
+                            self.db.collection("Directory").document(bridge.id.uuidString).setData([
+                                "subscribed_users" : FieldValue.arrayRemove(["\(deviceID)/\(preference.id.uuidString)"])
+                            ], merge: true)
+                        }
                     }
                     UserDefaults.standard.set(false, forKey: "\(ContentViewModel.shared.bridgeName(bridge: bridge)).subscribed")
                 }
+            }
+        }
+    }
+    
+    func updateBackendPreferences() {
+        guard let deviceID = Utilities.deviceID else { return }
+        for pref in preferencesArray {
+            db.collection(deviceID).document(pref.id.uuidString).setData([
+                "id": pref.id.uuidString,
+                "title": pref.title,
+                "days": (pref.days ?? []).map({ $0.rawValue }),
+                "is_all_day": pref.isAllDay,
+                "start_time": pref.startTime,
+                "end_time": pref.endTime,
+                "notification_priority": pref.notificationPriority.rawValue,
+                "bridge_ids": pref.bridgeIds.map({ $0.uuidString }),
+                "is_active": pref.isActive,
+                "device_id": Messaging.messaging().fcmToken ?? "nil",
+                "isBeta": Utilities.appType != .AppStore
+            ], merge: true)
+            for bridge in pref.bridgeIds {
+                db.collection("Directory").document(bridge.uuidString).setData([
+                    "subscribed_users" : FieldValue.arrayUnion(["\(deviceID)/\(pref.id.uuidString)"])
+                ], merge: true)
             }
         }
     }
@@ -70,6 +103,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 let pathWithFileName = documentDirectory.appendingPathComponent(fileName)
                 
                 try preferencesJson.write(to: pathWithFileName)
+                updateBackendPreferences()
             } else {
                 throw throwError.unableToWrite
             }
@@ -102,6 +136,7 @@ final class NotificationPreferencesModel: ObservableObject {
                             }
                         }
                     }
+                    updateBackendPreferences()
                 } else {
                     throw throwError.fileDoesNotExist
                 }
@@ -256,8 +291,11 @@ final class NotificationPreferencesModel: ObservableObject {
                 for bridge in ContentViewModel.shared.allBridges {
                     let sortedBridgesIndex = ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]?.firstIndex(where: { $0.id == bridge.id })
                     if let sortedBridgesIndex, !(self.preferencesArray.map({ $0.bridgeIds }).joined()).contains(bridge.id) {
-                        self.removeSubscription(for: ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![sortedBridgesIndex])
+                        self.removeSubscription(for: ContentViewModel.shared.sortedBridges[bridge.bridgeLocation]![sortedBridgesIndex], preference: preference)
                     }
+                }
+                if let deviceID = Utilities.deviceID {
+                    self.db.collection(deviceID).document(preference.id.uuidString).delete()
                 }
             }
         })])
