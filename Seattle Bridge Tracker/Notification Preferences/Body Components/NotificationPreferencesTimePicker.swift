@@ -55,5 +55,10 @@ struct NotificationPreferencesTimePicker: View {
                 }
             }
         }
+        if endTime < startTime {
+            Text("This notification schedule will not run")
+                .foregroundColor(.systemYellow)
+                .multilineTextAlignment(.center)
+        }
     }
 }

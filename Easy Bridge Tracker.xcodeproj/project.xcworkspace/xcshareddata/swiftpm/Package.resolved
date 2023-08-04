@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {
           "branch": null,
-          "revision": "7874c1b48cbffd086ce8a052c4be873a78613775",
-          "version": "9.2.3"
+          "revision": "aae45a320fd0d11811820335b1eabc8753902a40",
+          "version": "9.2.5"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "871d43135925cde39ef7421d8723ce47edfdcc39",
-          "version": "7.11.1"
+          "revision": "c38ce365d77b04a9a300c31061c5227589e5597b",
+          "version": "7.11.5"
         }
       },
       {
@@ -141,8 +141,8 @@
         "repositoryURL": "https://github.com/google/promises.git",
         "state": {
           "branch": null,
-          "revision": "ec957ccddbcc710ccc64c9dcbd4c7006fcf8b73a",
-          "version": "2.2.0"
+          "revision": "e70e889c0196c76d22759eb50d6a0270ca9f1d9e",
+          "version": "2.3.1"
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/RevenueCat/purchases-ios.git",
         "state": {
           "branch": null,
-          "revision": "3ad7fab62d44dd7053d6531d5b0bc90e0e4724a7",
-          "version": "4.18.0"
+          "revision": "f2f5314fa92d3556fe23e857b34eeed13934c6fb",
+          "version": "4.25.2"
         }
       },
       {
@@ -186,8 +186,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
-          "revision": "0af9125c4eae12a4973fb66574c53a54962a9e1e",
-          "version": "1.21.0"
+          "revision": "ce20dc083ee485524b802669890291c0d8090170",
+          "version": "1.22.1"
         }
       },
       {
