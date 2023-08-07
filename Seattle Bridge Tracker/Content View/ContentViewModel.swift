@@ -47,53 +47,64 @@ class ContentViewModel: ObservableObject {
     private var response: [Response] = []
     let dataFetch = TwitterFetch()
     let noImage = URL(string: "https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725020-stock-illustration-image-available-icon-flat-vector.jpg")!
+    
     func fetchData(repeatFetch: Bool) {
-        DispatchQueue.global(qos: .background).async {
-            self.dataFetch.fetchTweet { error in
-                print("❌ Status code is \(error.rawValue)")
-                DispatchQueue.main.async {
-                    self.status = .failed("\(error.rawValue) - \(error.localizedReasonPhrase.capitalized)")
-                }
-            } completion: { response in
-                self.response = response
-                for bridge in response {
-                    self.getNotificationAuthStatus { authStatus in
-                        let addBridge = Bridge(
-                            id: UUID(uuidString: bridge.id)!,
-                            name: bridge.name,
-                            status: BridgeStatus(rawValue: bridge.status) ?? .unknown,
-                            imageUrl: URL(string: bridge.imageUrl) ?? self.noImage,
-                            mapsUrl: URL(string: bridge.mapsUrl)!,
-                            address: bridge.address,
-                            latitude: bridge.latitude,
-                            longitude: bridge.longitude,
-                            bridgeLocation: bridge.bridgeLocation,
-                            subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(self.bridgeName(bridge: bridge)).subscribed") : false)
-                        )
-                        DispatchQueue.main.async {
-                            if (self.sortedBridges[bridge.bridgeLocation] ?? []).contains(where: { br in
+        Task(priority: .background) {
+            await self.fetchDataInternal()
+            try await Task.sleep(nanoseconds: 2_000_000_000) // Wait 2 seconds
+            if repeatFetch {
+                self.fetchData(repeatFetch: true)
+            }
+        }
+        
+//        if repeatFetch {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+//            }
+//        } else if repeatCount == 0 {
+//            Task(priority: .background, operation: <#T##() async -> _#>)
+//        }
+    }
+    
+    private func fetchDataInternal() async {
+        self.dataFetch.fetchTweet { error in
+            print("❌ Status code is \(error.rawValue)")
+            DispatchQueue.main.async {
+                self.status = .failed("\(error.rawValue) - \(error.localizedReasonPhrase.capitalized)")
+            }
+        } completion: { response in
+            self.response = response
+            for bridge in response {
+                self.getNotificationAuthStatus { authStatus in
+                    let addBridge = Bridge(
+                        id: UUID(uuidString: bridge.id)!,
+                        name: bridge.name,
+                        status: BridgeStatus(rawValue: bridge.status) ?? .unknown,
+                        imageUrl: URL(string: bridge.imageUrl) ?? self.noImage,
+                        mapsUrl: URL(string: bridge.mapsUrl)!,
+                        address: bridge.address,
+                        latitude: bridge.latitude,
+                        longitude: bridge.longitude,
+                        bridgeLocation: bridge.bridgeLocation,
+                        subscribed: (authStatus == .authorized ? UserDefaults.standard.bool(forKey: "\(self.bridgeName(bridge: bridge)).subscribed") : false)
+                    )
+                    DispatchQueue.main.async {
+                        if (self.sortedBridges[bridge.bridgeLocation] ?? []).contains(where: { br in
+                            br.name == addBridge.name
+                        }) {
+                            let index = self.sortedBridges[bridge.bridgeLocation]!.firstIndex { br in
                                 br.name == addBridge.name
-                            }) {
-                                let index = self.sortedBridges[bridge.bridgeLocation]!.firstIndex { br in
-                                    br.name == addBridge.name
-                                }!
-                                self.sortedBridges[bridge.bridgeLocation]![index].status = addBridge.status
-                                self.sortedBridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
-                                print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.sortedBridges[bridge.bridgeLocation]![index].status)")
+                            }!
+                            self.sortedBridges[bridge.bridgeLocation]![index].status = addBridge.status
+                            self.sortedBridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
+                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.sortedBridges[bridge.bridgeLocation]![index].status)")
+                        } else {
+                            if self.sortedBridges[bridge.bridgeLocation] != nil {
+                                self.sortedBridges[bridge.bridgeLocation]!.append(addBridge)
                             } else {
-                                if self.sortedBridges[bridge.bridgeLocation] != nil {
-                                    self.sortedBridges[bridge.bridgeLocation]!.append(addBridge)
-                                } else {
-                                    self.sortedBridges[bridge.bridgeLocation] = [addBridge]
-                                }
+                                self.sortedBridges[bridge.bridgeLocation] = [addBridge]
                             }
                         }
                     }
-                }
-            }
-            if repeatFetch {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-                    self.fetchData(repeatFetch: true)
                 }
             }
         }
