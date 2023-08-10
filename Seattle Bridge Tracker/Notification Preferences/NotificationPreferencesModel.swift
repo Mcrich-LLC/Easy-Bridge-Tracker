@@ -80,6 +80,7 @@ final class NotificationPreferencesModel: ObservableObject {
         for pref in preferencesArray {
             let dateFormatter = DateFormatter()
             dateFormatter.timeZone = TimeZone(identifier: "America/Los_Angeles") // Pacific Time Zone
+            dateFormatter.dateFormat = "hh:mm a"
 
             let startTime = dateFormatter.string(from: formattedDate(pref.startTime))
             let endTime = dateFormatter.string(from: formattedDate(pref.endTime))
@@ -95,7 +96,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 "is_active": pref.isActive,
                 "device_id": Messaging.messaging().fcmToken ?? "nil",
                 "isBeta": Utilities.appType != .AppStore
-            ], merge: true)
+            ], merge: false)
             for bridge in pref.bridgeIds {
                 db.collection("Directory").document(bridge.uuidString).setData([
                     "subscribed_users" : FieldValue.arrayUnion(["\(deviceID)/\(pref.id.uuidString)"])
