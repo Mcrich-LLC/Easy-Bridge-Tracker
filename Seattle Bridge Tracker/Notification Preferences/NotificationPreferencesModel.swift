@@ -67,16 +67,29 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
+    func formattedDate(_ date: String?) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en_US_POSIX")
+        dateFormatter.defaultDate = Calendar.current.startOfDay(for: Date())
+        dateFormatter.dateFormat = "hh:mm a"
+        return dateFormatter.date(from: date ?? "8:00 AM")!
+    }
+    
     func updateBackendPreferences() {
         guard let deviceID = Utilities.deviceID else { return }
         for pref in preferencesArray {
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(identifier: "America/Los_Angeles") // Pacific Time Zone
+
+            let startTime = dateFormatter.string(from: formattedDate(pref.startTime))
+            let endTime = dateFormatter.string(from: formattedDate(pref.endTime))
             db.collection(deviceID).document(pref.id.uuidString).setData([
                 "id": pref.id.uuidString,
                 "title": pref.title,
                 "days": (pref.days ?? []).map({ $0.rawValue }),
                 "is_all_day": pref.isAllDay,
-                "start_time": pref.startTime,
-                "end_time": pref.endTime,
+                "start_time": startTime,
+                "end_time": endTime,
                 "notification_priority": pref.notificationPriority.rawValue,
                 "bridge_ids": pref.bridgeIds.map({ $0.uuidString }),
                 "is_active": pref.isActive,
