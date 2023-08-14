@@ -16,7 +16,12 @@ class NotificationService: UNNotificationServiceExtension {
     override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
-        guard let bestAttemptContent = bestAttemptContent else { return }
+        guard let bestAttemptContent = bestAttemptContent else {
+            let content = bestAttemptContent
+            content?.subtitle = "⚠️ Extentsion Failed ⚠️"
+            contentHandler(content ?? UNNotificationContent())
+            return
+        }
         func complete() {
             bestAttemptContent.categoryIdentifier = request.content.title
             if let RawInterruptionLevel = request.content.userInfo["interruption_level"] as? String {
