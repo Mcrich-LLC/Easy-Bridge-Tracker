@@ -128,6 +128,15 @@
         }
       },
       {
+        "package": "LocalConsole",
+        "repositoryURL": "https://github.com/duraidabdul/LocalConsole/",
+        "state": {
+          "branch": null,
+          "revision": "2c5d5e018acd4963fe6dfe858f6d6fecef7cbf2f",
+          "version": "1.12.1"
+        }
+      },
+      {
         "package": "nanopb",
         "repositoryURL": "https://github.com/firebase/nanopb.git",
         "state": {

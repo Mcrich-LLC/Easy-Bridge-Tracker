@@ -21,7 +21,7 @@ struct Seattle_Bridge_TrackerApp: App {
             ContentView()
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
-                        print("Active")
+                        ConsoleManager.printStatement("Active")
                         UNUserNotificationCenter.current().getNotificationSettings { setting in
                             DispatchQueue.main.async {
                                 if setting.authorizationStatus == .authorized {
@@ -32,9 +32,9 @@ struct Seattle_Bridge_TrackerApp: App {
                             }
                         }
                     } else if newPhase == .inactive {
-                        print("Inactive")
+                        ConsoleManager.printStatement("Inactive")
                     } else if newPhase == .background {
-                        print("Background")
+                        ConsoleManager.printStatement("Background")
                     }
                 }
                 .onOpenURL { url in
@@ -45,7 +45,7 @@ struct Seattle_Bridge_TrackerApp: App {
                         let id = components[2]
                         db.collection(uid).document(id).getDocument { doc, error in
                             if let error {
-                                print(error)
+                                ConsoleManager.printStatement(error)
                                 return
                             }
                             

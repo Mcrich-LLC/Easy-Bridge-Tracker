@@ -55,7 +55,7 @@ struct BannerViewController: UIViewControllerRepresentable {
             self.bannerViewController = bannerViewController
         }
         func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-            print("banner failed to show! Error: \(String(describing: error))")
+            ConsoleManager.printStatement("banner failed to show! Error: \(String(describing: error))")
             bannerViewController.startLoading()
         }
         func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
@@ -78,7 +78,7 @@ struct BannerAds: View {
                     .shimmering(active: true, duration: 0.75, bounce: false)
                     .frame(height: 50)
                     .onDisappear {
-                        print("stopped shimmering")
+                        ConsoleManager.printStatement("stopped shimmering")
                     }
             }
                 BannerViewController(startLoading: {

@@ -19,7 +19,7 @@ struct FavoritedCities: View {
                     ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
                         if #available(iOS 15.0, *) {
                             BridgeRow(bridge: Binding(get: {
-                                print("get \(bridge)")
+                                ConsoleManager.printStatement("get \(bridge)")
                                 return bridge
                             }, set: { _ in
                             }))
@@ -37,7 +37,7 @@ struct FavoritedCities: View {
                             }
                         } else {
                             BridgeRow(bridge: Binding(get: {
-                                print("get \(bridge)")
+                                ConsoleManager.printStatement("get \(bridge)")
                                 return bridge
                             }, set: { _ in
                             }))

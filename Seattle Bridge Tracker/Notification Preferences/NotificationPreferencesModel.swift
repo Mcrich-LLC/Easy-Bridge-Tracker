@@ -122,7 +122,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 throw throwError.unableToWrite
             }
         } catch {
-            print("Unable to write json")
+            ConsoleManager.printStatement("Unable to write json")
         }
     }
     
@@ -155,7 +155,7 @@ final class NotificationPreferencesModel: ObservableObject {
                     throw throwError.fileDoesNotExist
                 }
             } catch {
-                print("NotificationPreferences.json doesn't exist")
+                ConsoleManager.printStatement("NotificationPreferences.json doesn't exist")
             }
         }
     }
@@ -175,7 +175,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 throw throwError.fileDoesNotExist
             }
         } catch {
-            print("NotificationPreferences.json doesn't exist")
+            ConsoleManager.printStatement("NotificationPreferences.json doesn't exist")
         }
     }
     

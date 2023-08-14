@@ -34,11 +34,11 @@ class TwitterFetch {
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard error == nil else {
                     if error?.localizedDescription.range(of: "Could not connect to the server.") != nil {
-                        print("Could not connect to the server!")
+                        ConsoleManager.printStatement("Could not connect to the server!")
                         errorHandler(.networkConnectTimeoutError)
                         completion([])
                     } else /*if error?.localizedDescription.range(of: "A server with the specified hostname could not be found.") != nil*/ {
-                        print("A server with the specified hostname could not be found.")
+                        ConsoleManager.printStatement("A server with the specified hostname could not be found.")
                         errorHandler(.notFound)
                         completion([])
                     }
@@ -48,7 +48,7 @@ class TwitterFetch {
                 
                 if let response = response as? HTTPURLResponse {
                     guard (200 ... 299) ~= response.statusCode else {
-                        print("❌ Status code is \(response.statusCode)")
+                        ConsoleManager.printStatement("❌ Status code is \(response.statusCode)")
                         errorHandler(HTTPStatusCode(rawValue: response.statusCode) ?? .notFound)
                         completion([])
                         return
@@ -78,7 +78,7 @@ class TwitterFetch {
                             completion(result)
                         }
                     } catch {
-                        print("error = \(error)")
+                        ConsoleManager.printStatement("error = \(error)")
                     }
                 }
             }

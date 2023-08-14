@@ -100,6 +100,20 @@ struct HelpMenu: View {
                             Label("Notification Schedules", systemImage: "bell")
                         }
                     }
+                    if Utilities.appType == .TestFlight || Utilities.appType == .Debug {
+                        Section {
+                            Button {
+                                ConsoleManager.uiConsole.isVisible.toggle()
+                            } label: {
+                                let text = ConsoleManager.uiConsole.isVisible ? "Hide Console" : "Show Console"
+                                if #available(iOS 17, *) {
+                                    Label(text, systemImage: "apple.terminal")
+                                } else {
+                                    Label(text, systemImage: "terminal")
+                                }
+                            }
+                        }
+                    }
                     
                 } label: {
                     Image(systemName: "ellipsis.circle")

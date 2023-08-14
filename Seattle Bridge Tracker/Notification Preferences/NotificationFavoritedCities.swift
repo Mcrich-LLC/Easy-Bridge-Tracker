@@ -20,7 +20,7 @@ struct NotificationFavoritedCities: View {
                 VStack {
                     ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
                         NotificationBridgeRow(bridge: Binding(get: {
-                            print("get \(bridge)")
+                            ConsoleManager.printStatement("get \(bridge)")
                             return bridge
                         }, set: { _ in
                         }), isSelected: preference.bridgeIds.contains(bridge.id), toggleBridgeCallback: { bridge in

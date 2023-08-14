@@ -46,21 +46,21 @@ class PurchaseService {
     }
     private func getOfferings(completion: @escaping ([Package]) -> Void) {
         Purchases.shared.getOfferings { offerings, error in
-            print("offerings = \(String(describing: offerings))")
+            ConsoleManager.printStatement("offerings = \(String(describing: offerings))")
             if let offerings = offerings {
-                print("offerings = \(offerings)")
+                ConsoleManager.printStatement("offerings = \(offerings)")
                 guard let offer = offerings.current else {
                     completion([])
                     return
                 }
                 let packages = offer.availablePackages
-                print("offer = \(String(describing: offer))")
-                print("packages = \(String(describing: packages))")
-                print("packages = \(String(describing: packages))")
+                ConsoleManager.printStatement("offer = \(String(describing: offer))")
+                ConsoleManager.printStatement("packages = \(String(describing: packages))")
+                ConsoleManager.printStatement("packages = \(String(describing: packages))")
                 completion(packages)
             } else {
-                print("RevenueCat Error = \(String(describing: error))")
-                print("Error, doesn't work")
+                ConsoleManager.printStatement("RevenueCat Error = \(String(describing: error))")
+                ConsoleManager.printStatement("Error, doesn't work")
                 SwiftUIAlert.show(
                     title: NSLocalizedString("Uh Oh", comment: "Shown in In App Purchases are not availble alert"),
                     message: NSLocalizedString("In App Purchases are not availble at this time.", comment: "Shown in In App Purchases are not availble alert"),
@@ -79,26 +79,26 @@ class PurchaseService {
         do {
             try await PurchasesDiagnostics.default.testSDKHealth()
         } catch {
-            print("RevenueCat Diagnostics Error = \(error)")
+            await ConsoleManager.printStatement("RevenueCat Diagnostics Error = \(error)")
         }
     }
     private func configOfferings() {
         Purchases.shared.getOfferings { offerings, error in
-            print("offerings = \(String(describing: offerings))")
+            ConsoleManager.printStatement("offerings = \(String(describing: offerings))")
             if let offerings = offerings {
-                print("offerings = \(offerings)")
+                ConsoleManager.printStatement("offerings = \(offerings)")
                 guard let offer = offerings.current else {
                     return
                 }
                 let packages = offer.availablePackages
-                print("offer = \(String(describing: offer))")
-                print("packages = \(String(describing: packages))")
-                print("packages = \(String(describing: packages))")
+                ConsoleManager.printStatement("offer = \(String(describing: offer))")
+                ConsoleManager.printStatement("packages = \(String(describing: packages))")
+                ConsoleManager.printStatement("packages = \(String(describing: packages))")
                 for i in 0...packages.count - 1 {
                     
                     // Get a reference to the package
                     let package = packages[i]
-                    print("package = \(package.identifier)")
+                    ConsoleManager.printStatement("package = \(package.identifier)")
                     if let offeringInfoIndex = OfferingInfo.offerings.firstIndex(where: { offering in
                         offering.id.rawValue == package.id
                     }) {
@@ -107,19 +107,19 @@ class PurchaseService {
                     }
                 }
             } else {
-                print("RevenueCat Error = \(String(describing: error))")
-                print("Error, doesn't work")
+                ConsoleManager.printStatement("RevenueCat Error = \(String(describing: error))")
+                ConsoleManager.printStatement("Error, doesn't work")
             }
         }
     }
     // MARK: Public Functions
     static func checkIAPEnabled() -> Bool {
-        print("IAPs = \(enabled)")
+        ConsoleManager.printStatement("IAPs = \(enabled)")
         if !enabled {
 //             Create OK button with action handler
             SwiftUIAlert.show(title: NSLocalizedString("Uh Oh", comment: "Shown in In App Purchases are not availble alert"), message: NSLocalizedString("In App Purchases are not availble at this time.", comment: "Shown in In App Purchases are not availble alert"), preferredStyle: .alert, actions: [
                 UIAlertAction(title: NSLocalizedString("Ok", comment: "Shown in In App Purchases are not availble alert"), style: .default, handler: { _ -> Void in
-                    print("\"IAP Unavailible\" alert was dismised")
+                    ConsoleManager.printStatement("\"IAP Unavailible\" alert was dismised")
                 })
             ])
             return false
@@ -152,7 +152,7 @@ class PurchaseService {
         if isConnectedToInternet() && PurchaseService.checkIAPEnabled() {
             Purchases.shared.restorePurchases { purchaserInfo, error in
                 if error == nil {
-                    print("Purchaser Info = \(purchaserInfo!)")
+                    ConsoleManager.printStatement("Purchaser Info = \(purchaserInfo!)")
                     if purchaserInfo?.entitlements["removeAds"]?.isActive == true {
                         AdController.shared.areAdsDisabled = true
                         UserDefaults.standard.set(true, forKey: PurchaseService.Offerings.removeAds.rawValue)
@@ -170,7 +170,7 @@ class PurchaseService {
                     )
                     completion()
                 } else {
-                    print("Error, \(error!)")
+                    ConsoleManager.printStatement("Error, \(error!)")
                     if "\(error!)" == "Error Domain=RCPurchasesErrorDomain Code=9 \"The receipt is missing.\" UserInfo={NSLocalizedDescription=The receipt is missing., readable_error_code=MISSING_RECEIPT_FILE}" {
                         SwiftUIAlert.show(
                             title: NSLocalizedString("Wooho!", comment: "Shown in restored purchases alert"),
@@ -214,12 +214,12 @@ class PurchaseService {
                 if let package = packages.first(where: { offer in
                     offer.id == offeringId
                 }) {
-                    print("package = \(package.identifier), productID = \(offeringId)")
-                    print("package = \(package.storeProduct.localizedTitle), package.productID = \(package.storeProduct.productIdentifier)")
+                    ConsoleManager.printStatement("package = \(package.identifier), productID = \(offeringId)")
+                    ConsoleManager.printStatement("package = \(package.storeProduct.localizedTitle), package.productID = \(package.storeProduct.productIdentifier)")
                     Purchases.shared.purchase(package: package) { _, _, error, userCancelled in
                         if error == nil && !userCancelled {
                             // Successful Purchase
-                            print("Success!")
+                            ConsoleManager.printStatement("Success!")
                             if package.id == Offerings.removeAds.rawValue {
                                 self.removeAds()
                             } else if Offerings.supportValues.contains(where: { offer in
@@ -236,7 +236,7 @@ class PurchaseService {
                             Analytics.logEvent("in_app_purchase", parameters: ["product" : String(describing: offering)])
                             completion("")
                         } else if userCancelled {
-                            print("Error, user cancelled")
+                            ConsoleManager.printStatement("Error, user cancelled")
                             SwiftUIAlert.show(
                                 title: NSLocalizedString("Uh Oh", comment: "Shown in transaction cancelled alert"),
                                 message: NSLocalizedString("The transaction was cancelled", comment: "Shown in transaction cancelled alert"),
@@ -250,7 +250,7 @@ class PurchaseService {
                             )
                             completion("The transaction was cancelled")
                         } else {
-                            print("Error, \(error!)")
+                            ConsoleManager.printStatement("Error, \(error!)")
                             self.reportError(function: "Purchase IAP", error: error!)
                             SwiftUIAlert.show(
                                 title: NSLocalizedString("Uh Oh", comment: "Shown in unable purchase alert"),
@@ -267,10 +267,10 @@ class PurchaseService {
                         }
                     }
                 } else {
-                    print("Error, doesn't work")
+                    ConsoleManager.printStatement("Error, doesn't work")
                     SwiftUIAlert.show(title: NSLocalizedString("Uh Oh", comment: "Shown in In App Purchases are not availble alert"), message: NSLocalizedString("In App Purchases are not availble at this time.", comment: "Shown in In App Purchases are not availble alert"), preferredStyle: .alert, actions: [
                         UIAlertAction(title: NSLocalizedString("Ok", comment: "Shown in In App Purchases are not availble alert"), style: .default, handler: { _ -> Void in
-                            print("\"IAP Unavailible\" alert was dismised")
+                            ConsoleManager.printStatement("\"IAP Unavailible\" alert was dismised")
                         })
                     ])
                     completion("In App Purchases are not availble at this time.")

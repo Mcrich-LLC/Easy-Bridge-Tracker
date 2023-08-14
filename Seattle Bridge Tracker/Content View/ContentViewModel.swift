@@ -67,7 +67,9 @@ class ContentViewModel: ObservableObject {
     
     private func fetchDataInternal() async {
         self.dataFetch.fetchTweet { error in
-            print("❌ Status code is \(error.rawValue)")
+            Task {
+                await ConsoleManager.printStatement("❌ Status code is \(error.rawValue)")
+            }
             DispatchQueue.main.async {
                 self.status = .failed("\(error.rawValue) - \(error.localizedReasonPhrase.capitalized)")
             }
@@ -96,7 +98,7 @@ class ContentViewModel: ObservableObject {
                             }!
                             self.sortedBridges[bridge.bridgeLocation]![index].status = addBridge.status
                             self.sortedBridges[bridge.bridgeLocation]![index].subscribed = addBridge.subscribed
-                            print("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.sortedBridges[bridge.bridgeLocation]![index].status)")
+                            ConsoleManager.printStatement("\(addBridge.name): addBridge.status = \(addBridge.status), self.bridges[bridge.bridgeLocation]![index].status = \(self.sortedBridges[bridge.bridgeLocation]![index].status)")
                         } else {
                             if self.sortedBridges[bridge.bridgeLocation] != nil {
                                 self.sortedBridges[bridge.bridgeLocation]!.append(addBridge)
