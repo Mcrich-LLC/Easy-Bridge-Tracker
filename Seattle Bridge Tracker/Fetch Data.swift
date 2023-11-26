@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 import HTTPStatusCodes
 
 enum HttpError: Error {
@@ -14,15 +15,18 @@ enum HttpError: Error {
 }
 
 class TwitterFetch {
+    private var url: URL? {
+        if Utilities.appType == .AppStore {
+            guard let urlString = Utilities.remoteConfig["fetchUrl"].stringValue else { return nil }
+            return URL(string: urlString)
+        } else {
+            guard let urlString = Utilities.remoteConfig["betaFetchUrl"].stringValue else { return nil }
+            return URL(string: urlString)
+        }
+    }
+    
     func fetchTweet(errorHandler: @escaping (HTTPStatusCode) -> Void, completion: @escaping ([Response]) -> Void) {
         do {
-            var url: URL? {
-                if Utilities.appType == .AppStore {
-                    return URL(string: "http://mc.mcrich23.com/bridges/")
-                } else {
-                    return URL(string: "http://mc.mcrich23.com/beta/bridges/")
-                }
-            }
             
             guard let url else { return }
             
