@@ -17,6 +17,7 @@ class ContentViewModel: ObservableObject {
     static let shared = ContentViewModel()
     @Published var isShowingNotificationSettings = false
     @Published var isShowingInfo = false
+    @Published var isShowingMoreApps = false
     @Published var sortedBridges: [String: [Bridge]] = [:] {
         didSet {
             var count = 0 {

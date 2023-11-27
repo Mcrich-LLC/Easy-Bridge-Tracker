@@ -137,6 +137,15 @@
         }
       },
       {
+        "package": "PortfolioKit",
+        "repositoryURL": "https://github.com/Mcrich23/PortfolioKit",
+        "state": {
+          "branch": "main",
+          "revision": "7fd3b50b04d5279e02fb49d536c908d56a9b5abb",
+          "version": null
+        }
+      },
+      {
         "package": "Promises",
         "repositoryURL": "https://github.com/google/promises.git",
         "state": {

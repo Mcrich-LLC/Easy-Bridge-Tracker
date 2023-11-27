@@ -27,6 +27,7 @@
 		229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */; };
 		229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */; };
 		22A815382B140CDA00C53CDD /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 22A815372B140CDA00C53CDD /* GoogleMobileAds */; };
+		22A8153B2B14148200C53CDD /* PortfolioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22A8153A2B14148200C53CDD /* PortfolioKit */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
 		22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 22AB7C80293EDFA4008BD92F /* FirebaseMessaging */; };
@@ -251,6 +252,7 @@
 				222C722F2A89B28200470C25 /* LocalConsole in Frameworks */,
 				22C28A4329397B9500D37696 /* FirebaseRemoteConfigSwift in Frameworks */,
 				22C28A1D29397B9500D37696 /* FirebaseAppDistribution-Beta in Frameworks */,
+				22A8153B2B14148200C53CDD /* PortfolioKit in Frameworks */,
 				A3413A1028B065BC0016710C /* Mcrich23-Toolkit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +516,7 @@
 				22D8688E29D2BEDC00E7D647 /* RevenueCat */,
 				222C722E2A89B28200470C25 /* LocalConsole */,
 				22A815372B140CDA00C53CDD /* GoogleMobileAds */,
+				22A8153A2B14148200C53CDD /* PortfolioKit */,
 			);
 			productName = "Seattle Bridge Tracker";
 			productReference = A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */;
@@ -527,7 +530,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					224C81EE29459999004C5722 = {
 						CreatedOnToolsVersion = 14.1;
@@ -560,6 +563,7 @@
 				22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				222C722D2A89B28200470C25 /* XCRemoteSwiftPackageReference "LocalConsole" */,
 				22A815362B140CC800C53CDD /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				22A815392B14106500C53CDD /* XCRemoteSwiftPackageReference "PortfolioKit" */,
 			);
 			productRefGroup = A33F930028AC90A800391EBB /* Products */;
 			projectDirPath = "";
@@ -807,6 +811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -839,6 +844,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -868,6 +874,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -900,6 +907,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -932,6 +940,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Seattle-Bridge-Tracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Bridges;
@@ -970,6 +979,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Seattle-Bridge-Tracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Bridges;
@@ -1069,6 +1079,14 @@
 				minimumVersion = 10.13.0;
 			};
 		};
+		22A815392B14106500C53CDD /* XCRemoteSwiftPackageReference "PortfolioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mcrich23/PortfolioKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1131,6 +1149,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22A815362B140CC800C53CDD /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
 			productName = GoogleMobileAds;
+		};
+		22A8153A2B14148200C53CDD /* PortfolioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22A815392B14106500C53CDD /* XCRemoteSwiftPackageReference "PortfolioKit" */;
+			productName = PortfolioKit;
 		};
 		22AB7C80293EDFA4008BD92F /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;

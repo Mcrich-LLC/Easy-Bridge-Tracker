@@ -9,6 +9,7 @@ import SwiftUI
 import Mcrich23_Toolkit
 import GoogleMobileAds
 import Firebase
+import PortfolioKit
 
 @main
 struct Seattle_Bridge_TrackerApp: App {
@@ -103,6 +104,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
         if Utilities.appType == .TestFlight || Utilities.appType == .Debug {
             Messaging.messaging().subscribe(toTopic: "test")
+        }
+        if let url = URL(string: "https://gist.githubusercontent.com/Mcrich23/b55923510068c8672cadc5fac3b07137/raw/PortfolioKit.json") {
+            PortfolioKit.shared.config(with: url)
         }
         return true
     }

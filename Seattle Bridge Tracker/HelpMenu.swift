@@ -11,6 +11,7 @@ import Mcrich23_Toolkit
 import SwiftUIBackports
 import Introspect
 import Foundation
+import PortfolioKit
 import SwiftUIAlert
 
 struct HelpMenu: View {
@@ -54,6 +55,11 @@ struct HelpMenu: View {
                         }
                         Link(destination: URL(string: "mailto:support@mcrich23@icloud.com")!) {
                             Label("Get Support", systemImage: "questionmark.circle")
+                        }
+                        Button {
+                            contentViewModel.isShowingMoreApps.toggle()
+                        } label: {
+                            Label("More Apps", systemImage: "square.stack")
                         }
                         Button {
                             Mcrich23_Toolkit.presentShareSheet(activityItems: ["I found this app that tells you when bridges are up and down in real time! You should download it here: https://mcrich23.com/easy-bridge-tracker"], excludedActivityTypes: [])
@@ -130,6 +136,21 @@ struct HelpMenu: View {
         }
         .sheet(isPresented: $contentViewModel.isShowingInfo) {
             Info()
+        }
+        .sheet(isPresented: $contentViewModel.isShowingMoreApps) {
+            NavigationView {
+                PortfolioView()
+                    .navigationTitle(Text("More by Mcrich"))
+                    .navigationBarTitleDisplayMode(.large)
+                    .toolbar {
+                        Button {
+                            contentViewModel.isShowingMoreApps = false
+                        } label: {
+                            Image(systemName: "xmark.circle")
+                        }
+
+                    }
+            }
         }
     }
 }
