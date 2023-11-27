@@ -51,7 +51,7 @@ final class FavoritesModel: ObservableObject {
                 throw throwError.unableToWrite
             }
         } catch {
-            print("Unable to write json")
+            ConsoleManager.printStatement("Unable to write json")
         }
     }
     
@@ -70,7 +70,7 @@ final class FavoritesModel: ObservableObject {
                 throw throwError.fileDoesNotExist
             }
         } catch {
-            print("\(fileName) doesn't exist")
+            ConsoleManager.printStatement("\(fileName) doesn't exist")
         }
     }
 }

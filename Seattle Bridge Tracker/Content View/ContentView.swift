@@ -51,7 +51,7 @@ struct ContentView: View {
                                             Section {
                                                 ForEach((viewModel.sortedBridges[key] ?? []).sorted()) { bridge in
                                                     //                                            BridgeRow(bridge: Binding(get: {
-                                                    //                                                print("get \(bridge)")
+                                                    //                                                ConsoleManager.printStatement("get \(bridge)")
                                                     //                                                return bridge
                                                     //                                            }, set: { _ in
                                                     //                                            }))
@@ -104,7 +104,7 @@ struct ContentView: View {
                                 case .city(let name):
                                     ForEach((viewModel.sortedBridges[name] ?? []).sorted()) { bridge in
                                         //                                            BridgeRow(bridge: Binding(get: {
-                                        //                                                print("get \(bridge)")
+                                        //                                                ConsoleManager.printStatement("get \(bridge)")
                                         //                                                return bridge
                                         //                                            }, set: { _ in
                                         //                                            }))

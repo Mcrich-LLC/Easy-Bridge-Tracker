@@ -8,5 +8,9 @@
 	<true/>
 	<key>revenueCatApiKey</key>
 	<string>appl_XnjQYrhRdrIQdPtXGGXrzkaUpmc</string>
+	<key>fetchUrl</key>
+	<string>https://backend.mcrich23.com/bridges</string>
+	<key>betaFetchUrl</key>
+	<string>https://backend.mcrich23.com/beta/bridges</string>
 </dict>
 </plist>

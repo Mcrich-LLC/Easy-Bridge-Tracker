@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		221BEC7D29D1A1420099A015 /* SwiftUIMap in Frameworks */ = {isa = PBXBuildFile; productRef = 221BEC7C29D1A1420099A015 /* SwiftUIMap */; };
 		2222EBAC29D163B000837F79 /* NotificationPreferencesDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */; };
 		2222EBB029D1779900837F79 /* ScrollViewIfNeeded in Frameworks */ = {isa = PBXBuildFile; productRef = 2222EBAF29D1779900837F79 /* ScrollViewIfNeeded */; };
 		2222EBB429D18D2C00837F79 /* NotificationBridgeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBB329D18D2C00837F79 /* NotificationBridgeRow.swift */; };
@@ -16,15 +15,21 @@
 		2224CDB829D1442D006D4338 /* NotificationPreferencesExample.json in Resources */ = {isa = PBXBuildFile; fileRef = 2224CDB629D1442B006D4338 /* NotificationPreferencesExample.json */; };
 		2224CDBF29D15102006D4338 /* NotificationPreferencesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224CDBD29D150E2006D4338 /* NotificationPreferencesModel.swift */; };
 		2224CDC029D15105006D4338 /* NotificationPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2224CDBB29D15063006D4338 /* NotificationPreferencesView.swift */; };
+		222BF2202B144AF200B0ACA7 /* SwiftUIMap in Frameworks */ = {isa = PBXBuildFile; productRef = 222BF21F2B144AF200B0ACA7 /* SwiftUIMap */; };
+		222BF2232B1451BC00B0ACA7 /* SwiftUIMap in Frameworks */ = {isa = PBXBuildFile; productRef = 222BF2222B1451BC00B0ACA7 /* SwiftUIMap */; };
+		222C722F2A89B28200470C25 /* LocalConsole in Frameworks */ = {isa = PBXBuildFile; productRef = 222C722E2A89B28200470C25 /* LocalConsole */; };
 		224C81FA29459B33004C5722 /* Easy_Bridge_TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BBE28B13720007644D5 /* Easy_Bridge_TrackerUITests.swift */; };
 		224C81FB29459B47004C5722 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37E4BAB28B1359D007644D5 /* SnapshotHelper.swift */; };
 		2253C9BC29D1940A00F22F3B /* NotificationPreferencesDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2222EBAB29D163B000837F79 /* NotificationPreferencesDecoder.swift */; };
 		2253E00D29DBC5430063DDE2 /* BridgeFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E00C29DBC5430063DDE2 /* BridgeFilterView.swift */; };
 		2253E00F29DBCE840063DDE2 /* NotificationFavoritedCities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E00E29DBCE840063DDE2 /* NotificationFavoritedCities.swift */; };
 		2253E01129DBD2110063DDE2 /* FavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2253E01029DBD2110063DDE2 /* FavoritesModel.swift */; };
+		225854562B144AC500A6CB01 /* SwiftUIMap in Frameworks */ = {isa = PBXBuildFile; productRef = 225854552B144AC500A6CB01 /* SwiftUIMap */; };
 		2288FF852A78409700932ED1 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288FF842A78409700932ED1 /* Credits.swift */; };
 		229E72C729D1E6BB00A6DD8A /* NotificationPreferencesBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C629D1E6BB00A6DD8A /* NotificationPreferencesBody.swift */; };
 		229E72CA29D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229E72C929D20CBC00A6DD8A /* NotificationPreferencesTimePicker.swift */; };
+		22A815382B140CDA00C53CDD /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 22A815372B140CDA00C53CDD /* GoogleMobileAds */; };
+		22A8153B2B14148200C53CDD /* PortfolioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 22A8153A2B14148200C53CDD /* PortfolioKit */; };
 		22AB7C77293EDF2A008BD92F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22AB7C76293EDF2A008BD92F /* NotificationService.swift */; };
 		22AB7C7B293EDF2A008BD92F /* NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 22AB7C74293EDF2A008BD92F /* NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		22AB7C81293EDFA4008BD92F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 22AB7C80293EDFA4008BD92F /* FirebaseMessaging */; };
@@ -72,7 +77,6 @@
 		22D8689929D2CDF100E7D647 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 22D8689829D2CDF000E7D647 /* Configuration.storekit */; };
 		22EE942729D3664F00EB8889 /* TitleTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EE942629D3664F00EB8889 /* TitleTextEditor.swift */; };
 		22F47FEB293C78DA00A4E654 /* RemoteConfigDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22F47FEA293C78DA00A4E654 /* RemoteConfigDefaults.plist */; };
-		A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = A305122628B33C3F002BB056 /* GoogleMobileAds */; };
 		A305122A28B33C50002BB056 /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = A305122928B33C50002BB056 /* Shimmer */; };
 		A33F930328AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F930228AC90A800391EBB /* Seattle_Bridge_TrackerApp.swift */; };
 		A33F930528AC90A800391EBB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33F930428AC90A800391EBB /* ContentView.swift */; };
@@ -215,9 +219,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2222EBB029D1779900837F79 /* ScrollViewIfNeeded in Frameworks */,
-				221BEC7D29D1A1420099A015 /* SwiftUIMap in Frameworks */,
 				22C28A2D29397B9500D37696 /* FirebaseFirestoreCombine-Community in Frameworks */,
 				22C28A2529397B9500D37696 /* FirebaseDatabase in Frameworks */,
+				222BF2232B1451BC00B0ACA7 /* SwiftUIMap in Frameworks */,
 				A3D22D7428C149C900AD4C0A /* HTTPStatusCodes in Frameworks */,
 				A305122A28B33C50002BB056 /* Shimmer in Frameworks */,
 				22C28A4529397B9500D37696 /* FirebaseStorage in Frameworks */,
@@ -235,20 +239,24 @@
 				22C28A3F29397B9500D37696 /* FirebasePerformance in Frameworks */,
 				22C28A1729397B9500D37696 /* FirebaseAnalyticsSwift in Frameworks */,
 				22C28A2729397B9500D37696 /* FirebaseDatabaseSwift in Frameworks */,
-				A305122728B33C3F002BB056 /* GoogleMobileAds in Frameworks */,
 				A3F2AFF228B2B5F900D38A59 /* Mcrich23-Toolkit in Frameworks */,
 				22C28A4129397B9500D37696 /* FirebaseRemoteConfig in Frameworks */,
 				22D8688D29D2BEDC00E7D647 /* ReceiptParser in Frameworks */,
+				225854562B144AC500A6CB01 /* SwiftUIMap in Frameworks */,
 				22C28A1F29397B9500D37696 /* FirebaseAuth in Frameworks */,
 				22C28A3129397B9500D37696 /* FirebaseFunctions in Frameworks */,
+				22A815382B140CDA00C53CDD /* GoogleMobileAds in Frameworks */,
 				22C28A3929397B9500D37696 /* FirebaseInstallations in Frameworks */,
 				22C28A2F29397B9500D37696 /* FirebaseFirestoreSwift in Frameworks */,
 				22C28A1929397B9500D37696 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				22C28A1B29397B9500D37696 /* FirebaseAppCheck in Frameworks */,
 				22C28A3D29397B9500D37696 /* FirebaseMLModelDownloader in Frameworks */,
 				22D8688F29D2BEDC00E7D647 /* RevenueCat in Frameworks */,
+				222C722F2A89B28200470C25 /* LocalConsole in Frameworks */,
 				22C28A4329397B9500D37696 /* FirebaseRemoteConfigSwift in Frameworks */,
 				22C28A1D29397B9500D37696 /* FirebaseAppDistribution-Beta in Frameworks */,
+				22A8153B2B14148200C53CDD /* PortfolioKit in Frameworks */,
+				222BF2202B144AF200B0ACA7 /* SwiftUIMap in Frameworks */,
 				A3413A1028B065BC0016710C /* Mcrich23-Toolkit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,7 +485,6 @@
 			packageProductDependencies = (
 				A3413A0F28B065BC0016710C /* Mcrich23-Toolkit */,
 				A3F2AFF128B2B5F900D38A59 /* Mcrich23-Toolkit */,
-				A305122628B33C3F002BB056 /* GoogleMobileAds */,
 				A305122928B33C50002BB056 /* Shimmer */,
 				A3D22D7328C149C900AD4C0A /* HTTPStatusCodes */,
 				22C28A1229397B9500D37696 /* FirebaseAnalytics */,
@@ -508,9 +515,14 @@
 				22C28A4429397B9500D37696 /* FirebaseStorage */,
 				22C28A4629397B9500D37696 /* FirebaseStorageCombine-Community */,
 				2222EBAF29D1779900837F79 /* ScrollViewIfNeeded */,
-				221BEC7C29D1A1420099A015 /* SwiftUIMap */,
 				22D8688C29D2BEDC00E7D647 /* ReceiptParser */,
 				22D8688E29D2BEDC00E7D647 /* RevenueCat */,
+				222C722E2A89B28200470C25 /* LocalConsole */,
+				22A815372B140CDA00C53CDD /* GoogleMobileAds */,
+				22A8153A2B14148200C53CDD /* PortfolioKit */,
+				225854552B144AC500A6CB01 /* SwiftUIMap */,
+				222BF21F2B144AF200B0ACA7 /* SwiftUIMap */,
+				222BF2222B1451BC00B0ACA7 /* SwiftUIMap */,
 			);
 			productName = "Seattle Bridge Tracker";
 			productReference = A33F92FF28AC90A800391EBB /* Easy Bridge Tracker.app */;
@@ -524,7 +536,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					224C81EE29459999004C5722 = {
 						CreatedOnToolsVersion = 14.1;
@@ -549,13 +561,15 @@
 			mainGroup = A33F92F628AC90A800391EBB;
 			packageReferences = (
 				A3413A0E28B065BC0016710C /* XCRemoteSwiftPackageReference "Mcrich23-Toolkit" */,
-				A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */,
 				A305122828B33C50002BB056 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 				A3D22D7228C149C900AD4C0A /* XCRemoteSwiftPackageReference "SwiftHTTPStatusCodes" */,
 				22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2222EBAE29D1779900837F79 /* XCRemoteSwiftPackageReference "ScrollViewIfNeeded" */,
-				221BEC7B29D1A1420099A015 /* XCRemoteSwiftPackageReference "SwiftUIMap" */,
 				22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				222C722D2A89B28200470C25 /* XCRemoteSwiftPackageReference "LocalConsole" */,
+				22A815362B140CC800C53CDD /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				22A815392B14106500C53CDD /* XCRemoteSwiftPackageReference "PortfolioKit" */,
+				222BF2212B1451BC00B0ACA7 /* XCRemoteSwiftPackageReference "SwiftUIMap" */,
 			);
 			productRefGroup = A33F930028AC90A800391EBB /* Products */;
 			projectDirPath = "";
@@ -710,7 +724,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -729,7 +743,7 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -749,7 +763,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -761,7 +775,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -777,7 +791,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NotificationService/Info.plist;
@@ -789,7 +803,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker.NotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -803,6 +817,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -835,6 +850,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -864,6 +880,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -896,6 +913,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -924,10 +942,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Seattle-Bridge-Tracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Bridges;
@@ -942,7 +961,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -962,10 +981,11 @@
 				CODE_SIGN_ENTITLEMENTS = "Easy Bridge Tracker.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Seattle Bridge Tracker/Preview Content\"";
 				DEVELOPMENT_TEAM = L7JQRVXU2V;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Seattle-Bridge-Tracker-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Bridges;
@@ -980,7 +1000,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.4;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Mcrich23.Easy-Bridge-Tracker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1033,14 +1053,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		221BEC7B29D1A1420099A015 /* XCRemoteSwiftPackageReference "SwiftUIMap" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Mcrich23/SwiftUIMap";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		2222EBAE29D1779900837F79 /* XCRemoteSwiftPackageReference "ScrollViewIfNeeded" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dkk/ScrollViewIfNeeded";
@@ -1049,12 +1061,44 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		222BF2212B1451BC00B0ACA7 /* XCRemoteSwiftPackageReference "SwiftUIMap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mcrich23/SwiftUIMap";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		222C722D2A89B28200470C25 /* XCRemoteSwiftPackageReference "LocalConsole" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/duraidabdul/LocalConsole/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		22A815362B140CC800C53CDD /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.13.0;
+			};
+		};
+		22A815392B14106500C53CDD /* XCRemoteSwiftPackageReference "PortfolioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Mcrich23/PortfolioKit";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		22C28A1129397B5400D37696 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
+				minimumVersion = 10.0.0;
 			};
 		};
 		22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
@@ -1063,14 +1107,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.0.0;
-			};
-		};
-		A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/quanghits/GoogleMobileAds";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		A305122828B33C50002BB056 /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
@@ -1100,15 +1136,38 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		221BEC7C29D1A1420099A015 /* SwiftUIMap */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 221BEC7B29D1A1420099A015 /* XCRemoteSwiftPackageReference "SwiftUIMap" */;
-			productName = SwiftUIMap;
-		};
 		2222EBAF29D1779900837F79 /* ScrollViewIfNeeded */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2222EBAE29D1779900837F79 /* XCRemoteSwiftPackageReference "ScrollViewIfNeeded" */;
 			productName = ScrollViewIfNeeded;
+		};
+		222BF21F2B144AF200B0ACA7 /* SwiftUIMap */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftUIMap;
+		};
+		222BF2222B1451BC00B0ACA7 /* SwiftUIMap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 222BF2212B1451BC00B0ACA7 /* XCRemoteSwiftPackageReference "SwiftUIMap" */;
+			productName = SwiftUIMap;
+		};
+		222C722E2A89B28200470C25 /* LocalConsole */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 222C722D2A89B28200470C25 /* XCRemoteSwiftPackageReference "LocalConsole" */;
+			productName = LocalConsole;
+		};
+		225854552B144AC500A6CB01 /* SwiftUIMap */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftUIMap;
+		};
+		22A815372B140CDA00C53CDD /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22A815362B140CC800C53CDD /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+		22A8153A2B14148200C53CDD /* PortfolioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22A815392B14106500C53CDD /* XCRemoteSwiftPackageReference "PortfolioKit" */;
+			productName = PortfolioKit;
 		};
 		22AB7C80293EDFA4008BD92F /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1259,11 +1318,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 22D8688B29D2BEDC00E7D647 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
-		};
-		A305122628B33C3F002BB056 /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A305122528B33C3F002BB056 /* XCRemoteSwiftPackageReference "GoogleMobileAds" */;
-			productName = GoogleMobileAds;
 		};
 		A305122928B33C50002BB056 /* Shimmer */ = {
 			isa = XCSwiftPackageProductDependency;

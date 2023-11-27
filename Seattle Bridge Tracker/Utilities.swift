@@ -11,6 +11,7 @@ import Firebase
 import Mcrich23_Toolkit
 import UIKit
 import SwiftUIAlert
+import LocalConsole
 
 class Utilities {
     static let isFastlaneRunning = UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT")
@@ -23,7 +24,7 @@ class Utilities {
     }
     
     static func fetchRemoteConfig() {
-        print("refreshing")
+        ConsoleManager.printStatement("refreshing")
         remoteConfig = RemoteConfig.remoteConfig()
         let settings = RemoteConfigSettings()
         if Utilities.appType == .Debug {
@@ -31,22 +32,22 @@ class Utilities {
         } else {
             settings.minimumFetchInterval = 43200 // 12 hours
         }
-        print("min fetch interval = \(settings.minimumFetchInterval)")
+        ConsoleManager.printStatement("min fetch interval = \(settings.minimumFetchInterval)")
         remoteConfig.configSettings = settings
         remoteConfig.setDefaults(fromPlist: "RemoteConfigDefaults")
         remoteConfig.fetchAndActivate { status, error in
             if status == .successFetchedFromRemote {
-                print("fetched from remote, \(String(describing: remoteConfig))")
+                ConsoleManager.printStatement("fetched from remote, \(String(describing: remoteConfig))")
                 handleRemoteConfigLoaded()
             } else if status == .successUsingPreFetchedData {
-                print("fetched locally, \(String(describing: remoteConfig))")
+                ConsoleManager.printStatement("fetched locally, \(String(describing: remoteConfig))")
                 handleRemoteConfigLoaded()
             } else if status == .error {
-                print("error fetching = \(String(describing: error))")
+                ConsoleManager.printStatement("error fetching = \(String(describing: error))")
                 handleRemoteConfigLoaded()
             }
         }
-        print("remote config = \(String(describing: remoteConfig))")
+        ConsoleManager.printStatement("remote config = \(String(describing: remoteConfig))")
     }
     
     static func checkNotificationPermissions(completion: @escaping (_ notificationsAreAllowed: Bool) -> Void) {
@@ -108,7 +109,7 @@ class Utilities {
       default:
           Utilities.appType = .AppStore
       }
-        print("App Type: \(Utilities.appType)")
+        ConsoleManager.printStatement("App Type: \(Utilities.appType)")
     }
 
 }
@@ -131,5 +132,13 @@ extension View {
 extension UIAlertAction {
     static func ok(handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertAction {
         UIAlertAction(title: "Ok", style: .default, handler: handler)
+    }
+}
+
+struct ConsoleManager {
+    static let uiConsole = LCManager.shared
+    static func printStatement(_ statement: Any) {
+        print(statement)
+        LCManager.shared.print(statement)
     }
 }

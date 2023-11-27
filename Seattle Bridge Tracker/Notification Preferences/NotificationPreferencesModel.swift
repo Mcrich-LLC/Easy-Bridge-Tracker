@@ -67,22 +67,36 @@ final class NotificationPreferencesModel: ObservableObject {
         }
     }
     
+    func formattedDate(_ date: String?) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en_US_POSIX")
+        dateFormatter.defaultDate = Calendar.current.startOfDay(for: Date())
+        dateFormatter.dateFormat = "hh:mm a"
+        return dateFormatter.date(from: date ?? "8:00 AM")!
+    }
+    
     func updateBackendPreferences() {
         guard let deviceID = Utilities.deviceID else { return }
         for pref in preferencesArray {
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(identifier: "America/Los_Angeles") // Pacific Time Zone
+            dateFormatter.dateFormat = "hh:mm a"
+
+            let startTime = dateFormatter.string(from: formattedDate(pref.startTime))
+            let endTime = dateFormatter.string(from: formattedDate(pref.endTime))
             db.collection(deviceID).document(pref.id.uuidString).setData([
                 "id": pref.id.uuidString,
                 "title": pref.title,
                 "days": (pref.days ?? []).map({ $0.rawValue }),
                 "is_all_day": pref.isAllDay,
-                "start_time": pref.startTime,
-                "end_time": pref.endTime,
+                "start_time": startTime,
+                "end_time": endTime,
                 "notification_priority": pref.notificationPriority.rawValue,
                 "bridge_ids": pref.bridgeIds.map({ $0.uuidString }),
                 "is_active": pref.isActive,
                 "device_id": Messaging.messaging().fcmToken ?? "nil",
                 "isBeta": Utilities.appType != .AppStore
-            ], merge: true)
+            ], merge: false)
             for bridge in pref.bridgeIds {
                 db.collection("Directory").document(bridge.uuidString).setData([
                     "subscribed_users" : FieldValue.arrayUnion(["\(deviceID)/\(pref.id.uuidString)"])
@@ -108,7 +122,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 throw throwError.unableToWrite
             }
         } catch {
-            print("Unable to write json")
+            ConsoleManager.printStatement("Unable to write json")
         }
     }
     
@@ -141,7 +155,7 @@ final class NotificationPreferencesModel: ObservableObject {
                     throw throwError.fileDoesNotExist
                 }
             } catch {
-                print("NotificationPreferences.json doesn't exist")
+                ConsoleManager.printStatement("NotificationPreferences.json doesn't exist")
             }
         }
     }
@@ -161,7 +175,7 @@ final class NotificationPreferencesModel: ObservableObject {
                 throw throwError.fileDoesNotExist
             }
         } catch {
-            print("NotificationPreferences.json doesn't exist")
+            ConsoleManager.printStatement("NotificationPreferences.json doesn't exist")
         }
     }
     

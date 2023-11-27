@@ -9,6 +9,7 @@ import SwiftUI
 import Mcrich23_Toolkit
 import GoogleMobileAds
 import Firebase
+import PortfolioKit
 
 @main
 struct Seattle_Bridge_TrackerApp: App {
@@ -21,7 +22,7 @@ struct Seattle_Bridge_TrackerApp: App {
             ContentView()
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
-                        print("Active")
+                        ConsoleManager.printStatement("Active")
                         UNUserNotificationCenter.current().getNotificationSettings { setting in
                             DispatchQueue.main.async {
                                 if setting.authorizationStatus == .authorized {
@@ -32,9 +33,9 @@ struct Seattle_Bridge_TrackerApp: App {
                             }
                         }
                     } else if newPhase == .inactive {
-                        print("Inactive")
+                        ConsoleManager.printStatement("Inactive")
                     } else if newPhase == .background {
-                        print("Background")
+                        ConsoleManager.printStatement("Background")
                     }
                 }
                 .onOpenURL { url in
@@ -45,7 +46,7 @@ struct Seattle_Bridge_TrackerApp: App {
                         let id = components[2]
                         db.collection(uid).document(id).getDocument { doc, error in
                             if let error {
-                                print(error)
+                                ConsoleManager.printStatement(error)
                                 return
                             }
                             
@@ -103,6 +104,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         }
         if Utilities.appType == .TestFlight || Utilities.appType == .Debug {
             Messaging.messaging().subscribe(toTopic: "test")
+        }
+        if let url = URL(string: "https://gist.githubusercontent.com/Mcrich23/b55923510068c8672cadc5fac3b07137/raw/PortfolioKit.json") {
+            PortfolioKit.shared.config(with: url)
         }
         return true
     }
